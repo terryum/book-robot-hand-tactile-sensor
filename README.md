@@ -4,7 +4,9 @@ English | [한국어](README_ko.md)
 
 A bilingual (Korean/English) book and IEEE survey paper covering tactile sensing, robot hand design, learning-based manipulation, and Physical AI — from foundations to industrial outlook.
 
-**Live Website**: [book-robot-hand-tactile-sensor.vercel.app](https://book-robot-hand-tactile-sensor.vercel.app)
+**Live Website**: [terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor](https://terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor)
+
+**PDF Download**: [English](https://drive.google.com/file/d/1z5NgFRtOwcWLiZka3bYFnZ-k4Zs7cUa4/view?usp=sharing) | [한글](https://drive.google.com/file/d/1XxPH3N72TOpz2vSSNsrT9C59IUdQpstR/view?usp=sharing)
 
 ## Outputs
 

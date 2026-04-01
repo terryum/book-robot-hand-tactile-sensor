@@ -79,7 +79,11 @@
       "Bash(echo $VERCEL_TOKEN:0:20...)",
       "Bash(env)",
       "WebFetch(domain:book-robot-hand-tactile-sensor.vercel.app)",
-      "WebFetch(domain:terry.artlab.ai)"
+      "WebFetch(domain:terry.artlab.ai)",
+      "Bash(ls book/ko/*.md)",
+      "Bash(ls book/en/*.md)",
+      "Bash(ls assets/figures/ch*/*.png)",
+      "Bash(ls paper/sections/*.tex)"
     ]
   }
 }

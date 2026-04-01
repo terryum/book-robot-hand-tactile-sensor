@@ -4,7 +4,9 @@
 
 촉각 센서, 로봇 핸드 설계, 학습 기반 조작, Physical AI를 아우르는 한국어/영어 이중 언어 기술 서적 및 IEEE 서베이 논문입니다.
 
-**웹사이트**: [book-robot-hand-tactile-sensor.vercel.app](https://book-robot-hand-tactile-sensor.vercel.app)
+**웹사이트**: [terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor](https://terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor)
+
+**PDF 다운로드**: [English](https://drive.google.com/file/d/1z5NgFRtOwcWLiZka3bYFnZ-k4Zs7cUa4/view?usp=sharing) | [한글](https://drive.google.com/file/d/1XxPH3N72TOpz2vSSNsrT9C59IUdQpstR/view?usp=sharing)
 
 ## 산출물
 
