@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 10: 사람에서 로봇으로 — Embodiment Retargeting</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch10.html" class="active">KO</a>
+        <a href="../en/ch10.html" class="">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-3">
+  <nav class="sidebar-nav part-3">
+    <a class="nav-dot active" data-section="sec-개요">
+      <span class="dot"></span>
+      <span class="label">개요</span>
+    </a>
+    <a class="nav-dot" data-section="sec-10-1">
+      <span class="dot"></span>
+      <span class="label">10.1 교차 체현 격차: 운동학적, 시각적, 촉각적 차이</span>
+    </a>
+    <a class="nav-dot" data-section="sec-10-2">
+      <span class="dot"></span>
+      <span class="label">10.2 운동학적 리타게팅: AnyTeleop, ImMimic,...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-10-3">
+      <span class="dot"></span>
+      <span class="label">10.3 시각적 격차 해소: DexUMI, RoboPaint</span>
+    </a>
+    <a class="nav-dot" data-section="sec-10-4">
+      <span class="dot"></span>
+      <span class="label">10.4 촉각 격차 해소: UniTacHand, OSMO</span>
+    </a>
+    <a class="nav-dot" data-section="sec-10-5">
+      <span class="dot"></span>
+      <span class="label">10.5 기계적 결합: DEXOP의 4절 링크 방식</span>
+    </a>
+    <a class="nav-dot" data-section="sec-10-6">
+      <span class="dot"></span>
+      <span class="label">10.6 미해결 과제: 촉각 도메인 갭의 일반적 해법 부재</span>
+    </a>
+    <a class="nav-dot" data-section="sec-요약-및-전망">
+      <span class="dot"></span>
+      <span class="label">요약 및 전망</span>
+    </a>
+    <a class="nav-dot" data-section="sec-참고문헌">
+      <span class="dot"></span>
+      <span class="label">참고문헌</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part III: 학습과 전이</span>
+        <h1>Chapter 10: 사람에서 로봇으로 — Embodiment Retargeting</h1>
+        <div class="chapter-meta">
+          <span>집필일: 2026-04-01</span>
+          <span>최종수정일: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-개요" class="content-section">
+<h2>개요</h2>
+<p>인간의 시연 데이터(Chapter 6)를 로봇 정책으로 변환하려면, 인간과 로봇 사이의 <strong>교차 체현 격차(cross-embodiment gap)</strong>를 극복해야 합니다. 인간 손의 27 DoF와 로봇 핸드의 7-22 DoF는 근본적으로 다른 운동학적 구조이며, 시각적 외형과 촉각 특성도 상이합니다. 이 챕터에서는 운동학적, 시각적, 촉각적 세 차원의 격차와 각각의 해결 접근을 다룹니다.</p>
+<blockquote class=""><strong>이 챕터를 읽고 나면...</strong>
+- 교차 체현 격차의 세 차원(운동학적, 시각적, 촉각적)을 구분할 수 있습니다.
+- AnyTeleop, ImMimic, DexH2R의 운동학적 리타게팅을 비교할 수 있습니다.
+- UniTacHand와 OSMO의 촉각 격차 해소 접근을 이해합니다.
+- 촉각 도메인 갭에 일반적 해법이 부재하다는 미해결 과제를 설명할 수 있습니다.</blockquote>
+<hr>
+</section>
+<section id="sec-10-1" class="content-section">
+<h2>10.1 교차 체현 격차: 운동학적, 시각적, 촉각적 차이</h2>
+<table class="styled-table">
+<thead><tr>
+<th>격차 차원</th>
+<th>인간</th>
+<th>로봇</th>
+<th>핵심 문제</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>운동학적</strong></td>
+<td>27 DoF</td>
+<td>7-22 DoF</td>
+<td>관절 구조, 범위, 커플링 차이</td>
+</tr>
+<tr>
+<td><strong>시각적</strong></td>
+<td>피부, 손톱, 유연</td>
+<td>금속, 플라스틱, 강성</td>
+<td>카메라 정책의 외형 의존</td>
+</tr>
+<tr>
+<td><strong>촉각적</strong></td>
+<td>~17,000 수용기</td>
+<td>0-17 센서</td>
+<td>밀도, 유형, 분포 완전 상이</td>
+</tr>
+</tbody></table>
+<p>세미나 1의 핵심 관찰: <strong>촉각 도메인에서 domain gap을 해결한 논문은 UniTacHand 1편뿐</strong>이며, 일반론적 방법론이 부재합니다.</p>
+<figure>
+  <img src="../assets/figures/ch10/fig_10_1_three_gaps_darkmode.png" alt="Figure 10.1: 교차 체현 격차의 세 차원." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_1_three_gaps_technical.png'">
+  <figcaption>Figure 10.1: 교차 체현 격차의 세 차원.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-10-2" class="content-section">
+<h2>10.2 운동학적 리타게팅: AnyTeleop, ImMimic, DexH2R</h2>
+<h3>AnyTeleop (2023)</h3>
+<p>Qin et al. [2023, RSS]의 Dex-Retarget:</p>
+<ul>
+<li>인간 키포인트 → 로봇 관절 위치 매핑</li>
+<li>범용 비전 기반 원격 조작</li>
+<li><strong>한계</strong>: naive 매핑은 물리적 타당성(physical feasibility) 상실 — 세미나 1에서 강조</li>
+</ul>
+<h3>ImMimic (2025)</h3>
+<p>Liu et al. [2025]:</p>
+<ul>
+<li>대규모 인간 궤적 + 소수 원격 조작 궤적을 <strong>보간(interpolation)</strong></li>
+<li>인간 데이터의 다양성 + 원격 조작의 물리적 타당성을 결합</li>
+<li>데이터 증강(augmentation)의 새로운 패러다임</li>
+<li>세미나 1: "비싼 teleop data 대신 human data를 시너지적으로 활용"</li>
+</ul>
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Liu, Y., et al. (2025). "ImMimic: Large-scale Human Trajectory + Few-shot Teleoperation Interpolation." <em>Various</em>.
+대규모 인간 궤적과 소수 원격 조작 궤적의 보간으로 데이터 증강. 교차 체현 격차를 데이터 측면에서 완화합니다.</blockquote>
+<h3>DexH2R (2024)</h3>
+<p>태스크 지향(task-oriented) 인간-로봇 다지 전이:</p>
+<ul>
+<li>인간 시연의 <strong>의도(intent)</strong>를 추출</li>
+<li>로봇의 운동학에 맞게 의도를 재현</li>
+<li>단순 관절 매핑이 아닌 태스크 수준 전이</li>
+</ul>
+<h3>Human2Sim2Robot</h3>
+<p>인간 비디오 → 시뮬레이션 재현 → 로봇 정책의 파이프라인. 인터넷 비디오 활용의 연장선입니다 (<a href="ch06.html">Chapter 6.5 참조</a>).</p>
+<figure>
+  <img src="../assets/figures/ch10/fig_10_2_kinematic_retargeting_darkmode.png" alt="Figure 10.2: 운동학적 리타게팅의 세 접근." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_2_kinematic_retargeting_technical.png'">
+  <figcaption>Figure 10.2: 운동학적 리타게팅의 세 접근.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-10-3" class="content-section">
+<h2>10.3 시각적 격차 해소: DexUMI, RoboPaint</h2>
+<h3>DexUMI (2025)</h3>
+<p>Xu et al. [2025]의 DexUMI (<a href="ch06.html">Chapter 6.4에서 소개</a>):</p>
+<ul>
+<li><strong>SAM2 인페인팅</strong>: 카메라 이미지에서 인간 손을 지우고 로봇 손으로 대체</li>
+<li>시각 정책이 인간 손 외형에 의존하지 않게 함</li>
+<li>운동학적 격차는 외골격으로 별도 해결</li>
+</ul>
+<h3>RoboPaint (2025)</h3>
+<p>3D Gaussian Splatting(3DGS)으로:</p>
+<ul>
+<li>실제 장면의 시각적 충실도를 시뮬레이션에 재현</li>
+<li>시각적 sim-to-real 격차 감소</li>
+<li>Real-Sim-Real 루프의 시각적 구성 요소 (<a href="ch09.html">Chapter 9.4 참조</a>)</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch10/fig_10_3_visual_gap_darkmode.png" alt="Figure 10.3: 시각적 격차 해소 — DexUMI와 RoboPaint." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_3_visual_gap_technical.png'">
+  <figcaption>Figure 10.3: 시각적 격차 해소 — DexUMI와 RoboPaint.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-10-4" class="content-section">
+<h2>10.4 촉각 격차 해소: UniTacHand, OSMO</h2>
+<p>촉각 격차는 세 차원 중 가장 해결이 어렵습니다.</p>
+<h3>UniTacHand (2025)</h3>
+<p>Zhang et al. [2025]:</p>
+<ul>
+<li><strong>MANO UV 맵</strong>: 인간 손 표면을 2D UV 공간으로 전개</li>
+<li>인간 글로브의 촉각 → MANO UV 맵으로 투영</li>
+<li>로봇 핸드의 촉각 → 같은 MANO UV 맵으로 투영</li>
+<li><strong>공유 표현 공간(shared representation space)</strong>에서 촉각 정책 학습</li>
+<li>촉각 도메인 갭을 해결한 <strong>유일한 논문</strong></li>
+</ul>
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Zhang, Y., et al. (2025). "UniTacHand: Cross-Embodiment Tactile Transfer via MANO UV Map." <em>Various</em>.
+MANO UV 맵을 이용한 인간-로봇 촉각 공유 표현. 촉각 교차 체현 전이를 최초로 체계적으로 다룬 연구입니다.</blockquote>
+<h3>OSMO (2025)</h3>
+<p>OSMO 글로브 [arXiv:2512.08920] (<a href="ch06.html">Chapter 6.3에서 소개</a>):</p>
+<ul>
+<li><strong>Embodiment Bridge</strong>: 인간/로봇에 동일 촉각 글로브 사용</li>
+<li>촉각 도메인 갭을 <strong>물리적으로 제거</strong> — 같은 센서이므로 표현 차이가 없음</li>
+<li>12개 3축 자기 센서</li>
+<li>오픈소스</li>
+</ul>
+<p>두 접근의 근본적 차이:</p>
+<ul>
+<li><strong>UniTacHand</strong>: 소프트웨어적 해법 (표현 정렬)</li>
+<li><strong>OSMO</strong>: 하드웨어적 해법 (물리적 공유)</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch10/fig_10_4_tactile_gap_darkmode.png" alt="Figure 10.4: 촉각 격차 해소의 두 접근." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_4_tactile_gap_technical.png'">
+  <figcaption>Figure 10.4: 촉각 격차 해소의 두 접근.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-10-5" class="content-section">
+<h2>10.5 기계적 결합: DEXOP의 4절 링크 방식</h2>
+<p>DEXOP [2025]은 인간과 로봇 손가락을 <strong>4절 링크(4-bar linkage)</strong>로 직접 기계적으로 연결합니다:</p>
+<ul>
+<li>세 가지 격차를 동시에 해소:</li>
+<li><strong>운동학적</strong>: 기계적 1:1 매핑</li>
+<li><strong>시각적</strong>: 로봇이 직접 동작하므로 카메라에 로봇만 보임</li>
+<li><strong>촉각적</strong>: 인간의 직접 접촉 피드백</li>
+<li>원격 조작 대비 <strong>8배 빠른</strong> 데이터 수집</li>
+<li><strong>51.3% vs 42.5%</strong> 성공률 (원격 조작 대비)</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch10/fig_10_5_dexop_linkage_darkmode.png" alt="Figure 10.5: DEXOP의 4절 링크 방식. Source: DEXOP (2025)." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_5_dexop_linkage_technical.png'">
+  <figcaption>Figure 10.5: DEXOP의 4절 링크 방식. Source: DEXOP (2025).</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-10-6" class="content-section">
+<h2>10.6 미해결 과제: 촉각 도메인 갭의 일반적 해법 부재</h2>
+<p>세미나 1의 가장 중요한 인사이트 중 하나: <strong>촉각 도메인에서 cross-embodiment gap을 해결한 일반론적 방법론이 부재</strong>합니다.</p>
+<ul>
+<li>UniTacHand: MANO UV 맵 기반이므로 MANO 호환 핸드에 한정</li>
+<li>OSMO: 동일 글로브 필수이므로 기존 센서와의 호환 불가</li>
+<li>DEXOP: 기계적 결합이므로 핸드 형태에 강하게 의존</li>
+</ul>
+<p>향후 필요한 연구 방향:</p>
+<ol>
+<li><strong>센서 무관 촉각 전이</strong>: AnyTouch/Sensor-Invariant 방향의 교차 체현 확장 (<a href="ch03.html">Chapter 3.3 참조</a>)</li>
+<li><strong>범용 촉각 UV 맵</strong>: MANO 외의 다양한 핸드 모델에 적용 가능한 공유 표현</li>
+<li><strong>시뮬레이션 기반 촉각 전이</strong>: DiffTactile로 시뮬레이션에서 촉각 갭을 극복</li>
+</ol>
+<figure>
+  <img src="../assets/figures/ch10/fig_10_6_future_challenges_darkmode.png" alt="Figure 10.6: 촉각 교차 체현 전이의 미해결 과제." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_6_future_challenges_technical.png'">
+  <figcaption>Figure 10.6: 촉각 교차 체현 전이의 미해결 과제.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-요약-및-전망" class="content-section">
+<h2>요약 및 전망</h2>
+<p>Embodiment Retargeting은 운동학적(AnyTeleop, ImMimic), 시각적(DexUMI, RoboPaint), 촉각적(UniTacHand, OSMO), 기계적(DEXOP) 네 차원에서 진행되고 있습니다. 그러나 촉각 도메인의 교차 체현 전이는 여전히 1편의 논문(UniTacHand)만이 체계적으로 다루고 있으며, 이는 이 분야의 가장 큰 열린 문제입니다.</p>
+<p>Chapter 13에서 제안하는 <strong>"Shared Sensing Platform"</strong> 방향 — OSMO/UniTacHand 방식의 교차 체현 촉각 전이 일반화 — 이 이 격차를 메울 핵심 연구 방향입니다.</p>
+<p>다음 파트에서는 지금까지의 모든 기술을 통합하는 <strong>시스템 통합과 전망</strong>을 다룹니다 (<a href="ch11.html">Chapter 11: 시스템 통합 참조</a>).</p>
+<hr>
+</section>
+<section id="sec-참고문헌" class="content-section">
+<h2>참고문헌</h2>
+<ol>
+<li>Qin, Y., et al. (2023). AnyTeleop: A general vision-based dexterous robot teleoperation system. <em>RSS 2023</em>.</li>
+</ol>
+<ol>
+<li>Liu, Y., et al. (2025). ImMimic: Cross-domain imitation from human videos via mapping and interpolation. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Li, Y., et al. (2024). DexH2R: Task-oriented dexterous manipulation from human to robots. <em>arXiv preprint</em>. arXiv:2411.04428.</li>
+</ol>
+<ol>
+<li>Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>. arXiv:2505.21864.</li>
+</ol>
+<ol>
+<li>Various. (2026). RoboPaint: From human demonstration to any robot and any view. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Zhang, C., Xue, Z., Yin, S., Zhao, B., et al. (2025). UniTacHand: Unified spatio-tactile representation for human to robotic hand skill transfer. <em>arXiv preprint</em>. arXiv:2512.21233.</li>
+</ol>
+<ol>
+<li>Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920.</li>
+</ol>
+<ol>
+<li>Fang, H.-S., Romero, B., Xie, Y., Hu, A., Huang, B.-R., Alvarez, J., Kim, M., Margolis, G., Anbarasu, K., Tomizuka, M., Adelson, E., & Agrawal, P. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441.</li>
+</ol>
+<ol>
+<li>Dan, P., et al. (2025). X-Sim: Cross-embodiment learning via real-to-sim-to-real. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>. arXiv:2506.11775.</li>
+</ol>
+<ol>
+<li>Shaw, K., Bahl, S., & Pathak, D. (2024). Learning dexterity from human hand motion in internet videos. <em>arXiv preprint</em>. arXiv:2404.xxxxx.</li>
+</ol>
+<ol>
+<li>Romero, J., Tzionas, D., & Black, M. J. (2017). Embodied hands (MANO). <em>SIGGRAPH Asia 2017</em>.</li>
+</ol>
+<ol>
+<li>Various. (2025). Human2Sim2Robot: Learning from human video via sim-to-real transfer. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Various. (2025). AnyTouch: Unified static-dynamic tactile representation. <em>arXiv:2502.12191</em>.</li>
+</ol>
+<ol>
+<li>Various. (2025). Sensor-invariant tactile representation. <em>OpenReview</em>.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>참고 자료 출처</h3>
+      <ul>
+      <li>세미나 PDF: 260319_Seminar_SNU_Junsoo_Jihwan_TactileHand_Manipulation</li>
+      <li>논문 요약 포스트: terry.artlab.ai (DexUMI, ExoStart, DEXOP, OSMO)</li>
+      <li>Literature survey 결과 (131편)</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch09.html" class="prev">&larr; 이전 챕터</a>
+        <a href="ch11.html" class="next">다음 챕터 &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+\section{Human Hand Data and Embodiment Retargeting}
+\label{sec:retarget}
+
+Converting human manipulation demonstrations into robot policies requires overcoming the cross-embodiment gap---a three-dimensional challenge spanning kinematic differences (27 DoF human hand vs.\ 7--22 DoF robot), visual differences (skin, nails, and flexible tissue vs.\ metal, plastic, and rigid structure), and tactile differences ($\sim$17{,}000 human mechanoreceptors vs.\ 0--17 robot sensors). This section reviews data collection methods and solutions for each gap dimension.
+
+\subsection{Human Hand Data Collection}
+
+Four collection paradigms span the throughput--quality spectrum:
+
+\textbf{Motion tracking gloves} capture joint angles and fingertip positions. A stretchable liquid-metal glove with 9 eGaIn sensors~\cite{various2024glove} (\emph{Nature Communications}, 2024) achieves 4.02~mm fingertip error with one-size-fits-all adaptation. Commercially, MANUS (designated as NVIDIA Isaac Teleop's official data glove at GTC 2026) and StretchSense (25 DoF EMF) offer higher-DoF tracking. The human hand model MANO~\cite{romero2017mano} (SIGGRAPH Asia 2017)---a statistical model learned from 1{,}000 3D scans with 778 vertices and 16 joints---serves as the foundation for virtually all retargeting work.
+
+\textbf{Tactile gloves} capture contact forces during manipulation. STAG~\cite{sundaram2019stag} (\emph{Nature}, 548 piezoresistive sensors) provided the first large-scale tactile demonstration dataset. OSMO~\cite{yin2025osmo} (12 three-axis magnetic sensors, open-source) introduces the ``embodiment bridge'' concept---the same glove worn by human and robot eliminates the tactile domain gap entirely.
+
+\textbf{Exoskeletons} mechanically connect to the human hand for direct motion capture with haptic feedback. DexUMI~\cite{xu2025dexumi} achieves 86\% success across Inspire and XHand with 3.2$\times$ faster data collection than teleoperation, using a wearable exoskeleton for kinematics and SAM2 inpainting for visual gap bridging. ExoStart~\cite{si2025exostart} demonstrates extreme data efficiency: from just $\sim$10 exoskeleton demonstrations, it learns dexterous policies via a MuJoCo dynamics filtering $\to$ auto-curriculum RL $\to$ ACT vision student pipeline, achieving >50\% success on 6 of 7 tasks with zero-shot real transfer. DEXOP~\cite{fang2025dexop} uses a 4-bar linkage for direct mechanical coupling between human and robot fingers, enabling 8$\times$ faster data collection with direct contact feedback (51.3\% vs.\ 42.5\% for teleoperation).
+
+\textbf{Teleoperation} remains the standard for high-quality demonstrations. AnyTeleop~\cite{qin2023anyteleop} (RSS 2023) provides general-purpose Dex-Retarget. DexPilot~\cite{handa2020dexpilot} (NVIDIA, ICRA 2020) enables 23-DoF control from bare-hand depth images. DexCap~\cite{wang2024dexcap} (Stanford, RSS 2024) achieves 3$\times$ speedup via portable mocap with 30-minute policy learning. Internet video mining~\cite{liu2025immimic} offers unlimited scale but lacks action labels and tactile data.
+
+\subsection{Kinematic Retargeting}
+
+The kinematic gap---mapping 27 human DoF to 7--22 robot DoF---is the most studied dimension. Three approaches reflect increasing sophistication:
+
+\textbf{Joint-level mapping} (AnyTeleop's Dex-Retarget~\cite{qin2023anyteleop}) directly maps human keypoints to robot joint positions. While general-purpose, naive mapping often produces physically infeasible robot poses due to kinematic differences in joint ranges, coupling, and workspace.
+
+\textbf{Data interpolation} (ImMimic~\cite{liu2025immimic}) takes a data-centric approach: large-scale human trajectories (diverse but potentially infeasible for the robot) are interpolated with a few teleoperation trajectories (feasible but limited in diversity). This augmentation preserves the diversity of human data while maintaining physical feasibility.
+
+\textbf{Intent-level transfer} (DexH2R~\cite{li2024dexh2r}) extracts the task-level \emph{intent} of human demonstrations---what the manipulation is trying to achieve---and reproduces that intent within the robot's kinematic constraints, rather than attempting joint-level correspondence.
+
+\subsection{Visual Gap}
+
+Visual policies trained on robot data fail when the input contains human hands instead of robot end-effectors. Two approaches bridge this gap:
+
+\textbf{DexUMI}~\cite{xu2025dexumi} uses SAM2 segmentation and inpainting to \emph{erase the human hand from camera images} and replace it with a high-fidelity rendering of the robot hand, making visual policies embodiment-agnostic. \textbf{RoboPaint}~\cite{various2026robopaint} uses 3D Gaussian Splatting (3DGS) to reconstruct real scenes in simulation with photorealistic fidelity, reducing the visual sim-to-real gap in Real-Sim-Real loops.
+
+\subsection{Tactile Gap}
+
+The tactile gap---$\sim$17{,}000 human mechanoreceptors distributed across the entire hand versus 0--17 discrete sensors on a robot---is the least studied and hardest to resolve. Two fundamentally different approaches have been proposed:
+
+\textbf{UniTacHand}~\cite{zhang2025unitachand} takes a \emph{software} approach: human glove tactile data and robot hand tactile data are both projected onto MANO UV maps, creating a shared 2D representation space. Contrastive learning with reconstruction and adversarial losses aligns the latent representations, enabling zero-shot or one-shot human-to-robot tactile policy transfer. This is the \emph{only} paper that systematically addresses tactile cross-embodiment transfer. Limitation: requires MANO-compatible hand geometry.
+
+\textbf{OSMO}~\cite{yin2025osmo} takes a \emph{hardware} approach: by placing identical 12-sensor three-axis magnetic gloves on both human and robot, the tactile domain gap is \emph{physically eliminated}---same sensors produce identical signals regardless of embodiment. A robot policy trained exclusively on human OSMO data, without any robot data, successfully executes contact-rich manipulation tasks. Limitation: requires identical sensor hardware on both embodiments.
+
+\textbf{Open challenge}: No general methodology exists for tactile cross-embodiment transfer. UniTacHand requires MANO-compatible hands; OSMO requires identical hardware; DEXOP~\cite{fang2025dexop} depends on mechanical coupling form factor. Extending sensor-agnostic representation approaches (AnyTouch~\cite{feng2025anytouch}, Sensor-Invariant~\cite{various2025sensorinvariant}) to cross-embodiment settings, and developing universal tactile UV maps applicable beyond MANO, represent critical future directions.

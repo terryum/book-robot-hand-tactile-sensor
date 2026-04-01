@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>용어집 (Glossary)</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/glossary.html" class="active">KO</a>
+        <a href="../en/glossary.html" class="">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="glossary-section">
+      <header class="chapter-header">
+        <h1>용어집 (Glossary)</h1>
+      </header>
+<h2 class="glossary-letter">A</h2>
+<div class="glossary-item"><strong>ACT (Action Chunking with Transformers)</strong>: Transformer 기반 행동 청킹 — 시연에서 연속 행동 시퀀스를 학습 (Ch7)</div>
+<div class="glossary-item"><strong>ADR (Automatic Domain Randomization)</strong>: 자동 도메인 랜덤화 — 물리/비물리 파라미터를 자동으로 변화시키는 sim-to-real 전략 (Ch9)</div>
+<div class="glossary-item"><strong>ALOHA</strong>: 저비용 양손 원격 조작 하드웨어 ($20K 이하) (Ch7, Ch11)</div>
+<h2 class="glossary-letter">B</h2>
+<div class="glossary-item"><strong>Binary tactile sensor</strong>: 이진 촉각 센서 — 접촉 여부만 감지 (0/1). 해상도보다 커버리지가 중요할 때 사용 (Ch7)</div>
+<h2 class="glossary-letter">C</h2>
+<div class="glossary-item"><strong>Capacitive sensor (정전용량식 센서)</strong>: 두 전극 간 정전용량 변화로 접촉을 측정하는 센서 (Ch2)</div>
+<div class="glossary-item"><strong>Canonical representation (정규 표현)</strong>: 센서 독립적인 표준 좌표계로의 데이터 변환 (Ch3)</div>
+<div class="glossary-item"><strong>Compliance (유연성)</strong>: 외력에 대한 기계적 순응. 접촉이 풍부한 조작에서 필수 (Ch4, Ch5)</div>
+<div class="glossary-item"><strong>Contrastive learning (대조 학습)</strong>: 유사 쌍을 가깝게, 비유사 쌍을 멀리 배치하는 학습 방법 (Ch3)</div>
+<div class="glossary-item"><strong>Cross-embodiment gap (교차 체현 격차)</strong>: 인간과 로봇 간 운동학적/시각적/촉각적 차이 (Ch10)</div>
+<h2 class="glossary-letter">D</h2>
+<div class="glossary-item"><strong>Dexterous manipulation (다지 조작)</strong>: 다지 핸드를 이용한 정밀 물체 조작 — in-hand rotation, assembly 등 (Ch7)</div>
+<div class="glossary-item"><strong>Diffusion Policy (확산 정책)</strong>: 조건부 잡음 제거 확산 과정으로 행동을 생성하는 정책 학습 방법 (Ch7)</div>
+<div class="glossary-item"><strong>DoF (Degrees of Freedom, 자유도)</strong>: 관절의 독립적 운동 축 수. 인간 손: ~27 DoF (Ch4)</div>
+<div class="glossary-item"><strong>Domain Randomization (도메인 랜덤화)</strong>: 시뮬레이션 파라미터를 랜덤화하여 정책의 견고성을 높이는 기법 (Ch9)</div>
+<h2 class="glossary-letter">E</h2>
+<div class="glossary-item"><strong>Embodiment Retargeting</strong>: 한 체현(예: 인간)의 동작을 다른 체현(예: 로봇)으로 매핑 (Ch10)</div>
+<div class="glossary-item"><strong>E-skin (전자 피부)</strong>: 촉각 센서가 통합된 유연 전자 기판 (Ch2)</div>
+<h2 class="glossary-letter">F</h2>
+<div class="glossary-item"><strong>FEM (Finite Element Method, 유한 요소법)</strong>: 변형 시뮬레이션을 위한 수치 해석 방법 (Ch3, Ch9)</div>
+<div class="glossary-item"><strong>Flow Matching</strong>: 연속 정규화 흐름으로 행동 분포를 학습하는 방법 — pi0의 핵심 기법 (Ch8)</div>
+<div class="glossary-item"><strong>Force-torque sensor (힘-토크 센서)</strong>: 6축(3힘 + 3토크) 힘을 측정하는 센서 (Ch7)</div>
+<div class="glossary-item"><strong>Foundation Model</strong>: 대규모 데이터로 사전학습된 범용 모델 — Sparsh(촉각), pi0(VLA) (Ch3, Ch8)</div>
+<h2 class="glossary-letter">G</h2>
+<div class="glossary-item"><strong>GelSight</strong>: MIT에서 개발된 광도 입체법 기반 비전 촉각 센서 (Ch2)</div>
+<h2 class="glossary-letter">I</h2>
+<div class="glossary-item"><strong>IL (Imitation Learning, 모방 학습)</strong>: 인간 시연을 직접 모방하여 정책을 학습 (Ch7)</div>
+<div class="glossary-item"><strong>Impedance control (임피던스 제어)</strong>: 힘과 변위의 관계를 조절하는 제어 방법 [Hogan, 1985] (Ch7)</div>
+<div class="glossary-item"><strong>In-hand manipulation (손안 조작)</strong>: 파지 상태에서 물체의 위치/자세를 변경 (Ch7)</div>
+<h2 class="glossary-letter">K</h2>
+<div class="glossary-item"><strong>Kinesthetic teaching (운동학적 시연)</strong>: 인간이 로봇을 직접 움직여 동작을 시연하는 방법 (Ch6)</div>
+<h2 class="glossary-letter">M</h2>
+<div class="glossary-item"><strong>MANO</strong>: 1,000개 3D 스캔으로 학습한 통계적 인간 손 모델 (778 정점, 16 관절) (Ch6)</div>
+<div class="glossary-item"><strong>Mechanoreceptor (기계적 수용기)</strong>: 접촉/압력/진동을 감지하는 생물학적 센서 — Merkel, Meissner, Ruffini, Pacinian (Ch1)</div>
+<div class="glossary-item"><strong>MoE (Mixture of Experts)</strong>: 여러 전문가 네트워크를 동적으로 라우팅하는 아키텍처 — ForceVLA (Ch8)</div>
+<h2 class="glossary-letter">N</h2>
+<div class="glossary-item"><strong>Neuromorphic sensor (신경형태학적 센서)</strong>: 생물학적 신경계를 모방한 이벤트 구동 센서 (Ch2)</div>
+<h2 class="glossary-letter">O</h2>
+<div class="glossary-item"><strong>Open X-Embodiment</strong>: 34개 연구실의 1M+ 궤적을 통합한 최대 오픈소스 로봇 데이터셋 (Ch8)</div>
+<h2 class="glossary-letter">P</h2>
+<div class="glossary-item"><strong>Particle jamming (입자 잼)</strong>: 입자 밀집으로 유연→강성 전환하는 메커니즘 (Ch5)</div>
+<div class="glossary-item"><strong>Photometric stereo (광도 입체법)</strong>: 다방향 조명과 카메라로 3D 형상을 복원하는 방법 — GelSight의 핵심 (Ch2)</div>
+<div class="glossary-item"><strong>Physical AI</strong>: 물리 세계를 이해하고 상호작용하는 AI — Foundation Models + 시뮬레이션 + 센서의 수렴 (Ch12)</div>
+<div class="glossary-item"><strong>Piezoresistive sensor (압저항식 센서)</strong>: 접촉에 의한 저항 변화를 측정하는 센서 (Ch2)</div>
+<div class="glossary-item"><strong>Point cloud (포인트 클라우드)</strong>: 3D 좌표 집합으로 표현된 촉각/시각 데이터 (Ch3)</div>
+<h2 class="glossary-letter">R</h2>
+<div class="glossary-item"><strong>RL (Reinforcement Learning, 강화학습)</strong>: 보상 최대화를 통한 정책 학습 (Ch7)</div>
+<div class="glossary-item"><strong>Retargeting</strong>: → Embodiment Retargeting 참조</div>
+<h2 class="glossary-letter">S</h2>
+<div class="glossary-item"><strong>Shear force (전단력)</strong>: 표면에 평행한 방향의 힘 — 미끄러짐 감지에 필수 (Ch2)</div>
+<div class="glossary-item"><strong>Sim-to-Real</strong>: 시뮬레이션에서 학습한 정책을 실제 로봇에 전이 (Ch9)</div>
+<div class="glossary-item"><strong>Slip detection (미끄러짐 감지)</strong>: 물체가 손에서 미끄러지는 것을 감지 — 전단력 모니터링으로 구현 (Ch1, Ch2)</div>
+<div class="glossary-item"><strong>Synergy (시너지)</strong>: 여러 관절의 협조 운동 패턴 — PCA 기반 차원 축소 (Ch5)</div>
+<h2 class="glossary-letter">T</h2>
+<div class="glossary-item"><strong>Tactile foundation model (촉각 Foundation Model)</strong>: 대규모 촉각 데이터로 사전학습된 범용 표현 — Sparsh, UniTouch (Ch3)</div>
+<div class="glossary-item"><strong>Taxel</strong>: 촉각 감지점 (tactile pixel) — Digit 360: 8.3M taxels (Ch2)</div>
+<div class="glossary-item"><strong>Teleoperation (원격 조작)</strong>: 인간이 원격으로 로봇을 조종하여 데이터 수집 (Ch6)</div>
+<div class="glossary-item"><strong>Tendon-driven (건 구동)</strong>: 건(tendon)으로 힘을 전달하는 구동 방식 — SoftHand, ORCA (Ch4, Ch5)</div>
+<div class="glossary-item"><strong>Torque control (토크 제어)</strong>: 관절 토크를 직접 제어 — contact-rich 환경에서 필수 (Ch4)</div>
+<h2 class="glossary-letter">U</h2>
+<div class="glossary-item"><strong>Underactuation (부족 구동)</strong>: 구동기 수 < 관절 수인 설계 — 수동적 형상 적응 (Ch5)</div>
+<div class="glossary-item"><strong>UV map</strong>: 3D 표면을 2D로 전개한 좌표 맵 — MANO UV map for UniTacHand (Ch3, Ch10)</div>
+<h2 class="glossary-letter">V</h2>
+<div class="glossary-item"><strong>VLA (Vision-Language-Action)</strong>: 시각-언어-행동 모델 — RT-2, pi0, Gemini Robotics (Ch8)</div>
+<div class="glossary-item"><strong>VSA (Variable Stiffness Actuator, 가변 강성 구동기)</strong>: 유연↔강성 전환 가능한 구동기 (Ch5)</div>
+<div class="glossary-item"><strong>Visuo-tactile (시각-촉각)</strong>: 시각과 촉각 정보의 결합 — Robot Synesthesia, 3D-ViTac (Ch3, Ch11)</div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

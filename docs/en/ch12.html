@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: Physical AI and the Industrial Outlook</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="lang-en">
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch12.html" class="">KO</a>
+        <a href="../en/ch12.html" class="active">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-4">
+  <nav class="sidebar-nav part-4">
+    <a class="nav-dot active" data-section="sec-overview">
+      <span class="dot"></span>
+      <span class="label">Overview</span>
+    </a>
+    <a class="nav-dot" data-section="sec-12-1">
+      <span class="dot"></span>
+      <span class="label">12.1 The Physical AI Vision</span>
+    </a>
+    <a class="nav-dot" data-section="sec-12-2">
+      <span class="dot"></span>
+      <span class="label">12.2 Company Landscape (11 Companie...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-12-3">
+      <span class="dot"></span>
+      <span class="label">12.3 Manufacturing Deployment Case ...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-12-4">
+      <span class="dot"></span>
+      <span class="label">12.4 Why Hands Are Central to Physi...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-12-5">
+      <span class="dot"></span>
+      <span class="label">12.5 Market Projections and Investm...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-12-6">
+      <span class="dot"></span>
+      <span class="label">12.6 Eight Industry Trends Shaping ...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-summary-and-outlook">
+      <span class="dot"></span>
+      <span class="label">Summary and Outlook</span>
+    </a>
+    <a class="nav-dot" data-section="sec-references">
+      <span class="dot"></span>
+      <span class="label">References</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part IV: Integration and Outlook</span>
+        <h1>Chapter 12: Physical AI and the Industrial Outlook</h1>
+        <div class="chapter-meta">
+          <span>Written: 2026-04-01</span>
+          <span>Last updated: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-overview" class="content-section">
+<h2>Overview</h2>
+<p>"Physical AI and robotics will bring about the next industrial revolution." — Jensen Huang, NVIDIA CEO (GTC 2025). This chapter examines the Physical AI vision, 11 major companies' robot hand strategies, five verified manufacturing deployments, and market projections.</p>
+<blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
+- Define Physical AI and its core components.
+- Compare robot hand strategies across 11 companies.
+- Understand that current manufacturing deployments remain at the logistics level.
+- Explain the drivers behind $2.9B → $15.3B market growth.</blockquote>
+<hr>
+</section>
+<section id="sec-12-1" class="content-section">
+<h2>12.1 The Physical AI Vision</h2>
+<p>Physical AI encompasses AI systems that understand and interact with the physical world:</p>
+<ul>
+<li><strong>Foundation Models (VLA)</strong>: Perception + reasoning + control</li>
+<li><strong>GPU-accelerated simulation</strong>: Synthetic data (780K trajectories/11 hours)</li>
+<li><strong>Edge computing (Jetson)</strong>: Real-time inference</li>
+</ul>
+<h3>Evolution Timeline</h3>
+<ul>
+<li><strong>2023</strong>: RT-2 establishes VLA paradigm</li>
+<li><strong>2024</strong>: OpenVLA, Octo, pi0 democratize VLA; Open X-Embodiment</li>
+<li><strong>2025</strong>: Gemini Robotics, Helix, GR00T N1 target full humanoid</li>
+<li><strong>2026</strong>: GR00T N1.6 (reasoning), Figure 03, Tesla Gen 3; factory scale-up</li>
+</ul>
+<h3>NVIDIA Isaac Ecosystem</h3>
+<p>Isaac Sim/Lab (simulation) → Isaac Teleop + MANUS (data collection) → Newton (physics) → Omniverse (digital twin). NVIDIA as "picks and shovels" for every major humanoid company.</p>
+<figure>
+  <img src="../assets/figures/ch12/fig_12_1_physical_ai_ecosystem_darkmode.png" alt="Figure 12.1: Physical AI ecosystem convergence." loading="lazy" onerror="this.src='../assets/figures/ch12/fig_12_1_physical_ai_ecosystem_technical.png'">
+  <figcaption>Figure 12.1: Physical AI ecosystem convergence.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-12-2" class="content-section">
+<h2>12.2 Company Landscape (11 Companies)</h2>
+<table class="styled-table">
+<thead><tr>
+<th>Company</th>
+<th>Key Achievement</th>
+<th>Hand Features</th>
+<th>Positioning</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Figure AI</strong></td>
+<td>BMW 10 months, 30K X3. BotQ 12K/yr</td>
+<td>Helix VLA (35 DoF)</td>
+<td>Automotive leader</td>
+</tr>
+<tr>
+<td><strong>Tesla</strong></td>
+<td>Optimus Gen 3. 25 actuators/hand</td>
+<td>Cable-driven, 22 DoF</td>
+<td>Largest scale target</td>
+</tr>
+<tr>
+<td><strong>Sanctuary AI</strong></td>
+<td>Phoenix Gen 8. <strong>5mN tactile</strong></td>
+<td>Hydraulic, 20 DoF</td>
+<td>Tactile leader</td>
+</tr>
+<tr>
+<td><strong>1X Technologies</strong></td>
+<td>NEO $20K consumer</td>
+<td>Tendon, 22 DoF</td>
+<td>First consumer</td>
+</tr>
+<tr>
+<td><strong>Agility (Digit)</strong></td>
+<td>Amazon 100K+ totes</td>
+<td>Bimanual gripper</td>
+<td>Logistics-focused</td>
+</tr>
+<tr>
+<td><strong>Boston Dynamics</strong></td>
+<td>Electric Atlas $420K</td>
+<td>TRI partnership</td>
+<td>Best HW maturity</td>
+</tr>
+<tr>
+<td><strong>Apptronik</strong></td>
+<td>Mercedes pilot. $5B valuation</td>
+<td>Logistics</td>
+<td>Manufacturing pilot</td>
+</tr>
+<tr>
+<td><strong>Unitree</strong></td>
+<td>G1 $16K-$73.9K. <strong>5,500+ shipped</strong></td>
+<td>Dex3-1/Dex5-1</td>
+<td>Volume leader</td>
+</tr>
+<tr>
+<td><strong>Wonik</strong></td>
+<td>Allegro $16K (de facto standard)</td>
+<td>Meta Digit Plexus</td>
+<td>Research-commercial bridge</td>
+</tr>
+<tr>
+<td><strong>Hyundai</strong></td>
+<td>KRW 125.2T. BD subsidiary</td>
+<td>Electric Atlas deploy</td>
+<td>Auto-robot vertical</td>
+</tr>
+<tr>
+<td><strong>Samsung</strong></td>
+<td>Rainbow Robotics 35%. Future Robotics Office</td>
+<td>In development</td>
+<td>Capability building</td>
+</tr>
+</tbody></table>
+<p>Additional: Mimic Robotics (ETH, tendon-driven), Physical Intelligence (pi0 VLA)</p>
+<h3>Korean Ecosystem</h3>
+<p>Hyundai-BD (HW) + Samsung-Rainbow (HW) + Wonik-Meta (sensors) + KAIST (materials) + ETRI (sensors) — a globally unique vertical integration.</p>
+<figure>
+  <img src="../assets/figures/ch12/fig_12_2_company_landscape_darkmode.png" alt="Figure 12.2: Global robot hand company landscape." loading="lazy" onerror="this.src='../assets/figures/ch12/fig_12_2_company_landscape_technical.png'">
+  <figcaption>Figure 12.2: Global robot hand company landscape.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-12-3" class="content-section">
+<h2>12.3 Manufacturing Deployment Case Studies (5 Verified)</h2>
+<table class="styled-table">
+<thead><tr>
+<th>Company</th>
+<th>Customer</th>
+<th>Task</th>
+<th>Scale</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>Figure AI</td>
+<td>BMW Spartanburg</td>
+<td>Sheet metal</td>
+<td>30K cars, 1,250h</td>
+<td>Pilot complete</td>
+</tr>
+<tr>
+<td>Agility</td>
+<td>Amazon/GXO</td>
+<td>Tote recycling</td>
+<td>100K+ totes</td>
+<td>Active</td>
+</tr>
+<tr>
+<td>Boston Dynamics</td>
+<td>Hyundai</td>
+<td>Factory ops</td>
+<td>Fleet</td>
+<td>Deploying</td>
+</tr>
+<tr>
+<td>Apptronik</td>
+<td>Mercedes Berlin</td>
+<td>Intra-logistics</td>
+<td>Pilot</td>
+<td>In progress</td>
+</tr>
+<tr>
+<td>Sanctuary AI</td>
+<td>Magna</td>
+<td>Parts sorting</td>
+<td>Pilot</td>
+<td>In progress</td>
+</tr>
+</tbody></table>
+<blockquote class=""><strong>Key Observation</strong>: All current deployments are at the <strong>logistics (pick-move-place)</strong> level. <strong>Dexterous assembly</strong> has not yet reached production. Seminar 3's scenarios (thin objects, multiple objects, repositioning) represent challenges one level above current deployments.</blockquote>
+<figure>
+  <img src="../assets/figures/ch12/fig_12_3_deployment_gap_darkmode.png" alt="Figure 12.3: Manufacturing deployment gap — logistics vs. precision manipulation." loading="lazy" onerror="this.src='../assets/figures/ch12/fig_12_3_deployment_gap_technical.png'">
+  <figcaption>Figure 12.3: Manufacturing deployment gap — logistics vs. precision manipulation.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-12-4" class="content-section">
+<h2>12.4 Why Hands Are Central to Physical AI</h2>
+<ol>
+<li><strong>Human environments are designed for hands</strong>: Door handles, tools, switches, keyboards</li>
+<li><strong>Dexterous manipulation = last puzzle of general-purpose robots</strong>: Mobility largely solved; manipulation remains</li>
+<li><strong>Tactile integration accelerating</strong>: Sanctuary 5mN, Figure 03, Digit Plexus — touch becoming standard</li>
+<li><strong>Seminar 1 conclusion</strong>: Torque-controlled dexterous hand is essential</li>
+</ol>
+<hr>
+</section>
+<section id="sec-12-5" class="content-section">
+<h2>12.5 Market Projections and Investment Trends</h2>
+<ul>
+<li><strong>Market size</strong>: $2.9B (2025) → <strong>$15.3B</strong> (2030), CAGR 39.2% (Markets and Markets)</li>
+<li><strong>Long-term</strong>: Goldman Sachs 250K+ shipments (2030), Morgan Stanley $5 trillion (2050)</li>
+<li><strong>Major investments</strong>: Figure AI $2.6B+, Apptronik $935M+ ($5B), 1X $1B+ (OpenAI), Unitree IPO</li>
+<li><strong>Price compression</strong>: Shadow $100K+ → Allegro $16K → LEAP $2K → Unitree G1 $16K → 1X NEO $20K</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch12/fig_12_4_market_projection_darkmode.png" alt="Figure 12.4: Market outlook and price compression trends." loading="lazy" onerror="this.src='../assets/figures/ch12/fig_12_4_market_projection_technical.png'">
+  <figcaption>Figure 12.4: Market outlook and price compression trends.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-12-6" class="content-section">
+<h2>12.6 Eight Industry Trends Shaping the Future</h2>
+<ol>
+<li><strong>VLA as Standard Brain</strong>: Every major humanoid adopts VLA</li>
+<li><strong>Tactile Integration Accelerating</strong>: Sanctuary 5mN, Figure 03, Digit Plexus</li>
+<li><strong>Automotive as Beachhead</strong>: BMW, Mercedes, Hyundai, Magna</li>
+<li><strong>Korea Positioning</strong>: Hyundai + Samsung + Wonik + KAIST</li>
+<li><strong>Price Compression</strong>: 50x reduction in 5 years</li>
+<li><strong>Data Flywheel</strong>: Synthetic + teleop + deployment data virtuous cycle</li>
+<li><strong>Sim-to-Real Maturing</strong>: Isaac Gym/Lab + DR (DeXtreme, GR00T)</li>
+<li><strong>Open-Source Ecosystem</strong>: LEAP, OpenVLA, OXE, GR00T N1</li>
+</ol>
+<figure>
+  <img src="../assets/figures/ch12/fig_12_5_eight_trends_darkmode.png" alt="Figure 12.5: Eight industry trends — convergence and synergy." loading="lazy" onerror="this.src='../assets/figures/ch12/fig_12_5_eight_trends_technical.png'">
+  <figcaption>Figure 12.5: Eight industry trends — convergence and synergy.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-summary-and-outlook" class="content-section">
+<h2>Summary and Outlook</h2>
+<p>Physical AI is defined by the convergence of foundation models, simulation, and sensors — with robot hands as the key contact point. Current industrial deployments remain at the logistics level, but Sanctuary AI's 5mN tactile integration, Figure's Helix VLA, and NVIDIA's synthetic data pipeline are accelerating the transition to dexterous manipulation. Korea's vertical integration through Hyundai-Samsung-Wonik-KAIST positions it uniquely in this landscape.</p>
+<p>The final chapter addresses <strong>common limitations and future research directions</strong> that persist despite all this progress (<a href="ch13.html">Chapter 13</a>).</p>
+<hr>
+</section>
+<section id="sec-references" class="content-section">
+<h2>References</h2>
+<ol>
+<li>NVIDIA. (2025). GR00T N1: An open foundation model for generalist humanoid robots. <em>arXiv preprint</em>. arXiv:2503.14734.</li>
+<li>NVIDIA. (2026). GR00T N1.5: Advancing humanoid robot foundation models. <em>GTC 2026</em>.</li>
+<li>Figure AI. (2025). Helix: A vision-language-action model for full humanoid control. <em>Company technical report</em>.</li>
+<li>Figure AI. (2025). Figure 02 deployment at BMW Spartanburg. <em>Company press release</em>.</li>
+<li>Tesla. (2025). Optimus Gen 3 humanoid robot. <em>Tesla AI Day 2025</em>.</li>
+<li>Sanctuary AI. (2025). Phoenix Gen 8: Tactile-integrated humanoid. <em>Company technical report</em>.</li>
+<li>1X Technologies. (2025). NEO: Consumer humanoid robot. <em>Company press release</em>.</li>
+<li>Agility Robotics. (2025). Digit deployment at Amazon fulfillment centers. <em>Company press release</em>.</li>
+<li>Boston Dynamics. (2025). Electric Atlas humanoid robot. <em>Company product announcement</em>.</li>
+<li>Apptronik. (2025). Apollo humanoid: Mercedes-Benz factory pilot. <em>Company press release</em>.</li>
+<li>Unitree Robotics. (2026). G1 humanoid robot: 5,500+ units shipped. <em>IPO prospectus / Company report</em>.</li>
+<li>Wonik Robotics. (2025). Allegro + Digit Plexus. <em>Various</em>.</li>
+<li>Hyundai Motor Group. (2025). Robotics investment plan: KRW 125.2 trillion. <em>Company investor report</em>.</li>
+<li>Samsung Electronics. (2025). Rainbow Robotics acquisition and Future Robotics Office. <em>Company press release</em>.</li>
+<li>Markets and Markets. (2025). Humanoid robot market: $2.9B (2025) to $15.3B (2030). <em>Market research report</em>.</li>
+<li>Goldman Sachs. (2025). Humanoid robot shipment forecast: 250K+ units by 2030. <em>Equity research report</em>.</li>
+<li>Billard, A., & Kragic, D. (2019). Trends and challenges in robot manipulation. <em>Science</em>.</li>
+<li>Physical Intelligence. (2024). pi0 VLA. <em>arXiv:2410.24164</em>.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>Sources</h3>
+      <ul>
+      <li>Industry trends research (11 companies, 5 deployments, market data)</li>
+      <li>Limitations and future research analysis</li>
+      <li>Literature survey results (131 papers)</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch11.html" class="prev">&larr; Previous</a>
+        <a href="ch13.html" class="next">Next &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

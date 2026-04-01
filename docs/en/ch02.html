@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 2: Tactile Sensor Technology — The Skin of Robots</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="lang-en">
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch02.html" class="">KO</a>
+        <a href="../en/ch02.html" class="active">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-1">
+  <nav class="sidebar-nav part-1">
+    <a class="nav-dot active" data-section="sec-overview">
+      <span class="dot"></span>
+      <span class="label">Overview</span>
+    </a>
+    <a class="nav-dot" data-section="sec-2-1">
+      <span class="dot"></span>
+      <span class="label">2.1 Sensing Physics: Transduction P...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-2-2">
+      <span class="dot"></span>
+      <span class="label">2.2 Vision-Based Tactile Sensors: F...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-2-3">
+      <span class="dot"></span>
+      <span class="label">2.3 Multi-Axis Sensing: The Importa...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-2-4">
+      <span class="dot"></span>
+      <span class="label">2.4 Sensor-Integrated Design: The F...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-2-5">
+      <span class="dot"></span>
+      <span class="label">2.5 Sensor Comparison and Selection...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-2-6">
+      <span class="dot"></span>
+      <span class="label">2.6 Emerging Trends: Neuromorphic a...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-2-7">
+      <span class="dot"></span>
+      <span class="label">2.7 Tactile Sensing in Space Roboti...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-summary-and-outlook">
+      <span class="dot"></span>
+      <span class="label">Summary and Outlook</span>
+    </a>
+    <a class="nav-dot" data-section="sec-references">
+      <span class="dot"></span>
+      <span class="label">References</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part I: Foundations of Touch</span>
+        <h1>Chapter 2: Tactile Sensor Technology — The Skin of Robots</h1>
+        <div class="chapter-meta">
+          <span>Written: 2026-04-01</span>
+          <span>Last updated: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-overview" class="content-section">
+<h2>Overview</h2>
+<p>Chapter 1 established why touch is essential for robotic manipulation. This chapter examines the <strong>sensor technologies that physically realize this sense of touch</strong> — from piezoresistive transduction to the vision-based optical sensors that now dominate the field, culminating in integrated designs such as Digit 360 and the F-TAC Hand.</p>
+<blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
+- Explain the physical transduction principles of major tactile sensor types.
+- Understand the operating mechanism, strengths, and limitations of vision-based optical tactile sensors.
+- Articulate why multi-axis sensing is essential and how it is implemented.
+- Apply sensor selection criteria to different application scenarios.</blockquote>
+<hr>
+</section>
+<section id="sec-2-1" class="content-section">
+<h2>2.1 Sensing Physics: Transduction Principles</h2>
+<p>Tactile sensors convert physical contact into electrical signals through various transduction mechanisms. Building on the taxonomy established by Dahiya et al. [2010], we review the principal approaches.</p>
+<h3>2.1.1 Piezoresistive</h3>
+<p>These sensors measure changes in material resistance caused by contact. Their simplicity and low cost make them among the most widely used. Sundaram et al. [2019] deployed 548 piezoresistive sensors on a human hand (the STAG glove), recording force distributions during grasping at high spatial resolution (<em>Nature</em>, 2019).</p>
+<p><strong>Strengths</strong>: Low cost, simple construction, high sensitivity</p>
+<p><strong>Limitations</strong>: Hysteresis, temperature dependence, drift under repeated use</p>
+<h3>2.1.2 Capacitive</h3>
+<p>Capacitive sensors detect changes in capacitance between two electrodes. Murphy et al. [2025] implemented teaching by demonstration with 102 capacitive sensors. A notable advantage is proximity sensing — the ability to detect approaching objects before contact.</p>
+<p><strong>Strengths</strong>: High sensitivity, low power consumption, proximity sensing</p>
+<p><strong>Limitations</strong>: Susceptibility to electromagnetic interference (EMI), wiring complexity</p>
+<h3>2.1.3 Optical — Vision-Based Tactile Sensors</h3>
+<p>These sensors image the deformation of a transparent gel or elastomer using an embedded camera, extracting contact information from the resulting images. This approach has become the <strong>dominant paradigm</strong> in tactile robotics research — discussed in detail in Section 2.2.</p>
+<h3>2.1.4 Magnetic</h3>
+<p>Combinations of magnets with Hall-effect or magnetoresistive sensors measure deformation. ReSkin [Bhirangi et al., 2021] introduced a magnetic elastomer tactile skin costing less than $6 per unit, 2-3 mm thick, and durable for 50,000+ interactions. The key innovation is separating electronics from the passive sensing surface. AnySkin [Bhirangi et al., 2024] advanced this idea to achieve <strong>12-second replacement</strong> without recalibration, maintaining 92% slip detection accuracy.</p>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). "ReSkin: Versatile, Replaceable, Lasting Tactile Skins." <em>arXiv preprint</em>.
+A magnetic elastomer-based, low-cost ($6/unit), replaceable tactile skin offering a practical answer to the sensor durability challenge in industrial settings.</blockquote>
+<p>The OSMO glove [2025] uses 12 three-axis magnetic sensors to simultaneously measure normal and shear forces, with MuMetal shielding to suppress external magnetic interference (<a href="ch06.html">Chapter 6.3</a>).</p>
+<h3>2.1.5 Piezoelectric</h3>
+<p>Piezoelectric materials (PZT, PVDF) generate charge under deformation. These sensors excel at detecting dynamic changes — vibration and texture — rather than static forces, serving as functional analogs of Pacinian corpuscles. Combined with energy harvesting, self-powered sensors become feasible [Yu et al., 2025].</p>
+<figure>
+  <img src="../assets/figures/ch02/fig_2_1_transduction_principles_darkmode.png" alt="Figure 2.1: Comparison of five tactile sensor transduction principles — piezoresistive, capacitive, optical, magnetic, piezoelectric." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_1_transduction_principles_technical.png'">
+  <figcaption>Figure 2.1: Comparison of five tactile sensor transduction principles — piezoresistive, capacitive, optical, magnetic, piezoelectric.</figcaption>
+</figure>
+<h3>Transduction Comparison</h3>
+<table class="styled-table">
+<thead><tr>
+<th>Property</th>
+<th>Piezoresistive</th>
+<th>Capacitive</th>
+<th>Optical/Vision</th>
+<th>Magnetic</th>
+<th>Piezoelectric</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Spatial resolution</strong></td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Very high</td>
+<td>Low-Medium</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><strong>Force range</strong></td>
+<td>Wide</td>
+<td>Wide</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Wide (dynamic)</td>
+</tr>
+<tr>
+<td><strong>Multi-axis</strong></td>
+<td>Difficult</td>
+<td>Possible</td>
+<td>Excellent</td>
+<td>Excellent</td>
+<td>Difficult</td>
+</tr>
+<tr>
+<td><strong>Durability</strong></td>
+<td>Moderate</td>
+<td>Moderate</td>
+<td>Low (gel wear)</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Cost</strong></td>
+<td>Very low</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><strong>Size</strong></td>
+<td>Compact</td>
+<td>Compact</td>
+<td>Bulky (camera)</td>
+<td>Compact</td>
+<td>Compact</td>
+</tr>
+<tr>
+<td><strong>Representative</strong></td>
+<td>STAG</td>
+<td>—</td>
+<td>GelSight, DIGIT</td>
+<td>ReSkin, OSMO</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<hr>
+</section>
+<section id="sec-2-2" class="content-section">
+<h2>2.2 Vision-Based Tactile Sensors: From GelSight to Digit 360</h2>
+<p>Vision-based optical tactile sensors have dominated tactile research since GelSight's introduction in 2017. Their core principle is <strong>photometric stereo</strong>: LEDs embedded in an elastomeric gel illuminate its surface; a camera captures deformation patterns caused by contact; and the resulting images are processed to reconstruct a 3D contact map.</p>
+<h3>GelSight (2017)</h3>
+<p>Developed by Yuan, Dong, and Adelson [2017] at MIT CSAIL, GelSight uses photometric stereo to reconstruct contact surface geometry at micrometer resolution. Its paradigm-shifting contribution was bringing "the tools of vision" to tactile sensing — unlike electrical transduction methods, GelSight directly leverages the rich ecosystem of image processing and deep learning.</p>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Yuan, W., Dong, S., & Adelson, E. H. (2017). "GelSight: High-Resolution Robot Tactile Sensors for Estimating Geometry and Force." <em>Sensors</em>, 17(12), 2762.
+The foundational paper for photometric stereo-based high-resolution 3D tactile sensing. With 600+ citations, it marks the beginning of the vision-based tactile sensor paradigm.</blockquote>
+<h3>GelSight Wedge (2021)</h3>
+<p>Wang et al. [2021] developed a wedge-shaped variant that fits standard robot grippers — a critical step from research prototype to practical integration.</p>
+<h3>DIGIT (2020)</h3>
+<p>Meta FAIR's DIGIT [Lambeta et al., 2020] was a milestone in miniaturization and cost reduction. At <strong>$350</strong>, it was over 10x cheaper than BioTac ($5K-10K), with a compact form factor suitable for mounting on individual fingers of a dexterous hand. DIGIT democratized tactile research and became the standard sensor for numerous subsequent studies.</p>
+<figure>
+  <img src="../assets/figures/ch02/fig_2_2_vbts_evolution_darkmode.png" alt="Figure 2.2: Evolution of vision-based tactile sensors. Source: Yuan et al. (2017), Wang et al. (2021), Lambeta et al. (2020, 2024)." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_2_vbts_evolution_technical.png'">
+  <figcaption>Figure 2.2: Evolution of vision-based tactile sensors. Source: Yuan et al. (2017), Wang et al. (2021), Lambeta et al. (2020, 2024).</figcaption>
+</figure>
+<h3>Digit 360 (2024)</h3>
+<p>Lambeta et al. [2024] presented the most comprehensive artificial fingertip to date:</p>
+<ul>
+<li><strong>8.3M taxels</strong>: Approximately 8.3 million sensing points</li>
+<li><strong>18+ sensing modalities</strong>: 3D geometry, force (normal + shear), vibration, temperature, proximity, and more</li>
+<li><strong>Omnidirectional touch</strong>: Full fingertip surface coverage</li>
+<li><strong>1 mN force resolution</strong>: Approaching human-level sensitivity</li>
+</ul>
+<p>This sensor integrates multimodal sensing corresponding to multiple human receptor types into a single fingertip — the closest attempt yet to a "complete" artificial touch organ.</p>
+<h3>Modularized GelSight Design (2025)</h3>
+<p>Agarwal et al. [2025] proposed a systematic modular design framework for GelSight-family sensors (<em>IJRR</em>), enabling application-specific customization by combining gel materials, illumination layouts, camera positions, and housings as modular units.</p>
+<h3>Limitations of Vision-Based Sensors</h3>
+<p>The primary limitation is <strong>durability</strong>. Gel surfaces wear with repeated contact; light sources degrade; dust infiltration and cleaning difficulties constrain long-term industrial operation. When the F-TAC Hand [2025] placed 17 sensors across the hand, it also created 17 potential failure points. AnySkin's [2024] 12-second replacement approach offers one practical remedy (<a href="ch13.html">Chapter 13.1</a>).</p>
+<figure>
+  <img src="../assets/figures/ch02/fig_2_3_photometric_stereo_darkmode.png" alt="Figure 2.3: Operating principle of vision-based tactile sensors — photometric stereo-based 3D contact map reconstruction." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_3_photometric_stereo_technical.png'">
+  <figcaption>Figure 2.3: Operating principle of vision-based tactile sensors — photometric stereo-based 3D contact map reconstruction.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-2-3" class="content-section">
+<h2>2.3 Multi-Axis Sensing: The Importance of Normal and Shear Forces</h2>
+<p>As emphasized in Seminar 2 (Taejoon), <strong>normal force alone is insufficient</strong>. Shear force is essential for slip detection, object orientation estimation, and force-noise decoupling.</p>
+<h3>Motivation for Multi-Axis Sensing</h3>
+<ul>
+<li><strong>Efficient robot learning</strong>: Multi-dimensional tactile information improves policy sample efficiency [Yin et al., 2025]</li>
+<li><strong>Slip detection</strong>: Shear force changes are leading indicators of incipient slip [Hossain et al., 2025]</li>
+<li><strong>Object orientation detection</strong>: Tangential force vectors estimate object tilt [Lach et al., 2023]</li>
+<li><strong>Force-noise decoupling</strong>: Multi-axis information separates true contact forces from sensor noise [Cho et al., 2025]</li>
+</ul>
+<h3>The Seminar 2 Multi-Axis Sensor</h3>
+<p>The custom multi-axis tactile sensor presented in Seminar 2 measures 10 x 10 x 6.5 mm:</p>
+<ul>
+<li>Normal force range: ~50 N</li>
+<li>Shear force range: ~5 N</li>
+<li>Sampling rate: 100 Hz</li>
+<li>Validated on robot hand integration</li>
+</ul>
+<p>This compact sensor addresses the bulk problem of vision-based sensors while still providing shear information.</p>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Fang, J., et al. (2025). "Force Measurement Technology of Vision-Based Tactile Sensor." <em>Advanced Intelligent Systems</em> (Wiley).
+A comprehensive review of force measurement approaches in vision-based tactile sensors, covering calibration methods and multi-axis force estimation techniques.</blockquote>
+<figure>
+  <img src="../assets/figures/ch02/fig_2_4_multiaxis_force_darkmode.png" alt="Figure 2.4: Multi-axis tactile sensing — comparing the roles of normal and shear forces." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_4_multiaxis_force_technical.png'">
+  <figcaption>Figure 2.4: Multi-axis tactile sensing — comparing the roles of normal and shear forces.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-2-4" class="content-section">
+<h2>2.4 Sensor-Integrated Design: The F-TAC Hand Case Study</h2>
+<p>No matter how capable a sensor may be, its practical value is limited unless integrated into a robot hand. The F-TAC Hand [2025, <em>Nature Machine Intelligence</em>] represents the current state of the art in integrated design:</p>
+<ul>
+<li><strong>17 tactile sensors</strong> covering <strong>70%</strong> of the hand surface</li>
+<li><strong>0.1 mm resolution</strong> for fine feature detection</li>
+<li><strong>100% multi-object grasp success</strong> — a direct effect of tactile feedback</li>
+<li><strong>Optimized sensor placement</strong> concentrated in high-contact-probability regions</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch02/fig_2_5_ftac_hand_darkmode.png" alt="Figure 2.5: F-TAC Hand sensor layout — distribution and coverage of 17 tactile sensors. Source: F-TAC Hand (Nature Machine Intelligence, 2025)." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_5_ftac_hand_technical.png'">
+  <figcaption>Figure 2.5: F-TAC Hand sensor layout — distribution and coverage of 17 tactile sensors. Source: F-TAC Hand (Nature Machine Intelligence, 2025).</figcaption>
+</figure>
+<p>The F-TAC Hand's success demonstrates the importance of <strong>integration methodology</strong> over sensor technology alone. Co-optimizing sensor type, count, and placement alongside hand design is likely to become standard practice.</p>
+<p>3D-ViTac [Huang et al., 2024] fused dense tactile sensors (3 mm² resolution) with vision into a unified 3D representation and used Diffusion Policy to achieve 85-90% success on bimanual dexterous tasks — versus 45-50% with vision only (<em>CoRL 2024</em>) (<a href="ch11.html">Chapter 11.1</a>).</p>
+<p>Soft Robotic Hand with Tactile Palm-Finger Coordination [2025, <em>Nature Communications</em>] improved manipulation performance through coordinated tactile sensing between palm and fingers in a soft robotic hand.</p>
+<hr>
+</section>
+<section id="sec-2-5" class="content-section">
+<h2>2.5 Sensor Comparison and Selection Guide</h2>
+<p>Sensor selection depends on application requirements. The table below recommends sensor types for common scenarios:</p>
+<table class="styled-table">
+<thead><tr>
+<th>Application</th>
+<th>Key Requirement</th>
+<th>Recommended Sensor</th>
+<th>Representative Example</th>
+</tr></thead><tbody>
+<tr>
+<td>Research dexterous manipulation</td>
+<td>High resolution, low cost</td>
+<td>Vision-based (DIGIT)</td>
+<td>DeXtreme, Robot Synesthesia</td>
+</tr>
+<tr>
+<td>Industrial gripper</td>
+<td>Durability, multi-axis</td>
+<td>Magnetic (ReSkin/AnySkin)</td>
+<td>Factory automation</td>
+</tr>
+<tr>
+<td>Human hand data collection</td>
+<td>Compact, flexible, multi-axis</td>
+<td>Magnetic (OSMO)</td>
+<td>OSMO glove</td>
+</tr>
+<tr>
+<td>Whole-hand coverage</td>
+<td>Wide area, binary contact</td>
+<td>Piezoresistive array</td>
+<td>Yin et al. (2023)</td>
+</tr>
+<tr>
+<td>Texture/surface classification</td>
+<td>High-resolution 3D</td>
+<td>Vision-based (GelSight)</td>
+<td>UniTouch</td>
+</tr>
+<tr>
+<td>Slip detection</td>
+<td>Fast response, shear sensing</td>
+<td>Multi-axis (magnetic/capacitive)</td>
+<td>Universal Slip Detection</td>
+</tr>
+</tbody></table>
+<blockquote class=""><strong>Key Insight</strong>: Sensor selection is not a problem with a single optimal answer but should be approached from a <strong>task-sensor fitness</strong> perspective. The tactile data taxonomy by Albini et al. [2025] systematizes the decision flow from sensor hardware to data representation (<a href="ch03.html">Chapter 3</a>).</blockquote>
+<hr>
+</section>
+<section id="sec-2-6" class="content-section">
+<h2>2.6 Emerging Trends: Neuromorphic and Self-Healing Sensors</h2>
+<h3>2.6.1 Neuromorphic Tactile Sensors</h3>
+<p>Neuromorphic sensors, inspired by the biological nervous system, use event-driven processing to maximize energy efficiency and temporal resolution. NRE-skin [2025, <em>PNAS</em>] integrates high-resolution touch, active pain and injury detection, and local reflexes through a hierarchical architecture with modular quick-release repair.</p>
+<p>The spike-based neural coding survey [2025, <em>Microsystems & Nanoengineering</em>] demonstrates that CMOS/memristor hardware combined with spiking neural network (SNN) decoding can achieve 10x super-resolution. Bioinspired Spiking Architecture [2026, <em>Nature Communications</em>] demonstrated efficient tactile encoding under energy constraints.</p>
+<h3>2.6.2 Self-Healing and Multisensory E-Skin</h3>
+<p>Multisensory Electronic Skin [2025, <em>PNAS</em>] achieved decoupled pressure-temperature sensing with self-healing materials, extending sensor lifespan. Such approaches have the potential to fundamentally address the tactile sensor durability problem in industrial environments (<a href="ch13.html">Chapter 13.1</a>).</p>
+<h3>2.6.3 Physically-Based Rendering for Sensor Design</h3>
+<p>Vision-Based Tactile Sensor Design Using Physically Based Rendering [2025, <em>Nature Communications Engineering</em>] proposed simulating optical tactile sensor designs through PBR, reducing design trial-and-error and enabling digital twin-based sensor development.</p>
+<figure>
+  <img src="../assets/figures/ch02/fig_2_6_nextgen_sensors_darkmode.png" alt="Figure 2.6: Next-generation tactile sensor technologies — neuromorphic sensors, self-healing e-skin, PBR-based design." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_6_nextgen_sensors_technical.png'">
+  <figcaption>Figure 2.6: Next-generation tactile sensor technologies — neuromorphic sensors, self-healing e-skin, PBR-based design.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-2-7" class="content-section">
+<h2>2.7 Tactile Sensing in Space Robotics</h2>
+<p>Tactile sensing for space robotics presents unique design requirements — vacuum, extreme temperatures, and radiation. The Comprehensive Review of Tactile Sensing Technologies in Space Robotics [2025, <em>Chinese Journal of Aeronautics</em>] surveys these extreme-environment challenges and sensor design strategies. Lessons from space sensor design transfer to terrestrial industrial sensor development.</p>
+<hr>
+</section>
+<section id="sec-summary-and-outlook" class="content-section">
+<h2>Summary and Outlook</h2>
+<p>Tactile sensor technology has undergone a paradigm shift with the emergence of vision-based optical sensors. From GelSight (DIGIT at ~$350) to Digit 360 (8.3M taxels, 18+ modalities), resolution and multimodality have advanced dramatically. Simultaneously, magnetic sensors like ReSkin and AnySkin have realized replaceable tactile skins at ~$6 per unit, offering a practical answer to the durability problem.</p>
+<p>Key challenges remain: gel wear, recalibration needs, industrial environment validation, and achieving miniaturization alongside multi-axis sensing. With Sanctuary AI integrating 5 mN sensitivity into a commercial humanoid, and Meta's Digit Plexus pursuing standardized sensor-hand interfaces, touch is transitioning from "optional" to "standard."</p>
+<p>The next chapter addresses <strong>how the data generated by these sensors is represented and collected</strong> (<a href="ch03.html">Chapter 3: Tactile Data</a>).</p>
+<hr>
+</section>
+<section id="sec-references" class="content-section">
+<h2>References</h2>
+<ol>
+<li>Dahiya, R. S., Metta, G., Valle, M., & Sandini, G. (2010). Tactile sensing: From humans to humanoids. <em>IEEE Transactions on Robotics</em>, 26(1), 1-20. https://doi.org/10.1109/TRO.2009.2033627</li>
+</ol>
+<ol>
+<li>Yuan, W., Dong, S., & Adelson, E. H. (2017). GelSight: High-resolution robot tactile sensors for estimating geometry and force. <em>Sensors</em>, 17(12), 2762. https://doi.org/10.3390/s17122762</li>
+</ol>
+<ol>
+<li>Wang, S., She, Y., Romero, B., & Adelson, E. H. (2021). GelSight Wedge: Measuring high-resolution 3D contact geometry with a compact robot finger. <em>IEEE ICRA 2021</em>. https://doi.org/10.1109/ICRA48506.2021.9560783</li>
+</ol>
+<ol>
+<li>Lambeta, M., Chou, P.-W., Tian, S., Yang, B., Maloon, B., Most, V. R., ... & Calandra, R. (2020). DIGIT: A novel design for a low-cost compact high-resolution tactile sensor with application to in-hand manipulation. <em>IEEE Robotics and Automation Letters</em>, 5(3), 3838-3845.</li>
+</ol>
+<ol>
+<li>Lambeta, M., Wu, T., Sengul, A., & Calandra, R. (2024). Digitizing touch with an artificial multimodal fingertip (Digit 360). <em>arXiv preprint</em>, arXiv:2411.02834.</li>
+</ol>
+<ol>
+<li>Agarwal, A., Mirzaee, M. A., Sun, X., & Yuan, W. (2025). A modularized design approach for GelSight family of vision-based tactile sensors. <em>International Journal of Robotics Research</em>. https://doi.org/10.1177/02783649251339680</li>
+</ol>
+<ol>
+<li>Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). ReSkin: Versatile, replaceable, lasting tactile skins. <em>arXiv preprint</em>, arXiv:2111.00071.</li>
+</ol>
+<ol>
+<li>Bhirangi, R., Pattabiraman, V., Norcross, E., Shocher, A., & Pinto, L. (2024). AnySkin: Plug-and-play skin sensing for robotic touch. <em>ICRA 2025</em>. arXiv:2409.08276.</li>
+</ol>
+<ol>
+<li>Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
+</ol>
+<ol>
+<li>Murphy, L., et al. (2025). Capacitive tactile sensing for teaching by demonstration. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Fang, J., et al. (2025). Force measurement technology of vision-based tactile sensor. <em>Advanced Intelligent Systems</em> (Wiley). https://doi.org/10.1002/aisy.202400290</li>
+</ol>
+<ol>
+<li>Yu, et al. (2025). Recent progress in tactile sensing and machine learning for texture perception in humanoid robots. <em>Interdisciplinary Materials</em> (Wiley). https://doi.org/10.1002/idm2.12233</li>
+</ol>
+<ol>
+<li>Various. (2025). Comprehensive review of tactile sensing technologies in space robotics. <em>Chinese Journal of Aeronautics</em>. https://doi.org/10.1016/j.cja.2025.01.031</li>
+</ol>
+<ol>
+<li>Various. (2025). Vision-based tactile sensor design using physically based rendering. <em>Communications Engineering</em> (Nature). https://doi.org/10.1038/s44172-025-00350-4</li>
+</ol>
+<ol>
+<li>Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
+</ol>
+<ol>
+<li>Huang, B., Wang, Y., et al. (2024). 3D-ViTac: Learning fine-grained manipulation with visuo-tactile sensing. <em>CoRL 2024</em>. arXiv:2410.24091.</li>
+</ol>
+<ol>
+<li>Zhang, N., Ren, J., Dong, Y., Gu, G., & Zhu, X. (2025). Soft robotic hand with tactile palm-finger coordination. <em>Nature Communications</em>, 16, 2395. https://doi.org/10.1038/s41467-025-57741-6</li>
+</ol>
+<ol>
+<li>Gao, Y., Zhang, J., Zhang, H., et al. (2025). A neuromorphic robotic electronic skin with active pain and injury perception. <em>PNAS</em>. https://doi.org/10.1073/pnas.2520922122</li>
+</ol>
+<ol>
+<li>Various. (2025). Multisensory electronic skin with decoupled pressure-temperature sensing. <em>PNAS</em>.</li>
+</ol>
+<ol>
+<li>Various. (2025). Recent advances in spike-based neural coding for tactile perception. <em>Microsystems & Nanoengineering</em> (Nature). https://doi.org/10.1038/s41378-025-01074-3</li>
+</ol>
+<ol>
+<li>Various. (2026). Bioinspired spiking architecture for energy-constrained touch encoding. <em>Nature Communications</em>. https://doi.org/10.1038/s41467-026-68858-7</li>
+</ol>
+<ol>
+<li>Yin, Z.-H., et al. (2025). Multi-dimensional tactile sensing for efficient robot learning. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Hossain, M., et al. (2025). Multi-axis tactile for object orientation detection. <em>Sensors and Actuators A: Physical</em>.</li>
+</ol>
+<ol>
+<li>Lach, L., et al. (2023). Tactile-based object orientation detection for blind manipulation. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Cho, W., et al. (2025). Multi-dimensional tactile sensing for force/noise decoupling. <em>ACS Applied Materials & Interfaces</em>.</li>
+</ol>
+<ol>
+<li>Various. (2025). Recent advances in tactile sensing technologies for human-robot interaction. <em>ScienceDirect</em>. https://doi.org/10.1016/j.sintl.2025.100345</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>Sources</h3>
+      <ul>
+      <li>SNU Seminar: 260323_Seminar_Taejoon_DataGlove_Sensors</li>
+      <li>Literature survey results (131 papers)</li>
+      <li>Paper summary posts: terry.artlab.ai</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch01.html" class="prev">&larr; Previous</a>
+        <a href="ch03.html" class="next">Next &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

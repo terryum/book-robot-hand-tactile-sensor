@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: Intelligent Mechanisms — Physical Intelligence</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="lang-en">
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch05.html" class="">KO</a>
+        <a href="../en/ch05.html" class="active">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-2">
+  <nav class="sidebar-nav part-2">
+    <a class="nav-dot active" data-section="sec-overview">
+      <span class="dot"></span>
+      <span class="label">Overview</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-1">
+      <span class="dot"></span>
+      <span class="label">5.1 Underactuation: Shape Adaptatio...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-2">
+      <span class="dot"></span>
+      <span class="label">5.2 Variable Stiffness Actuators: S...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-3">
+      <span class="dot"></span>
+      <span class="label">5.3 Active Surfaces: Belt- and Roll...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-4">
+      <span class="dot"></span>
+      <span class="label">5.4 Integrating the Three Mechanism...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-5">
+      <span class="dot"></span>
+      <span class="label">5.5 Factory Automation Applications...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-6">
+      <span class="dot"></span>
+      <span class="label">5.6 Continuous vs. Discrete Contact...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-summary-and-outlook">
+      <span class="dot"></span>
+      <span class="label">Summary and Outlook</span>
+    </a>
+    <a class="nav-dot" data-section="sec-references">
+      <span class="dot"></span>
+      <span class="label">References</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part II: Hands — Robot and Human</span>
+        <h1>Chapter 5: Intelligent Mechanisms — Physical Intelligence</h1>
+        <div class="chapter-meta">
+          <span>Written: 2026-04-01</span>
+          <span>Last updated: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-overview" class="content-section">
+<h2>Overview</h2>
+<p>While Chapter 4 surveyed the full spectrum of robot hand design, this chapter focuses on three approaches where <strong>the mechanism itself exhibits intelligence</strong>: underactuation, variable stiffness actuators (VSAs), and active surfaces. Seminar 3 (Inchul) provided the richest source material, demonstrating how integrating these three mechanisms creates synergies for factory automation.</p>
+<blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
+- Explain the principles of underactuation and its shape adaptation capabilities.
+- Compare four implementation approaches for variable stiffness actuators.
+- Understand how active surfaces contribute to continuous-contact manipulation.
+- Describe the impact of integrated mechanism design on factory automation.</blockquote>
+<hr>
+</section>
+<section id="sec-5-1" class="content-section">
+<h2>5.1 Underactuation: Shape Adaptation with Fewer Actuators</h2>
+<p>Underactuation refers to designs where the number of actuators is less than the number of joints. Remaining joints are passively determined by springs or mechanical stops. The core value is <strong>automatic adaptation to object shape</strong> — performed by physical mechanism rather than control algorithms.</p>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Bicchi, A. (2000). "Hands for Dexterous Manipulation and Robust Grasping: A Difficult Road Toward Simplicity." <em>IEEE T-RA</em>.
+The foundational paper for underactuation theory, proving the paradoxical proposition that "fewer actuators can yield more robust grasping."</blockquote>
+<h3>Pisa/IIT SoftHand</h3>
+<p>Among the most referenced hands in Seminar 3:</p>
+<p><strong>SoftHand 1</strong> [Li et al.; Catalano et al.]:</p>
+<ul>
+<li>1 actuator drives 19 joints</li>
+<li>Adaptive synergy: all joints coordinated along the first principal synergy</li>
+<li>Tendons slip on contact, automatically expanding contact area</li>
+<li>3D-printable, modular design</li>
+</ul>
+<p><strong>SoftHand 2</strong> [Della Santina et al.]:</p>
+<ul>
+<li>2 actuators: primary + auxiliary synergy</li>
+<li>Friction-based actuation expansion enables more diverse grasp types</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_1_underactuation_darkmode.png" alt="Figure 5.1: Shape adaptation sequence of an underactuated finger." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_1_underactuation_technical.png'">
+  <figcaption>Figure 5.1: Shape adaptation sequence of an underactuated finger.</figcaption>
+</figure>
+<h3>Palm Concavity and Adaptability</h3>
+<p>Capsi-Morales et al. proposed sectioning the palm and connecting sections via underactuation, allowing the palm itself to adapt to objects — extending the adaptive region beyond fingers.</p>
+<h3>Pull-in Mechanism</h3>
+<p>Kakogawa et al. combined underactuated fingers with a pull-in mechanism to solve the challenging task of picking up flat objects from a table surface.</p>
+<h3>Dollar's Hand</h3>
+<p>Dollar et al. pursued extreme simplification of underactuation for manufacturing environments, achieving robust grasping with minimal complexity.</p>
+<hr>
+</section>
+<section id="sec-5-2" class="content-section">
+<h2>5.2 Variable Stiffness Actuators: Switching Between Soft and Rigid</h2>
+<p>Variable stiffness actuators (VSAs) enable a single mechanism to transition between <strong>compliant</strong> and <strong>stiff</strong> states. Seminar 3 systematically organized four implementation approaches:</p>
+<h3>5.2.1 Parallel Beam</h3>
+<p>Fu et al. use a slider to adjust the effective beam length, continuously varying finger stiffness. Combined with ArUco marker-based vision force sensing for low-cost force feedback.</p>
+<h3>5.2.2 Pneumatic</h3>
+<p>Al Abeach et al. arrange McKibben artificial muscles antagonistically, enabling independent stiffness control while maintaining pose. This means adjustable resistance to disturbances while holding an object.</p>
+<h3>5.2.3 SMA + SMP</h3>
+<p>Wang & Ahn combine shape memory alloy (SMA) actuation with shape memory polymer (SMP) stiffness switching, achieving <strong>55x stiffness change</strong> per hinge.</p>
+<h3>5.2.4 Particle Jamming</h3>
+<p>Wei et al. combine fiber-reinforced pneumatic actuators with particle jamming for <strong>10x+ stiffness increase</strong>. Soft state adapts to objects; jamming the particles transitions to rigid grasping.</p>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_2_variable_stiffness_darkmode.png" alt="Figure 5.2: Four VSA implementation approaches." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_2_variable_stiffness_technical.png'">
+  <figcaption>Figure 5.2: Four VSA implementation approaches.</figcaption>
+</figure>
+<table class="styled-table">
+<thead><tr>
+<th>VSA Method</th>
+<th>Stiffness Ratio</th>
+<th>Response Speed</th>
+<th>Size</th>
+<th>Cost</th>
+<th>Advantage</th>
+</tr></thead><tbody>
+<tr>
+<td>Parallel beam</td>
+<td>Continuous</td>
+<td>Fast</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Simple, vision feedback</td>
+</tr>
+<tr>
+<td>Pneumatic</td>
+<td>Variable</td>
+<td>Slow</td>
+<td>Large</td>
+<td>Medium</td>
+<td>Pose-stiffness decoupling</td>
+</tr>
+<tr>
+<td>SMA+SMP</td>
+<td>55x</td>
+<td>Slow</td>
+<td>Compact</td>
+<td>High</td>
+<td>Extreme stiffness change</td>
+</tr>
+<tr>
+<td>Particle jamming</td>
+<td>10x+</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Shape adapt + lock</td>
+</tr>
+</tbody></table>
+<h3>BISA (Bidirectional Stiffening Soft Actuator)</h3>
+<p>Lin et al.'s BISA independently controls bending stiffness and lateral stiffness, enabling more precise stiffness profile management.</p>
+<h3>Reconfigurable Passive Joints</h3>
+<p>Kopicki et al. proposed joints that reconfigure under external force, then lock via tendon tension — achieving variable configuration without dedicated VSA hardware.</p>
+<hr>
+</section>
+<section id="sec-5-3" class="content-section">
+<h2>5.3 Active Surfaces: Belt- and Roller-Based Continuous Contact Manipulation</h2>
+<p>Active surfaces drive the gripper's contact surface itself, enabling <strong>sliding or repositioning objects while maintaining contact</strong>.</p>
+<h3>Belt-Based Active Surfaces</h3>
+<p>In work by Kim et al. and Wang et al., belts are mounted on gripper finger surfaces and driven:</p>
+<ul>
+<li><strong>Thin object approach</strong>: Belts pull cards/paper up from a table surface</li>
+<li><strong>Repositioning/alignment</strong>: Belt drives adjust object position within the grasp</li>
+<li><strong>Continuous contact maintenance</strong>: Manipulation occurs without releasing and re-grasping</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_3_active_belt_darkmode.png" alt="Figure 5.3: Active belt surface operating principle." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_3_active_belt_technical.png'">
+  <figcaption>Figure 5.3: Active belt surface operating principle.</figcaption>
+</figure>
+<p>The key insight from Seminar 3: <strong>continuous contact is easier to control and more stable than discrete contact</strong>. It eliminates the uncertainty that arises from releasing and re-grasping.</p>
+<hr>
+</section>
+<section id="sec-5-4" class="content-section">
+<h2>5.4 Integrating the Three Mechanisms: Adapt, Fix, Manipulate</h2>
+<p>Seminar 3's most original contribution is the <strong>temporal integration</strong> of the three mechanisms:</p>
+<ol>
+<li><strong>Underactuation</strong>: Initial approach → passive adaptation to object shape</li>
+<li><strong>Variable Stiffness (VSA)</strong>: After adaptation → stiffness transition locks the grasp</li>
+<li><strong>Active Surface (Belt)</strong>: While locked → belt drives manipulate/reposition/align</li>
+</ol>
+<p>These three stages implement the natural flow of human grasping — "approach → grasp → adjust" — through mechanism.</p>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_4_integrated_architecture_darkmode.png" alt="Figure 5.4: Integrated architecture of three mechanisms." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_4_integrated_architecture_technical.png'">
+  <figcaption>Figure 5.4: Integrated architecture of three mechanisms.</figcaption>
+</figure>
+<blockquote class=""><strong>Key Insight</strong>: Even with identical sensing and learning, stability improves dramatically when the mechanism induces continuous contact. This is the "role of physical design" — embedding intelligence in physical structure rather than relying solely on software.</blockquote>
+<hr>
+</section>
+<section id="sec-5-5" class="content-section">
+<h2>5.5 Factory Automation Applications: Thin Objects, Multiple Objects, Repositioning</h2>
+<p>Seminar 3 presented concrete factory automation scenarios for this integrated mechanism:</p>
+<h3>5.5.1 Thin Object Grasping</h3>
+<p>Extremely thin objects (cards, paper, gaskets) are difficult for parallel grippers. Active belt surfaces lift edges from the table, followed by underactuated finger grasping. PP-Tac [2025] (R-Tac + Diffusion Policy, 87.5% success) attacks this problem from the tactile+learning direction; Seminar 3's mechanism approach attacks it from physical design (<a href="ch07.html">Chapter 7.3</a>).</p>
+<h3>5.5.2 Multiple Object Handling</h3>
+<p>Grasping multiple objects simultaneously, or adding objects to an existing grasp. Underactuation's shape adaptation plays the key role; the F-TAC Hand's 100% multi-object success shows how tactile feedback reinforces this further (<a href="ch04.html">Chapter 4.5</a>).</p>
+<h3>5.5.3 Repositioning/Alignment/Rotation</h3>
+<p>Adjusting object position or orientation within the grasp. Active belt surfaces play the central role — more stable than discrete contact (release-and-regrasp).</p>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_5_factory_tasks_darkmode.png" alt="Figure 5.5: Factory automation target tasks." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_5_factory_tasks_technical.png'">
+  <figcaption>Figure 5.5: Factory automation target tasks.</figcaption>
+</figure>
+<table class="styled-table">
+<thead><tr>
+<th>Scenario</th>
+<th>Primary Mechanism</th>
+<th>Supporting Mechanism</th>
+<th>Industrial Application</th>
+</tr></thead><tbody>
+<tr>
+<td>Thin objects</td>
+<td>Active surface</td>
+<td>Underactuation</td>
+<td>Gaskets, paper, PCBs</td>
+</tr>
+<tr>
+<td>Multiple objects</td>
+<td>Underactuation</td>
+<td>VSA</td>
+<td>Parts sorting, assembly</td>
+</tr>
+<tr>
+<td>Repositioning</td>
+<td>Active surface</td>
+<td>VSA</td>
+<td>Precision assembly, insertion</td>
+</tr>
+</tbody></table>
+<hr>
+</section>
+<section id="sec-5-6" class="content-section">
+<h2>5.6 Continuous vs. Discrete Contact: The Role of Physical Design</h2>
+<p>Seminar 3's deepest insight is the fundamental difference between <strong>continuous</strong> and <strong>discrete contact</strong>:</p>
+<p><strong>Discrete Contact</strong> (most current approaches):</p>
+<ul>
+<li>Grasp → release → re-grasp</li>
+<li>Each transition requires new contact planning</li>
+<li>Uncertainty increases at state transitions</li>
+<li>Learning-based approaches must absorb this uncertainty</li>
+</ul>
+<p><strong>Continuous Contact</strong> (mechanism-based approach):</p>
+<ul>
+<li>Manipulation while maintaining contact</li>
+<li>Stable contact state → simpler control</li>
+<li>Mechanism "physically guarantees" continuous contact</li>
+<li>Reduced burden on learning and sensing</li>
+</ul>
+<blockquote class=""><strong>Key Perspective</strong>: When mechanisms induce continuous contact, the burden on sensing and learning is reduced. This forms one axis of the <strong>"mechanism + tactile + learning triangle"</strong> proposed in Chapter 13 (<a href="ch13.html">Chapter 13.4</a>).</blockquote>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_6_contact_continuity_darkmode.png" alt="Figure 5.6: Continuous vs. discrete contact — state transition diagrams." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_6_contact_continuity_technical.png'">
+  <figcaption>Figure 5.6: Continuous vs. discrete contact — state transition diagrams.</figcaption>
+</figure>
+<p>The Process-Centric Manipulation Taxonomy [2025, <em>Nature Machine Intelligence</em>] formalizes the connection from process specifications to tactile manipulation skills, validating 28 skills from industrial domains at ~100% success rates. This taxonomy encompasses continuous-contact manipulation skills aligned with Seminar 3's mechanism approach.</p>
+<hr>
+</section>
+<section id="sec-summary-and-outlook" class="content-section">
+<h2>Summary and Outlook</h2>
+<p>Intelligent mechanisms are not alternatives to software intelligence (sensing, learning) but <strong>complements</strong>. Underactuation provides shape adaptation, VSAs provide state locking, and active surfaces provide continuous-contact manipulation. Their integration creates synergy beyond the sum of parts. Seminar 3's factory scenarios (thin objects, multiple objects, repositioning) represent challenges one level above current industrial deployments (logistics), and mechanism-based approaches are a key strategy for bridging this gap.</p>
+<p>The next chapter examines <strong>human hand data collection</strong> — how we teach robots to manipulate by demonstration (<a href="ch06.html">Chapter 6: Human Hand Data Collection</a>).</p>
+<hr>
+</section>
+<section id="sec-references" class="content-section">
+<h2>References</h2>
+<ol>
+<li>Bicchi, A. (2000). Hands for dexterous manipulation and robust grasping: A difficult road toward simplicity. <em>IEEE Transactions on Robotics and Automation</em>, 16(6), 652-662.</li>
+</ol>
+<ol>
+<li>Li, H., Ford, C. J., Bianchi, M., Catalano, M. G., Psomopoulou, E., & Lepora, N. F. (2022). BRL/Pisa/IIT SoftHand: A low-cost, 3D-printed, underactuated, tendon-driven hand with soft and adaptive synergies. <em>IEEE Robotics and Automation Letters</em>, 7(4), 8745-8751.</li>
+</ol>
+<ol>
+<li>Catalano, M. G., Grioli, G., Farnioli, E., Serio, A., Piazza, C., & Bicchi, A. (2014). Adaptive synergies for the design and control of the Pisa/IIT SoftHand. <em>International Journal of Robotics Research</em>, 33(5), 768-782. https://doi.org/10.1177/0278364913518998</li>
+</ol>
+<ol>
+<li>Della Santina, C., Piazza, C., Grioli, G., Catalano, M. G., & Bicchi, A. (2018). Toward dexterous manipulation with augmented adaptive synergies: The Pisa/IIT SoftHand 2. <em>IEEE Transactions on Robotics</em>, 34(5), 1141-1156.</li>
+</ol>
+<ol>
+<li>Capsi-Morales, P., Grioli, G., Piazza, C., Bicchi, A., & Catalano, M. G. (2020). Exploring the role of palm concavity and adaptability in soft synergistic robotic hands. <em>IEEE Robotics and Automation Letters</em>, 5(3), 4703-4710.</li>
+</ol>
+<ol>
+<li>Kakogawa, A., Nishimura, H., & Ma, S. (2016). Underactuated modular finger with pull-in mechanism for a robotic gripper. <em>IEEE International Conference on Robotics and Biomimetics (ROBIO)</em>, 556-561.</li>
+</ol>
+<ol>
+<li>Odhner, L. U., Jentoft, L. P., Claffee, M. R., Corson, N., Tenzer, Y., Ma, R. R., Buehler, M., Kohout, R., Howe, R. D., & Dollar, A. M. (2014). A compliant, underactuated hand for robust manipulation. <em>International Journal of Robotics Research</em>, 33(5), 736-752.</li>
+</ol>
+<ol>
+<li>Fu, J., Yu, Z., Guo, Q., Zheng, L., & Gan, D. (2023). A variable stiffness robotic gripper based on parallel beam with vision-based force sensing for flexible grasping. <em>Robotica</em>. https://doi.org/10.1017/S026357472300156X</li>
+</ol>
+<ol>
+<li>Al Abeach, L. A. T., Nefti-Meziani, S., & Davis, S. (2017). Design of a variable stiffness soft dexterous gripper. <em>Soft Robotics</em>, 4(3), 274-284.</li>
+</ol>
+<ol>
+<li>Wang, W., & Ahn, S.-H. (2017). Shape memory alloy-based soft gripper with variable stiffness for compliant and effective grasping. <em>Soft Robotics</em>, 4(4), 379-389.</li>
+</ol>
+<ol>
+<li>Wei, Y., Chen, Y., Ren, T., Chen, Q., Yan, C., Yang, Y., & Li, Y. (2016). A novel, variable stiffness robotic gripper based on integrated soft actuating and particle jamming. <em>Soft Robotics</em>, 3(3), 134-143.</li>
+</ol>
+<ol>
+<li>Kim, Y., Shin, J., Won, J., Lee, W., & Seo, T. (2024). LBH gripper: Linkage-belt based hybrid adaptive gripper design for dish collecting robots. <em>Robotics and Autonomous Systems</em>, 185, 104886.</li>
+</ol>
+<ol>
+<li>Wang, H., Gao, B., Zhao, D., & Shen, H. (2025). A reconfigurable gripper inspired by elastic belt for versatile in-hand manipulations. <em>IEEE Robotics and Automation Letters</em>.</li>
+</ol>
+<ol>
+<li>Lin, J., et al. (2023). A bioinspired bidirectional stiffening soft actuator for multimodal, compliant, and robust grasping. <em>Soft Robotics</em>. https://doi.org/10.1089/soro.2022.0212</li>
+</ol>
+<ol>
+<li>Kopicki, M., Ansary, S. I., Tolomei, S., Angelini, F., Garabini, M., & Skrzypczyński, P. (2025). Underactuated dexterous robotic grasping with reconfigurable passive joints. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.16006.</li>
+</ol>
+<ol>
+<li>Johannsmeier, L., et al. (2025). A process-centric manipulation taxonomy for the organization, classification and synthesis of tactile robot skills. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01045-3</li>
+</ol>
+<ol>
+<li>Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>RSS 2025</em>.</li>
+</ol>
+<ol>
+<li>Hogan, N. (1985). Impedance control: An approach to manipulation. <em>JDSMC</em>, 107(1), 1-24.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>Sources</h3>
+      <ul>
+      <li>SNU Seminar: 260323_Seminar_Inchul_Hand_Gripper_Mechanism (56 pages)</li>
+      <li>Literature survey results (131 papers)</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch04.html" class="prev">&larr; Previous</a>
+        <a href="ch06.html" class="next">Next &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

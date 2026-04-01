@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 13: Limitations and Future — Toward Physical AI for Manufacturing</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="lang-en">
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch13.html" class="">KO</a>
+        <a href="../en/ch13.html" class="active">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-4">
+  <nav class="sidebar-nav part-4">
+    <a class="nav-dot active" data-section="sec-overview">
+      <span class="dot"></span>
+      <span class="label">Overview</span>
+    </a>
+    <a class="nav-dot" data-section="sec-13-1">
+      <span class="dot"></span>
+      <span class="label">13.1 Top 10 Common Limitations</span>
+    </a>
+    <a class="nav-dot" data-section="sec-13-2">
+      <span class="dot"></span>
+      <span class="label">13.2 Future Research Directions (5 ...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-13-3">
+      <span class="dot"></span>
+      <span class="label">13.3 Ten Manufacturing-Specific Cha...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-13-4">
+      <span class="dot"></span>
+      <span class="label">13.4 Our Research Agenda: The Mecha...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-closing-message">
+      <span class="dot"></span>
+      <span class="label">Closing Message</span>
+    </a>
+    <a class="nav-dot" data-section="sec-references">
+      <span class="dot"></span>
+      <span class="label">References</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part IV: Integration and Outlook</span>
+        <h1>Chapter 13: Limitations and Future — Toward Physical AI for Manufacturing</h1>
+        <div class="chapter-meta">
+          <span>Written: 2026-04-01</span>
+          <span>Last updated: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-overview" class="content-section">
+<h2>Overview</h2>
+<p>This book has painted the full picture from tactile sensors to VLA models, from robot hands to industrial deployment. This final chapter systematically organizes the <strong>Top 10 common limitations</strong> across 131 papers, presents <strong>future research directions</strong> in five groups, identifies <strong>ten manufacturing-specific challenges</strong>, and proposes <strong>our research agenda</strong>.</p>
+<blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
+- List the 10 most common limitations in tactile manipulation research.
+- Describe future directions across 5 research groups (sensing, learning, hardware, data, deployment).
+- Understand the 3-5 year gap between research demonstrations and manufacturing deployment.
+- Explain the mechanism-tactile-learning triangle as a research direction.</blockquote>
+<hr>
+</section>
+<section id="sec-13-1" class="content-section">
+<h2>13.1 Top 10 Common Limitations</h2>
+<table class="styled-table">
+<thead><tr>
+<th>Rank</th>
+<th>Limitation</th>
+<th>Frequency</th>
+<th>Core Issue</th>
+<th>Related Chapter</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><strong>Sim-to-Real Gap</strong></td>
+<td>20+</td>
+<td>Tactile harder than visual</td>
+<td>Ch9</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Novel Object Generalization</strong></td>
+<td>15+</td>
+<td>Material properties not captured</td>
+<td>Ch7, Ch8</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Sensor Durability</strong></td>
+<td>12+</td>
+<td>Gel wear, calibration loss</td>
+<td>Ch2</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Data Scarcity</strong></td>
+<td>12+</td>
+<td>~10 demos/hr; tactile especially hard</td>
+<td>Ch3, Ch6</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Hardware Cost/Fragility</strong></td>
+<td>10+</td>
+<td>No MTBF data</td>
+<td>Ch4</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Cross-Embodiment Transfer</strong></td>
+<td>10+</td>
+<td>Tactile: UniTacHand only</td>
+<td>Ch10</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Multi-Modal Fusion Timing</strong></td>
+<td>8+</td>
+<td>Vision 30Hz vs tactile 1000Hz</td>
+<td>Ch8, Ch11</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Safety in Human Proximity</strong></td>
+<td>7+</td>
+<td>ISO/TS 15066 not met</td>
+<td>Ch5</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Long-Horizon Task</strong></td>
+<td>7+</td>
+<td>Error compounding beyond 5-30s</td>
+<td>Ch8</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Evaluation Standardization</strong></td>
+<td>6+</td>
+<td>No established benchmark</td>
+<td>Ch11</td>
+</tr>
+</tbody></table>
+<figure>
+  <img src="../assets/figures/ch13/fig_13_1_limitations_matrix_darkmode.png" alt="Figure 13.1: Top 10 common limitations — frequency and severity matrix." loading="lazy" onerror="this.src='../assets/figures/ch13/fig_13_1_limitations_matrix_technical.png'">
+  <figcaption>Figure 13.1: Top 10 common limitations — frequency and severity matrix.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-13-2" class="content-section">
+<h2>13.2 Future Research Directions (5 Groups)</h2>
+<h3>A. Sensing & Perception</h3>
+<ul>
+<li>Tactile foundation models at scale (Sparsh 460K → 10x+ needed)</li>
+<li>Neuromorphic sensors: spike-based, event-driven (NRE-skin)</li>
+<li>Self-healing/self-calibrating sensors for industrial longevity</li>
+<li>Sensor-agnostic representations (AnyTouch, Sensor-Invariant)</li>
+<li>Whole-hand dense tactile coverage as standard (F-TAC direction)</li>
+</ul>
+<h3>B. Learning & Control</h3>
+<ul>
+<li>VLA + tactile as first-class modality (ForceVLA, Tactile-VLA)</li>
+<li>Post-deployment RL for continuous improvement (pi0.6/RECAP)</li>
+<li>One-demo/zero-demo learning from human video</li>
+<li>World models with tactile feedback for model-based planning</li>
+<li>Hierarchical VLA for long-horizon dexterous tasks with error recovery</li>
+</ul>
+<h3>C. Hardware & Design</h3>
+<ul>
+<li>Sub-$1K dexterous hands with integrated tactile (LEAP cost + F-TAC sensing)</li>
+<li>Modular, replaceable sensor skin (AnySkin 12-second replacement)</li>
+<li>Variable stiffness for safety + dexterity co-optimization (Seminar 3)</li>
+<li>Standardized hand-sensor integration (Digit Plexus direction)</li>
+</ul>
+<h3>D. Data & Simulation</h3>
+<ul>
+<li>Tactile simulation fidelity (DiffTactile, TacEx)</li>
+<li>Massive synthetic data (NVIDIA 780K approach for tactile)</li>
+<li>Shared tactile datasets (Touch-and-Go 3M → 100M+)</li>
+<li>Cross-embodiment data reuse (OXE for hands)</li>
+</ul>
+<h3>E. Deployment & Application</h3>
+<ul>
+<li>Safety certification for human-proximity dexterous manipulation</li>
+<li>Quality inspection via touch (defects invisible to cameras)</li>
+<li>Deformable object manipulation at production speed</li>
+<li>Multi-robot collaborative manipulation (Helix dual-robot)</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch13/fig_13_2_research_groups_darkmode.png" alt="Figure 13.2: Five future research groups relationship map." loading="lazy" onerror="this.src='../assets/figures/ch13/fig_13_2_research_groups_technical.png'">
+  <figcaption>Figure 13.2: Five future research groups relationship map.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-13-3" class="content-section">
+<h2>13.3 Ten Manufacturing-Specific Challenges</h2>
+<p>The gap from research demonstration to manufacturing floor is typically <strong>3-5 years</strong>:</p>
+<table class="styled-table">
+<thead><tr>
+<th>Challenge</th>
+<th>Severity</th>
+<th>Expected</th>
+<th>Related Chapters</th>
+</tr></thead><tbody>
+<tr>
+<td>Cycle time matching</td>
+<td>Critical</td>
+<td>3-5 yrs</td>
+<td>Ch7, Ch8</td>
+</tr>
+<tr>
+<td>Multi-shift reliability (24/7)</td>
+<td>Critical</td>
+<td>2-4 yrs</td>
+<td>Ch2, Ch4</td>
+</tr>
+<tr>
+<td>Safety certification</td>
+<td>Critical</td>
+<td>2-3 yrs</td>
+<td>Ch5</td>
+</tr>
+<tr>
+<td>Sub-mm assembly + force control</td>
+<td>High</td>
+<td>3-5 yrs</td>
+<td>Ch7, Ch10</td>
+</tr>
+<tr>
+<td>Deformable material handling</td>
+<td>High</td>
+<td>2-4 yrs</td>
+<td>Ch7, Ch5</td>
+</tr>
+<tr>
+<td>Tool use (screwdriver, wrench)</td>
+<td>High</td>
+<td>3-5 yrs</td>
+<td>Ch7</td>
+</tr>
+<tr>
+<td>Maintenance by technicians</td>
+<td>High</td>
+<td>2-4 yrs</td>
+<td>Ch4, Ch12</td>
+</tr>
+<tr>
+<td>Mixed small-part bin picking</td>
+<td>Medium</td>
+<td>1-3 yrs</td>
+<td>Ch7</td>
+</tr>
+<tr>
+<td>Tactile quality inspection</td>
+<td>Medium</td>
+<td>2-4 yrs</td>
+<td>Ch2, Ch11</td>
+</tr>
+<tr>
+<td>ROI vs traditional automation</td>
+<td>Medium</td>
+<td>Ongoing</td>
+<td>Ch12</td>
+</tr>
+</tbody></table>
+<blockquote class=""><strong>Key Observation</strong>: Current factory deployments (BMW, Amazon, Mercedes) are at the logistics level. <strong>Dexterous assembly has not reached production.</strong> This book has clearly distinguished these capability levels.</blockquote>
+<figure>
+  <img src="../assets/figures/ch13/fig_13_3_manufacturing_timeline_darkmode.png" alt="Figure 13.3: Manufacturing-specific challenges and expected resolution timeline." loading="lazy" onerror="this.src='../assets/figures/ch13/fig_13_3_manufacturing_timeline_technical.png'">
+  <figcaption>Figure 13.3: Manufacturing-specific challenges and expected resolution timeline.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-13-4" class="content-section">
+<h2>13.4 Our Research Agenda: The Mechanism-Tactile-Learning Triangle</h2>
+<p>Synthesizing insights from all 12 preceding chapters into a unified research direction:</p>
+<p><strong>Axis 1 — Mechanism (Physical Intelligence)</strong>:</p>
+<p>When intelligent mechanisms induce continuous contact (<a href="ch05.html">Chapter 5</a>), state stability improves and control simplifies.</p>
+<p><strong>Axis 2 — Tactile (Sensing)</strong>:</p>
+<p>When tactile sensors recognize the contact state during continuous contact (<a href="ch02.html">Chapter 2</a>), finer force control and slip detection become possible.</p>
+<p><strong>Axis 3 — Learning (VLA/Diffusion)</strong>:</p>
+<p>When VLA/Diffusion Policy leverages tactile feedback from stable contact (→ Chapters 7, 8), sample efficiency and generalization improve.</p>
+<blockquote class=""><strong>Core Proposition</strong>: When mechanism physically guarantees continuous contact, tactile recognizes the contact state, and learning exploits this information — the burden on each axis is reduced and overall system robustness improves.</blockquote>
+<figure>
+  <img src="../assets/figures/ch13/fig_13_4_triangle_integration_darkmode.png" alt="Figure 13.4: Mechanism + Tactile + Learning triangle integration." loading="lazy" onerror="this.src='../assets/figures/ch13/fig_13_4_triangle_integration_technical.png'">
+  <figcaption>Figure 13.4: Mechanism + Tactile + Learning triangle integration.</figcaption>
+</figure>
+<h3>Additional Directions</h3>
+<ul>
+<li><strong>Shared Sensing Platform</strong>: Generalizing OSMO/UniTacHand cross-embodiment tactile transfer (<a href="ch10.html">Chapter 10.4</a>)</li>
+<li><strong>Factory-Specific Foundation Model</strong>: Tactile-visual foundation model specialized for factory environments</li>
+<li><strong>Open Hardware + Open Data</strong>: Sub-$2K hands + Touch100k-scale dataset expansion</li>
+<li><strong>Continuous-Contact Manipulation</strong>: Seminar 3's original insight — mechanism-induced continuous contact reduces sensing/learning burden</li>
+</ul>
+<hr>
+</section>
+<section id="sec-closing-message" class="content-section">
+<h2>Closing Message</h2>
+<p>Tactile sensing is the <strong>last puzzle piece</strong> of robotic manipulation. Three converging trends — cost reduction of vision-based sensors (GelSight → DIGIT $350 → Digit 360), democratization of open-source hands (Shadow $100K → LEAP $2K), and emergence of foundation models (RT-2 → pi0 → Gemini Robotics) — are driving tactile robotics at unprecedented speed.</p>
+<p>As of 2026, touch is no longer optional. It is becoming <strong>standard</strong>.</p>
+<p>And converting this standard into dexterous manipulation on manufacturing floors is the core challenge of <strong>"Physical AI for Manufacturing"</strong> — the vision this book proposes.</p>
+<hr>
+</section>
+<section id="sec-references" class="content-section">
+<h2>References</h2>
+<ol>
+<li>Various. (2023). DeXtreme. <em>ICRA 2023</em>.</li>
+<li>Various. (2025). Tactile Robotics: Past and Future. <em>arXiv:2512.01106</em>.</li>
+<li>Bhirangi, R., et al. (2024). AnySkin. <em>ICRA 2025</em>.</li>
+<li>Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
+<li>Various. (2025). NRE-skin. <em>PNAS</em>.</li>
+<li>Various. (2026). Bioinspired spiking architecture. <em>Nature Communications</em>.</li>
+<li>Yu, J., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>.</li>
+<li>Various. (2025). Tactile-VLA. <em>OpenReview</em>.</li>
+<li>Physical Intelligence. (2025). pi0.5/RECAP: Post-deployment RL for continuous improvement. <em>arXiv preprint</em>. arXiv:2504.16932.</li>
+<li>Shaw, K., et al. (2024). Learning from internet videos. <em>CMU</em>.</li>
+<li>Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator. <em>ICLR 2024</em>.</li>
+<li>Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776.</li>
+<li>NVIDIA. (2026). 780K trajectories in 11 hours. <em>GTC 2026</em>.</li>
+<li>Various. (2025). OSMO. <em>arXiv:2512.08920</em>.</li>
+<li>Zhang, Y., et al. (2025). UniTacHand. <em>Various</em>.</li>
+<li>Bicchi, A. (2000). Hands for dexterous manipulation. <em>IEEE T-RA</em>.</li>
+<li>Billard, A., & Kragic, D. (2019). Trends and challenges. <em>Science</em>.</li>
+<li>Various. (2026). VLA systematic review. <em>Information Fusion</em>.</li>
+<li>Various. (2025). What matters in building VLA models. <em>Nature MI</em>.</li>
+<li>Hogan, N. (1985). Impedance control. <em>JDSMC</em>.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>Sources</h3>
+      <ul>
+      <li>Limitations and future research analysis (131 papers, TOP 10 limitations, 20+ directions)</li>
+      <li>All three SNU seminars</li>
+      <li>Industry trends research</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch12.html" class="prev">&larr; Previous</a>
+        <span class="placeholder"></span>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

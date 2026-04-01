@@ -1,0 +1,56 @@
+\section{Integrated Systems and Applications}
+\label{sec:systems}
+
+The preceding sections reviewed individual components---sensors, hands, data, learning methods, VLA models, and retargeting. This section examines how these components integrate into unified systems, the open-source ecosystem accelerating this integration, and the current state of industrial deployment.
+
+\subsection{Multi-Modal Fusion Architectures}
+
+Combining tactile with visual and/or language information requires architectural choices that significantly impact performance. Four fusion paradigms have emerged:
+
+\textbf{Early fusion} concatenates raw or low-level features from different modalities before joint processing. 3D-ViTac~\cite{huang2024vitac} (CoRL 2024) exemplifies this approach, fusing 3~mm$^2$-resolution dense tactile sensor data with visual observations into a unified 3D representation processed by Diffusion Policy. The result---85--90\% success on bimanual dexterous tasks versus 45--50\% with vision only---demonstrates the magnitude of improvement tactile integration provides, though early fusion risks cross-modal interference when sensor characteristics differ significantly.
+
+\textbf{Late fusion} processes each modality through independent stream networks, combining only at the decision level. NeuralFeels~\cite{suresh2024neuralfeels} (\emph{Science Robotics}, 2024) uses neural fields to independently process visual and tactile inputs for visuotactile in-hand SLAM, estimating object pose and shape simultaneously during manipulation---a task impossible with either modality alone due to finger occlusion. The late fusion approach preserves modality-specific processing but limits cross-modal interaction during feature extraction.
+
+\textbf{Mixture of Experts (MoE)} dynamically routes inputs through specialized expert networks based on task demands. ForceVLA~\cite{yu2025forcevla} (NeurIPS 2025) implements this with FVLMoE: four expert modules process force, vision, and language combinations with learned gating, achieving task-dependent optimal weighting. This architecture naturally handles the temporal resolution mismatch (vision at 30~Hz vs.\ force at 1{,}000~Hz) through adaptive routing.
+
+\textbf{Attention-based fusion} uses Transformer cross-attention mechanisms to learn inter-modal relationships. Most VLA architectures (RT-2, pi0, Gemini Robotics) implicitly implement attention-based fusion for vision-language, with tactile tokens increasingly being added to the attention mechanism.
+
+Robot Synesthesia~\cite{yuan2024synesthesia} (ICRA 2024) demonstrated an innovative approach: converting tactile signals into point clouds processable by PointNet alongside visual point clouds, enabling visuotactile in-hand manipulation that generalizes to novel objects via teacher-student RL.
+
+\subsection{End-to-End Systems}
+
+Several systems demonstrate the value of full-pipeline integration:
+
+\textbf{Mobile ALOHA}~\cite{fu2024mobilealoha} (Stanford, 200+ citations) combines a mobile base with bimanual ALOHA arms and ACT-based policy learning into the most influential end-to-end research platform. Its impact stems from the combination of low cost (sub-\$20K), open-source design, and demonstrated capability across diverse household tasks.
+
+\textbf{PP-Tac}~\cite{lin2025pptac} (RSS 2025) integrates R-Tac tactile sensor, slip detection CNN, online force controller, and Diffusion Policy into a unified pipeline for 87.5\% thin-object grasping---demonstrating that practical, problem-specific integration of sensing, perception, control, and learning yields immediate practical value.
+
+\textbf{TacEx}~\cite{various2024tacex} integrates GelSight simulation into NVIDIA Isaac Sim, providing a complete research workflow---sensor simulation, policy learning, and sim-to-real transfer---in a single platform, reducing the engineering burden of multi-tool research pipelines.
+
+The \textbf{temporal integration} of intelligent mechanisms (Section~\ref{sec:mechanisms})---underactuation for shape adaptation, VSA for grasp locking, active surfaces for in-grasp manipulation---represents a hardware-level end-to-end system designed for factory scenarios involving thin objects, multiple objects, and repositioning.
+
+\subsection{Open-Source Ecosystem}
+
+The democratization of dexterous manipulation research is driven by an open-source ecosystem spanning three layers:
+
+\textbf{Hardware}: LEAP Hand~\cite{shaw2023leap} (\$2K), ORCA~\cite{christoph2025orca} (17 DoF + tactile), ISyHand~\cite{richardson2025isyhand} (\$1.3K + articulated palm), OSMO glove~\cite{yin2025osmo} (tactile bridge), DOGlove~\cite{zhang2025doglove} (\$600 haptic feedback). Before 2023, dexterous manipulation research required \$16K--100K in hardware; now it starts at \$2K.
+
+\textbf{Software}: OpenVLA~\cite{kim2024openvla} (7B open VLA), Octo~\cite{octo2024} (generalist policy), Diffusion Policy~\cite{chi2023diffusion}, ACT/ALOHA~\cite{zhao2023aloha}. These open-weight models enable researchers to fine-tune state-of-the-art policies without training from scratch.
+
+\textbf{Data}: Open X-Embodiment~\cite{oxe2024} (1M+ trajectories, 22 embodiments), Touch-and-Go~\cite{yang2022touchandgo} (3M+ contacts), Touch100k~\cite{yang2024touch100k}, VTDexManip~\cite{liu2025vtdexmanip} (10 tasks, 182 objects). Shared data eliminates the coldstart problem for new research groups.
+
+This triple-layer ecosystem has reduced the cost, time, and expertise required to enter dexterous manipulation research by an order of magnitude, accelerating the pace of discovery.
+
+\subsection{Industrial Deployment and Market Outlook}
+
+Current humanoid robot factory deployments have achieved commercial validation at the logistics level:
+
+\begin{itemize}
+    \item \textbf{Figure AI} at BMW Spartanburg: 10-month deployment, 90K components moved, contributing to 30K BMW X3 production~\cite{figureai2025}.
+    \item \textbf{Agility Robotics (Digit)} at Amazon/GXO: 100K+ totes recycled in fulfillment centers.
+    \item \textbf{Boston Dynamics (Electric Atlas)} at Hyundai: Factory fleet deployment in progress.
+    \item \textbf{Apptronik (Apollo)} at Mercedes Berlin: Intra-logistics pilot.
+    \item \textbf{Sanctuary AI (Phoenix)} at Magna: Automotive parts sorting pilot with 5~mN tactile sensitivity---the most advanced tactile integration among commercial humanoids.
+\end{itemize}
+
+The critical observation: \emph{all current deployments remain at the logistics (pick-move-place) level. Dexterous assembly has not yet reached production floors}~\cite{billard2019trends}. The gap between logistics-level deployment and manufacturing-grade dexterous manipulation---where tactile feedback is essential for force control, slip detection, and quality assurance---defines the central challenge for the next 3--5 years. The humanoid market is projected to grow from \$2.9B (2025) to \$15.3B (2030) at 39.2\% CAGR, driven by automotive beachhead deployments, with Sanctuary AI's tactile integration and Figure AI's VLA-based control representing the leading approaches to bridging the logistics-to-dexterity gap.

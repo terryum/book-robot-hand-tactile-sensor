@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 6: Human Hand Data Collection — Teaching by Demonstration</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="lang-en">
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch06.html" class="">KO</a>
+        <a href="../en/ch06.html" class="active">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-2">
+  <nav class="sidebar-nav part-2">
+    <a class="nav-dot active" data-section="sec-overview">
+      <span class="dot"></span>
+      <span class="label">Overview</span>
+    </a>
+    <a class="nav-dot" data-section="sec-6-1">
+      <span class="dot"></span>
+      <span class="label">6.1 The Human Hand Model: MANO (778...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-6-2">
+      <span class="dot"></span>
+      <span class="label">6.2 Motion Tracking Gloves: From St...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-6-3">
+      <span class="dot"></span>
+      <span class="label">6.3 Tactile Gloves: STAG, OSMO, and...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-6-4">
+      <span class="dot"></span>
+      <span class="label">6.4 Exoskeleton Approaches: DexUMI,...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-6-5">
+      <span class="dot"></span>
+      <span class="label">6.5 Learning from Internet Videos a...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-6-6">
+      <span class="dot"></span>
+      <span class="label">6.6 Teleoperation: AnyTeleop, DexPi...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-summary-and-outlook">
+      <span class="dot"></span>
+      <span class="label">Summary and Outlook</span>
+    </a>
+    <a class="nav-dot" data-section="sec-references">
+      <span class="dot"></span>
+      <span class="label">References</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part II: Hands — Robot and Human</span>
+        <h1>Chapter 6: Human Hand Data Collection — Teaching by Demonstration</h1>
+        <div class="chapter-meta">
+          <span>Written: 2026-04-01</span>
+          <span>Last updated: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-overview" class="content-section">
+<h2>Overview</h2>
+<p>The most intuitive way to teach robots to manipulate is to <strong>show them human demonstrations</strong>. Yet transferring the 27-DoF motion and tactile information of the human hand to a robot presents fundamental challenges. This chapter covers human hand modeling (MANO), motion tracking gloves, tactile gloves, exoskeletons, and teleoperation systems, surveying the data pipeline from human to robot.</p>
+<blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
+- Describe the MANO hand model's structure and applications.
+- Compare the characteristics of major motion tracking gloves.
+- Understand tactile glove designs (STAG, OSMO) and their cross-embodiment potential.
+- Evaluate the strengths and limitations of exoskeleton and teleoperation approaches.</blockquote>
+<hr>
+</section>
+<section id="sec-6-1" class="content-section">
+<h2>6.1 The Human Hand Model: MANO (778 Vertices, 16 Joints)</h2>
+<p>MANO [Romero et al., 2017] is a statistical human hand model learned from 1,000 3D scans (<em>SIGGRAPH Asia 2017</em>):</p>
+<ul>
+<li><strong>778 vertices</strong>, 16 joints</li>
+<li><strong>PCA shape space</strong>: Low-dimensional representation of inter-individual hand size/shape variation</li>
+<li><strong>Pose blend shapes</strong>: Skin deformation modeling as a function of joint angles</li>
+<li>Compatible with the SMPL full-body model (SMPL+H)</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch06/fig_6_1_mano_model_darkmode.png" alt="Figure 6.1: MANO hand model. Source: Romero et al. (2017)." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_1_mano_model_technical.png'">
+  <figcaption>Figure 6.1: MANO hand model. Source: Romero et al. (2017).</figcaption>
+</figure>
+<p>MANO serves as the foundation for virtually all human hand research — hand pose estimation, human-robot retargeting, and tactile transfer (UniTacHand's MANO UV map) (<a href="ch10.html">Chapter 10.4</a>).</p>
+<hr>
+</section>
+<section id="sec-6-2" class="content-section">
+<h2>6.2 Motion Tracking Gloves: From Stretchable Sensors to Commercial Products</h2>
+<p>Seminar 2 (Taejoon) systematically reviewed the current state of motion tracking gloves.</p>
+<h3>Stretchable Liquid-Metal Sensor Glove (2024)</h3>
+<p>Published in <em>Nature Communications</em> [2024]:</p>
+<ul>
+<li>9 eGaIn (eutectic gallium-indium) liquid-metal sensors</li>
+<li>9 DoF tracking, adapts to all hand sizes (one-size-fits-all)</li>
+<li><strong>Joint angle error: 4.16 degrees</strong>, fingertip position error: <strong>4.02 mm</strong></li>
+<li>Bayesian refinement + Kalman filter</li>
+</ul>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Various. (2024). "Stretchable Liquid-Metal Sensor Glove." <em>Nature Communications</em>.
+A 9-sensor eGaIn glove adapting to all hand sizes. The 4.02 mm fingertip error is sufficient for most manipulation demonstrations.</blockquote>
+<h3>Commercial Glove Comparison</h3>
+<p>Seminar 2 compared three commercial gloves:</p>
+<table class="styled-table">
+<thead><tr>
+<th>Glove</th>
+<th>Sensor Type</th>
+<th>Sensors</th>
+<th>DoF</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Rokoko</strong></td>
+<td>IMU</td>
+<td>7</td>
+<td>6</td>
+<td>Lightest solution</td>
+</tr>
+<tr>
+<td><strong>Manus</strong></td>
+<td>Stretch/flex</td>
+<td>16</td>
+<td>—</td>
+<td>NVIDIA Isaac Teleop official glove (GTC 2026)</td>
+</tr>
+<tr>
+<td><strong>StretchSense</strong></td>
+<td>EMF</td>
+<td>—</td>
+<td>25</td>
+<td>Highest DoF</td>
+</tr>
+</tbody></table>
+<p>NVIDIA's designation of Manus as the official data glove for Isaac Teleop at GTC 2026 signals industrial standardization.</p>
+<figure>
+  <img src="../assets/figures/ch06/fig_6_2_tracking_gloves_darkmode.png" alt="Figure 6.2: Motion tracking glove comparison." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_2_tracking_gloves_technical.png'">
+  <figcaption>Figure 6.2: Motion tracking glove comparison.</figcaption>
+</figure>
+<h3>Korean Research: ML-Based Wearable Sensors</h3>
+<p>Seoul National University research [2024, <em>PMC</em>] implemented real-time hand motion recognition with ML-based wearable sensors, bridging the gap between lab research and practical applications.</p>
+<hr>
+</section>
+<section id="sec-6-3" class="content-section">
+<h2>6.3 Tactile Gloves: STAG, OSMO, and the Open-Source Approach</h2>
+<p>Beyond motion tracking, collecting <strong>tactile information</strong> during human grasping is the next step.</p>
+<h3>STAG (2019)</h3>
+<p>Sundaram et al. [2019] (<em>Nature</em>, 2019):</p>
+<ul>
+<li><strong>548 piezoresistive sensors</strong>: High-resolution pressure distribution across the human hand</li>
+<li>Grasp-finger correlation analysis</li>
+<li>Pioneering tactile demonstration dataset for robot learning</li>
+</ul>
+<p>Ruppel et al. [2024] proposed a 169-sensor reduced version, exploring the trade-off between sensor count and information loss.</p>
+<h3>OSMO Glove (2025)</h3>
+<p>OSMO [arXiv:2512.08920] takes the innovative approach of using <strong>the same glove on both human and robot hands</strong>:</p>
+<ul>
+<li><strong>12 three-axis magnetic sensors</strong>: Simultaneous normal and shear force measurement</li>
+<li>MuMetal shielding against external magnetic interference</li>
+<li><strong>Core concept — Embodiment Bridge</strong>: Using identical sensing gloves on human and robot simplifies the cross-embodiment problem</li>
+<li><strong>Open-source</strong>: Reproducible design</li>
+</ul>
+<blockquote class="key-paper"><strong>Key Paper</strong>: OSMO. (2025). "OSMO: Open-Source Multi-axis Tactile Glove." <em>arXiv:2512.08920</em>.
+A 12-sensor three-axis magnetic tactile glove usable on both human and robot hands. Presents a new paradigm for cross-embodiment tactile transfer.</blockquote>
+<p>Key insight from Seminar 2: <strong>Using identical sensing gloves on human and robot simplifies the cross-embodiment problem</strong>. When tactile data is collected from human demonstrations and the same glove is mounted on a robot hand for policy learning, the tactile domain gap is eliminated (<a href="ch10.html">Chapter 10.4</a>).</p>
+<figure>
+  <img src="../assets/figures/ch06/fig_6_3_osmo_bridge_darkmode.png" alt="Figure 6.3: OSMO glove's Embodiment Bridge concept. Source: OSMO (2025)." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_3_osmo_bridge_technical.png'">
+  <figcaption>Figure 6.3: OSMO glove's Embodiment Bridge concept. Source: OSMO (2025).</figcaption>
+</figure>
+<h3>FSR Optimization</h3>
+<p>Tang et al. [2025] and Chen et al. [2025] addressed the optimal placement of FSR sensors, exploring how to extract maximum information from limited sensors — answering the "high spatial resolution vs. optimized sensor count/position" trade-off.</p>
+<hr>
+</section>
+<section id="sec-6-4" class="content-section">
+<h2>6.4 Exoskeleton Approaches: DexUMI, ExoStart, DEXOP</h2>
+<p>Exoskeletons mechanically connect to the human hand, directly capturing motion.</p>
+<h3>DexUMI (2025)</h3>
+<p>Xu et al. [2025] — "Human Hand as Universal Interface":</p>
+<ul>
+<li>Wearable exoskeleton resolves the <strong>kinematic gap</strong></li>
+<li>SAM2 inpainting resolves the <strong>visual gap</strong> — erasing the human hand from camera images and replacing it with the robot hand</li>
+<li><strong>86% success</strong> on Inspire and XHand</li>
+<li><strong>3.2x faster</strong> data collection than teleoperation</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch06/fig_6_4_dexumi_darkmode.png" alt="Figure 6.4: DexUMI's dual gap resolution. Source: DexUMI (2025)." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_4_dexumi_technical.png'">
+  <figcaption>Figure 6.4: DexUMI's dual gap resolution. Source: DexUMI (2025).</figcaption>
+</figure>
+<h3>ExoStart (2025)</h3>
+<p>Si et al. [2025] learn dexterous manipulation policies from <strong>just 10 exoskeleton demonstrations</strong>:</p>
+<ol>
+<li>~10 exoskeleton demos</li>
+<li>MuJoCo dynamics filtering</li>
+<li>Auto-curriculum RL</li>
+<li>ACT vision student</li>
+<li>Zero-shot real → >50% success on 6 of 7 tasks</li>
+</ol>
+<p>This pipeline exemplifies Real-Sim-Real transfer (<a href="ch09.html">Chapter 9.4</a>).</p>
+<h3>DEXOP (2025)</h3>
+<p>DEXOP [2025] uses a four-bar linkage to <strong>directly mechanically couple</strong> human and robot fingers:</p>
+<ul>
+<li><strong>8x faster</strong> data collection than teleoperation</li>
+<li>Direct contact feedback</li>
+<li><strong>51.3% vs. 42.5%</strong> success (vs. teleoperation)</li>
+</ul>
+<blockquote class=""><strong>Key Perspective</strong>: DexUMI, ExoStart, and DEXOP each bridge the human-robot gap differently, but all share the goal of overcoming <strong>teleoperation's throughput bottleneck (~10 demos/hr)</strong>.</blockquote>
+<hr>
+</section>
+<section id="sec-6-5" class="content-section">
+<h2>6.5 Learning from Internet Videos and Large-Scale Data</h2>
+<p>Shaw et al. [2024, CMU] proposed extracting human hand motions from internet videos and retargeting them to robot hands. The potential lies in <strong>scalability</strong> — millions of hand manipulation videos exist online, and converting them to robot learning data could fundamentally solve the teleoperation bottleneck.</p>
+<p>ImMimic [Liu et al., 2025] augments data by interpolating between large-scale human trajectories and a few teleoperation trajectories. As discussed in Seminar 1, this represents the direction of <strong>synergistically using human data instead of expensive teleop data</strong> (<a href="ch10.html">Chapter 10.2</a>).</p>
+<p>DexH2R [2024] implements task-oriented human-to-robot dexterous transfer, mapping the intent of human demonstrations to robot actions.</p>
+<figure>
+  <img src="../assets/figures/ch06/fig_6_5_collection_spectrum_darkmode.png" alt="Figure 6.5: Spectrum of human hand data collection methods." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_5_collection_spectrum_technical.png'">
+  <figcaption>Figure 6.5: Spectrum of human hand data collection methods.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-6-6" class="content-section">
+<h2>6.6 Teleoperation: AnyTeleop, DexPilot, Bunny-VisionPro</h2>
+<p>Teleoperation remains the most traditional collection method and yields the highest data quality.</p>
+<h3>AnyTeleop (2023)</h3>
+<p>Qin et al. [2023, RSS] built a general-purpose vision-based teleoperation system:</p>
+<ul>
+<li>Dex-Retarget: Maps human keypoints to robot joint positions</li>
+<li>Compatible with diverse robot hands</li>
+<li>As discussed in Seminar 1, <strong>naive retargeting has limitations</strong> — kinematic differences between human and robot can violate physical feasibility</li>
+</ul>
+<h3>DexPilot (2020)</h3>
+<p>Handa & Van Wyk [2020, NVIDIA] achieved 23-DOA teleoperation from bare-hand depth images. Requires only an RGB-D camera, maximizing accessibility.</p>
+<h3>Bunny-VisionPro (2024)</h3>
+<p>Ding et al. [2024, UCSD] implemented bimanual teleoperation via Apple Vision Pro with haptic feedback, achieving research-grade teleoperation using consumer hardware.</p>
+<h3>DexCap (2024)</h3>
+<p>Wang et al. [2024, Stanford] created a portable mocap system enabling <strong>3x faster</strong> data collection than teleoperation, with policy learning from 30 minutes of data.</p>
+<h3>DOGlove (2025)</h3>
+<p>A low-cost open-source haptic feedback glove that provides tactile feedback to operators, improving teleoperation quality.</p>
+<h3>Feel Robot Feels (2026)</h3>
+<p>A tactile feedback array glove that closes the haptic loop, enabling operators to directly feel what the robot touches.</p>
+<figure>
+  <img src="../assets/figures/ch06/fig_6_6_teleop_comparison_darkmode.png" alt="Figure 6.6: Teleoperation system comparison." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_6_teleop_comparison_technical.png'">
+  <figcaption>Figure 6.6: Teleoperation system comparison.</figcaption>
+</figure>
+<table class="styled-table">
+<thead><tr>
+<th>System</th>
+<th>Input Device</th>
+<th>Haptic Feedback</th>
+<th>Throughput</th>
+<th>Cost</th>
+</tr></thead><tbody>
+<tr>
+<td>AnyTeleop</td>
+<td>RGB camera</td>
+<td>None</td>
+<td>Baseline</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>DexPilot</td>
+<td>RGB-D camera</td>
+<td>None</td>
+<td>Baseline</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Bunny-VisionPro</td>
+<td>Vision Pro</td>
+<td>Yes</td>
+<td>Baseline</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>DexCap</td>
+<td>Motion capture</td>
+<td>None</td>
+<td>3x</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>DexUMI</td>
+<td>Exoskeleton</td>
+<td>Direct contact</td>
+<td>3.2x</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>DEXOP</td>
+<td>4-bar linkage</td>
+<td>Direct contact</td>
+<td>8x</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Internet video</td>
+<td>None (observation)</td>
+<td>None</td>
+<td>Unlimited</td>
+<td>Very low</td>
+</tr>
+</tbody></table>
+<hr>
+</section>
+<section id="sec-summary-and-outlook" class="content-section">
+<h2>Summary and Outlook</h2>
+<p>Human hand data collection sits on a trade-off between <strong>throughput</strong> and <strong>data quality</strong>. Teleoperation provides high quality but scales poorly at ~10 demos/hr; internet video offers unlimited scale but lacks action labels and tactile information. The OSMO glove's Embodiment Bridge and DEXOP's mechanical coupling propose new solutions to this trade-off.</p>
+<p>NVIDIA Isaac Teleop + MANUS standardization, internet video mining at scale, and extending synthetic data (780K trajectories/11 hours) to the tactile domain are the key directions for resolving the data bottleneck.</p>
+<p>The next chapter examines <strong>how robots learn to manipulate</strong> from such collected data (<a href="ch07.html">Chapter 7: Learning to Manipulate</a>).</p>
+<hr>
+</section>
+<section id="sec-references" class="content-section">
+<h2>References</h2>
+<ol>
+<li>Romero, J., Tzionas, D., & Black, M. J. (2017). Embodied hands: Modeling and capturing hands and bodies together. <em>SIGGRAPH Asia 2017</em>.</li>
+</ol>
+<ol>
+<li>Various. (2024). Stretchable liquid-metal sensor glove. <em>Nature Communications</em>. https://doi.org/10.1038/s41467-024-50101-w</li>
+</ol>
+<ol>
+<li>Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
+</ol>
+<ol>
+<li>Ruppel, P., et al. (2024). Reduced tactile sensor array for grasp analysis. <em>Sensors</em>.</li>
+</ol>
+<ol>
+<li>Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920.</li>
+</ol>
+<ol>
+<li>Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Si, Z., et al. (2025). ExoStart: From 10 exoskeleton demos to dexterous robot manipulation.</li>
+</ol>
+<ol>
+<li>Fang, H.-S., Romero, B., Xie, Y., et al. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441.</li>
+</ol>
+<ol>
+<li>Qin, Y., et al. (2023). AnyTeleop: A general vision-based dexterous robot hand-arm teleoperation system. <em>RSS 2023</em>.</li>
+</ol>
+<ol>
+<li>Handa, A., & Van Wyk, K. (2020). DexPilot: Vision-based teleoperation for dexterous manipulation. <em>ICRA 2020</em>.</li>
+</ol>
+<ol>
+<li>Ding, Z., et al. (2024). Bunny-VisionPro: Real-time bimanual dexterous teleoperation for imitation learning. <em>arXiv preprint</em>. arXiv:2407.03162.</li>
+</ol>
+<ol>
+<li>Wang, C., et al. (2024). DexCap: Scalable and portable mocap data collection system. <em>RSS 2024</em>.</li>
+</ol>
+<ol>
+<li>Shaw, K., Bahl, S., & Pathak, D. (2024). Learning dexterity from human hand motion in internet videos. <em>arXiv preprint</em>. arXiv:2404.xxxxx.</li>
+</ol>
+<ol>
+<li>Liu, Y., et al. (2025). ImMimic: Large-scale human trajectory + few-shot teleoperation interpolation.</li>
+</ol>
+<ol>
+<li>Li, Y., et al. (2024). DexH2R: Task-oriented dexterous manipulation from human to robots. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Various. (2025). DOGlove: Low-cost open-source haptic feedback glove.</li>
+</ol>
+<ol>
+<li>Various. (2026). Feel Robot Feels: Tactile feedback array glove.</li>
+</ol>
+<ol>
+<li>Murphy, L., et al. (2025). Capacitive tactile sensing for teaching by demonstration. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Tang, M., et al. (2025). FSR sensor optimization for grasp classification. <em>IEEE Journal of Biomedical and Health Informatics</em>.</li>
+</ol>
+<ol>
+<li>Chen, H., et al. (2025). Capacitive sensor for lift-risk identification. <em>Applied Ergonomics</em>.</li>
+</ol>
+<ol>
+<li>Various. (2024). ML-based wearable sensors for real-time hand motion recognition. <em>PMC</em>. (Seoul National University)</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>Sources</h3>
+      <ul>
+      <li>SNU Seminar: 260323_Seminar_Taejoon_DataGlove_Sensors</li>
+      <li>SNU Seminar: 260319_Seminar_Junsoo_Jihwan_TactileHand_Manipulation</li>
+      <li>Paper summary posts: terry.artlab.ai (MANO, Glove, DexUMI, ExoStart, DEXOP, OSMO)</li>
+      <li>Literature survey results (131 papers)</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch05.html" class="prev">&larr; Previous</a>
+        <a href="ch07.html" class="next">Next &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

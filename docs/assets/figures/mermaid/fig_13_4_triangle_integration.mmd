@@ -1,0 +1,14 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#1a1a2e', 'primaryTextColor': '#e0e0e0', 'lineColor': '#00D4AA'}}}%%
+graph TD
+    M["Intelligent<br/>Mechanisms"] ---|"Hardware-informed<br/>sensing"| T["Tactile<br/>Sensing"]
+    T ---|"Touch-guided<br/>learning"| L["Learning<br/>(IL/RL/VLA)"]
+    L ---|"Physics-informed<br/>policy"| M
+
+    M --> U["Unified Dexterous<br/>Manipulation"]
+    T --> U
+    L --> U
+
+    style M fill:#00D4AA,stroke:#00D4AA,color:#1a1a2e
+    style T fill:#3498DB,stroke:#3498DB,color:#fff
+    style L fill:#9B59B6,stroke:#9B59B6,color:#fff
+    style U fill:#FF6B35,stroke:#FF6B35,color:#fff

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossary</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="lang-en">
+  <canvas id="particle-canvas"></canvas>
+
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/glossary.html" class="">KO</a>
+        <a href="../en/glossary.html" class="active">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="glossary-section">
+      <header class="chapter-header">
+        <h1>Glossary</h1>
+      </header>
+<h2 class="glossary-letter">A</h2>
+<div class="glossary-item"><strong>ACT (Action Chunking with Transformers)</strong>: Policy learning method that predicts continuous action sequences from demonstrations (Ch7)</div>
+<div class="glossary-item"><strong>ADR (Automatic Domain Randomization)</strong>: Sim-to-real strategy that automatically varies physics/non-physics parameters (Ch9)</div>
+<div class="glossary-item"><strong>ALOHA</strong>: Low-cost (<$20K) bimanual teleoperation hardware (Ch7, Ch11)</div>
+<h2 class="glossary-letter">B</h2>
+<div class="glossary-item"><strong>Binary tactile sensor</strong>: Touch sensor detecting only contact/no-contact (0/1). Used when coverage matters more than resolution (Ch7)</div>
+<h2 class="glossary-letter">C</h2>
+<div class="glossary-item"><strong>Capacitive sensor</strong>: Measures contact via capacitance change between electrodes (Ch2)</div>
+<div class="glossary-item"><strong>Canonical representation</strong>: Sensor-independent data transformation to a standard coordinate frame (Ch3)</div>
+<div class="glossary-item"><strong>Compliance</strong>: Mechanical yielding to external forces. Essential for contact-rich manipulation (Ch4, Ch5)</div>
+<div class="glossary-item"><strong>Contrastive learning</strong>: Training method placing similar pairs close and dissimilar pairs far in embedding space (Ch3)</div>
+<div class="glossary-item"><strong>Cross-embodiment gap</strong>: Kinematic, visual, and tactile differences between human and robot (Ch10)</div>
+<h2 class="glossary-letter">D</h2>
+<div class="glossary-item"><strong>Dexterous manipulation</strong>: Precise object manipulation using multi-fingered hands — in-hand rotation, assembly, etc. (Ch7)</div>
+<div class="glossary-item"><strong>Diffusion Policy</strong>: Policy learning via conditional denoising diffusion process for action generation (Ch7)</div>
+<div class="glossary-item"><strong>DoF (Degrees of Freedom)</strong>: Number of independent motion axes in joints. Human hand: ~27 DoF (Ch4)</div>
+<div class="glossary-item"><strong>Domain Randomization</strong>: Randomizing simulation parameters to increase policy robustness (Ch9)</div>
+<h2 class="glossary-letter">E</h2>
+<div class="glossary-item"><strong>Embodiment Retargeting</strong>: Mapping motion from one embodiment (e.g., human) to another (e.g., robot) (Ch10)</div>
+<div class="glossary-item"><strong>E-skin</strong>: Flexible electronic substrate with integrated tactile sensors (Ch2)</div>
+<h2 class="glossary-letter">F</h2>
+<div class="glossary-item"><strong>FEM (Finite Element Method)</strong>: Numerical method for deformation simulation (Ch3, Ch9)</div>
+<div class="glossary-item"><strong>Flow Matching</strong>: Learning action distributions via continuous normalizing flows — core technique of pi0 (Ch8)</div>
+<div class="glossary-item"><strong>Force-torque sensor</strong>: 6-axis sensor measuring 3 forces + 3 torques (Ch7)</div>
+<div class="glossary-item"><strong>Foundation Model</strong>: General-purpose model pretrained on large-scale data — Sparsh (tactile), pi0 (VLA) (Ch3, Ch8)</div>
+<h2 class="glossary-letter">G</h2>
+<div class="glossary-item"><strong>GelSight</strong>: Photometric stereo-based vision tactile sensor developed at MIT (Ch2)</div>
+<h2 class="glossary-letter">I</h2>
+<div class="glossary-item"><strong>IL (Imitation Learning)</strong>: Learning policies by directly mimicking human demonstrations (Ch7)</div>
+<div class="glossary-item"><strong>Impedance control</strong>: Control method governing the force-displacement relationship [Hogan, 1985] (Ch7)</div>
+<div class="glossary-item"><strong>In-hand manipulation</strong>: Changing object pose/position within a grasp (Ch7)</div>
+<h2 class="glossary-letter">K</h2>
+<div class="glossary-item"><strong>Kinesthetic teaching</strong>: Demonstrating motion by physically guiding the robot (Ch6)</div>
+<h2 class="glossary-letter">M</h2>
+<div class="glossary-item"><strong>MANO</strong>: Statistical human hand model learned from 1,000 3D scans (778 vertices, 16 joints) (Ch6)</div>
+<div class="glossary-item"><strong>Mechanoreceptor</strong>: Biological sensor for contact/pressure/vibration — Merkel, Meissner, Ruffini, Pacinian (Ch1)</div>
+<div class="glossary-item"><strong>MoE (Mixture of Experts)</strong>: Architecture dynamically routing inputs across expert networks — ForceVLA (Ch8)</div>
+<h2 class="glossary-letter">N</h2>
+<div class="glossary-item"><strong>Neuromorphic sensor</strong>: Event-driven sensor inspired by the biological nervous system (Ch2)</div>
+<h2 class="glossary-letter">O</h2>
+<div class="glossary-item"><strong>Open X-Embodiment</strong>: Largest open-source robot dataset — 1M+ trajectories from 34 labs, 22 embodiments (Ch8)</div>
+<h2 class="glossary-letter">P</h2>
+<div class="glossary-item"><strong>Particle jamming</strong>: Stiffness switching via particle densification — soft to rigid transition (Ch5)</div>
+<div class="glossary-item"><strong>Photometric stereo</strong>: 3D shape recovery from multi-directional illumination — core of GelSight (Ch2)</div>
+<div class="glossary-item"><strong>Physical AI</strong>: AI systems understanding and interacting with the physical world — convergence of foundation models + simulation + sensors (Ch12)</div>
+<div class="glossary-item"><strong>Piezoresistive sensor</strong>: Measures contact via resistance change in material (Ch2)</div>
+<div class="glossary-item"><strong>Point cloud</strong>: Tactile/visual data represented as a set of 3D coordinates (Ch3)</div>
+<h2 class="glossary-letter">R</h2>
+<div class="glossary-item"><strong>RL (Reinforcement Learning)</strong>: Policy learning through reward maximization (Ch7)</div>
+<div class="glossary-item"><strong>Retargeting</strong>: See Embodiment Retargeting</div>
+<h2 class="glossary-letter">S</h2>
+<div class="glossary-item"><strong>Shear force</strong>: Force parallel to the contact surface — essential for slip detection (Ch2)</div>
+<div class="glossary-item"><strong>Sim-to-Real</strong>: Transferring simulation-trained policies to physical robots (Ch9)</div>
+<div class="glossary-item"><strong>Slip detection</strong>: Detecting object slippage from the hand — implemented via shear force monitoring (Ch1, Ch2)</div>
+<div class="glossary-item"><strong>Synergy</strong>: Coordinated multi-joint motion pattern — PCA-based dimensionality reduction (Ch5)</div>
+<h2 class="glossary-letter">T</h2>
+<div class="glossary-item"><strong>Tactile foundation model</strong>: General-purpose representation pretrained on large-scale tactile data — Sparsh, UniTouch (Ch3)</div>
+<div class="glossary-item"><strong>Taxel</strong>: Tactile pixel — single sensing point. Digit 360: 8.3M taxels (Ch2)</div>
+<div class="glossary-item"><strong>Teleoperation</strong>: Remotely controlling a robot to collect demonstration data (Ch6)</div>
+<div class="glossary-item"><strong>Tendon-driven</strong>: Actuation via tendons transmitting force — SoftHand, ORCA (Ch4, Ch5)</div>
+<div class="glossary-item"><strong>Torque control</strong>: Direct joint torque control — essential for contact-rich environments (Ch4)</div>
+<h2 class="glossary-letter">U</h2>
+<div class="glossary-item"><strong>Underactuation</strong>: Design with fewer actuators than joints — passive shape adaptation (Ch5)</div>
+<div class="glossary-item"><strong>UV map</strong>: 2D unfolding of a 3D surface — MANO UV map for UniTacHand (Ch3, Ch10)</div>
+<h2 class="glossary-letter">V</h2>
+<div class="glossary-item"><strong>VLA (Vision-Language-Action)</strong>: Models integrating vision, language, and action — RT-2, pi0, Gemini Robotics (Ch8)</div>
+<div class="glossary-item"><strong>VSA (Variable Stiffness Actuator)</strong>: Actuator capable of switching between compliant and stiff states (Ch5)</div>
+<div class="glossary-item"><strong>Visuo-tactile</strong>: Combining visual and tactile information — Robot Synesthesia, 3D-ViTac (Ch3, Ch11)</div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

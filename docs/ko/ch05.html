@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 5: 지능형 메커니즘 — 물리적 지능</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch05.html" class="active">KO</a>
+        <a href="../en/ch05.html" class="">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-2">
+  <nav class="sidebar-nav part-2">
+    <a class="nav-dot active" data-section="sec-개요">
+      <span class="dot"></span>
+      <span class="label">개요</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-1">
+      <span class="dot"></span>
+      <span class="label">5.1 부족 구동: 적은 구동기로 형상 적응</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-2">
+      <span class="dot"></span>
+      <span class="label">5.2 가변 강성 구동기: 유연과 강성의 전환</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-3">
+      <span class="dot"></span>
+      <span class="label">5.3 능동 표면: 벨트/롤러 기반 연속 접촉 조작</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-4">
+      <span class="dot"></span>
+      <span class="label">5.4 세 메커니즘의 통합: 적응 → 고정 → 조작 시너지</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-5">
+      <span class="dot"></span>
+      <span class="label">5.5 공장 자동화 적용: 얇은 물체, 복수 물체, 재배치/정렬</span>
+    </a>
+    <a class="nav-dot" data-section="sec-5-6">
+      <span class="dot"></span>
+      <span class="label">5.6 연속 접촉 vs 불연속 접촉: 물리적 설계의 역할</span>
+    </a>
+    <a class="nav-dot" data-section="sec-요약-및-전망">
+      <span class="dot"></span>
+      <span class="label">요약 및 전망</span>
+    </a>
+    <a class="nav-dot" data-section="sec-참고문헌">
+      <span class="dot"></span>
+      <span class="label">참고문헌</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part II: 로봇 핸드와 인간 손</span>
+        <h1>Chapter 5: 지능형 메커니즘 — 물리적 지능</h1>
+        <div class="chapter-meta">
+          <span>집필일: 2026-04-01</span>
+          <span>최종수정일: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-개요" class="content-section">
+<h2>개요</h2>
+<p>Chapter 4에서 로봇 핸드의 전체 설계 스펙트럼을 조망했다면, 이 챕터에서는 <strong>메커니즘 자체가 지능을 발휘하는</strong> 세 가지 접근 — 부족 구동(underactuation), 가변 강성 구동기(variable stiffness actuator, VSA), 능동 표면(active surface) — 을 깊이 다룹니다. 세미나 3 (Inchul)은 이 세 메커니즘의 통합이 공장 자동화에서 어떤 시너지를 만들어내는지를 보여준 가장 풍부한 자료입니다.</p>
+<blockquote class=""><strong>이 챕터를 읽고 나면...</strong>
+- 부족 구동의 원리와 형상 적응 능력을 설명할 수 있습니다.
+- 가변 강성 구동기의 네 가지 구현 방식을 비교할 수 있습니다.
+- 능동 표면이 연속 접촉 조작에 어떻게 기여하는지 이해합니다.
+- 세 메커니즘의 통합 설계가 공장 자동화에 미치는 영향을 설명할 수 있습니다.</blockquote>
+<hr>
+</section>
+<section id="sec-5-1" class="content-section">
+<h2>5.1 부족 구동: 적은 구동기로 형상 적응</h2>
+<p>부족 구동(underactuation)은 구동기 수가 관절 수보다 적은 설계입니다. 나머지 관절은 스프링이나 기계적 멈춤(mechanical stop)으로 수동적으로 결정됩니다. 이 접근의 핵심 가치는 <strong>물체 형상에 자동 적응</strong>하는 것입니다 — 제어 알고리즘이 아닌 물리적 메커니즘이 적응을 수행합니다.</p>
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Bicchi, A. (2000). "Hands for Dexterous Manipulation and Robust Grasping: A Difficult Road Toward Simplicity." <em>IEEE T-RA</em>.
+부족 구동의 이론적 기초를 제시한 기념비적 논문. "더 적은 구동기로 더 견고한 파지"라는 역설적 명제를 증명했습니다.</blockquote>
+<h3>Pisa/IIT SoftHand</h3>
+<p>세미나 3에서 가장 많이 참조된 핸드 중 하나입니다:</p>
+<p><strong>SoftHand 1</strong> [Li et al.; Catalano et al.]:</p>
+<ul>
+<li>1 구동기로 19 관절을 구동</li>
+<li>적응 시너지(adaptive synergy): 첫 번째 주성분(first principal synergy)에 맞춰 모든 관절이 연동</li>
+<li>물체 접촉 시 건이 미끄러지며 접촉 면적 자동 확대</li>
+<li>3D 프린팅 + 모듈형 설계</li>
+</ul>
+<p><strong>SoftHand 2</strong> [Della Santina et al.]:</p>
+<ul>
+<li>2 구동기: 주 시너지 + 보조 시너지</li>
+<li>마찰(friction)을 이용한 구동 확장으로 더 다양한 파지 유형 실현</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_1_underactuation_darkmode.png" alt="Figure 5.1: 부족 구동 손가락의 형상 적응 시퀀스." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_1_underactuation_technical.png'">
+  <figcaption>Figure 5.1: 부족 구동 손가락의 형상 적응 시퀀스.</figcaption>
+</figure>
+<h3>손바닥 오목 적응 (Palm Concavity + Adaptability)</h3>
+<p>Capsi-Morales et al.은 손바닥을 여러 섹션으로 나누고 부족 구동으로 연결하여, 손바닥 자체가 물체에 적응하는 설계를 제안했습니다. 이는 손가락뿐 아니라 손바닥까지 적응 영역을 확장한 것입니다.</p>
+<h3>끌어당기기 메커니즘 (Pull-in Mechanism)</h3>
+<p>Kakogawa et al.은 부족 구동 손가락에 물체를 안쪽으로 끌어들이는 메커니즘을 결합하여, 테이블 위의 평평한 물체를 집는 어려운 과제를 해결했습니다.</p>
+<h3>Dollar의 핸드</h3>
+<p>Dollar et al.의 연구는 부족 구동의 극단적 단순화를 추구하여, 제조업 환경에서 최소한의 복잡도로 견고한 파지를 달성하는 방향을 제시했습니다.</p>
+<hr>
+</section>
+<section id="sec-5-2" class="content-section">
+<h2>5.2 가변 강성 구동기: 유연과 강성의 전환</h2>
+<p>가변 강성 구동기(Variable Stiffness Actuator, VSA)는 하나의 메커니즘이 <strong>유연한 상태(compliant)</strong>와 <strong>강성 상태(stiff)</strong> 사이를 전환할 수 있습니다. 세미나 3은 네 가지 구현 방식을 체계적으로 정리했습니다:</p>
+<h3>5.2.1 평행 보 방식 (Parallel Beam)</h3>
+<p>Fu et al.은 슬라이더(slider)로 손가락의 유효 보 길이를 조절하여 강성을 연속적으로 변화시킵니다. ArUco 마커 기반 비전 힘 센싱과 결합하여, 저비용으로 힘 피드백을 구현했습니다.</p>
+<h3>5.2.2 공압 방식 (Pneumatic)</h3>
+<p>Al Abeach et al.은 McKibben 인공 근육을 길항(antagonistic) 배치하여, 자세를 유지하면서 강성만 독립적으로 조절하는 VSA를 구현했습니다. 이는 물체를 잡은 상태에서 충격에 대한 저항력을 조절할 수 있음을 의미합니다.</p>
+<h3>5.2.3 SMA + SMP 방식</h3>
+<p>Wang & Ahn은 형상기억합금(SMA) 구동과 형상기억폴리머(SMP) 강성 전환을 결합하여, 힌지당 <strong>55배의 강성 변화</strong>를 달성했습니다.</p>
+<h3>5.2.4 입자 잼 방식 (Particle Jamming)</h3>
+<p>Wei et al.은 섬유 보강 공압 구동기에 입자 잼(particle jamming)을 결합하여, <strong>10배 이상의 강성 증가</strong>를 달성했습니다. 부드러운 상태에서 물체에 적응한 후, 입자를 밀집시켜 강성 파지로 전환합니다.</p>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_2_variable_stiffness_darkmode.png" alt="Figure 5.2: 네 가지 가변 강성 구동기 구현 방식." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_2_variable_stiffness_technical.png'">
+  <figcaption>Figure 5.2: 네 가지 가변 강성 구동기 구현 방식.</figcaption>
+</figure>
+<table class="styled-table">
+<thead><tr>
+<th>VSA 방식</th>
+<th>강성 비율</th>
+<th>응답 속도</th>
+<th>크기</th>
+<th>비용</th>
+<th>장점</th>
+</tr></thead><tbody>
+<tr>
+<td>평행 보</td>
+<td>연속 가변</td>
+<td>빠름</td>
+<td>중간</td>
+<td>낮음</td>
+<td>단순, 비전 피드백 가능</td>
+</tr>
+<tr>
+<td>공압</td>
+<td>가변</td>
+<td>느림</td>
+<td>큼</td>
+<td>중간</td>
+<td>자세-강성 독립 제어</td>
+</tr>
+<tr>
+<td>SMA+SMP</td>
+<td>55x</td>
+<td>느림</td>
+<td>소형</td>
+<td>높음</td>
+<td>극단적 강성 변화</td>
+</tr>
+<tr>
+<td>입자 잼</td>
+<td>10x+</td>
+<td>중간</td>
+<td>중간</td>
+<td>낮음</td>
+<td>형상 적응 + 고정</td>
+</tr>
+</tbody></table>
+<h3>양방향 강성 구동기 (BISA)</h3>
+<p>Lin et al.의 BISA(Bidirectional Stiffening Soft Actuator)는 굽힘 강성과 횡방향 강성을 각각 독립적으로 조절할 수 있어, 더 정밀한 강성 프로파일 제어를 가능하게 합니다.</p>
+<h3>재구성 가능 수동 관절</h3>
+<p>Kopicki et al.은 외력으로 관절을 원하는 위치에 재구성한 후, 건 장력(tendon tension)으로 고정(lock)하는 방식을 제안했습니다. 이는 별도의 VSA 없이 가변 구성을 달성합니다.</p>
+<hr>
+</section>
+<section id="sec-5-3" class="content-section">
+<h2>5.3 능동 표면: 벨트/롤러 기반 연속 접촉 조작</h2>
+<p>능동 표면(active surface)은 그리퍼의 접촉면 자체를 구동하여, <strong>접촉을 유지한 상태에서 물체를 미끄러뜨리거나 재배치</strong>하는 접근입니다.</p>
+<h3>벨트 기반 능동 표면</h3>
+<p>Kim et al.; Wang et al.의 연구에서, 그리퍼 손가락 표면에 벨트를 장착하고 이를 구동합니다:</p>
+<ul>
+<li><strong>얇은 물체 접근</strong>: 벨트를 이용해 테이블 위의 카드/종이를 끌어올림</li>
+<li><strong>재배치/정렬</strong>: 파지 상태에서 벨트 구동으로 물체 위치 조정</li>
+<li><strong>연속 접촉 유지</strong>: 물체를 놓았다가 다시 잡는 것이 아닌, 접촉을 유지하며 조작</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_3_active_belt_darkmode.png" alt="Figure 5.3: 능동 표면(Active Belt)의 작동 원리." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_3_active_belt_technical.png'">
+  <figcaption>Figure 5.3: 능동 표면(Active Belt)의 작동 원리.</figcaption>
+</figure>
+<p>이 접근의 핵심 인사이트는 세미나 3의 독창적 관점에서 나옵니다: <strong>연속 접촉(continuous contact)이 불연속 접촉(discrete contact)보다 제어가 쉽고 안정적</strong>입니다. 물체를 놓고 다시 잡는 과정에서 발생하는 불확실성을 제거하기 때문입니다.</p>
+<hr>
+</section>
+<section id="sec-5-4" class="content-section">
+<h2>5.4 세 메커니즘의 통합: 적응 → 고정 → 조작 시너지</h2>
+<p>세미나 3의 가장 독창적 기여는 세 메커니즘의 <strong>시간순 통합(temporal integration)</strong>입니다:</p>
+<ol>
+<li><strong>부족 구동 (Underactuation)</strong>: 초기 접근 → 물체 형상에 수동적 적응</li>
+<li><strong>가변 강성 (VSA)</strong>: 적응 완료 후 → 강성 전환으로 파지 고정</li>
+<li><strong>능동 표면 (Active Belt)</strong>: 고정 상태에서 → 벨트 구동으로 조작/재배치/정렬</li>
+</ol>
+<p>이 세 단계는 인간이 물체를 잡을 때의 자연스러운 흐름 — "접근 → 파악 → 조정" — 을 메커니즘으로 구현합니다.</p>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_4_integrated_architecture_darkmode.png" alt="Figure 5.4: 세 메커니즘의 통합 아키텍처." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_4_integrated_architecture_technical.png'">
+  <figcaption>Figure 5.4: 세 메커니즘의 통합 아키텍처.</figcaption>
+</figure>
+<blockquote class=""><strong>핵심 인사이트</strong>: 동일한 sensing과 learning을 사용하더라도, 메커니즘이 연속 접촉을 유도하면 안정성이 크게 향상됩니다. 이것이 "Physical Design의 역할"입니다 — 지능을 소프트웨어에만 의존하지 않고, 물리적 구조 자체에 내재시키는 접근입니다.</blockquote>
+<hr>
+</section>
+<section id="sec-5-5" class="content-section">
+<h2>5.5 공장 자동화 적용: 얇은 물체, 복수 물체, 재배치/정렬</h2>
+<p>세미나 3은 이 통합 메커니즘의 공장 자동화 적용 시나리오를 구체적으로 제시합니다:</p>
+<h3>5.5.1 얇은 물체 파지</h3>
+<p>카드, 종이, 가스켓 등 극도로 얇은 물체는 병렬 그리퍼로는 접근이 어렵습니다. 능동 벨트 표면으로 가장자리를 끌어올린 후, 부족 구동 손가락으로 파지합니다. PP-Tac [2025]의 R-Tac + Diffusion Policy 접근(87.5% 성공률)은 촉각+학습 방향에서, 세미나 3의 메커니즘 접근은 물리적 설계 방향에서 같은 문제를 공략합니다 (<a href="ch07.html">Chapter 7.3 참조</a>).</p>
+<h3>5.5.2 복수 물체 핸들링</h3>
+<p>여러 물체를 동시에 잡거나, 한 물체를 잡은 상태에서 다른 물체를 추가로 파지하는 시나리오입니다. 부족 구동의 형상 적응이 핵심 역할을 하며, F-TAC Hand의 100% 다중 물체 파지 성공률은 촉각 피드백이 이를 더욱 견고하게 만듦을 보여줍니다 (<a href="ch04.html">Chapter 4.5 참조</a>).</p>
+<h3>5.5.3 재배치/정렬/회전</h3>
+<p>파지 상태에서 물체의 위치나 방향을 조정해야 하는 시나리오입니다. 능동 벨트 표면이 핵심 역할을 하며, 이는 불연속 접촉(놓고-다시-잡기)보다 안정적입니다.</p>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_5_factory_tasks_darkmode.png" alt="Figure 5.5: 공장 자동화 Target Tasks." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_5_factory_tasks_technical.png'">
+  <figcaption>Figure 5.5: 공장 자동화 Target Tasks.</figcaption>
+</figure>
+<table class="styled-table">
+<thead><tr>
+<th>시나리오</th>
+<th>핵심 메커니즘</th>
+<th>보조 메커니즘</th>
+<th>산업 적용</th>
+</tr></thead><tbody>
+<tr>
+<td>얇은 물체</td>
+<td>능동 표면</td>
+<td>부족 구동</td>
+<td>가스켓, 종이, PCB</td>
+</tr>
+<tr>
+<td>복수 물체</td>
+<td>부족 구동</td>
+<td>VSA</td>
+<td>부품 분류, 조립</td>
+</tr>
+<tr>
+<td>재배치/정렬</td>
+<td>능동 표면</td>
+<td>VSA</td>
+<td>정밀 조립, 삽입</td>
+</tr>
+</tbody></table>
+<hr>
+</section>
+<section id="sec-5-6" class="content-section">
+<h2>5.6 연속 접촉 vs 불연속 접촉: 물리적 설계의 역할</h2>
+<p>세미나 3의 가장 깊은 통찰은 <strong>연속 접촉(continuous contact)</strong>과 <strong>불연속 접촉(discrete contact)</strong>의 근본적 차이입니다:</p>
+<p><strong>불연속 접촉</strong> (대부분의 현재 접근):</p>
+<ul>
+<li>물체를 잡고 → 놓고 → 다시 잡기</li>
+<li>매 번 새로운 접촉 계획 필요</li>
+<li>접촉 상태 전환 시 불확실성 증가</li>
+<li>학습 기반 접근이 이 불확실성을 흡수해야 함</li>
+</ul>
+<p><strong>연속 접촉</strong> (메커니즘 기반 접근):</p>
+<ul>
+<li>물체와의 접촉을 유지하며 조작</li>
+<li>접촉 상태 안정적 → 제어 단순화</li>
+<li>메커니즘이 연속 접촉을 "물리적으로 보장"</li>
+<li>학습/센싱의 부담 경감</li>
+</ul>
+<blockquote class=""><strong>핵심 관점</strong>: 메커니즘이 연속 접촉을 유도하면, sensing과 learning의 부담이 경감됩니다. 이것이 Chapter 13에서 제안하는 <strong>"메커니즘 + 촉각 + 학습의 삼각 통합"</strong>의 한 축입니다 (<a href="ch13.html">Chapter 13.4 참조</a>).</blockquote>
+<figure>
+  <img src="../assets/figures/ch05/fig_5_6_contact_continuity_darkmode.png" alt="Figure 5.6: 연속 접촉 vs 불연속 접촉 — 상태 전환 다이어그램." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_6_contact_continuity_technical.png'">
+  <figcaption>Figure 5.6: 연속 접촉 vs 불연속 접촉 — 상태 전환 다이어그램.</figcaption>
+</figure>
+<p>Process-Centric Manipulation Taxonomy [2025, <em>Nature Machine Intelligence</em>]은 공정 사양(process specification)에서 촉각 조작 기술로의 연결을 형식화하여, 28가지 기술을 산업 도메인에서 ~100% 성공률로 검증했습니다. 이 분류 체계는 연속 접촉 기반 조작 기술을 포함하며, 세미나 3의 메커니즘 접근과 상통합니다.</p>
+<hr>
+</section>
+<section id="sec-요약-및-전망" class="content-section">
+<h2>요약 및 전망</h2>
+<p>지능형 메커니즘은 소프트웨어 지능(sensing, learning)의 대안이 아니라 <strong>보완재</strong>입니다. 부족 구동이 형상 적응을, VSA가 상태 고정을, 능동 표면이 연속 접촉 조작을 제공하며, 이 세 요소의 통합은 단순한 합 이상의 시너지를 만들어냅니다. 세미나 3의 공장 자동화 시나리오(얇은 물체, 복수 물체, 재배치)는 현재 산업 배치(물류 수준)보다 한 단계 위의 도전이며, 메커니즘 기반 접근이 이 격차를 메우는 핵심 전략 중 하나입니다.</p>
+<p>다음 챕터에서는 로봇에게 조작을 가르치기 위한 <strong>인간 손 데이터 수집</strong>을 다룹니다 (<a href="ch06.html">Chapter 6: 사람 손 데이터 수집 참조</a>).</p>
+<hr>
+</section>
+<section id="sec-참고문헌" class="content-section">
+<h2>참고문헌</h2>
+<ol>
+<li>Bicchi, A. (2000). Hands for dexterous manipulation and robust grasping: A difficult road toward simplicity. <em>IEEE Transactions on Robotics and Automation</em>, 16(6), 652-662.</li>
+</ol>
+<ol>
+<li>Li, H., Ford, C. J., Bianchi, M., Catalano, M. G., Psomopoulou, E., & Lepora, N. F. (2022). BRL/Pisa/IIT SoftHand: A low-cost, 3D-printed, underactuated, tendon-driven hand with soft and adaptive synergies. <em>IEEE Robotics and Automation Letters</em>, 7(4), 8745-8751.</li>
+</ol>
+<ol>
+<li>Catalano, M. G., Grioli, G., Farnioli, E., Serio, A., Piazza, C., & Bicchi, A. (2014). Adaptive synergies for the design and control of the Pisa/IIT SoftHand. <em>International Journal of Robotics Research</em>, 33(5), 768-782. https://doi.org/10.1177/0278364913518998</li>
+</ol>
+<ol>
+<li>Della Santina, C., Piazza, C., Grioli, G., Catalano, M. G., & Bicchi, A. (2018). Toward dexterous manipulation with augmented adaptive synergies: The Pisa/IIT SoftHand 2. <em>IEEE Transactions on Robotics</em>, 34(5), 1141-1156.</li>
+</ol>
+<ol>
+<li>Capsi-Morales, P., Grioli, G., Piazza, C., Bicchi, A., & Catalano, M. G. (2020). Exploring the role of palm concavity and adaptability in soft synergistic robotic hands. <em>IEEE Robotics and Automation Letters</em>, 5(3), 4703-4710.</li>
+</ol>
+<ol>
+<li>Kakogawa, A., Nishimura, H., & Ma, S. (2016). Underactuated modular finger with pull-in mechanism for a robotic gripper. <em>IEEE International Conference on Robotics and Biomimetics (ROBIO)</em>, 556-561.</li>
+</ol>
+<ol>
+<li>Odhner, L. U., Jentoft, L. P., Claffee, M. R., Corson, N., Tenzer, Y., Ma, R. R., Buehler, M., Kohout, R., Howe, R. D., & Dollar, A. M. (2014). A compliant, underactuated hand for robust manipulation. <em>International Journal of Robotics Research</em>, 33(5), 736-752.</li>
+</ol>
+<ol>
+<li>Fu, J., Yu, Z., Guo, Q., Zheng, L., & Gan, D. (2023). A variable stiffness robotic gripper based on parallel beam with vision-based force sensing for flexible grasping. <em>Robotica</em>. https://doi.org/10.1017/S026357472300156X</li>
+</ol>
+<ol>
+<li>Al Abeach, L. A. T., Nefti-Meziani, S., & Davis, S. (2017). Design of a variable stiffness soft dexterous gripper. <em>Soft Robotics</em>, 4(3), 274-284.</li>
+</ol>
+<ol>
+<li>Wang, W., & Ahn, S.-H. (2017). Shape memory alloy-based soft gripper with variable stiffness for compliant and effective grasping. <em>Soft Robotics</em>, 4(4), 379-389.</li>
+</ol>
+<ol>
+<li>Wei, Y., Chen, Y., Ren, T., Chen, Q., Yan, C., Yang, Y., & Li, Y. (2016). A novel, variable stiffness robotic gripper based on integrated soft actuating and particle jamming. <em>Soft Robotics</em>, 3(3), 134-143.</li>
+</ol>
+<ol>
+<li>Kim, Y., Shin, J., Won, J., Lee, W., & Seo, T. (2024). LBH gripper: Linkage-belt based hybrid adaptive gripper design for dish collecting robots. <em>Robotics and Autonomous Systems</em>, 185, 104886.</li>
+</ol>
+<ol>
+<li>Wang, H., Gao, B., Zhao, D., & Shen, H. (2025). A reconfigurable gripper inspired by elastic belt for versatile in-hand manipulations. <em>IEEE Robotics and Automation Letters</em>.</li>
+</ol>
+<ol>
+<li>Lin, J., et al. (2023). A bioinspired bidirectional stiffening soft actuator for multimodal, compliant, and robust grasping. <em>Soft Robotics</em>. https://doi.org/10.1089/soro.2022.0212</li>
+</ol>
+<ol>
+<li>Kopicki, M., Ansary, S. I., Tolomei, S., Angelini, F., Garabini, M., & Skrzypczyński, P. (2025). Underactuated dexterous robotic grasping with reconfigurable passive joints. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.16006.</li>
+</ol>
+<ol>
+<li>Johannsmeier, L., et al. (2025). A process-centric manipulation taxonomy for the organization, classification and synthesis of tactile robot skills. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01045-3</li>
+</ol>
+<ol>
+<li>Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>RSS 2025</em>.</li>
+</ol>
+<ol>
+<li>Hogan, N. (1985). Impedance control: An approach to manipulation. <em>JDSMC</em>, 107(1), 1-24.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>참고 자료 출처</h3>
+      <ul>
+      <li>세미나 PDF: 260323_Seminar_SNU_Inchul_Hand_Gripper_Mechanism (56 pages)</li>
+      <li>Literature survey 결과 (131편)</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch04.html" class="prev">&larr; 이전 챕터</a>
+        <a href="ch06.html" class="next">다음 챕터 &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#1a1a2e', 'primaryTextColor': '#e0e0e0', 'lineColor': '#00D4AA'}}}%%
+graph TD
+    subgraph HW["Hardware"]
+        H1["LEAP Hand ($2K)"]
+        H2["AnySkin (modular)"]
+        H3["Open-source grippers"]
+    end
+
+    subgraph SW["Software"]
+        S1["Isaac Lab (NVIDIA)"]
+        S2["LeRobot (Hugging Face)"]
+        S3["OpenVLA"]
+    end
+
+    subgraph DATA["Data"]
+        D1["Open X-Embodiment"]
+        D2["DROID"]
+        D3["VTDexManip"]
+    end
+
+    HW <-->|"Integration"| SW
+    SW <-->|"Pipelines"| DATA
+    DATA <-->|"Compatibility"| HW
+
+    style HW fill:#1a4a3c,stroke:#00D4AA,color:#fff
+    style SW fill:#3a1a4c,stroke:#9B59B6,color:#fff
+    style DATA fill:#1a3a5c,stroke:#3498DB,color:#fff

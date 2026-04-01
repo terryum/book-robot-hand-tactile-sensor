@@ -1,0 +1,53 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{tabularx}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\begin{document}
+
+\title{Tactile Sensing for Dexterous Robot Hand Manipulation:\\A Comprehensive Survey}
+
+\author{Terry~Taewoong~Um
+\thanks{T. T. Um is with Cosmax (e-mail: terry.t.um@gmail.com).}}
+
+\markboth{IEEE Transactions on Robotics, Vol.~XX, No.~X, 2026}%
+{Um: Tactile Sensing for Dexterous Robot Hand Manipulation}
+
+\maketitle
+
+\input{sections/abstract}
+
+\begin{IEEEkeywords}
+Tactile sensing, dexterous manipulation, robot hand design, vision-language-action models, embodiment retargeting, sim-to-real transfer
+\end{IEEEkeywords}
+
+\input{sections/introduction}
+\input{sections/tactile_sensors}
+\input{sections/robot_hand_design}
+\input{sections/data_representation}
+\input{sections/learning_methods}
+\input{sections/vla_models}
+\input{sections/retargeting}
+\input{sections/integrated_systems}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\section*{Acknowledgment}
+This work was conducted with the assistance of artificial intelligence tools, including Claude (Anthropic) for literature survey, content generation, and manuscript preparation, and Gemini (Google) for figure generation. The authors take full responsibility for the accuracy and integrity of the content presented in this paper.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

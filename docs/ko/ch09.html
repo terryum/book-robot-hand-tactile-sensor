@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: Sim-to-Real 전이 — 가상에서 현실로</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch09.html" class="active">KO</a>
+        <a href="../en/ch09.html" class="">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-3">
+  <nav class="sidebar-nav part-3">
+    <a class="nav-dot active" data-section="sec-개요">
+      <span class="dot"></span>
+      <span class="label">개요</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-1">
+      <span class="dot"></span>
+      <span class="label">9.1 시뮬레이션 엔진: Isaac Gym/Lab, MuJoCo...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-2">
+      <span class="dot"></span>
+      <span class="label">9.2 도메인 랜덤화: DeXtreme의 ADR</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-3">
+      <span class="dot"></span>
+      <span class="label">9.3 촉각 Sim-to-Real: 이진 촉각 피부 모델, 제로...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-4">
+      <span class="dot"></span>
+      <span class="label">9.4 Real-Sim-Real: RoboPaint, X-Sim...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-5">
+      <span class="dot"></span>
+      <span class="label">9.5 Sim-to-Real 격차 분석: 동역학, 인지, 접촉 ...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-6">
+      <span class="dot"></span>
+      <span class="label">9.6 합성 데이터의 위력과 한계</span>
+    </a>
+    <a class="nav-dot" data-section="sec-요약-및-전망">
+      <span class="dot"></span>
+      <span class="label">요약 및 전망</span>
+    </a>
+    <a class="nav-dot" data-section="sec-참고문헌">
+      <span class="dot"></span>
+      <span class="label">참고문헌</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part III: 학습과 전이</span>
+        <h1>Chapter 9: Sim-to-Real 전이 — 가상에서 현실로</h1>
+        <div class="chapter-meta">
+          <span>집필일: 2026-04-01</span>
+          <span>최종수정일: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-개요" class="content-section">
+<h2>개요</h2>
+<p>시뮬레이션에서 학습한 정책을 실제 로봇에 전이하는 Sim-to-Real 전이는 촉각 기반 조작의 핵심 도전입니다. 시각 sim-to-real보다 촉각 sim-to-real이 본질적으로 더 어렵습니다 — 젤 변형, 다중 물리(multi-physics) 결합, 접촉 모델의 충실도 한계 때문입니다. 이 챕터에서는 시뮬레이션 엔진, 도메인 랜덤화, 촉각 sim-to-real, Real-Sim-Real 루프를 다룹니다.</p>
+<blockquote class=""><strong>이 챕터를 읽고 나면...</strong>
+- 주요 촉각 시뮬레이션 엔진(Isaac Gym, MuJoCo, Tacto, DiffTactile)을 비교할 수 있습니다.
+- DeXtreme의 ADR(자동 도메인 랜덤화) 접근을 설명할 수 있습니다.
+- 촉각 sim-to-real의 고유한 도전을 이해합니다.
+- Real-Sim-Real 루프의 개념과 대표 사례를 파악합니다.</blockquote>
+<hr>
+</section>
+<section id="sec-9-1" class="content-section">
+<h2>9.1 시뮬레이션 엔진: Isaac Gym/Lab, MuJoCo, Tacto, DiffTactile</h2>
+<h3>Isaac Gym / Isaac Lab</h3>
+<p>NVIDIA의 Isaac 생태계는 GPU 가속 물리 시뮬레이션의 표준입니다:</p>
+<ul>
+<li><strong>GPU 병렬 시뮬레이션</strong>: 수천 환경을 동시 실행</li>
+<li>Isaac Sim/Lab: 시뮬레이션 + 학습 통합 플랫폼</li>
+<li>Newton 물리 엔진: 높은 충실도 접촉 모델</li>
+<li>Omniverse: 디지털 트윈</li>
+<li>DeXtreme [2023], GR00T [2025]의 핵심 플랫폼</li>
+</ul>
+<h3>MuJoCo</h3>
+<p>DeepMind의 MuJoCo는 접촉이 풍부한 시뮬레이션에 강점을 가집니다:</p>
+<ul>
+<li>효율적 접촉 솔버(contact solver)</li>
+<li>ExoStart [2025]의 dynamics filtering에 사용</li>
+<li>OpenAI Dactyl [2020]의 초기 시뮬레이션 플랫폼</li>
+</ul>
+<h3>Tacto (2022)</h3>
+<p>Meta FAIR의 Tacto [Wang, Lambeta et al., 2022]는 비전 기반 촉각 센서 시뮬레이터입니다:</p>
+<ul>
+<li>PyRender + PyBullet 기반</li>
+<li>GelSight, DIGIT 등 비전 기반 센서의 합성 촉각 이미지 생성</li>
+<li>Sim-to-real 촉각 학습 가능</li>
+<li><strong>150회+ 인용</strong></li>
+</ul>
+<h3>DiffTactile (2024)</h3>
+<p>미분 가능한 촉각 시뮬레이터:</p>
+<ul>
+<li>기울기 기반 최적화(gradient-based optimization) 지원</li>
+<li>접촉이 풍부한 조작의 미분 가능 시뮬레이션</li>
+<li>FEM 기반 변형 모델링</li>
+</ul>
+<h3>TacEx (2024)</h3>
+<p>TacEx는 GelSight 시뮬레이션을 Isaac Sim에 통합하여, 연구 워크플로우 전체(센서 시뮬레이션 → 정책 학습 → 전이)를 하나의 플랫폼에서 수행할 수 있게 합니다 (<a href="ch11.html">Chapter 11.2 참조</a>).</p>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_1_sim_engines_darkmode.png" alt="Figure 9.1: 촉각 시뮬레이션 엔진 비교." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_1_sim_engines_technical.png'">
+  <figcaption>Figure 9.1: 촉각 시뮬레이션 엔진 비교.</figcaption>
+</figure>
+<table class="styled-table">
+<thead><tr>
+<th>엔진</th>
+<th>GPU 가속</th>
+<th>촉각 지원</th>
+<th>미분 가능</th>
+<th>주요 용도</th>
+<th>대표 사례</th>
+</tr></thead><tbody>
+<tr>
+<td>Isaac Gym/Lab</td>
+<td>예</td>
+<td>간접 (센서 모델)</td>
+<td>아니오</td>
+<td>RL 대규모 학습</td>
+<td>DeXtreme, GR00T</td>
+</tr>
+<tr>
+<td>MuJoCo</td>
+<td>아니오</td>
+<td>간접</td>
+<td>아니오</td>
+<td>접촉 풍부 시뮬레이션</td>
+<td>ExoStart, Dactyl</td>
+</tr>
+<tr>
+<td>Tacto</td>
+<td>아니오</td>
+<td>예 (비전 기반)</td>
+<td>아니오</td>
+<td>촉각 이미지 생성</td>
+<td>DIGIT sim-to-real</td>
+</tr>
+<tr>
+<td>DiffTactile</td>
+<td>부분적</td>
+<td>예</td>
+<td>예</td>
+<td>기울기 최적화</td>
+<td>접촉 최적화</td>
+</tr>
+<tr>
+<td>TacEx</td>
+<td>예</td>
+<td>예 (GelSight)</td>
+<td>아니오</td>
+<td>통합 워크플로우</td>
+<td>연구 파이프라인</td>
+</tr>
+</tbody></table>
+<hr>
+</section>
+<section id="sec-9-2" class="content-section">
+<h2>9.2 도메인 랜덤화: DeXtreme의 ADR</h2>
+<p>Sim-to-real 격차를 극복하는 가장 널리 사용되는 전략은 <strong>도메인 랜덤화(Domain Randomization, DR)</strong>입니다 — 시뮬레이션의 물리 파라미터를 랜덤으로 변화시켜 정책이 다양한 조건에 견고해지도록 합니다.</p>
+<h3>DeXtreme (2023)</h3>
+<p>Handa et al. [2023, NVIDIA]의 DeXtreme은 DR의 최선 사례입니다:</p>
+<ul>
+<li><strong>자동 도메인 랜덤화(ADR)</strong>: 물리 + 비물리 파라미터 동시 랜덤화</li>
+<li>물리: 마찰, 질량, 관절 강성, 중력</li>
+<li>비물리: 조명, 카메라 위치, 텍스처, 배경</li>
+<li>Allegro Hand + Isaac Gym</li>
+<li>Omniverse Replicator로 합성 시각 데이터 생성</li>
+<li>시각 기반 정책이 기존 문헌 능가</li>
+</ul>
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Handa, A., et al. (2023). "DeXtreme: Transfer of Agile In-hand Manipulation from Simulation to Reality." <em>ICRA 2023</em>.
+Allegro Hand + Isaac Gym에서 ADR로 sim-to-real 다지 조작 달성. 물리/비물리 파라미터의 동시 랜덤화가 핵심입니다.</blockquote>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_2_dextreme_adr_darkmode.png" alt="Figure 9.2: DeXtreme의 ADR. Source: DeXtreme (ICRA 2023)." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_2_dextreme_adr_technical.png'">
+  <figcaption>Figure 9.2: DeXtreme의 ADR. Source: DeXtreme (ICRA 2023).</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-9-3" class="content-section">
+<h2>9.3 촉각 Sim-to-Real: 이진 촉각 피부 모델, 제로샷 전이</h2>
+<p>촉각 sim-to-real은 시각 sim-to-real보다 본질적으로 어렵습니다:</p>
+<ul>
+<li>젤 변형의 정확한 모델링 어려움</li>
+<li>다중 물리 결합 (광학 + 변형 + 접촉)</li>
+<li>센서 노이즈 프로파일의 시뮬레이션/현실 차이</li>
+</ul>
+<p>Yin et al. [2024]의 이진 3축 촉각 피부(binary 3-axis tactile skin) 모델은 이 문제의 실용적 해법입니다:</p>
+<ul>
+<li><strong>단순화</strong>: 연속 힘 → 이진 접촉 (접촉 여부 + 3축 방향)</li>
+<li><strong>5,000 FPS</strong> 시뮬레이션 속도</li>
+<li><strong>제로샷</strong> sim-to-real 전이 성공</li>
+<li>OOD 물체에서 <strong>93% 성공률</strong></li>
+</ul>
+<p>이 연구의 핵심 교훈: <strong>정밀한 촉각 시뮬레이션보다 단순화된 모델 + 넓은 커버리지가 sim-to-real 전이에 더 효과적</strong>일 수 있습니다.</p>
+<p>Sim-to-Real RL for Humanoid Dexterous Manipulation [2025]은 환경 모델링, 보상 설계, 정책 학습, 전이의 실용적 레시피를 제공합니다.</p>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_3_tactile_sim2real_challenges_darkmode.png" alt="Figure 9.3: 촉각 sim-to-real의 도전." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_3_tactile_sim2real_challenges_technical.png'">
+  <figcaption>Figure 9.3: 촉각 sim-to-real의 도전.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-9-4" class="content-section">
+<h2>9.4 Real-Sim-Real: RoboPaint, X-Sim, ExoStart</h2>
+<p>Real-Sim-Real은 실제 데이터를 시뮬레이션에 통합한 후 다시 현실로 전이하는 루프입니다.</p>
+<h3>RoboPaint (2025)</h3>
+<p>3D Gaussian Splatting(3DGS)으로 실제 장면을 시뮬레이션에 재구성하여, 시뮬레이션의 시각적 충실도를 높입니다. 이는 시각적 sim-to-real 격차를 줄이는 데 기여합니다.</p>
+<h3>X-Sim (2025)</h3>
+<p>Dan et al. [2025]의 X-Sim은 Real-to-Sim-to-Real 파이프라인입니다:</p>
+<ul>
+<li>실제 인간 데이터를 시뮬레이션으로 전이</li>
+<li>시뮬레이션에서 정책 학습</li>
+<li>학습된 정책을 다시 현실로 전이</li>
+<li>세미나 1에서 핵심 사례로 논의</li>
+</ul>
+<h3>ExoStart (2025)</h3>
+<p>Si et al. [2025]의 ExoStart는 Real-Sim-Real의 가장 데이터 효율적인 사례입니다:</p>
+<ol>
+<li><strong>~10회 외골격 시연</strong> (현실)</li>
+<li>MuJoCo <strong>dynamics filtering</strong> (시뮬레이션)</li>
+<li><strong>Auto-curriculum RL</strong> (시뮬레이션)</li>
+<li>ACT <strong>vision student</strong> (증류)</li>
+<li><strong>제로샷 현실</strong> 전이</li>
+</ol>
+<p>7개 태스크 중 6개에서 >50% 성공률을 달성합니다.</p>
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Si, Z., et al. (2025). "ExoStart: From 10 Exoskeleton Demos to Dexterous Robot Manipulation." <em>Various</em>.
+10회 외골격 시연 → MuJoCo dynamics filtering → auto-curriculum RL → zero-shot real 전이. 데이터 효율적 Real-Sim-Real의 대표 사례.</blockquote>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_4_exostart_pipeline_darkmode.png" alt="Figure 9.4: Real-Sim-Real 루프 — ExoStart의 파이프라인. Source: ExoStart (2025)." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_4_exostart_pipeline_technical.png'">
+  <figcaption>Figure 9.4: Real-Sim-Real 루프 — ExoStart의 파이프라인. Source: ExoStart (2025).</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-9-5" class="content-section">
+<h2>9.5 Sim-to-Real 격차 분석: 동역학, 인지, 접촉 모델</h2>
+<p>Sim-to-real 격차의 세 가지 근원:</p>
+<h3>9.5.1 동역학 격차 (Dynamics Gap)</h3>
+<p>관절 마찰(joint friction), 정마찰(stiction), 접촉 동역학, 변형 물질 거동의 충실한 모델링이 어렵습니다. DeXtreme의 ADR은 이 격차를 "강건성(robustness)"으로 극복하지만, 모든 격차를 해소할 수는 없습니다.</p>
+<h3>9.5.2 인지 격차 (Perception Gap)</h3>
+<p>카메라 이미지, 깊이 맵, 촉각 이미지의 시뮬레이션/현실 차이입니다. Omniverse Replicator의 합성 시각 데이터, RoboPaint의 3DGS 재구성이 이를 줄입니다.</p>
+<h3>9.5.3 접촉 모델 격차 (Contact Model Gap)</h3>
+<p>촉각 sim-to-real의 가장 어려운 부분입니다. FEM은 정밀하지만 계산 비용이 높고, 해석적 모델은 근사가 거칩니다. DiffTactile은 미분 가능한 접촉 모델로 이 격차를 줄이려 하지만, 실시간 시뮬레이션에는 아직 부족합니다.</p>
+<p>Human-in-the-Loop RL [2025, <em>Science Robotics</em>]는 인간 직관과 자율 정책 최적화를 결합하여, sim-to-real 격차가 클 때에도 정밀 조작을 달성합니다.</p>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_5_gap_sources_darkmode.png" alt="Figure 9.5: Sim-to-Real 격차의 세 근원." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_5_gap_sources_technical.png'">
+  <figcaption>Figure 9.5: Sim-to-Real 격차의 세 근원.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-9-6" class="content-section">
+<h2>9.6 합성 데이터의 위력과 한계</h2>
+<p>NVIDIA의 합성 데이터 파이프라인은 현재 가장 강력한 데이터 생성 접근입니다:</p>
+<ul>
+<li><strong>780K 궤적</strong> (6,500시간 상당) → <strong>11시간</strong>에 생성</li>
+<li>실제 성능 <strong>40% 향상</strong></li>
+<li>Isaac Sim + Omniverse Replicator</li>
+</ul>
+<p>그러나 합성 데이터의 한계도 명확합니다:</p>
+<ul>
+<li>Sim-to-real 격차가 합성 데이터의 효과를 제한</li>
+<li>촉각 합성 데이터는 시각보다 격차가 크다</li>
+<li>물성(material property) 다양성의 시뮬레이션이 어려움</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_6_synthetic_data_darkmode.png" alt="Figure 9.6: 합성 데이터의 위력과 한계." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_6_synthetic_data_technical.png'">
+  <figcaption>Figure 9.6: 합성 데이터의 위력과 한계.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-요약-및-전망" class="content-section">
+<h2>요약 및 전망</h2>
+<p>Sim-to-real 전이는 촉각 기반 조작의 가장 큰 병목 중 하나이며, 동시에 가장 빠르게 진보하는 영역입니다. DeXtreme의 ADR, Yin et al.의 단순화된 촉각 모델, ExoStart의 데이터 효율적 Real-Sim-Real이 현재의 최전선입니다. NVIDIA의 합성 데이터 파이프라인은 규모 문제를 해결하지만, 촉각 sim-to-real 격차는 시각보다 근본적으로 크며, DiffTactile/TacEx 방향의 발전이 필요합니다.</p>
+<p>다음 챕터에서는 인간에서 로봇으로의 <strong>Embodiment Retargeting</strong>을 다룹니다 (<a href="ch10.html">Chapter 10 참조</a>).</p>
+<hr>
+</section>
+<section id="sec-참고문헌" class="content-section">
+<h2>참고문헌</h2>
+<ol>
+<li>Handa, A., et al. (2023). DeXtreme: Transfer of agile in-hand manipulation from simulation to reality. <em>ICRA 2023</em>. arXiv:2210.13702.</li>
+</ol>
+<ol>
+<li>Various. (2020). OpenAI Dactyl: Solving Rubik's Cube with a robot hand. <em>IJRR</em>.</li>
+</ol>
+<ol>
+<li>Wang, S., Lambeta, M., et al. (2022). Tacto: A fast, flexible, and open-source simulator for vision-based tactile sensors. <em>IEEE RA-L</em>.</li>
+</ol>
+<ol>
+<li>Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator for contact-rich robotic manipulation. <em>ICLR 2024</em>. arXiv:2403.08716.</li>
+</ol>
+<ol>
+<li>Yin, Z.-H., et al. (2024). Learning in-hand translation using a binary 3-axis tactile skin. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>. arXiv:2506.11775.</li>
+</ol>
+<ol>
+<li>Dan, P., et al. (2025). X-Sim: Cross-embodiment learning via real-to-sim-to-real. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Various. (2026). RoboPaint: From human demonstration to any robot and any view. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776.</li>
+</ol>
+<ol>
+<li>Various. (2025). Sim-to-real reinforcement learning for vision-based dexterous manipulation on humanoids. <em>arXiv preprint</em>. arXiv:2502.20396.</li>
+</ol>
+<ol>
+<li>Various. (2025). Human-in-the-loop RL for precise dexterous manipulation. <em>Science Robotics</em>. https://doi.org/10.1126/scirobotics.ads5033.</li>
+</ol>
+<ol>
+<li>NVIDIA. (2025). GR00T N1: An open foundation model for generalist humanoid robots. <em>arXiv preprint</em>. arXiv:2503.14734.</li>
+</ol>
+<ol>
+<li>NVIDIA. (2026). Synthetic data pipeline: 780K trajectories in 11 hours. <em>GTC 2026 Keynote</em>.</li>
+</ol>
+<ol>
+<li>Various. (2025). Tactile Robotics: Past and Future. <em>arXiv:2512.01106</em>.</li>
+</ol>
+<ol>
+<li>Lipman, Y., et al. (2023). Flow matching for generative modeling. <em>ICLR 2023</em>.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>참고 자료 출처</h3>
+      <ul>
+      <li>논문 요약 포스트: terry.artlab.ai (DeXtreme, Tactile Skin, ExoStart)</li>
+      <li>Literature survey 결과 (131편)</li>
+      <li>researcher 산업 동향 조사</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch08.html" class="prev">&larr; 이전 챕터</a>
+        <a href="ch10.html" class="next">다음 챕터 &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

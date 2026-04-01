@@ -1,0 +1,40 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#1a1a2e', 'primaryTextColor': '#e0e0e0', 'lineColor': '#00D4AA'}}}%%
+graph LR
+    subgraph P1["Part I: Foundations of Touch"]
+        C1["Ch1: Why Tactile?"]
+        C2["Ch2: Tactile Sensors"]
+        C3["Ch3: Tactile Data"]
+    end
+
+    subgraph P2["Part II: Hardware"]
+        C4["Ch4: Robot Hand Design"]
+        C5["Ch5: Intelligent Mechanisms"]
+        C6["Ch6: Human Hand Data"]
+    end
+
+    subgraph P3["Part III: Intelligence"]
+        C7["Ch7: Manipulation Learning"]
+        C8["Ch8: VLA Models"]
+        C9["Ch9: Sim-to-Real"]
+        C10["Ch10: Retargeting"]
+    end
+
+    subgraph P4["Part IV: Integration & Future"]
+        C11["Ch11: System Integration"]
+        C12["Ch12: Industry Outlook"]
+        C13["Ch13: Limits & Future"]
+    end
+
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
+
+    C1 --> C2 --> C3
+    C4 --> C5 --> C6
+    C7 --> C8 --> C9 --> C10
+    C11 --> C12 --> C13
+
+    style P1 fill:#1a3a5c,stroke:#3498DB,color:#fff
+    style P2 fill:#1a4a3c,stroke:#00D4AA,color:#fff
+    style P3 fill:#3a1a4c,stroke:#9B59B6,color:#fff
+    style P4 fill:#4a2a1c,stroke:#FF6B35,color:#fff

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 1: Why Tactile Sensing — Giving Robots the Sense of Touch</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="lang-en">
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch01.html" class="">KO</a>
+        <a href="../en/ch01.html" class="active">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-1">
+  <nav class="sidebar-nav part-1">
+    <a class="nav-dot active" data-section="sec-overview">
+      <span class="dot"></span>
+      <span class="label">Overview</span>
+    </a>
+    <a class="nav-dot" data-section="sec-1-1">
+      <span class="dot"></span>
+      <span class="label">1.1 The Biology of Touch</span>
+    </a>
+    <a class="nav-dot" data-section="sec-1-2">
+      <span class="dot"></span>
+      <span class="label">1.2 A Brief History of Tactile Robo...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-1-3">
+      <span class="dot"></span>
+      <span class="label">1.3 When Touch Is Missing: Failure ...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-1-4">
+      <span class="dot"></span>
+      <span class="label">1.4 What Touch Enables</span>
+    </a>
+    <a class="nav-dot" data-section="sec-1-5">
+      <span class="dot"></span>
+      <span class="label">1.5 Industrial and Everyday Applica...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-1-6">
+      <span class="dot"></span>
+      <span class="label">1.6 Book Organization and Roadmap</span>
+    </a>
+    <a class="nav-dot" data-section="sec-summary-and-outlook">
+      <span class="dot"></span>
+      <span class="label">Summary and Outlook</span>
+    </a>
+    <a class="nav-dot" data-section="sec-references">
+      <span class="dot"></span>
+      <span class="label">References</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part I: Foundations of Touch</span>
+        <h1>Chapter 1: Why Tactile Sensing — Giving Robots the Sense of Touch</h1>
+        <div class="chapter-meta">
+          <span>Written: 2026-04-01</span>
+          <span>Last updated: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-overview" class="content-section">
+<h2>Overview</h2>
+<p>Humans can find keys in a pocket, peel a single page from a stack, and transfer an egg without cracking it — all without looking. Underlying each of these acts is <strong>tactile sensing</strong>, a modality that most robots today entirely lack. This chapter argues why touch is indispensable for robotic manipulation, traces the historical arc of tactile robotics, catalogs failure modes that arise without it, and lays out the roadmap for the rest of the book.</p>
+<blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
+- Describe how biological touch works and how it differs from current robotic tactile sensing.
+- Identify concrete manipulation scenarios where the absence of touch leads to failure.
+- Trace the four generations of tactile robotics research.
+- Navigate the structure and scope of this book.</blockquote>
+<hr>
+</section>
+<section id="sec-1-1" class="content-section">
+<h2>1.1 The Biology of Touch</h2>
+<p>The human hand contains roughly 17,000 mechanoreceptors that detect contact, pressure, vibration, and temperature changes [Johansson & Flanagan, 2009]. Receptor density at the fingertip reaches approximately 240 units/cm², enabling discrimination of surface features as fine as 13 μm [Kandel et al., 2000].</p>
+<figure>
+  <img src="../assets/figures/ch01/fig_1_1_mechanoreceptors_darkmode.png" alt="Figure 1.1: Distribution of mechanoreceptors in the human hand. Adapted from Johansson & Flanagan (2009)." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_1_mechanoreceptors_technical.png'">
+  <figcaption>Figure 1.1: Distribution of mechanoreceptors in the human hand. Adapted from Johansson & Flanagan (2009).</figcaption>
+</figure>
+<p>The four receptor types and their robotic analogs are summarized below:</p>
+<table class="styled-table">
+<thead><tr>
+<th>Receptor Type</th>
+<th>Stimulus</th>
+<th>Adaptation</th>
+<th>Robotic Counterpart</th>
+</tr></thead><tbody>
+<tr>
+<td>Merkel disc</td>
+<td>Pressure, shape</td>
+<td>Slow (SA I)</td>
+<td>Piezoresistive</td>
+</tr>
+<tr>
+<td>Meissner corpuscle</td>
+<td>Light touch, slip</td>
+<td>Fast (RA I)</td>
+<td>Capacitive</td>
+</tr>
+<tr>
+<td>Ruffini ending</td>
+<td>Skin stretch</td>
+<td>Slow (SA II)</td>
+<td>Strain gauge</td>
+</tr>
+<tr>
+<td>Pacinian corpuscle</td>
+<td>Vibration (40-400 Hz)</td>
+<td>Fast (RA II)</td>
+<td>Piezoelectric</td>
+</tr>
+</tbody></table>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Johansson, R. S. & Flanagan, J. R. (2009). "Coding and Use of Tactile Signals from the Fingertips in Object Manipulation Tasks." <em>Nature Reviews Neuroscience</em>, 10, 345-359.
+A foundational neuroscience study revealing how fingertip tactile signals are encoded and exploited during object manipulation.</blockquote>
+<p>When grasping an object, humans detect slip within approximately 100 ms and adjust grip force accordingly. Without this feedback loop, we would crush paper cups and drop eggs. The same principle applies to robots: safe, dexterous manipulation in contact-rich environments demands tactile feedback.</p>
+<hr>
+</section>
+<section id="sec-1-2" class="content-section">
+<h2>1.2 A Brief History of Tactile Robotics</h2>
+<p>The history of tactile robotics stretches back to the 1960s. The survey "Tactile Robotics: Past and Future" [2025] organizes this history into four generations:</p>
+<figure>
+  <img src="../assets/figures/ch01/fig_1_2_timeline_darkmode.png" alt="Figure 1.2: Four generations of tactile robotics (1965-2026). Adapted from Tactile Robotics: Past and Future (2025)." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_2_timeline_technical.png'">
+  <figcaption>Figure 1.2: Four generations of tactile robotics (1965-2026). Adapted from Tactile Robotics: Past and Future (2025).</figcaption>
+</figure>
+<p><strong>Generation 1 — Origins (1965-1980s)</strong>: Early tactile sensors provided simple binary contact detection. Force-torque sensors began appearing on industrial robot arms, but fingertip-level sensing remained a distant goal.</p>
+<p><strong>Generation 2 — Growth (1980s-2000s)</strong>: As documented in the landmark survey by Dahiya et al. [2010], this era explored diverse transduction methods — piezoresistive, capacitive, piezoelectric, and others. Dexterous hand prototypes such as the Shadow Hand (1990s) appeared, but sensor durability and cost remained formidable barriers to practical deployment.</p>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Dahiya, R. S., Metta, G., Valle, M., & Sandini, G. (2010). "Tactile Sensing: From Humans to Humanoids." <em>IEEE Transactions on Robotics</em>, 26(1), 1-20.
+The de facto starting reference for tactile robotics research, covering transduction methods, data processing, and system-level integration.</blockquote>
+<p><strong>Generation 3 — The Tactile Winter (2000-2015)</strong>: The explosive progress of computer vision (deep learning, CNNs) drew the research community's attention toward vision-based robotics, and tactile research entered a relative plateau. Nonetheless, high-performance sensors such as BioTac ($5K-10K) kept foundational research alive.</p>
+<p><strong>Generation 4 — Renaissance (2015-present)</strong>: The introduction of GelSight [Yuan et al., 2017] marked a turning point. Vision-based optical tactile sensors delivered dramatically higher resolution at far lower cost — DIGIT [Lambeta et al., 2020] brought the price to roughly $350. By 2024, Digit 360 offered 8.3 million taxels and 18+ sensing modalities in a single multimodal artificial fingertip [Lambeta et al., 2024], prompting claims that the "ImageNet moment" for touch has arrived.</p>
+<figure>
+  <img src="../assets/figures/ch01/fig_1_3_sensor_evolution_darkmode.png" alt="Figure 1.3: Evolution of tactile sensor technology — GelSight (2017) → DIGIT (2020) → Digit 360 (2024). Source: Yuan et al. (2017), Lambeta et al. (2020, 2024)." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_3_sensor_evolution_technical.png'">
+  <figcaption>Figure 1.3: Evolution of tactile sensor technology — GelSight (2017) → DIGIT (2020) → Digit 360 (2024). Source: Yuan et al. (2017), Lambeta et al. (2020, 2024).</figcaption>
+</figure>
+<p>Another catalyst for this renaissance has been the <strong>democratization of low-cost robot hands</strong>. LEAP Hand [Shaw et al., 2023] introduced a 3D-printable anthropomorphic hand at $2,000, making dexterous manipulation research accessible without the $16,000 Allegro Hand or the $100,000+ Shadow Hand (<a href="ch04.html">Chapter 4</a>).</p>
+<hr>
+</section>
+<section id="sec-1-3" class="content-section">
+<h2>1.3 When Touch Is Missing: Failure Modes</h2>
+<p>Numerous manipulation scenarios resist solution by vision alone. The following are representative cases where the absence of tactile feedback is a direct cause of failure.</p>
+<h3>1.3.1 Grasp Failure</h3>
+<p>When grasping objects, visual information alone is insufficient to determine appropriate grip force. A Styrofoam cup and a ceramic mug may look similar to a camera, yet the required gripping forces differ by an order of magnitude. The F-TAC Hand [2025] covered 70% of the hand surface with 17 tactile sensors and achieved 100% success in multi-object grasping — a direct demonstration of the power of tactile feedback (<a href="ch02.html">Chapter 2.4</a>).</p>
+<h3>1.3.2 Slip Detection</h3>
+<p>Detecting incipient slip requires real-time monitoring of shear force changes. Universal Slip Detection [2025] achieved 97% accuracy with 1.26 ms latency using tactile feedback. Cameras can only observe slip <em>after</em> it has occurred; tactile sensors detect it <em>as it begins</em>.</p>
+<figure>
+  <img src="../assets/figures/ch01/fig_1_4_vision_vs_tactile_darkmode.png" alt="Figure 1.4: Temporal response comparison — vision vs. tactile for slip detection." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_4_vision_vs_tactile_technical.png'">
+  <figcaption>Figure 1.4: Temporal response comparison — vision vs. tactile for slip detection.</figcaption>
+</figure>
+<h3>1.3.3 Deformable Objects</h3>
+<p>Manipulating cloth, cables, and food is inherently difficult with vision alone. Estimating stiffness, friction coefficients, and current deformation state requires contact information. PP-Tac [2025] combined an R-Tac tactile sensor with slip detection in a Diffusion Policy framework, achieving 87.5% success on thin-object grasping — including paper and cards (<a href="ch07.html">Chapter 7.3</a>).</p>
+<h3>1.3.4 Occlusion</h3>
+<p>During in-hand rotation, the robot's own fingers occlude most of the object. NeuralFeels [Suresh et al., 2024] addressed this through neural field-based visuotactile SLAM, simultaneously estimating object pose and shape inside the hand (<em>Science Robotics</em>, 2024) — a task impossible with vision alone (<a href="ch11.html">Chapter 11.1</a>).</p>
+<hr>
+</section>
+<section id="sec-1-4" class="content-section">
+<h2>1.4 What Touch Enables</h2>
+<p>Tactile sensing provides four core capabilities for robotic manipulation:</p>
+<h3>1.4.1 Force Modulation</h3>
+<p>Tactile feedback enables real-time adjustment of grip force. Hogan [1985] established the theoretical foundations of impedance control — governing the relationship between force and displacement during robot-environment interaction — which remains the bedrock of tactile-aware force control. DexForce [2025] demonstrated kinesthetic teaching that simultaneously records force-torque information through a spring model (<a href="ch07.html">Chapter 7.4</a>).</p>
+<h3>1.4.2 Slip Detection and Response</h3>
+<p>By detecting changes in shear force, robots can increase grip force before an object slips. As discussed in Seminar 2, multi-axis sensing is essential because normal force alone cannot predict shear-direction slip [Cho et al., 2025; Hossain et al., 2025].</p>
+<h3>1.4.3 Pose Estimation</h3>
+<p>The distribution of contact points and force vectors enables estimation of an object's pose within the hand. Tactile-only in-hand rotation [Yin et al., 2023; Pitz et al., 2024] demonstrated continuous object rotation using only binary tactile sensors without vision — though as noted in Seminar 1, tactile-only manipulation is currently limited to rotation tasks, because touch provides only local, post-contact information.</p>
+<h3>1.4.4 Texture Recognition</h3>
+<p>Tactile recognition of surface microstructure provides material property information that vision cannot easily capture. GelSight [Yuan et al., 2017] reconstructs 3D contact surfaces at micrometer resolution via photometric stereo, while UniTouch [Yang et al., 2024] aligns touch with vision, language, and audio through contrastive learning, enabling zero-shot texture classification (<a href="ch03.html">Chapter 3.6</a>).</p>
+<figure>
+  <img src="../assets/figures/ch01/fig_1_5_four_capabilities_darkmode.png" alt="Figure 1.5: Four core capabilities enabled by tactile sensing — force modulation, slip detection, pose estimation, texture recognition." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_5_four_capabilities_technical.png'">
+  <figcaption>Figure 1.5: Four core capabilities enabled by tactile sensing — force modulation, slip detection, pose estimation, texture recognition.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-1-5" class="content-section">
+<h2>1.5 Industrial and Everyday Applications</h2>
+<p>Tactile-based robotic manipulation is expanding beyond the laboratory into industrial settings. Markets and Markets projects the humanoid robotics market to grow from $2.9 billion in 2025 to $15.3 billion by 2030 (CAGR 39.2%). Goldman Sachs forecasts 250,000+ unit shipments by 2030; Morgan Stanley envisions a $5 trillion market by 2050.</p>
+<h3>1.5.1 Manufacturing — The First Beachhead</h3>
+<p>Factory deployment of humanoid robots is currently led by the automotive sector:</p>
+<table class="styled-table">
+<thead><tr>
+<th>Company</th>
+<th>Customer</th>
+<th>Task</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td>Figure AI</td>
+<td>BMW Spartanburg</td>
+<td>Sheet metal handling</td>
+<td>Pilot completed (30K cars)</td>
+</tr>
+<tr>
+<td>Agility (Digit)</td>
+<td>Amazon/GXO</td>
+<td>Tote recycling</td>
+<td>Active deployment (100K+ totes)</td>
+</tr>
+<tr>
+<td>Boston Dynamics</td>
+<td>Hyundai</td>
+<td>Factory operations</td>
+<td>Deploying</td>
+</tr>
+<tr>
+<td>Apptronik</td>
+<td>Mercedes Berlin</td>
+<td>Intra-logistics</td>
+<td>Pilot in progress</td>
+</tr>
+<tr>
+<td>Sanctuary AI</td>
+<td>Magna</td>
+<td>Parts sorting</td>
+<td>Pilot in progress</td>
+</tr>
+</tbody></table>
+<p>However, as Billard & Kragic [2019] observed, current factory deployments remain at the <strong>logistics (pick-move-place)</strong> level. <strong>Dexterous assembly</strong> — the domain where tactile feedback is essential — has not yet reached production floors. Bridging this gap is a central challenge for tactile robotics over the next five years (→ Chapters 12, 13).</p>
+<figure>
+  <img src="../assets/figures/ch01/fig_1_6_manipulation_spectrum_darkmode.png" alt="Figure 1.6: The manipulation capability spectrum — logistics (current industrial deployment) vs. dexterous manipulation (research level)." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_6_manipulation_spectrum_technical.png'">
+  <figcaption>Figure 1.6: The manipulation capability spectrum — logistics (current industrial deployment) vs. dexterous manipulation (research level).</figcaption>
+</figure>
+<h3>1.5.2 The Korean Ecosystem</h3>
+<p>South Korea has established a distinctive ecosystem in tactile robotics:</p>
+<ul>
+<li><strong>Hyundai</strong>: Owns Boston Dynamics subsidiary; KRW 125.2 trillion investment; Electric Atlas factory deployment.</li>
+<li><strong>Samsung</strong>: 35% stake in Rainbow Robotics; CEO-level Future Robotics Office (led by Prof. Oh Jun-ho, KAIST).</li>
+<li><strong>Wonik Robotics</strong>: Allegro Hand ($16K) — the de facto research standard; pursuing Digit Plexus integration with Meta FAIR.</li>
+<li><strong>KAIST/ETRI</strong>: Next-generation sensors and materials research.</li>
+</ul>
+<p>This vertical integration — hardware (Hyundai-BD, Samsung-Rainbow) + sensors (Wonik-Meta) + fundamental research (KAIST/ETRI) — is rare even from a global perspective (<a href="ch12.html">Chapter 12.2</a>).</p>
+<h3>1.5.3 Everyday Applications</h3>
+<p>The 1X NEO ($20K consumer humanoid) began home deployment in 2026, making tactile manipulation in everyday environments a reality. Turning door handles, opening drawers, transferring dishes — human environments are designed for <strong>hands</strong>, which is the fundamental reason why general-purpose robots require dexterous manipulation capabilities.</p>
+<hr>
+</section>
+<section id="sec-1-6" class="content-section">
+<h2>1.6 Book Organization and Roadmap</h2>
+<p>This book comprises four parts and thirteen chapters, painting the full picture of tactile-based robotic manipulation from foundations to applications.</p>
+<figure>
+  <img src="../assets/figures/ch01/fig_1_7_book_roadmap_darkmode.png" alt="Figure 1.7: Book roadmap — relationships among 4 Parts and 13 Chapters." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_7_book_roadmap_technical.png'">
+  <figcaption>Figure 1.7: Book roadmap — relationships among 4 Parts and 13 Chapters.</figcaption>
+</figure>
+<p><strong>Part I — Foundations of Touch (Chapters 1-3)</strong>: Beginning with the motivation and biological foundations of touch (this chapter), we cover the physics of sensor technology (Chapter 2) and the representation and collection of tactile data (Chapter 3). These three chapters establish the vocabulary and concepts for all subsequent discussion.</p>
+<p><strong>Part II — Hands: Robot and Human (Chapters 4-6)</strong>: We examine robot hand design principles (Chapter 4) and the physical intelligence of smart mechanisms (Chapter 5), then introduce diverse approaches for collecting human hand data (Chapter 6). Here, "how machines grasp" meets "how humans teach."</p>
+<p><strong>Part III — Learning and Transfer (Chapters 7-10)</strong>: Starting with tactile manipulation learning (Chapter 7), we advance to the frontier of VLA models (Chapter 8), simulation-to-reality transfer (Chapter 9), and human-to-robot skill transfer (Chapter 10). This part encompasses the largest body of recent research and reflects the most active areas of the current community.</p>
+<p><strong>Part IV — Integration and Outlook (Chapters 11-13)</strong>: We conclude with multi-modal system integration (Chapter 11), Physical AI and industry outlook (Chapter 12), and common limitations with future research directions (Chapter 13). Chapter 13 in particular proposes a research direction centered on the mechanism-tactile-learning triangle.</p>
+<p>Each chapter is designed to be readable independently, though sequential reading provides the most natural flow. Every chapter includes <strong>Key Paper</strong> boxes, <strong>Figure</strong> placeholders, <strong>cross-references</strong>, and an APA-formatted reference list.</p>
+<hr>
+</section>
+<section id="sec-summary-and-outlook" class="content-section">
+<h2>Summary and Outlook</h2>
+<p>Tactile sensing is the "last puzzle piece" of robotic manipulation. Three converging trends — the cost reduction of vision-based sensors, the democratization of open-source hands, and the emergence of large-scale foundation models — are driving tactile robotics forward at an unprecedented pace. As of 2026, Sanctuary AI has integrated 5 mN sensitivity tactile sensing into a commercial humanoid, NVIDIA's synthetic data pipeline generates 780K trajectories in 11 hours, and pi0/RECAP demonstrates continuous improvement through post-deployment reinforcement learning. Touch is no longer optional — it is becoming <strong>standard</strong>.</p>
+<p>The next chapter enters the world of the sensor technologies that physically realize this sense of touch (<a href="ch02.html">Chapter 2: Tactile Sensor Technology</a>).</p>
+<hr>
+</section>
+<section id="sec-references" class="content-section">
+<h2>References</h2>
+<ol>
+<li>Johansson, R. S., & Flanagan, J. R. (2009). Coding and use of tactile signals from the fingertips in object manipulation tasks. <em>Nature Reviews Neuroscience</em>, 10, 345-359. https://doi.org/10.1038/nrn2621</li>
+</ol>
+<ol>
+<li>Kandel, E. R., Schwartz, J. H., & Jessell, T. M. (2000). <em>Principles of Neural Science</em> (4th ed.). McGraw-Hill.</li>
+</ol>
+<ol>
+<li>Dahiya, R. S., Metta, G., Valle, M., & Sandini, G. (2010). Tactile sensing: From humans to humanoids. <em>IEEE Transactions on Robotics</em>, 26(1), 1-20. https://doi.org/10.1109/TRO.2009.2033627</li>
+</ol>
+<ol>
+<li>Yuan, W., Dong, S., & Adelson, E. H. (2017). GelSight: High-resolution robot tactile sensors for estimating geometry and force. <em>Sensors</em>, 17(12), 2762. https://doi.org/10.3390/s17122762</li>
+</ol>
+<ol>
+<li>Lambeta, M., Chou, P.-W., Tian, S., Yang, B., Maloon, B., Most, V. R., ... & Calandra, R. (2020). DIGIT: A novel design for a low-cost compact high-resolution tactile sensor with application to in-hand manipulation. <em>IEEE Robotics and Automation Letters</em>, 5(3), 3838-3845. https://arxiv.org/abs/2005.14679</li>
+</ol>
+<ol>
+<li>Lambeta, M., Wu, T., Sengul, A., & Calandra, R. (2024). Digitizing touch with an artificial multimodal fingertip (Digit 360). <em>arXiv preprint</em>, arXiv:2411.02834.</li>
+</ol>
+<ol>
+<li>Shaw, K., Agarwal, A., & Pathak, D. (2023). LEAP Hand: Low-cost, efficient, and anthropomorphic hand for robot learning. <em>Robotics: Science and Systems (RSS)</em>.</li>
+</ol>
+<ol>
+<li>Hogan, N. (1985). Impedance control: An approach to manipulation. <em>Journal of Dynamic Systems, Measurement, and Control</em>, 107(1), 1-24. https://doi.org/10.1115/1.3140702</li>
+</ol>
+<ol>
+<li>Billard, A., & Kragic, D. (2019). Trends and challenges in robot manipulation. <em>Science</em>, 364(6446), eaat8414.</li>
+</ol>
+<ol>
+<li>Yin, Z.-H., Huang, B., Qin, Y., Chen, Q., & Wang, X. (2023). Rotating without seeing: Towards in-hand dexterity through touch. <em>Robotics: Science and Systems (RSS)</em>.</li>
+</ol>
+<ol>
+<li>Pitz, J., Röstel, L., Sievers, L., & Bäuml, B. (2024). Dextrous tactile in-hand manipulation using a modular reinforcement learning architecture. <em>IEEE-RAS International Conference on Humanoid Robots</em>.</li>
+</ol>
+<ol>
+<li>Suresh, S., Si, Z., Anderson, S., Kaess, M., & Mukadam, M. (2024). NeuralFeels: Neural fields for visuotactile perception. <em>Science Robotics</em>, 9(86).</li>
+</ol>
+<ol>
+<li>Yang, F., Feng, C., Chen, Z., Park, H., Wang, D., Dou, Y., ... & Wong, A. (2024). Binding touch to everything: Learning unified multimodal tactile representations. <em>CVPR 2024</em>.</li>
+</ol>
+<ol>
+<li>Lepora, N. F. (2025). Tactile Robotics: Past and Future. <em>arXiv preprint</em>, arXiv:2512.01106.</li>
+</ol>
+<ol>
+<li>Various. (2025). Recent advances in tactile sensing technologies for human-robot interaction: Current trends and future perspectives. <em>Sensors International</em>. https://doi.org/10.1016/j.sintl.2025.100345</li>
+</ol>
+<ol>
+<li>Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
+</ol>
+<ol>
+<li>Zhao, C., Yu, Y., Ye, Z., Tian, Z., Zhang, Y., & Zeng, L.-L. (2025). Universal slip detection of robotic hand with tactile sensing. <em>Frontiers in Neurorobotics</em>, 19. https://doi.org/10.3389/fnbot.2025.1478758</li>
+</ol>
+<ol>
+<li>Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>Robotics: Science and Systems (RSS) 2025</em>.</li>
+</ol>
+<ol>
+<li>Cho, W., et al. (2025). Multi-dimensional tactile sensing for force/noise decoupling. <em>ACS Applied Materials & Interfaces</em>.</li>
+</ol>
+<ol>
+<li>Hossain, M., et al. (2025). Multi-axis tactile for object orientation detection. <em>Sensors and Actuators A: Physical</em>.</li>
+</ol>
+<ol>
+<li>Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.10356.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>Sources</h3>
+      <ul>
+      <li>SNU Seminar: 260319_Seminar_Junsoo_Jihwan_TactileHand_Manipulation</li>
+      <li>SNU Seminar: 260323_Seminar_Taejoon_DataGlove_Sensors</li>
+      <li>Literature survey results (131 papers)</li>
+      <li>Industry trends research</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <span class="placeholder"></span>
+        <a href="ch02.html" class="next">Next &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

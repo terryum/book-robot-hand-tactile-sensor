@@ -1,0 +1,22 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#1a1a2e', 'primaryTextColor': '#e0e0e0', 'lineColor': '#00D4AA'}}}%%
+graph TD
+    A["Tactile Data<br/>Representation"] --> B["From Raw<br/>Measurements"]
+    A --> C["From Taxel<br/>Distribution"]
+
+    B --> D["Vector<br/><i>1D array</i>"]
+    B --> E["Matrix<br/><i>2D grid</i>"]
+    B --> F["Map<br/><i>Spatial distribution</i>"]
+
+    C --> G["Point Cloud<br/><i>3D scattered</i>"]
+    C --> H["Mesh<br/><i>Triangulated surface</i>"]
+    C --> I["Image<br/><i>Camera-based</i>"]
+
+    style A fill:#00D4AA,stroke:#00D4AA,color:#1a1a2e
+    style B fill:#3498DB,stroke:#3498DB,color:#fff
+    style C fill:#9B59B6,stroke:#9B59B6,color:#fff
+    style D fill:#2d3436,stroke:#3498DB,color:#dfe6e9
+    style E fill:#2d3436,stroke:#3498DB,color:#dfe6e9
+    style F fill:#2d3436,stroke:#3498DB,color:#dfe6e9
+    style G fill:#2d3436,stroke:#9B59B6,color:#dfe6e9
+    style H fill:#2d3436,stroke:#9B59B6,color:#dfe6e9
+    style I fill:#2d3436,stroke:#9B59B6,color:#dfe6e9

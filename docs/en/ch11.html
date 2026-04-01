@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 11: Research Integration — Toward Unified Systems</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="lang-en">
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch11.html" class="">KO</a>
+        <a href="../en/ch11.html" class="active">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-4">
+  <nav class="sidebar-nav part-4">
+    <a class="nav-dot active" data-section="sec-overview">
+      <span class="dot"></span>
+      <span class="label">Overview</span>
+    </a>
+    <a class="nav-dot" data-section="sec-11-1">
+      <span class="dot"></span>
+      <span class="label">11.1 Multi-Modal Fusion Architectur...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-11-2">
+      <span class="dot"></span>
+      <span class="label">11.2 End-to-End System Case Studies</span>
+    </a>
+    <a class="nav-dot" data-section="sec-11-3">
+      <span class="dot"></span>
+      <span class="label">11.3 The Open-Source Ecosystem and ...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-11-4">
+      <span class="dot"></span>
+      <span class="label">11.4 Benchmarks and Standardization</span>
+    </a>
+    <a class="nav-dot" data-section="sec-summary-and-outlook">
+      <span class="dot"></span>
+      <span class="label">Summary and Outlook</span>
+    </a>
+    <a class="nav-dot" data-section="sec-references">
+      <span class="dot"></span>
+      <span class="label">References</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part IV: Integration and Outlook</span>
+        <h1>Chapter 11: Research Integration — Toward Unified Systems</h1>
+        <div class="chapter-meta">
+          <span>Written: 2026-04-01</span>
+          <span>Last updated: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-overview" class="content-section">
+<h2>Overview</h2>
+<p>The preceding ten chapters covered individual components — sensors, data, hands, learning, and transfer. This chapter examines how these components <strong>integrate into unified systems</strong>. We survey multi-modal fusion architectures, end-to-end system case studies, the open-source ecosystem, and benchmarks with standardization trends.</p>
+<blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
+- Compare major visuo-tactile fusion architectures (early/late/MoE).
+- Explain the systemic significance of Mobile ALOHA, PP-Tac, and the Seminar 3 integrated gripper.
+- Understand how open-source hardware/software/data accelerates research.
+- Assess the current state and need for benchmarks like RGMC.</blockquote>
+<hr>
+</section>
+<section id="sec-11-1" class="content-section">
+<h2>11.1 Multi-Modal Fusion Architectures</h2>
+<h3>Visuo-Tactile Fusion</h3>
+<p><strong>Robot Synesthesia</strong> [Yuan et al., 2024]: Point cloud-based visuo-tactile fusion with PointNet. Generalizes to novel objects (<a href="ch03.html">Chapter 3.1.4</a>).</p>
+<p><strong>NeuralFeels</strong> [Suresh et al., 2024]: Neural field-based visuotactile perception. Simultaneous pose and shape estimation inside the hand. <em>Science Robotics</em> (<a href="ch01.html">Chapter 1.3.4</a>).</p>
+<p><strong>3D-ViTac</strong> [Huang et al., 2024]: Dense tactile (3mm²) + vision unified 3D representation. 85-90% bimanual success with Diffusion Policy vs. 45-50% vision-only (<a href="ch02.html">Chapter 2.4</a>).</p>
+<h3>Force-Vision-Language Fusion</h3>
+<p><strong>ForceVLA</strong> [Yu et al., 2025]: FVLMoE dynamic routing across 4 experts. +23.2pp, 90% under occlusion (→ Chapters 7.4, 8.4).</p>
+<p><strong>Tactile-VLA</strong> [2025]: Unlocks VLA physical knowledge through tactile sensing (<a href="ch08.html">Chapter 8.4</a>).</p>
+<h3>Representation Alignment</h3>
+<p><strong>UniTouch</strong> [Yang et al., 2024]: Contrastive alignment of touch-vision-language-audio. Zero-shot classification (<a href="ch03.html">Chapter 3.6</a>).</p>
+<p><strong>Sparsh</strong> [Higuera et al., 2024]: 460K+ image self-supervised tactile foundation model (<a href="ch03.html">Chapter 3.6</a>).</p>
+<p><strong>VTV-LLM</strong> [2025]: Pre-contact physical property inference via visuo-tactile video + LLMs.</p>
+<h3>Fusion Architecture Comparison</h3>
+<table class="styled-table">
+<thead><tr>
+<th>Architecture</th>
+<th>Strengths</th>
+<th>Weaknesses</th>
+<th>Representative</th>
+</tr></thead><tbody>
+<tr>
+<td>Early fusion</td>
+<td>Low-level feature combination</td>
+<td>Cross-modal interference</td>
+<td>3D-ViTac</td>
+</tr>
+<tr>
+<td>Late fusion</td>
+<td>Independent modality learning</td>
+<td>Limited cross-modal interaction</td>
+<td>NeuralFeels</td>
+</tr>
+<tr>
+<td>MoE (dynamic routing)</td>
+<td>Task-optimal fusion</td>
+<td>Training complexity</td>
+<td>ForceVLA</td>
+</tr>
+<tr>
+<td>Attention-based</td>
+<td>Flexible weighting</td>
+<td>Computation cost</td>
+<td>Transformer VLAs</td>
+</tr>
+</tbody></table>
+<figure>
+  <img src="../assets/figures/ch11/fig_11_1_fusion_architectures_darkmode.png" alt="Figure 11.1: Multimodal fusion architecture comparison." loading="lazy" onerror="this.src='../assets/figures/ch11/fig_11_1_fusion_architectures_technical.png'">
+  <figcaption>Figure 11.1: Multimodal fusion architecture comparison.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-11-2" class="content-section">
+<h2>11.2 End-to-End System Case Studies</h2>
+<h3>Mobile ALOHA (2024)</h3>
+<p>Fu, Zhao, Finn [2024, Stanford]: Low-cost mobile bimanual system. ACT-based policy. ~200 citations. The most influential end-to-end research system.</p>
+<h3>TacEx (2024)</h3>
+<p>GelSight simulation integrated in Isaac Sim. Complete workflow: sensor sim → policy learning → sim-to-real in one platform.</p>
+<h3>PP-Tac (2025)</h3>
+<p>R-Tac + slip detection + Diffusion Policy → 87.5% thin object grasping. Integration of sensor + perception + control + learning for practical problem solving.</p>
+<h3>Seminar 3 Integrated Gripper</h3>
+<p>Underactuation + VSA + Active Belt for factory automation. Physical integration of mechanism (Chapter 5) + sensing + control.</p>
+<figure>
+  <img src="../assets/figures/ch11/fig_11_2_e2e_systems_darkmode.png" alt="Figure 11.2: Four end-to-end integrated systems." loading="lazy" onerror="this.src='../assets/figures/ch11/fig_11_2_e2e_systems_technical.png'">
+  <figcaption>Figure 11.2: Four end-to-end integrated systems.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-11-3" class="content-section">
+<h2>11.3 The Open-Source Ecosystem and Research Acceleration</h2>
+<h3>Hardware</h3>
+<p>LEAP Hand ($2K), ORCA (17-DoF), ISyHand ($1.3K), OSMO glove</p>
+<h3>Software</h3>
+<p>OpenVLA (7B VLA), Octo, Diffusion Policy, ACT/ALOHA</p>
+<h3>Data</h3>
+<p>Open X-Embodiment (1M+ trajectories), Touch-and-Go (3M+ contacts), Touch100k, VTDexManip</p>
+<p>The impact of open-source on reproducibility and research speed is revolutionary. Pre-2023, dexterous manipulation research required $16K-100K hardware; now it starts at $2K.</p>
+<figure>
+  <img src="../assets/figures/ch11/fig_11_3_opensource_ecosystem_darkmode.png" alt="Figure 11.3: Open-source ecosystem — hardware, software, data triangle." loading="lazy" onerror="this.src='../assets/figures/ch11/fig_11_3_opensource_ecosystem_technical.png'">
+  <figcaption>Figure 11.3: Open-source ecosystem — hardware, software, data triangle.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-11-4" class="content-section">
+<h2>11.4 Benchmarks and Standardization</h2>
+<h3>RGMC</h3>
+<p>ICRA's annual competition. 2025 Champion used optimization (not learning), demonstrating methodological diversity (<a href="ch07.html">Chapter 7.5</a>).</p>
+<h3>Absent Tactile Sensor Benchmarks</h3>
+<p>Vision has ImageNet and COCO; tactile sensing has <strong>no established benchmark</strong>. This hinders sensor comparison and reproducibility.</p>
+<h3>Data Format Standardization</h3>
+<p>Albini et al. [2025]'s 6 data structures (Chapter 3) are de facto standard candidates.</p>
+<h3>Cross-Embodiment Evaluation</h3>
+<p>Open X-Embodiment [2024] enables consistent performance comparison across diverse robots.</p>
+<p>Multimodal Tactile-Vision for Housekeeping [<em>Nature Communications</em>, 2024] demonstrates end-to-end multi-modal integration (pressure, temperature, texture, slip + vision) in household environments.</p>
+<figure>
+  <img src="../assets/figures/ch11/fig_11_4_benchmarks_darkmode.png" alt="Figure 11.4: Benchmark and standardization status." loading="lazy" onerror="this.src='../assets/figures/ch11/fig_11_4_benchmarks_technical.png'">
+  <figcaption>Figure 11.4: Benchmark and standardization status.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-summary-and-outlook" class="content-section">
+<h2>Summary and Outlook</h2>
+<p>System integration matters as much as individual component advances. ForceVLA's MoE fusion, Mobile ALOHA's low-cost bimanual system, PP-Tac's practical problem solving, and Seminar 3's mechanism integration each demonstrate that "the whole is greater than the sum of its parts." The open-source ecosystem accelerates integration, and establishing standardized benchmarks is the next challenge.</p>
+<p>The next chapter examines how research achievements translate into industry — <strong>Physical AI and Industry Outlook</strong> (<a href="ch12.html">Chapter 12</a>).</p>
+<hr>
+</section>
+<section id="sec-references" class="content-section">
+<h2>References</h2>
+<ol>
+<li>Yuan, Y., et al. (2024). Robot Synesthesia. <em>ICRA 2024</em>.</li>
+<li>Suresh, S., et al. (2024). NeuralFeels. <em>Science Robotics</em>, 9(86).</li>
+<li>Huang, B., et al. (2024). 3D-ViTac. <em>CoRL 2024</em>.</li>
+<li>Yu, J., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>.</li>
+<li>Various. (2025). Tactile-VLA. <em>OpenReview</em>.</li>
+<li>Yang, F., et al. (2024). UniTouch. <em>CVPR 2024</em>.</li>
+<li>Higuera, C., et al. (2024). Sparsh. <em>CoRL 2024</em>.</li>
+<li>Liu, K., et al. (2025). VTV-LLM: Robotic perception with a large tactile-vision-language model. <em>arXiv preprint</em>. arXiv:2506.19303.</li>
+<li>Fu, Z., Zhao, T. Z., & Finn, C. (2024). Mobile ALOHA: Learning bimanual mobile manipulation with low-cost whole-body teleoperation. <em>arXiv preprint</em>. arXiv:2401.02117.</li>
+<li>Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776.</li>
+<li>Various. (2025). PP-Tac. <em>RSS 2025</em>.</li>
+<li>Yu, M., et al. (2025). RGMC Champion. <em>IEEE RA-L</em>.</li>
+<li>Albini, A., et al. (2025). Tactile data representation review. <em>arXiv (IEEE T-RO)</em>.</li>
+<li>Open X-Embodiment Collaboration. (2024). <em>ICRA 2024</em>.</li>
+<li>Mao, Q., Liao, Z., Yuan, J., & Zhu, R. (2024). Multimodal tactile sensing fused with vision for dexterous robotic housekeeping. <em>Nature Communications</em>, 15, 6871. https://doi.org/10.1038/s41467-024-51261-5</li>
+<li>Various. (2025). Simultaneous tactile-visual perception for learning multimodal robot manipulation. <em>arXiv preprint</em>. arXiv:2512.09851.</li>
+<li>Various. (2025). Multimodal fusion and vision-language models: A survey for robot vision. <em>Information Fusion (Elsevier)</em>. arXiv:2504.02477.</li>
+<li>Various. (2025). Tactile Robotics: An outlook. <em>arXiv preprint</em>. arXiv:2508.11261.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>Sources</h3>
+      <ul>
+      <li>All three SNU seminars</li>
+      <li>Paper summary posts: terry.artlab.ai (ForceVLA, PP-Tac, Mobile ALOHA)</li>
+      <li>Literature survey results (131 papers)</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch10.html" class="prev">&larr; Previous</a>
+        <a href="ch12.html" class="next">Next &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

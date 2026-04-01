@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7: 조작 학습 — 만지며 배우기</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch07.html" class="active">KO</a>
+        <a href="../en/ch07.html" class="">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-3">
+  <nav class="sidebar-nav part-3">
+    <a class="nav-dot active" data-section="sec-개요">
+      <span class="dot"></span>
+      <span class="label">개요</span>
+    </a>
+    <a class="nav-dot" data-section="sec-7-1">
+      <span class="dot"></span>
+      <span class="label">7.1 모방 학습: Diffusion Policy, ACT/AL...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-7-2">
+      <span class="dot"></span>
+      <span class="label">7.2 강화학습: PPO + 촉각, Sim-to-Real RL</span>
+    </a>
+    <a class="nav-dot" data-section="sec-7-3">
+      <span class="dot"></span>
+      <span class="label">7.3 촉각 기반 조작: 촉각 전용 회전, 시각-촉각 융합, P...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-7-4">
+      <span class="dot"></span>
+      <span class="label">7.4 힘 기반 학습: DexForce, ForceVLA</span>
+    </a>
+    <a class="nav-dot" data-section="sec-7-5">
+      <span class="dot"></span>
+      <span class="label">7.5 최적화 기반 대안: RGMC 챔피언의 궤적 최적화</span>
+    </a>
+    <a class="nav-dot" data-section="sec-7-6">
+      <span class="dot"></span>
+      <span class="label">7.6 방법론 비교: IL vs RL vs 최적화</span>
+    </a>
+    <a class="nav-dot" data-section="sec-요약-및-전망">
+      <span class="dot"></span>
+      <span class="label">요약 및 전망</span>
+    </a>
+    <a class="nav-dot" data-section="sec-참고문헌">
+      <span class="dot"></span>
+      <span class="label">참고문헌</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part III: 학습과 전이</span>
+        <h1>Chapter 7: 조작 학습 — 만지며 배우기</h1>
+        <div class="chapter-meta">
+          <span>집필일: 2026-04-01</span>
+          <span>최종수정일: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-개요" class="content-section">
+<h2>개요</h2>
+<p>Part I-II에서 센서, 데이터, 핸드, 인간 시연의 기반을 마련했다면, 이 챕터에서는 이 모든 요소를 결합하여 <strong>로봇이 실제로 조작을 학습하는 방법</strong>을 다룹니다. 모방 학습(imitation learning), 강화학습(reinforcement learning), 촉각 기반 조작, 힘 기반 학습, 최적화 기반 대안까지 — 현재 촉각 기반 조작 학습의 전체 방법론 지형도를 그립니다.</p>
+<blockquote class=""><strong>이 챕터를 읽고 나면...</strong>
+- Diffusion Policy와 ACT/ALOHA의 작동 원리와 차이를 설명할 수 있습니다.
+- 촉각 전용 vs 시각-촉각 융합 조작의 장단점을 비교할 수 있습니다.
+- 힘 기반 학습(DexForce, ForceVLA)의 접근과 의의를 이해합니다.
+- IL, RL, 최적화의 방법론적 트레이드오프를 판단할 수 있습니다.</blockquote>
+<hr>
+</section>
+<section id="sec-7-1" class="content-section">
+<h2>7.1 모방 학습: Diffusion Policy, ACT/ALOHA</h2>
+<p>모방 학습(Imitation Learning, IL)은 인간 시연을 직접 모방하여 정책(policy)을 학습합니다. 2023년 이후 두 접근이 지배적입니다.</p>
+<h3>Diffusion Policy (2023)</h3>
+<p>Chi et al. [2023]의 Diffusion Policy는 로봇 행동을 <strong>조건부 잡음 제거 확산 과정(conditional denoising diffusion process)</strong>으로 모델링합니다 (<em>RSS 2023 / IJRR 2024</em>):</p>
+<ul>
+<li>다중 모달 행동 분포(multimodal action distribution) 처리 가능</li>
+<li>기존 방법 대비 <strong>46.9% 평균 향상</strong></li>
+<li><strong>500회+ 인용</strong>: 로봇 정책 학습의 주류 패러다임</li>
+</ul>
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Chi, C., Feng, S., Du, Y., Xu, Z., Cousineau, E., Burchfiel, B., & Song, S. (2023). "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion." <em>RSS 2023 / IJRR 2024</em>.
+행동 확산을 통한 시각-운동 정책 학습. 다중 모달 행동 분포를 자연스럽게 처리하여, 촉각 조건화(tactile conditioning)와의 결합이 용이합니다.</blockquote>
+<h3>ACT/ALOHA (2023)</h3>
+<p>Zhao et al. [2023, Stanford]의 ACT(Action Chunking with Transformers)는 Transformer 기반 행동 청킹으로 <strong>10분 시연에서 80-90% 양손 조작 성공률</strong>을 달성합니다:</p>
+<ul>
+<li>ALOHA: $20K 이하 저비용 양손 하드웨어</li>
+<li>Mobile ALOHA: 이동 + 양손 조작 통합 (<a href="ch11.html">Chapter 11.2 참조</a>)</li>
+<li><strong>400회+ 인용</strong></li>
+</ul>
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Zhao, T. Z., Kumar, V., Levine, S., & Finn, C. (2023). "Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware." <em>RSS 2023</em>.
+Transformer 기반 행동 청킹으로 저비용 하드웨어에서 양손 정밀 조작을 달성. ALOHA 하드웨어와 함께 오픈소스 공개.</blockquote>
+<figure>
+  <img src="../assets/figures/ch07/fig_7_1_diffusion_vs_act_darkmode.png" alt="Figure 7.1: Diffusion Policy vs ACT/ALOHA — 모방 학습의 두 주류 접근 비교." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_1_diffusion_vs_act_technical.png'">
+  <figcaption>Figure 7.1: Diffusion Policy vs ACT/ALOHA — 모방 학습의 두 주류 접근 비교.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-7-2" class="content-section">
+<h2>7.2 강화학습: PPO + 촉각, Sim-to-Real RL</h2>
+<p>강화학습(Reinforcement Learning, RL)은 시행착오를 통해 보상을 최대화하는 정책을 학습합니다. 촉각과 결합된 RL의 핵심 성과들:</p>
+<h3>OpenAI Dactyl (2020)</h3>
+<p>OpenAI Dactyl [2020, <em>IJRR</em>]은 sim-to-real RL의 이정표입니다:</p>
+<ul>
+<li>Shadow Hand로 Rubik's Cube 조작</li>
+<li>시뮬레이션에서만 학습, 현실에 제로샷 전이</li>
+<li>도메인 랜덤화(domain randomization)의 위력을 입증</li>
+<li><strong>1,500회+ 인용</strong></li>
+</ul>
+<h3>DeXtreme (2023)</h3>
+<p>Handa et al. [2023, NVIDIA]의 DeXtreme은 Allegro Hand + Isaac Gym으로:</p>
+<ul>
+<li>자동 도메인 랜덤화(ADR): 물리 + 비물리 파라미터 동시 랜덤화</li>
+<li>Omniverse Replicator로 합성 시각 데이터 생성</li>
+<li>시각 기반 정책이 기존 문헌을 능가</li>
+<li><strong>200회+ 인용</strong> (<a href="ch09.html">Chapter 9.2에서 상세</a>)</li>
+</ul>
+<h3>촉각 기반 Sim-to-Real RL</h3>
+<p>Yin et al. [2024]은 이진 3축 촉각 피부(binary 3-axis tactile skin) 센서 모델을 개발하여:</p>
+<ul>
+<li><strong>5,000 FPS</strong> 시뮬레이션 속도</li>
+<li>S3-Axis: OOD(분포 외) 물체에서 <strong>93% 성공률</strong></li>
+<li><strong>제로샷</strong> sim-to-real 전이</li>
+</ul>
+<p>이 연구는 촉각 센서 모델의 단순화(이진 접촉)와 넓은 커버리지(전체 손)가 고해상도 센서보다 효과적일 수 있음을 보여줍니다 — 세미나 1에서 강조된 "센서 해상도보다 넓은 영역 커버가 중요"라는 인사이트와 일치합니다.</p>
+<figure>
+  <img src="../assets/figures/ch07/fig_7_2_tactile_rl_pipeline_darkmode.png" alt="Figure 7.2: 촉각 기반 강화학습 파이프라인." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_2_tactile_rl_pipeline_technical.png'">
+  <figcaption>Figure 7.2: 촉각 기반 강화학습 파이프라인.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-7-3" class="content-section">
+<h2>7.3 촉각 기반 조작: 촉각 전용 회전, 시각-촉각 융합, PP-Tac</h2>
+<h3>7.3.1 촉각 전용 손안 회전 (Tactile-Only In-Hand Rotation)</h3>
+<p>Yin et al. [2023, <em>RSS</em>]과 Pitz et al. [2024]은 시각 없이 촉각만으로 물체를 연속 회전시키는 것이 가능함을 입증했습니다. 그러나 세미나 1에서 논의된 바와 같이:</p>
+<ul>
+<li><strong>한계</strong>: 촉각만으로 가능한 조작은 현재 <strong>회전(rotation)</strong>에 한정</li>
+<li><strong>이유</strong>: 촉각은 접촉 <em>후</em>의 국소(local) 정보만 제공 — 접촉 전 글로벌 정보 부재</li>
+<li><strong>Known environment 가정</strong>: 촉각 전용 LfD(Learning from Demonstration)는 알려진 환경을 가정해야 함</li>
+</ul>
+<h3>7.3.2 시각-촉각 융합 조작 (Visuo-Tactile Manipulation)</h3>
+<p>Wu et al. [2025, <em>ICRA</em>]은 3축 촉각 + 시각(Realsense D435) + 로봇 상태를 결합한 시각-촉각 모방 학습을 구현했습니다:</p>
+<ul>
+<li><strong>Canonical 3D Tactile</strong> 표현으로 센서 독립적 전이</li>
+<li>Play data 사전학습 + 소수 전문가 시연 미세 조정</li>
+<li><strong>78% 평균 성공률</strong> (T-DEX 63% 대비)</li>
+</ul>
+<p>Robot Synesthesia [Yuan et al., 2024]는 포인트 클라우드 기반 촉각 표현으로 이중 공 회전과 3축 회전을 달성했습니다 (<a href="ch03.html">Chapter 3.1.4 참조</a>).</p>
+<h3>7.3.3 PP-Tac: 얇은 물체의 촉각 기반 파지</h3>
+<p>PP-Tac [2025, <em>RSS</em>]은 극도로 얇은 물체(종이, 카드)의 파지 문제를 해결합니다:</p>
+<ul>
+<li><strong>R-Tac</strong>: 원형 카메라 기반 젤 촉각 센서</li>
+<li><strong>미끄러짐 감지 CNN</strong>: 실시간 미끄러짐 감지</li>
+<li><strong>온라인 힘 제어</strong>: 감지된 미끄러짐에 따른 힘 조절</li>
+<li><strong>Diffusion Policy</strong> 통합</li>
+<li><strong>87.5% 성공률</strong>: 얇은/변형 가능 물체</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch07/fig_7_3_pptac_darkmode.png" alt="Figure 7.3: PP-Tac 시스템. Source: PP-Tac (RSS 2025)." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_3_pptac_technical.png'">
+  <figcaption>Figure 7.3: PP-Tac 시스템. Source: PP-Tac (RSS 2025).</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-7-4" class="content-section">
+<h2>7.4 힘 기반 학습: DexForce, ForceVLA</h2>
+<p>힘(force) 정보를 학습에 명시적으로 통합하는 접근입니다.</p>
+<h3>DexForce (2025)</h3>
+<p>Hou et al. [2025]의 DexForce는 운동학적 시연에서 힘 정보를 자연스럽게 기록합니다:</p>
+<ul>
+<li><strong>스프링 모델</strong>: $x_f = x_o + k_f \cdot f$ (단일 파라미터 $k_f = 0.0045$)</li>
+<li>힘 인식 행동 타겟(force-informed action targets) 생성</li>
+<li>6개 태스크에서 <strong>76% 평균 성공률</strong></li>
+<li>원격 조작의 힘 정보 부재 문제를 해결</li>
+</ul>
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Hou, Y., et al. (2025). "DexForce: Learning Contact Forces from Human Demonstrations." <em>Various</em>.
+스프링 모델 기반 힘 인식 시연 학습. 단일 파라미터 $k_f$로 힘 정보를 자연스럽게 행동 타겟에 통합합니다.</blockquote>
+<h3>ForceVLA (2025)</h3>
+<p>Yu et al. [2025]의 ForceVLA는 힘-시각-언어의 동적 융합을 구현합니다:</p>
+<ul>
+<li><strong>FVLMoE</strong>: 4개 전문가(expert)의 Mixture of Experts 아키텍처</li>
+<li>pi0 기반 VLA에 힘 정보 통합</li>
+<li>힘 없는 기준 대비 <strong>+23.2%p</strong> 향상</li>
+<li>시각 가림(visual occlusion) 하에서 <strong>90% 성공률</strong></li>
+</ul>
+<p>ForceVLA는 VLA 모델에 촉각/힘 정보를 "일급 시민(first-class modality)"으로 통합하는 방향의 대표적 사례입니다 (<a href="ch08.html">Chapter 8.4, 11.1 참조</a>).</p>
+<figure>
+  <img src="../assets/figures/ch07/fig_7_4_force_learning_darkmode.png" alt="Figure 7.4: 힘 기반 학습의 두 접근 — DexForce와 ForceVLA 비교." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_4_force_learning_technical.png'">
+  <figcaption>Figure 7.4: 힘 기반 학습의 두 접근 — DexForce와 ForceVLA 비교.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-7-5" class="content-section">
+<h2>7.5 최적화 기반 대안: RGMC 챔피언의 궤적 최적화</h2>
+<p>모든 조작이 학습 기반일 필요는 없습니다. Yu et al. [2025]의 RGMC 챔피언 솔루션은:</p>
+<ul>
+<li><strong>운동학적 궤적 최적화(kinematic trajectory optimization)</strong>: 사전학습 없이</li>
+<li>5x5x5cm 공간에서 40 waypoint</li>
+<li><strong>평균 5mm 오차</strong></li>
+<li>ICRA RGMC 챔피언 + Most Elegant Solution 수상</li>
+</ul>
+<p>이 결과는 구조화된 문제에서는 최적화 기반 접근이 학습 기반만큼 효과적이거나 더 우수할 수 있음을 보여줍니다.</p>
+<h3>FARM: 촉각 조건 Diffusion Policy (2025)</h3>
+<p>FARM [2025]은 고차원 촉각 데이터에서 힘 신호를 추론하고, Diffusion Policy를 촉각으로 조건화하는 모방 학습 프레임워크입니다.</p>
+<h3>TLA: 촉각-언어-행동 모델 (2025)</h3>
+<p>TLA [2025]는 24,000개의 촉각-행동 지시 쌍(instruction pair)으로 언어 조건 촉각 제어를 구현하여, 자연어 명령으로 접촉이 풍부한 조작을 지시할 수 있습니다.</p>
+<h3>비파지 촉각 조작 (Non-Prehensile Manipulation)</h3>
+<p>Tactile-Driven Non-Prehensile Manipulation [RSS 2024]은 촉각 피드백으로 외재 접촉 모드(extrinsic contact mode)를 제어하여, 잡지 않고도 물체를 정밀하게 조작합니다.</p>
+<hr>
+</section>
+<section id="sec-7-6" class="content-section">
+<h2>7.6 방법론 비교: IL vs RL vs 최적화</h2>
+<table class="styled-table">
+<thead><tr>
+<th>특성</th>
+<th>모방 학습 (IL)</th>
+<th>강화학습 (RL)</th>
+<th>최적화</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>데이터 요구</strong></td>
+<td>시연 필요 (10-50회)</td>
+<td>시뮬레이션 수백만 스텝</td>
+<td>모델/구조 지식</td>
+</tr>
+<tr>
+<td><strong>일반화</strong></td>
+<td>시연 분포 내</td>
+<td>보상 설계에 따라 다양</td>
+<td>구조화된 문제</td>
+</tr>
+<tr>
+<td><strong>Sim-to-Real</strong></td>
+<td>직접 실세계</td>
+<td>격차 존재 (DR 필요)</td>
+<td>모델 정확도 의존</td>
+</tr>
+<tr>
+<td><strong>촉각 통합</strong></td>
+<td>자연스러움</td>
+<td>보상에 통합</td>
+<td>접촉 모델 필요</td>
+</tr>
+<tr>
+<td><strong>대표 사례</strong></td>
+<td>Diffusion Policy, ACT</td>
+<td>DeXtreme, Dactyl</td>
+<td>RGMC Champion</td>
+</tr>
+<tr>
+<td><strong>장점</strong></td>
+<td>데이터 효율적</td>
+<td>초인적 성능 가능</td>
+<td>해석 가능, 보장</td>
+</tr>
+<tr>
+<td><strong>한계</strong></td>
+<td>분포 외 실패</td>
+<td>실세계 탐색 위험</td>
+<td>비구조화 문제 부적합</td>
+</tr>
+</tbody></table>
+<figure>
+  <img src="../assets/figures/ch07/fig_7_5_il_rl_optimization_darkmode.png" alt="Figure 7.5: IL vs RL vs 최적화 — 세 방법론의 적용 영역과 트레이드오프." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_5_il_rl_optimization_technical.png'">
+  <figcaption>Figure 7.5: IL vs RL vs 최적화 — 세 방법론의 적용 영역과 트레이드오프.</figcaption>
+</figure>
+<p>서베이 논문들이 이 비교의 맥락을 제공합니다:</p>
+<ul>
+<li>Learning-Based In-Hand Manipulation Survey [Frontiers, 2024]</li>
+<li>Robot Intelligent Grasping Based on Tactile Perception [Elsevier, 2024]</li>
+<li>Dexterous Manipulation Through Imitation Learning Survey [2025]</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch07/fig_7_6_tactile_landscape_darkmode.png" alt="Figure 7.6: 촉각 기반 조작 학습의 전체 지형도." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_6_tactile_landscape_technical.png'">
+  <figcaption>Figure 7.6: 촉각 기반 조작 학습의 전체 지형도.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-요약-및-전망" class="content-section">
+<h2>요약 및 전망</h2>
+<p>촉각 기반 조작 학습은 Diffusion Policy와 ACT가 모방 학습의 주류를, DeXtreme과 Dactyl이 강화학습의 경계를, RGMC Champion이 최적화의 가능성을 보여주는 다원적 지형입니다. 촉각 정보의 통합은 FARM, TLA, ForceVLA에서 보듯 점차 <strong>일급 모달리티</strong>로 승격되고 있으며, PP-Tac은 실용적 문제(얇은 물체 파지)에서 촉각의 직접적 가치를 입증했습니다.</p>
+<p>다음 챕터에서는 이 학습 방법론의 최전선인 <strong>VLA 모델</strong>을 다룹니다 (<a href="ch08.html">Chapter 8: VLA 모델 참조</a>).</p>
+<hr>
+</section>
+<section id="sec-참고문헌" class="content-section">
+<h2>참고문헌</h2>
+<ol>
+<li>Chi, C., Feng, S., Du, Y., Xu, Z., Cousineau, E., Burchfiel, B., & Song, S. (2023). Diffusion Policy: Visuomotor policy learning via action diffusion. <em>RSS 2023 / IJRR 2024</em>. arXiv:2303.04137.</li>
+</ol>
+<ol>
+<li>Zhao, T. Z., Kumar, V., Levine, S., & Finn, C. (2023). Learning fine-grained bimanual manipulation with low-cost hardware (ACT/ALOHA). <em>RSS 2023</em>. arXiv:2304.13705.</li>
+</ol>
+<ol>
+<li>Various. (2020). OpenAI Dactyl: Solving Rubik's Cube with a robot hand. <em>IJRR</em>.</li>
+</ol>
+<ol>
+<li>Handa, A., et al. (2023). DeXtreme: Transfer of agile in-hand manipulation from simulation to reality. <em>ICRA 2023</em>. arXiv:2210.13702.</li>
+</ol>
+<ol>
+<li>Yin, Z.-H., Huang, B., Qin, Y., Chen, Q., & Wang, X. (2023). Rotating without seeing: Towards in-hand dexterity through touch. <em>RSS 2023</em>.</li>
+</ol>
+<ol>
+<li>Yin, Z.-H., et al. (2024). Learning in-hand translation using shear and normal forces via a binary 3-axis tactile skin. <em>arXiv preprint</em>. arXiv:2407.xxxxx.</li>
+</ol>
+<ol>
+<li>Pitz, J., et al. (2024). Dextrous tactile in-hand manipulation using modular RL. <em>Humanoid Robots</em>.</li>
+</ol>
+<ol>
+<li>Wu, C., et al. (2025). Canonical 3D tactile for visuo-tactile imitation learning. <em>ICRA 2025</em>.</li>
+</ol>
+<ol>
+<li>Yuan, Y., et al. (2024). Robot Synesthesia: In-hand manipulation with visuotactile sensing. <em>ICRA 2024</em>.</li>
+</ol>
+<ol>
+<li>Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>RSS 2025</em>.</li>
+</ol>
+<ol>
+<li>Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.10356.</li>
+</ol>
+<ol>
+<li>Yu, J., Liu, H., Yu, Q., Ren, J., Hao, C., Ding, H., Huang, G., Huang, G., Song, Y., Cai, P., Lu, C., & Zhang, W. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. arXiv:2505.22159.</li>
+</ol>
+<ol>
+<li>Yu, M., Jiang, Y., Chen, C., Jia, Y., & Li, X. (2025). RGMC Champion: Kinematic trajectory optimization. <em>IEEE RA-L</em>.</li>
+</ol>
+<ol>
+<li>Helmut, E., Funk, N., Schneider, T., de Farias, C., & Peters, J. (2025). Tactile-conditioned diffusion policy for force-aware robotic manipulation. <em>ICRA 2026</em>. arXiv:2510.13324.</li>
+</ol>
+<ol>
+<li>Hao, P., Zhang, C., Li, D., Cao, X., Hao, X., Cui, S., & Wang, S. (2025). TLA: Tactile-language-action model for contact-rich manipulation. <em>arXiv preprint</em>. arXiv:2503.08548.</li>
+</ol>
+<ol>
+<li>Oller, M., Berenson, D., & Fazeli, N. (2024). Tactile-driven non-prehensile object manipulation via extrinsic contact mode control. <em>RSS 2024</em>.</li>
+</ol>
+<ol>
+<li>Various. (2025). Robust in-hand manipulation with motion-contact planning. <em>arXiv:2505.04978</em>.</li>
+</ol>
+<ol>
+<li>Huang, J., Wang, S., Lin, F., Hu, Y., Wen, C., & Gao, Y. (2025). Tactile-VLA: Unlocking vision-language-action model's physical knowledge for tactile generalization. <em>OpenReview</em>.</li>
+</ol>
+<ol>
+<li>Various. (2024). Survey of learning-based in-hand manipulation. <em>Frontiers in Robotics and AI</em>.</li>
+</ol>
+<ol>
+<li>Various. (2024). Robot intelligent grasping based on tactile perception. <em>Robotics and Computer-Integrated Manufacturing</em> (Elsevier).</li>
+</ol>
+<ol>
+<li>Zhao, C., Yu, Y., Ye, Z., Tian, Z., Zhang, Y., & Zeng, L.-L. (2025). Universal slip detection of robotic hand with tactile sensing. <em>Frontiers in Neurorobotics</em>, 19. https://doi.org/10.3389/fnbot.2025.1478758</li>
+</ol>
+<ol>
+<li>Li, Y., et al. (2025). Dexterous manipulation through imitation learning: A survey. <em>arXiv preprint</em>. arXiv:2504.03515.</li>
+</ol>
+<ol>
+<li>Hogan, N. (1985). Impedance control: An approach to manipulation. <em>JDSMC</em>, 107(1), 1-24.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>참고 자료 출처</h3>
+      <ul>
+      <li>세미나 PDF: 260319_Seminar_SNU_Junsoo_Jihwan_TactileHand_Manipulation</li>
+      <li>논문 요약 포스트: terry.artlab.ai (DexForce, PP-Tac, Canonical 3D Tactile)</li>
+      <li>Literature survey 결과 (131편)</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch06.html" class="prev">&larr; 이전 챕터</a>
+        <a href="ch08.html" class="next">다음 챕터 &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>

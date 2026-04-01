@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 9: Sim-to-Real Transfer — From Virtual to Reality</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="lang-en">
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
+    </div>
+    <div class="header-right">
+      <div class="lang-toggle">
+        <a href="../ko/ch09.html" class="">KO</a>
+        <a href="../en/ch09.html" class="active">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chapter-page part-3">
+  <nav class="sidebar-nav part-3">
+    <a class="nav-dot active" data-section="sec-overview">
+      <span class="dot"></span>
+      <span class="label">Overview</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-1">
+      <span class="dot"></span>
+      <span class="label">9.1 Simulation Engines: Isaac Gym/L...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-2">
+      <span class="dot"></span>
+      <span class="label">9.2 Domain Randomization: Automatic...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-3">
+      <span class="dot"></span>
+      <span class="label">9.3 Tactile Sim-to-Real: Binary Tac...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-4">
+      <span class="dot"></span>
+      <span class="label">9.4 Real-Sim-Real Loops: RoboPaint,...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-5">
+      <span class="dot"></span>
+      <span class="label">9.5 Analyzing the Sim-to-Real Gap: ...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-9-6">
+      <span class="dot"></span>
+      <span class="label">9.6 The Power and Limits of Synthet...</span>
+    </a>
+    <a class="nav-dot" data-section="sec-summary-and-outlook">
+      <span class="dot"></span>
+      <span class="label">Summary and Outlook</span>
+    </a>
+    <a class="nav-dot" data-section="sec-references">
+      <span class="dot"></span>
+      <span class="label">References</span>
+    </a>
+  </nav>
+
+    <article class="chapter-content">
+      <header class="chapter-header">
+        <span class="part-label">Part III: Learning and Transfer</span>
+        <h1>Chapter 9: Sim-to-Real Transfer — From Virtual to Reality</h1>
+        <div class="chapter-meta">
+          <span>Written: 2026-04-01</span>
+          <span>Last updated: 2026-04-01</span>
+        </div>
+      </header>
+
+<section id="sec-overview" class="content-section">
+<h2>Overview</h2>
+<p>Transferring policies learned in simulation to physical robots is a central challenge for tactile manipulation. Tactile sim-to-real is inherently harder than visual sim-to-real — due to gel deformation, multi-physics coupling, and contact model fidelity limitations. This chapter covers simulation engines, domain randomization, tactile sim-to-real, and Real-Sim-Real loops.</p>
+<blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
+- Compare major tactile simulation engines (Isaac Gym, MuJoCo, Tacto, DiffTactile).
+- Explain DeXtreme's ADR approach.
+- Understand the unique challenges of tactile sim-to-real.
+- Describe the Real-Sim-Real loop concept and representative examples.</blockquote>
+<hr>
+</section>
+<section id="sec-9-1" class="content-section">
+<h2>9.1 Simulation Engines: Isaac Gym/Lab, MuJoCo, Tacto, DiffTactile</h2>
+<h3>Isaac Gym / Isaac Lab</h3>
+<p>NVIDIA's Isaac ecosystem is the standard for GPU-accelerated physics simulation: thousands of parallel environments, Newton physics engine, Omniverse digital twins. Core platform for DeXtreme [2023] and GR00T [2025].</p>
+<h3>MuJoCo</h3>
+<p>DeepMind's MuJoCo excels at contact-rich simulation. Used for ExoStart [2025] dynamics filtering and OpenAI Dactyl [2020].</p>
+<h3>Tacto (2022)</h3>
+<p>Meta FAIR's open-source simulator for vision-based tactile sensors (PyRender + PyBullet). Generates synthetic tactile images for GelSight/DIGIT. 150+ citations.</p>
+<h3>DiffTactile (2024)</h3>
+<p>Differentiable tactile simulator supporting gradient-based optimization with FEM-based deformation modeling.</p>
+<h3>TacEx (2024)</h3>
+<p>Integrates GelSight simulation into Isaac Sim for end-to-end research workflows (<a href="ch11.html">Chapter 11.2</a>).</p>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_1_sim_engines_darkmode.png" alt="Figure 9.1: Tactile simulation engine comparison." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_1_sim_engines_technical.png'">
+  <figcaption>Figure 9.1: Tactile simulation engine comparison.</figcaption>
+</figure>
+<table class="styled-table">
+<thead><tr>
+<th>Engine</th>
+<th>GPU Accel.</th>
+<th>Tactile</th>
+<th>Differentiable</th>
+<th>Primary Use</th>
+<th>Representative</th>
+</tr></thead><tbody>
+<tr>
+<td>Isaac Gym/Lab</td>
+<td>Yes</td>
+<td>Indirect</td>
+<td>No</td>
+<td>Large-scale RL</td>
+<td>DeXtreme, GR00T</td>
+</tr>
+<tr>
+<td>MuJoCo</td>
+<td>No</td>
+<td>Indirect</td>
+<td>No</td>
+<td>Contact-rich sim</td>
+<td>ExoStart, Dactyl</td>
+</tr>
+<tr>
+<td>Tacto</td>
+<td>No</td>
+<td>Yes (vision)</td>
+<td>No</td>
+<td>Tactile image gen</td>
+<td>DIGIT sim-to-real</td>
+</tr>
+<tr>
+<td>DiffTactile</td>
+<td>Partial</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Gradient optim.</td>
+<td>Contact optimization</td>
+</tr>
+<tr>
+<td>TacEx</td>
+<td>Yes</td>
+<td>Yes (GelSight)</td>
+<td>No</td>
+<td>Integrated workflow</td>
+<td>Research pipeline</td>
+</tr>
+</tbody></table>
+<hr>
+</section>
+<section id="sec-9-2" class="content-section">
+<h2>9.2 Domain Randomization: Automatic Domain Randomization in DeXtreme</h2>
+<p><strong>Domain Randomization (DR)</strong> — randomly varying simulation physics parameters to make policies robust across conditions — is the most widely used sim-to-real strategy.</p>
+<h3>DeXtreme (2023)</h3>
+<p>Handa et al. [2023, NVIDIA] represents the state of the art in DR:</p>
+<ul>
+<li><strong>Automatic Domain Randomization (ADR)</strong>: Simultaneous physics + non-physics randomization</li>
+<li>Physics: friction, mass, joint stiffness, gravity</li>
+<li>Non-physics: lighting, camera position, texture, background</li>
+<li>Allegro Hand + Isaac Gym</li>
+<li>Omniverse Replicator for synthetic visual data</li>
+</ul>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Handa, A., et al. (2023). "DeXtreme: Transfer of Agile In-hand Manipulation from Simulation to Reality." <em>ICRA 2023</em>.
+ADR with simultaneous physics/non-physics randomization is the key to sim-to-real dexterous manipulation.</blockquote>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_2_dextreme_adr_darkmode.png" alt="Figure 9.2: DeXtreme ADR pipeline. Source: DeXtreme (ICRA 2023)." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_2_dextreme_adr_technical.png'">
+  <figcaption>Figure 9.2: DeXtreme ADR pipeline. Source: DeXtreme (ICRA 2023).</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-9-3" class="content-section">
+<h2>9.3 Tactile Sim-to-Real: Binary Tactile Skin Models and Zero-Shot Transfer</h2>
+<p>Tactile sim-to-real is fundamentally harder than visual sim-to-real: accurate gel deformation modeling is difficult; multi-physics coupling (optical + deformation + contact) is complex; sensor noise profiles differ between simulation and reality.</p>
+<p>Yin et al. [2024]'s binary 3-axis tactile skin model offers a practical solution:</p>
+<ul>
+<li><strong>Simplification</strong>: Continuous force → binary contact (contact yes/no + 3-axis direction)</li>
+<li><strong>5,000 FPS</strong> simulation speed</li>
+<li><strong>Zero-shot</strong> sim-to-real transfer</li>
+<li><strong>93% success</strong> on out-of-distribution objects</li>
+</ul>
+<p>Key lesson: <strong>Simplified models with wide coverage can be more effective for sim-to-real transfer than precise but narrow tactile simulation.</strong></p>
+<p>Sim-to-Real RL for Humanoid Dexterous Manipulation [2025] provides a practical recipe covering environment modeling, reward design, policy learning, and transfer.</p>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_3_tactile_sim2real_challenges_darkmode.png" alt="Figure 9.3: Challenges of tactile sim-to-real transfer." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_3_tactile_sim2real_challenges_technical.png'">
+  <figcaption>Figure 9.3: Challenges of tactile sim-to-real transfer.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-9-4" class="content-section">
+<h2>9.4 Real-Sim-Real Loops: RoboPaint, X-Sim, ExoStart</h2>
+<p>Real-Sim-Real integrates real data into simulation before transferring back to reality.</p>
+<h3>RoboPaint (2025)</h3>
+<p>3D Gaussian Splatting (3DGS) reconstructs real scenes in simulation, increasing visual fidelity.</p>
+<h3>X-Sim (2025)</h3>
+<p>Dan et al. [2025]'s Real-to-Sim-to-Real pipeline: real human data → simulation → policy learning → real transfer.</p>
+<h3>ExoStart (2025)</h3>
+<p>The most data-efficient Real-Sim-Real example:</p>
+<ol>
+<li>~10 exoskeleton demos (real)</li>
+<li>MuJoCo dynamics filtering (sim)</li>
+<li>Auto-curriculum RL (sim)</li>
+<li>ACT vision student (distillation)</li>
+<li>Zero-shot real transfer → >50% on 6/7 tasks</li>
+</ol>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Si, Z., et al. (2025). "ExoStart: From 10 Exoskeleton Demos to Dexterous Robot Manipulation."
+10 exoskeleton demos → dynamics filtering → auto-curriculum RL → zero-shot real. The exemplar of data-efficient Real-Sim-Real.</blockquote>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_4_exostart_pipeline_darkmode.png" alt="Figure 9.4: ExoStart Real-Sim-Real loop pipeline. Source: ExoStart (2025)." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_4_exostart_pipeline_technical.png'">
+  <figcaption>Figure 9.4: ExoStart Real-Sim-Real loop pipeline. Source: ExoStart (2025).</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-9-5" class="content-section">
+<h2>9.5 Analyzing the Sim-to-Real Gap: Dynamics, Perception, Contact Models</h2>
+<p>Three sources of the sim-to-real gap:</p>
+<h3>9.5.1 Dynamics Gap</h3>
+<p>Joint friction, stiction, contact dynamics, and deformable material behavior are difficult to model faithfully. ADR overcomes this through robustness, not precision.</p>
+<h3>9.5.2 Perception Gap</h3>
+<p>Differences in camera images, depth maps, and tactile images between simulation and reality. Omniverse Replicator and RoboPaint's 3DGS reduce this.</p>
+<h3>9.5.3 Contact Model Gap</h3>
+<p>The hardest aspect of tactile sim-to-real. FEM is precise but expensive; analytical models are too approximate. DiffTactile addresses this with differentiable contact models, but real-time performance remains insufficient.</p>
+<p>Human-in-the-Loop RL [2025, <em>Science Robotics</em>] combines human intuition with autonomous policy optimization to achieve precise manipulation even when the sim-to-real gap is large.</p>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_5_gap_sources_darkmode.png" alt="Figure 9.5: Three sources of the sim-to-real gap." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_5_gap_sources_technical.png'">
+  <figcaption>Figure 9.5: Three sources of the sim-to-real gap.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-9-6" class="content-section">
+<h2>9.6 The Power and Limits of Synthetic Data</h2>
+<p>NVIDIA's synthetic data pipeline is currently the most powerful data generation approach:</p>
+<ul>
+<li><strong>780K trajectories</strong> (6,500 hours equivalent) → generated in <strong>11 hours</strong></li>
+<li><strong>40% improvement</strong> in real performance</li>
+<li>Isaac Sim + Omniverse Replicator</li>
+</ul>
+<p>Limitations remain clear:</p>
+<ul>
+<li>Sim-to-real gap constrains synthetic data effectiveness</li>
+<li>Tactile synthetic data has a larger gap than visual</li>
+<li>Material property diversity is difficult to simulate</li>
+</ul>
+<figure>
+  <img src="../assets/figures/ch09/fig_9_6_synthetic_data_darkmode.png" alt="Figure 9.6: Synthetic data: power and limitations." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_6_synthetic_data_technical.png'">
+  <figcaption>Figure 9.6: Synthetic data: power and limitations.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-summary-and-outlook" class="content-section">
+<h2>Summary and Outlook</h2>
+<p>Sim-to-real transfer is simultaneously one of the largest bottlenecks and fastest-advancing areas of tactile manipulation. DeXtreme's ADR, Yin et al.'s simplified tactile model, and ExoStart's data-efficient Real-Sim-Real represent the current frontier. NVIDIA's synthetic data addresses scale, but the tactile sim-to-real gap remains fundamentally larger than the visual gap, requiring advances along the DiffTactile/TacEx direction.</p>
+<p>The next chapter examines <strong>Embodiment Retargeting</strong> — transferring skills from human to robot (<a href="ch10.html">Chapter 10</a>).</p>
+<hr>
+</section>
+<section id="sec-references" class="content-section">
+<h2>References</h2>
+<ol>
+<li>Handa, A., et al. (2023). DeXtreme: Transfer of agile in-hand manipulation from simulation to reality. <em>ICRA 2023</em>. arXiv:2210.13702.</li>
+</ol>
+<ol>
+<li>Various. (2020). OpenAI Dactyl: Solving Rubik's Cube with a robot hand. <em>IJRR</em>.</li>
+</ol>
+<ol>
+<li>Wang, S., Lambeta, M., et al. (2022). Tacto: A fast, flexible, and open-source simulator for vision-based tactile sensors. <em>IEEE RA-L</em>.</li>
+</ol>
+<ol>
+<li>Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator for contact-rich robotic manipulation. <em>ICLR 2024</em>.</li>
+</ol>
+<ol>
+<li>Yin, Z.-H., et al. (2024). Learning in-hand translation using a binary 3-axis tactile skin. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>.</li>
+</ol>
+<ol>
+<li>Dan, Y., et al. (2025). X-Sim: Real-to-Sim-to-Real pipeline.</li>
+</ol>
+<ol>
+<li>Various. (2025). RoboPaint: 3DGS for Real-Sim-Real visual transfer.</li>
+</ol>
+<ol>
+<li>Various. (2024). TacEx: GelSight simulation in Isaac Sim.</li>
+</ol>
+<ol>
+<li>Various. (2025). Sim-to-real reinforcement learning for vision-based dexterous manipulation on humanoids. <em>arXiv preprint</em>. arXiv:2502.20396.</li>
+</ol>
+<ol>
+<li>Various. (2025). Human-in-the-loop RL for precise dexterous manipulation. <em>Science Robotics</em>. https://doi.org/10.1126/scirobotics.ads5033.</li>
+</ol>
+<ol>
+<li>NVIDIA. (2025). GR00T N1: An open foundation model for generalist humanoid robots. <em>arXiv preprint</em>. arXiv:2503.14734.</li>
+</ol>
+<ol>
+<li>NVIDIA. (2026). Synthetic data pipeline: 780K trajectories in 11 hours. <em>GTC 2026 Keynote</em>.</li>
+</ol>
+<ol>
+<li>Various. (2025). Tactile Robotics: Past and Future. <em>arXiv:2512.01106</em>.</li>
+</ol>
+<ol>
+<li>Lipman, Y., et al. (2023). Flow matching for generative modeling. <em>ICLR 2023</em>.</li>
+</ol>
+</section>
+
+
+    <div class="chapter-sources">
+      <h3>Sources</h3>
+      <ul>
+      <li>Paper summary posts: terry.artlab.ai (DeXtreme, Tactile Skin, ExoStart)</li>
+      <li>Literature survey results (131 papers)</li>
+      <li>Industry trends research</li>
+      </ul>
+    </div>
+
+      <!-- Chapter Navigation -->
+      <nav class="chapter-nav">
+        <a href="ch08.html" class="prev">&larr; Previous</a>
+        <a href="ch10.html" class="next">Next &rarr;</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="../js/chapter.js"></script>
+</body>
+</html>
