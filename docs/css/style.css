@@ -238,7 +238,32 @@ main {
 .hero-cta {
   margin-top: 2rem;
   display: flex;
+  justify-content: center;
   gap: 1rem;
+}
+
+.hero-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+}
+
+.hero-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.hero-links a:hover {
+  color: var(--accent-part1);
+  text-decoration: underline;
+}
+
+.hero-links-sep {
+  color: var(--border-subtle);
 }
 
 .btn-primary {
