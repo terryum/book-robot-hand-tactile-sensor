@@ -6,3 +6,4 @@ _workspace/
 *.pdf
 book/ko/_combined.md
 book/en/_combined.md
+.vercel

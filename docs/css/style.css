@@ -456,15 +456,11 @@ main {
 /* --- Content Sections --- */
 .content-section {
   margin-bottom: 3rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.content-section.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* GSAP will handle animations via inline styles when loaded */
 
 .content-section h2 {
   font-size: clamp(1.4rem, 2.5vw, 1.8rem);
