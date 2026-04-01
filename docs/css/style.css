@@ -310,7 +310,37 @@ main {
   box-shadow: 0 8px 30px rgba(0, 212, 170, 0.15);
 }
 
-/* --- Intro Cards --- */
+/* --- Intro List (flat, non-interactive) --- */
+.intro-list {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.intro-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.intro-item:last-child {
+  border-bottom: none;
+}
+
+.intro-item h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.intro-item p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- Intro Cards (legacy) --- */
 .intro-section {
   padding: 4rem 0;
 }
