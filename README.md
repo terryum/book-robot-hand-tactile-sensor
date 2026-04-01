@@ -1,3 +1,5 @@
+**🇰🇷 [한국어 README](README_ko.md)** | 🇺🇸 English
+
 # Tactile Sensing for Dexterous Robot Hand Manipulation: A Comprehensive Survey
 
 A bilingual (Korean/English) book and IEEE survey paper covering tactile sensing, robot hand design, learning-based manipulation, and Physical AI — from foundations to industrial outlook.
