@@ -83,7 +83,11 @@
       "Bash(ls book/ko/*.md)",
       "Bash(ls book/en/*.md)",
       "Bash(ls assets/figures/ch*/*.png)",
-      "Bash(ls paper/sections/*.tex)"
+      "Bash(ls paper/sections/*.tex)",
+      "Bash(NODE_EXTRA_CA_CERTS=/tmp/eprism-ca.pem npx vercel deploy --prod --yes)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }
