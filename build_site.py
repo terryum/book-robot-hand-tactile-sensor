@@ -491,6 +491,34 @@ def build_chapter_html(ch_num, lang, chapters_meta, book_dir, lang_code):
             else:
                 in_sources = False
 
+    # Build chapter navigation (needed before content assembly)
+    if lang_code == 'ko':
+        date_label = '집필일'
+        updated_label = '최종수정일'
+        toc_label = '목록'
+    else:
+        date_label = 'Written'
+        updated_label = 'Last updated'
+        toc_label = 'Index'
+
+    if ch_num > 1:
+        prev_link = f'<a href="ch{ch_num-1:02d}.html" class="prev">&larr; Ch.{ch_num-1}</a>'
+    else:
+        prev_link = '<span class="placeholder"></span>'
+
+    toc_link = f'<a href="./" class="toc-link">{toc_label}</a>'
+
+    if ch_num < 13:
+        next_link = f'<a href="ch{ch_num+1:02d}.html" class="next">Ch.{ch_num+1} &rarr;</a>'
+    else:
+        next_link = '<span class="placeholder"></span>'
+
+    chapter_nav_html = f'''      <nav class="chapter-nav">
+        {prev_link}
+        {toc_link}
+        {next_link}
+      </nav>'''
+
     # Build citation map from references in this chapter
     cite_map, ref_list = build_citation_map(body)
 
@@ -519,40 +547,13 @@ def build_chapter_html(ch_num, lang, chapters_meta, book_dir, lang_code):
         ref_html += build_references_list_html(ref_list, ch_num)
         ref_html += '\n</section>'
 
-    content_html = content_html + '\n' + ref_html
+    # Navigation before references + references + navigation after
+    content_html = content_html + '\n' + chapter_nav_html + '\n' + ref_html
 
     sections = extract_sections(body, ch_num)
     sidebar_html = build_sidebar(sections, part_num)
 
-    # Prev/Next navigation
-    prev_link = ''
-    next_link = ''
-    other_lang = 'en' if lang_code == 'ko' else 'ko'
-    other_lang_label = 'EN' if lang_code == 'ko' else 'KO'
-    this_lang_label = 'KO' if lang_code == 'ko' else 'EN'
-
-    if lang_code == 'ko':
-        prev_text = '&larr; 이전 챕터'
-        next_text = '다음 챕터 &rarr;'
-        date_label = '집필일'
-        updated_label = '최종수정일'
-        sources_title = '참고 자료 출처'
-    else:
-        prev_text = '&larr; Previous'
-        next_text = 'Next &rarr;'
-        date_label = 'Written'
-        updated_label = 'Last updated'
-        sources_title = 'Sources'
-
-    if ch_num > 1:
-        prev_link = f'<a href="ch{ch_num-1:02d}.html" class="prev">{prev_text}</a>'
-    else:
-        prev_link = '<span class="placeholder"></span>'
-
-    if ch_num < 13:
-        next_link = f'<a href="ch{ch_num+1:02d}.html" class="next">{next_text}</a>'
-    else:
-        next_link = '<span class="placeholder"></span>'
+    # Navigation variables already defined above (before citation processing)
 
     # Sources section removed per user request
     sources_html = ''
@@ -586,13 +587,7 @@ def build_chapter_html(ch_num, lang, chapters_meta, book_dir, lang_code):
 
 {content_html}
 
-{sources_html}
-
-      <!-- Chapter Navigation -->
-      <nav class="chapter-nav">
-        {prev_link}
-        {next_link}
-      </nav>
+{chapter_nav_html}
     </article>
   </main>
 
