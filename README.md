@@ -101,15 +101,13 @@ bash scripts/build_pdf.sh en
     └── skills/      # 7 skills (literature-research, web-build, etc.)
 ```
 
-## Author
-
-**Terry Taewoong Um** — Cosmax
-- Website: [terry.artlab.ai](https://terry.artlab.ai)
-- Email: terry.t.um@gmail.com
-
 ## Acknowledgment
 
-This work was conducted with the assistance of AI tools, including Claude (Anthropic) for literature survey, content generation, and manuscript preparation, and Gemini (Google) for figure generation.
+This project was built using the [Harness](https://github.com/revfactory/harness) skill by Minho Hwang, and the site structure was heavily inspired by [AI Trend Onboarding](https://github.com/revfactory/ai-trend-onboarding). Special thanks to Minho Hwang for creating these excellent tools.
+
+Thanks to the robotics lab students at Seoul National University for insightful discussions that shaped the content of this work.
+
+AI tools were used in the production of this work: Claude (Anthropic) for literature survey, content generation, and manuscript preparation, and Gemini (Google) for figure generation.
 
 ## License
 

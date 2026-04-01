@@ -101,15 +101,13 @@ bash scripts/build_pdf.sh en
     └── skills/      # 7개 스킬 (literature-research, web-build 등)
 ```
 
-## 저자
-
-**엄태웅 (Terry Taewoong Um)** — Cosmax
-- 웹사이트: [terry.artlab.ai](https://terry.artlab.ai)
-- 이메일: terry.t.um@gmail.com
-
 ## 감사의 글
 
-이 저작물은 AI 도구의 도움을 받아 제작되었습니다. 문헌 조사, 콘텐츠 생성, 원고 작성에 Claude(Anthropic)를, 그림 생성에 Gemini(Google)를 활용했습니다.
+이 프로젝트는 황민호님의 [Harness](https://github.com/revfactory/harness) 스킬을 이용하여 제작되었으며, 사이트 구조는 [AI Trend Onboarding](https://github.com/revfactory/ai-trend-onboarding)을 많이 참고하였습니다. 훌륭한 도구를 만들어주신 황민호님께 감사드립니다.
+
+함께 디스커션 해주신 서울대학교 로보틱스 연구실 학생분들께도 감사의 말씀을 전합니다.
+
+이 저작물의 제작에 AI 도구가 활용되었습니다. 문헌 조사, 콘텐츠 생성, 원고 작성에 Claude(Anthropic)를, 그림 생성에 Gemini(Google)를 사용했습니다.
 
 ## 라이선스
 
