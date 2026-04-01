@@ -13,7 +13,14 @@
 1. **프레임워크 없는 순수 정적 사이트**: HTML/CSS/JS만 사용, GitHub Pages 호스팅 가능
 2. **참조 사이트 스타일 충실 재현**: 다크 모드, glassmorphism 카드, GSAP 스크롤 애니메이션, 파티클 배경
 3. **책 구조 반영**: 챕터별 개별 페이지, 사이드바 네비게이션, 목차 랜딩 페이지
-4. **반응형**: 모바일/태블릿/데스크탑 대응
+4. **반응형 (모바일 우선)**: 모바일/태블릿/데스크탑 대응. 반드시 아래 규칙을 준수:
+   - 모든 컨테이너에 `max-width: 100%; overflow-x: hidden` 적용
+   - 모든 텍스트에 `overflow-wrap: break-word; word-break: break-word` 적용
+   - 테이블은 `display: block; overflow-x: auto`로 가로 스크롤 허용
+   - 이미지에 `max-width: 100%; height: auto`
+   - 코드블록에 `overflow-x: auto; max-width: 100%`
+   - iframe 임베딩 환경(모바일 웹뷰)에서 부모 너비를 초과하지 않도록 `box-sizing: border-box` 전역 적용
+   - 참고문헌 리스트의 긴 URL/DOI에 `word-break: break-all`
 5. **이중 언어(KO/EN) 지원**: 헤더에 언어 전환 토글(🇰🇷/🇺🇸), 같은 URL 구조로 `/ko/`와 `/en/` 분리. Noto Sans KR + Inter(영문) 폰트
 6. **집필 메타데이터 표시**: 각 챕터 페이지 상단에 집필일, 최종 수정일 표시. 페이지 하단에 참고 자료 출처(sources) 명시
 7. **Reference List 페이지**: 전체 참고문헌을 카테고리별로 정리한 references 페이지. 각 챕터 내 인용 클릭 시 해당 항목으로 이동
