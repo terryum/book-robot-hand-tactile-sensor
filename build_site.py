@@ -574,7 +574,7 @@ def build_chapter_html(ch_num, lang, chapters_meta, book_dir, lang_code):
       <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
     </div>
     <div class="header-right">
-      <a href="https://terry.artlab.ai" target="_blank" rel="noopener" class="header-icon" title="Author Homepage">
+      <a href="https://terry.artlab.ai" class="header-icon header-home" title="Author Homepage">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/></svg>
       </a>
       <a href="https://github.com/terryum/book-robot-hand-tactile-sensor" target="_blank" rel="noopener" class="header-icon" title="GitHub Repository">
@@ -672,7 +672,7 @@ def build_glossary_html(lang_code, book_dir):
       <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
     </div>
     <div class="header-right">
-      <a href="https://terry.artlab.ai" target="_blank" rel="noopener" class="header-icon" title="Author Homepage">
+      <a href="https://terry.artlab.ai" class="header-icon header-home" title="Author Homepage">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/></svg>
       </a>
       <a href="https://github.com/terryum/book-robot-hand-tactile-sensor" target="_blank" rel="noopener" class="header-icon" title="GitHub Repository">
@@ -765,7 +765,7 @@ def build_references_html(lang_code, bib_path):
       <a href="./" class="header-logo">Tactile Sensing for Robot Hands</a>
     </div>
     <div class="header-right">
-      <a href="https://terry.artlab.ai" target="_blank" rel="noopener" class="header-icon" title="Author Homepage">
+      <a href="https://terry.artlab.ai" class="header-icon header-home" title="Author Homepage">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/></svg>
       </a>
       <a href="https://github.com/terryum/book-robot-hand-tactile-sensor" target="_blank" rel="noopener" class="header-icon" title="GitHub Repository">
