@@ -516,6 +516,55 @@ main {
   border-bottom-color: var(--accent);
 }
 
+/* --- Citation Superscripts --- */
+sup a.cite-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.8em;
+  font-weight: 500;
+  padding: 0 1px;
+  border-bottom: none;
+}
+sup a.cite-link:hover {
+  text-decoration: underline;
+  border-bottom: none;
+}
+
+/* --- References List --- */
+ol.references-list {
+  list-style: none;
+  counter-reset: ref-counter;
+  padding-left: 0;
+}
+ol.references-list li {
+  counter-increment: ref-counter;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  transition: background 0.3s, border-left 0.3s;
+  border-left: 3px solid transparent;
+}
+ol.references-list li::before {
+  content: "[" counter(ref-counter) "] ";
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+ol.references-list li:target {
+  background: var(--accent-glow);
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+}
+ol.references-list li em {
+  color: var(--text-muted);
+}
+ol.references-list li strong {
+  color: var(--text-primary);
+}
+
 /* --- Key Paper Blockquote --- */
 blockquote {
   background: rgba(52, 152, 219, 0.06);

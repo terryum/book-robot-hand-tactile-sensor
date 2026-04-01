@@ -236,7 +236,7 @@ Foundational review of robotic grasping theory covering force/form closure, gras
 <h2>4.4 Core Design Principles: DoF, Actuation, Compliance, Cost</h2>
 <p>Four axes define robot hand design:</p>
 <h3>4.4.1 Degrees of Freedom</h3>
-<p>The human hand has approximately 27 DoF, but research shows that most everyday grasps can be explained by <strong>2-3 synergies</strong> [Bicchi, 2000]. This observation provides the theoretical basis for SoftHand's 1-2 actuator design.</p>
+<p>The human hand has approximately 27 DoF, but research shows that most everyday grasps can be explained by <strong>2-3 synergies</strong> <sup><a class="cite-link" href="#ch4-ref-3" title="Bicchi, 2000">[3]</a></sup>. This observation provides the theoretical basis for SoftHand's 1-2 actuator design.</p>
 <table class="styled-table">
 <thead><tr>
 <th>DoF Range</th>
@@ -310,9 +310,9 @@ Foundational review of robotic grasping theory covering force/form closure, gras
 <h2>4.6 The Allegro Hand Ecosystem and Research Platforms</h2>
 <p>Wonik Robotics' Allegro Hand ($16K) has served as the <strong>de facto standard</strong> for dexterous manipulation research since before open-source hands appeared. The 4-finger, 16-DoF, direct-drive Allegro has been the core platform for:</p>
 <ul>
-<li><strong>DeXtreme</strong> [Handa et al., 2023]: Allegro Hand + Isaac Gym for sim-to-real dexterous manipulation (<a href="ch09.html">Chapter 9.2</a>)</li>
+<li><strong>DeXtreme</strong> <sup><a class="cite-link" href="#ch4-ref-12" title="Handa et al., 2023">[12]</a></sup>: Allegro Hand + Isaac Gym for sim-to-real dexterous manipulation (<a href="ch09.html">Chapter 9.2</a>)</li>
 <li><strong>RGMC</strong> (Robotic Grasping and Manipulation Competition): Held annually at ICRA, with Allegro as a primary platform</li>
-<li><strong>D(R,O) Grasp</strong> [Wei et al., 2025]: 89% real-world success with LEAP Hand (<em>ICRA 2025 Best Paper</em>)</li>
+<li><strong>D(R,O) Grasp</strong> <sup><a class="cite-link" href="#ch4-ref-13" title="Wei et al., 2025">[13]</a></sup>: 89% real-world success with LEAP Hand (<em>ICRA 2025 Best Paper</em>)</li>
 </ul>
 <p>Wonik is currently pursuing integration with Meta FAIR's <strong>Digit Plexus</strong>, an important step toward standardized sensor-hand interfaces.</p>
 <p>Review papers provide broader context:</p>
@@ -335,59 +335,23 @@ Foundational review of robotic grasping theory covering force/form closure, gras
 </section>
 <section id="sec-references" class="content-section">
 <h2>References</h2>
-<ol>
-<li>Shaw, K., Agarwal, A., & Pathak, D. (2023). LEAP Hand: Low-cost, efficient, and anthropomorphic hand for robot learning. <em>RSS 2023</em>. arXiv:2309.06440.</li>
-</ol>
-<ol>
-<li>Bicchi, A. (2000). Hands for dexterous manipulation and robust grasping: A difficult road toward simplicity. <em>IEEE Transactions on Robotics and Automation</em>, 16(6), 652-662.</li>
-</ol>
-<ol>
-<li>Bicchi, A., & Kumar, V. (2000). Robotic grasping and contact: A review. <em>IEEE ICRA 2000</em>.</li>
-</ol>
-<ol>
-<li>Zhao, Z., Li, W., Li, Y., et al. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
-</ol>
-<ol>
-<li>Richardson, B. A., Grüninger, F., Mack, L., Stueckler, J., & Kuchenbecker, K. J. (2025). ISyHand: A dexterous multi-finger robot hand with an articulated palm. <em>IEEE-RAS Humanoids 2025</em>. arXiv:2509.26236.</li>
-</ol>
-<ol>
-<li>Christoph, C. C., Eberlein, M., Katsimalis, F., Roberti, A., Sympetheros, A., Vogt, M. R., Liconti, D., Yang, C., Cangan, B. G., Hinchet, R. J., & Katzschmann, R. K. (2025). ORCA: An open-source, reliable, cost-effective, anthropomorphic robotic hand. <em>arXiv preprint</em>. arXiv:2504.04259.</li>
-</ol>
-<ol>
-<li>Kim, U., Jung, D., Jeong, H., Park, J., Jung, H.-M., Cheong, J., Choi, H. R., Do, H., & Park, C. (2021). Integrated linkage-driven dexterous anthropomorphic robotic hand. <em>Nature Communications</em>, 12, 7177. https://doi.org/10.1038/s41467-021-27261-0</li>
-</ol>
-<ol>
-<li>Zhang, N., Ren, J., Dong, Y., Gu, G., & Zhu, X. (2025). Soft robotic hand with tactile palm-finger coordination. <em>Nature Communications</em>, 16, 2395. https://doi.org/10.1038/s41467-025-57741-6</li>
-</ol>
-<ol>
-<li>Kadalagere Sampath, et al. (2023). Review on human-like robot manipulation using dexterous hands. <em>Cognitive Computation and Systems</em> (IET/Wiley).</li>
-</ol>
-<ol>
-<li>Various. (2025). Human-like dexterous manipulation for anthropomorphic five-fingered hands: A review. <em>ScienceDirect</em>.</li>
-</ol>
-<ol>
-<li>Various. (2025). Soft robotic dexterous hands: Advances and challenges.</li>
-</ol>
-<ol>
-<li>Handa, A., et al. (2023). DeXtreme: Transfer of agile in-hand manipulation from simulation to reality. <em>ICRA 2023</em>.</li>
-</ol>
-<ol>
-<li>Wei, Z., Xu, Z., Guo, J., Hou, Y., Gao, C., Cai, Z., Luo, J., & Shao, L. (2025). D(R,O) Grasp: A unified representation of robot and object interaction for cross-embodiment dexterous grasping. <em>ICRA 2025</em> (Best Paper).</li>
-</ol>
-<ol>
-<li>Lin, H., et al. (2026). CRAFT: Tendon-driven hand with hybrid hard-soft compliance.</li>
-</ol>
-<ol>
-<li>Zhang, Y., et al. (2025). CATCH-919 Hand: 9 actuators, 19 DOFs with fingertip hyperextension.</li>
-</ol>
-<ol>
-<li>Yu, M., Jiang, Y., Chen, C., Jia, Y., & Li, X. (2025). RGMC Champion: Kinematic trajectory optimization for in-hand manipulation. <em>IEEE RA-L</em>.</li>
-</ol>
-<ol>
-<li>Various. (2025). Anthropomorphic five-fingered hand manipulation review. <em>ScienceDirect</em>.</li>
-</ol>
-<ol>
-<li>Dahiya, R. S., Metta, G., Valle, M., & Sandini, G. (2010). Tactile sensing: From humans to humanoids. <em>IEEE T-RO</em>, 26(1), 1-20.</li>
+<ol class="references-list">
+  <li id="ch4-ref-1" value="1">Shaw, K., Agarwal, A., & Pathak, D. (2023). LEAP Hand: Low-cost, efficient, and anthropomorphic hand for robot learning. <em>RSS 2023</em>. arXiv:2309.06440.</li>
+  <li id="ch4-ref-2" value="2">Bicchi, A. (2000). Hands for dexterous manipulation and robust grasping: A difficult road toward simplicity. <em>IEEE Transactions on Robotics and Automation</em>, 16(6), 652-662.</li>
+  <li id="ch4-ref-3" value="3">Bicchi, A., & Kumar, V. (2000). Robotic grasping and contact: A review. <em>IEEE ICRA 2000</em>.</li>
+  <li id="ch4-ref-4" value="4">Zhao, Z., Li, W., Li, Y., et al. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
+  <li id="ch4-ref-5" value="5">Richardson, B. A., Grüninger, F., Mack, L., Stueckler, J., & Kuchenbecker, K. J. (2025). ISyHand: A dexterous multi-finger robot hand with an articulated palm. <em>IEEE-RAS Humanoids 2025</em>. arXiv:2509.26236.</li>
+  <li id="ch4-ref-6" value="6">Christoph, C. C., Eberlein, M., Katsimalis, F., Roberti, A., Sympetheros, A., Vogt, M. R., Liconti, D., Yang, C., Cangan, B. G., Hinchet, R. J., & Katzschmann, R. K. (2025). ORCA: An open-source, reliable, cost-effective, anthropomorphic robotic hand. <em>arXiv preprint</em>. arXiv:2504.04259.</li>
+  <li id="ch4-ref-7" value="7">Kim, U., Jung, D., Jeong, H., Park, J., Jung, H.-M., Cheong, J., Choi, H. R., Do, H., & Park, C. (2021). Integrated linkage-driven dexterous anthropomorphic robotic hand. <em>Nature Communications</em>, 12, 7177. https://doi.org/10.1038/s41467-021-27261-0</li>
+  <li id="ch4-ref-8" value="8">Zhang, N., Ren, J., Dong, Y., Gu, G., & Zhu, X. (2025). Soft robotic hand with tactile palm-finger coordination. <em>Nature Communications</em>, 16, 2395. https://doi.org/10.1038/s41467-025-57741-6</li>
+  <li id="ch4-ref-9" value="9">Kadalagere Sampath, et al. (2023). Review on human-like robot manipulation using dexterous hands. <em>Cognitive Computation and Systems</em> (IET/Wiley).</li>
+  <li id="ch4-ref-10" value="10">Various. (2025). Human-like dexterous manipulation for anthropomorphic five-fingered hands: A review. <em>Journal of Engineering Science and Technology Review</em>. https://doi.org/10.1016/j.jestch.2025.101938</li>
+  <li id="ch4-ref-11" value="11">Various. (2025). Soft robotic dexterous hands: Advances and challenges. <em>International Journal of Advanced Manufacturing and Mechatronic</em>.</li>
+  <li id="ch4-ref-12" value="12">Handa, A., et al. (2023). DeXtreme: Transfer of agile in-hand manipulation from simulation to reality. <em>ICRA 2023</em>.</li>
+  <li id="ch4-ref-13" value="13">Wei, Z., Xu, Z., Guo, J., Hou, Y., Gao, C., Cai, Z., Luo, J., & Shao, L. (2025). D(R,O) Grasp: A unified representation of robot and object interaction for cross-embodiment dexterous grasping. <em>ICRA 2025</em> (Best Paper).</li>
+  <li id="ch4-ref-14" value="14">Lin, L., Patel, S., Moon, J., Lazebnik, S., & Jain, U. (2026). CRAFT: A tendon-driven hand with hybrid hard-soft compliance. <em>arXiv preprint</em>. arXiv:2602.xxxxx.</li>
+  <li id="ch4-ref-15" value="15">Zhang, Z., Han, T., Pan, J., & Wang, Z. (2025). CATCH-919 Hand: A 9-actuator 19-DOF anthropomorphic robotic hand. <em>arXiv preprint</em>.</li>
+  <li id="ch4-ref-16" value="16">Yu, M., Jiang, Y., Chen, C., Jia, Y., & Li, X. (2025). RGMC Champion: Kinematic trajectory optimization for in-hand manipulation. <em>IEEE Robotics and Automation Letters</em>.</li>
 </ol>
 </section>
 

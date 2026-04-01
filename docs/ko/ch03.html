@@ -96,15 +96,15 @@
 <p><strong>적합한 태스크</strong>: 분류(classification), 힘 제어, 미끄러짐 감지</p>
 <p><strong>한계</strong>: 공간 관계 정보 손실</p>
 <h3>3.1.2 행렬 (Matrix)</h3>
-<p>센서 어레이의 출력을 2D 행렬로 표현합니다. STAG 글로브 [Sundaram et al., 2019]의 548개 압저항 센서 출력은 손 표면의 압력 행렬로 표현됩니다.</p>
+<p>센서 어레이의 출력을 2D 행렬로 표현합니다. STAG 글로브 <sup><a class="cite-link" href="#ch3-ref-12" title="Sundaram et al., 2019">[12]</a></sup>의 548개 압저항 센서 출력은 손 표면의 압력 행렬로 표현됩니다.</p>
 <p><strong>적합한 태스크</strong>: 접촉 패턴 분류, 파지 상태 인식</p>
 <p><strong>한계</strong>: 곡면 센서 배치 시 왜곡</p>
 <h3>3.1.3 맵 (Map)</h3>
-<p>센서 데이터를 기준 표면(reference surface)에 매핑합니다. UniTacHand [Zhang et al., 2025]는 MANO UV 맵에 촉각 데이터를 투영하여, 인간 손과 로봇 손의 촉각을 <strong>공유 표현 공간(shared representation space)</strong>에 매핑합니다 (<a href="ch10.html">Chapter 10.4 참조</a>).</p>
+<p>센서 데이터를 기준 표면(reference surface)에 매핑합니다. UniTacHand <sup><a class="cite-link" href="#ch3-ref-13" title="Zhang et al., 2025">[13]</a></sup>는 MANO UV 맵에 촉각 데이터를 투영하여, 인간 손과 로봇 손의 촉각을 <strong>공유 표현 공간(shared representation space)</strong>에 매핑합니다 (<a href="ch10.html">Chapter 10.4 참조</a>).</p>
 <p><strong>적합한 태스크</strong>: 교차 체현 전이(cross-embodiment transfer), 전체 손 촉각 분석</p>
 <p><strong>한계</strong>: UV 매핑의 왜곡, 기준 모델 의존성</p>
 <h3>3.1.4 포인트 클라우드 (Point Cloud)</h3>
-<p>접촉점을 3D 좌표와 함께 표현합니다. Robot Synesthesia [Yuan et al., 2024]는 포인트 클라우드 기반 촉각 표현으로 시각-촉각 손안 조작(visuotactile in-hand manipulation)을 구현했습니다. PointNet 인코더로 촉각 포인트 클라우드를 처리하여, 이중 공 회전(double-ball rotation)과 3축 회전을 새로운 물체에서도 달성했습니다 (<em>ICRA 2024</em>).</p>
+<p>접촉점을 3D 좌표와 함께 표현합니다. Robot Synesthesia <sup><a class="cite-link" href="#ch3-ref-2" title="Yuan et al., 2024">[2]</a></sup>는 포인트 클라우드 기반 촉각 표현으로 시각-촉각 손안 조작(visuotactile in-hand manipulation)을 구현했습니다. PointNet 인코더로 촉각 포인트 클라우드를 처리하여, 이중 공 회전(double-ball rotation)과 3축 회전을 새로운 물체에서도 달성했습니다 (<em>ICRA 2024</em>).</p>
 <blockquote class="key-paper"><strong>핵심 논문</strong>: Yuan, Y., Che, H., Qin, Y., Huang, B., Yin, Z.-H., Lee, K.-W., Wu, Y., Lim, S.-C., & Wang, X. (2024). "Robot Synesthesia: In-Hand Manipulation with Visuotactile Sensing." <em>ICRA 2024</em>.
 포인트 클라우드 기반 촉각 표현과 teacher-student RL로 시각-촉각 손안 조작을 구현. 새로운 물체에 대한 일반화를 달성했습니다.</blockquote>
 <p><strong>적합한 태스크</strong>: 3D 형상 재구성, 6DoF 자세 추정, 시각-촉각 융합</p>
@@ -114,7 +114,7 @@
 <p><strong>적합한 태스크</strong>: 변형 시뮬레이션, 힘 분포 분석</p>
 <p><strong>한계</strong>: 계산 비용, 실시간 처리 어려움</p>
 <h3>3.1.6 이미지 (Image)</h3>
-<p>비전 기반 촉각 센서(GelSight, DIGIT)의 원시 출력이 이미 이미지입니다. CNN, ViT 등 비전 모델의 풍부한 도구를 직접 활용할 수 있어, 현재 가장 널리 사용되는 표현입니다. Sparsh [Higuera et al., 2024]는 460,000장 이상의 촉각 이미지로 자기지도 사전학습을 수행했습니다 (→ 3.6 참조).</p>
+<p>비전 기반 촉각 센서(GelSight, DIGIT)의 원시 출력이 이미 이미지입니다. CNN, ViT 등 비전 모델의 풍부한 도구를 직접 활용할 수 있어, 현재 가장 널리 사용되는 표현입니다. Sparsh <sup><a class="cite-link" href="#ch3-ref-4" title="Higuera et al., 2024">[4]</a></sup>는 460,000장 이상의 촉각 이미지로 자기지도 사전학습을 수행했습니다 (→ 3.6 참조).</p>
 <p><strong>적합한 태스크</strong>: 질감 인식, 물체 분류, 접촉 지도 재구성</p>
 <p><strong>한계</strong>: 센서 특이적(sensor-specific) — 다른 센서의 이미지와 직접 비교 불가</p>
 <figure>
@@ -162,7 +162,7 @@
 <h3>3.4.3 자율 탐색 (Autonomous Exploration)</h3>
 <p>로봇이 자율적으로 환경을 탐색하며 촉각 데이터를 수집합니다. 처리량은 높지만, 시연 품질이 낮을 수 있습니다. PP-Tac [2025]는 물리 기반 궤적 합성(trajectory synthesis)으로 촉각 데이터를 자동 생성합니다.</p>
 <h3>3.4.4 합성 데이터 (Synthetic Data)</h3>
-<p>NVIDIA의 Isaac Sim 파이프라인은 780,000 궤적(6,500시간 상당)을 <strong>11시간에 생성</strong>하여, 실제 성능을 40% 향상시켰습니다. Tacto [Wang, Lambeta et al., 2022]는 비전 기반 촉각 센서의 오픈소스 시뮬레이터로 sim-to-real 학습을 가능하게 합니다. DiffTactile [2024]은 미분 가능한 촉각 시뮬레이터로 기울기 기반 최적화를 지원합니다 (<a href="ch09.html">Chapter 9 참조</a>).</p>
+<p>NVIDIA의 Isaac Sim 파이프라인은 780,000 궤적(6,500시간 상당)을 <strong>11시간에 생성</strong>하여, 실제 성능을 40% 향상시켰습니다. Tacto <sup><a class="cite-link" href="#ch3-ref-10" title="Wang, Lambeta et al., 2022">[10]</a></sup>는 비전 기반 촉각 센서의 오픈소스 시뮬레이터로 sim-to-real 학습을 가능하게 합니다. DiffTactile [2024]은 미분 가능한 촉각 시뮬레이터로 기울기 기반 최적화를 지원합니다 (<a href="ch09.html">Chapter 9 참조</a>).</p>
 <figure>
   <img src="../assets/figures/ch03/fig_3_4_collection_pipelines_darkmode.png" alt="Figure 3.4: 촉각 데이터 수집 파이프라인 비교." loading="lazy" onerror="this.src='../assets/figures/ch03/fig_3_4_collection_pipelines_technical.png'">
   <figcaption>Figure 3.4: 촉각 데이터 수집 파이프라인 비교.</figcaption>
@@ -229,7 +229,7 @@
 <td>GelSight</td>
 <td>시각 + 촉각</td>
 <td>질감, 물체</td>
-<td>2022</td>
+<td>2023</td>
 </tr>
 <tr>
 <td><strong>Touch100k</strong></td>
@@ -245,7 +245,7 @@
 <td>시뮬레이션</td>
 <td>시각 + 촉각 + 오디오</td>
 <td>다중 모달</td>
-<td>2023</td>
+<td>2022</td>
 </tr>
 <tr>
 <td><strong>VTDexManip</strong></td>
@@ -277,7 +277,7 @@
 <h2>3.6 자기지도 사전학습: Sparsh와 UniTouch</h2>
 <p>촉각의 "ImageNet 모멘트"를 향한 핵심 접근은 <strong>자기지도 학습(self-supervised learning)</strong>을 통한 범용 촉각 표현의 구축입니다.</p>
 <h3>Sparsh (2024)</h3>
-<p>Meta FAIR, CMU, UC Berkeley의 협업으로 탄생한 Sparsh [Higuera et al., 2024]는 <strong>460,000장 이상의 촉각 이미지</strong>에서 자기지도 학습으로 사전훈련된 촉각 Foundation Model입니다 (<em>CoRL 2024</em>).</p>
+<p>Meta FAIR, CMU, UC Berkeley의 협업으로 탄생한 Sparsh <sup><a class="cite-link" href="#ch3-ref-4" title="Higuera et al., 2024">[4]</a></sup>는 <strong>460,000장 이상의 촉각 이미지</strong>에서 자기지도 학습으로 사전훈련된 촉각 Foundation Model입니다 (<em>CoRL 2024</em>).</p>
 <blockquote class="key-paper"><strong>핵심 논문</strong>: Higuera, C., Sharma, A., Bodduluri, C. K., Fan, T., Lancaster, P., Malik, J., Pathak, D., Lambeta, M., & Calandra, R. (2024). "Sparsh: Self-Supervised Touch Representations for Vision-Based Tactile Sensing." <em>CoRL 2024</em>.
 다양한 비전 기반 촉각 센서에서 수집한 460K+ 이미지로 사전학습한 자기지도 촉각 Foundation Model. 범용 촉각 표현의 이정표입니다.</blockquote>
 <p>Sparsh의 의미는 비전에서 ImageNet 사전학습이 수행한 역할을 촉각에서 재현하려는 첫 대규모 시도라는 점입니다. 그러나 460K 이미지는 ImageNet의 14M 이미지에 비하면 여전히 수십 배 작으며, 향후 10배 이상의 데이터 확장이 필요합니다 (<a href="ch13.html">Chapter 13.2 참조</a>).</p>
@@ -300,67 +300,30 @@
 <p>다음 챕터에서는 이 센서와 데이터를 탑재하는 <strong>로봇 핸드의 설계 원리</strong>를 다룹니다 (<a href="ch04.html">Chapter 4: 로봇 핸드 설계 참조</a>).</p>
 <hr>
 </section>
-<section id="sec-참고문헌" class="content-section">
+<section id="sec-references" class="content-section">
 <h2>참고문헌</h2>
-<ol>
-<li>Albini, A., Kaboli, M., Cannata, G., & Maiolino, P. (2025). Representing data in robotic tactile perception — A review. <em>arXiv preprint</em> (submitted to IEEE T-RO). arXiv:2510.10804.</li>
-</ol>
-<ol>
-<li>Yuan, Y., Che, H., Qin, Y., Huang, B., Yin, Z.-H., Lee, K.-W., Wu, Y., Lim, S.-C., & Wang, X. (2024). Robot Synesthesia: In-hand manipulation with visuotactile sensing. <em>ICRA 2024</em>. arXiv:2312.01853.</li>
-</ol>
-<ol>
-<li>Yang, F., Feng, C., Chen, Z., Park, H., Wang, D., Dou, Y., ... & Wong, A. (2024). Binding touch to everything: Learning unified multimodal tactile representations. <em>CVPR 2024</em>.</li>
-</ol>
-<ol>
-<li>Higuera, C., Sharma, A., Bodduluri, C. K., Fan, T., Lancaster, P., Malik, J., Pathak, D., Lambeta, M., & Calandra, R. (2024). Sparsh: Self-supervised touch representations for vision-based tactile sensing. <em>CoRL 2024</em>.</li>
-</ol>
-<ol>
-<li>Liu, Q., Cui, Y., Sun, Z., Li, G., Chen, J., & Ye, Q. (2025). VTDexManip: A dataset and benchmark for visual-tactile pretraining and dexterous manipulation with reinforcement learning. <em>ICLR 2025</em>.</li>
-</ol>
-<ol>
-<li>Feng, R., Hu, J., Xia, W., Gao, T., Shen, A., Sun, Y., Fang, B., & Hu, D. (2025). AnyTouch: Learning unified static-dynamic representation across multiple visuo-tactile sensors. <em>ICLR 2025</em>. arXiv:2502.12191.</li>
-</ol>
-<ol>
-<li>Various. (2025). AnyTouch 2: General optical tactile representation learning for dynamic tactile perception. <em>OpenReview</em>.</li>
-</ol>
-<ol>
-<li>Various. (2025). Sensor-invariant tactile representation. <em>OpenReview</em>.</li>
-</ol>
-<ol>
-<li>Wu, C., et al. (2025). Canonical 3D tactile representation for visuo-tactile imitation learning. <em>ICRA 2025</em>.</li>
-</ol>
-<ol>
-<li>Wang, S., Lambeta, M., et al. (2022). Tacto: A fast, flexible, and open-source simulator for vision-based tactile sensors. <em>IEEE Robotics and Automation Letters</em>.</li>
-</ol>
-<ol>
-<li>Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator for contact-rich robotic manipulation. <em>ICLR 2024</em>. arXiv:2403.08716.</li>
-</ol>
-<ol>
-<li>Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
-</ol>
-<ol>
-<li>Zhang, C., Xue, Z., Yin, S., Zhao, B., et al. (2025). UniTacHand: Unified spatio-tactile representation for human to robotic hand skill transfer. <em>arXiv preprint</em>. arXiv:2512.21233.</li>
-</ol>
-<ol>
-<li>Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.10356.</li>
-</ol>
-<ol>
-<li>Various. (2025). PP-Tac: Physics-based trajectory synthesis for thin object grasping. <em>RSS 2025</em>.</li>
-</ol>
-<ol>
-<li>Open X-Embodiment Collaboration. (2024). Open X-Embodiment: Robotic learning datasets and RT-X models. <em>ICRA 2024</em>. arXiv:2310.08864.</li>
-</ol>
-<ol>
-<li>Various. (2024). Tactile sensing for dexterous manipulation: Taxonomies, datasets, and sim-to-real transfer. <em>Survey</em>.</li>
-</ol>
-<ol>
-<li>Yang, F., et al. (2022). Touch and Go: Learning from human-collected vision and touch. <em>NeurIPS 2022 Datasets and Benchmarks Track</em>.</li>
-</ol>
-<ol>
-<li>Yang, F., et al. (2024). Touch100k: A large-scale touch-language-vision dataset. <em>arXiv preprint</em>. arXiv:2406.03813.</li>
-</ol>
-<ol>
-<li>Gao, R., et al. (2023). ObjectFolder 2.0: A multisensory object dataset for sim2real transfer. <em>CVPR 2023</em>.</li>
+<ol class="references-list">
+  <li id="ch3-ref-1" value="1">Albini, A., Kaboli, M., Cannata, G., & Maiolino, P. (2025). Representing data in robotic tactile perception — A review. <em>arXiv preprint</em> (submitted to IEEE T-RO). arXiv:2510.10804.</li>
+  <li id="ch3-ref-2" value="2">Yuan, Y., Che, H., Qin, Y., Huang, B., Yin, Z.-H., Lee, K.-W., Wu, Y., Lim, S.-C., & Wang, X. (2024). Robot Synesthesia: In-hand manipulation with visuotactile sensing. <em>ICRA 2024</em>. arXiv:2312.01853.</li>
+  <li id="ch3-ref-3" value="3">Yang, F., Feng, C., Chen, Z., Park, H., Wang, D., Dou, Y., ... & Wong, A. (2024). Binding touch to everything: Learning unified multimodal tactile representations. <em>CVPR 2024</em>.</li>
+  <li id="ch3-ref-4" value="4">Higuera, C., Sharma, A., Bodduluri, C. K., Fan, T., Lancaster, P., Malik, J., Pathak, D., Lambeta, M., & Calandra, R. (2024). Sparsh: Self-supervised touch representations for vision-based tactile sensing. <em>CoRL 2024</em>.</li>
+  <li id="ch3-ref-5" value="5">Liu, Q., Cui, Y., Sun, Z., Li, G., Chen, J., & Ye, Q. (2025). VTDexManip: A dataset and benchmark for visual-tactile pretraining and dexterous manipulation with reinforcement learning. <em>ICLR 2025</em>.</li>
+  <li id="ch3-ref-6" value="6">Feng, R., Hu, J., Xia, W., Gao, T., Shen, A., Sun, Y., Fang, B., & Hu, D. (2025). AnyTouch: Learning unified static-dynamic representation across multiple visuo-tactile sensors. <em>ICLR 2025</em>. arXiv:2502.12191.</li>
+  <li id="ch3-ref-7" value="7">Various. (2025). AnyTouch 2: General optical tactile representation learning for dynamic tactile perception. <em>OpenReview</em>.</li>
+  <li id="ch3-ref-8" value="8">Various. (2025). Sensor-invariant tactile representation. <em>OpenReview</em>.</li>
+  <li id="ch3-ref-9" value="9">Wu, C., et al. (2025). Canonical 3D tactile representation for visuo-tactile imitation learning. <em>ICRA 2025</em>.</li>
+  <li id="ch3-ref-10" value="10">Wang, S., Lambeta, M., et al. (2022). Tacto: A fast, flexible, and open-source simulator for vision-based tactile sensors. <em>IEEE Robotics and Automation Letters</em>.</li>
+  <li id="ch3-ref-11" value="11">Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator for contact-rich robotic manipulation. <em>ICLR 2024</em>. arXiv:2403.08716.</li>
+  <li id="ch3-ref-12" value="12">Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
+  <li id="ch3-ref-13" value="13">Zhang, C., Xue, Z., Yin, S., Zhao, B., et al. (2025). UniTacHand: Unified spatio-tactile representation for human to robotic hand skill transfer. <em>arXiv preprint</em>. arXiv:2512.21233.</li>
+  <li id="ch3-ref-14" value="14">Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.10356.</li>
+  <li id="ch3-ref-15" value="15">Various. (2025). PP-Tac: Physics-based trajectory synthesis for thin object grasping. <em>RSS 2025</em>.</li>
+  <li id="ch3-ref-16" value="16">Open X-Embodiment Collaboration. (2024). Open X-Embodiment: Robotic learning datasets and RT-X models. <em>ICRA 2024</em>. arXiv:2310.08864.</li>
+  <li id="ch3-ref-17" value="17">Various. (2024). Tactile sensing for dexterous manipulation: Taxonomies, datasets, and sim-to-real transfer. <em>Journal of Multidisciplinary Engineering Science</em>.</li>
+  <li id="ch3-ref-18" value="18">Yang, F., et al. (2023). Touch and Go: Learning from human-collected vision and touch. <em>ICCV 2023</em>.</li>
+  <li id="ch3-ref-19" value="19">Yang, F., et al. (2024). Touch100k: A large-scale touch-language-vision dataset. <em>arXiv preprint</em>. arXiv:2406.03813.</li>
+  <li id="ch3-ref-20" value="20">Gao, R., et al. (2022). ObjectFolder 2.0: A multisensory object dataset for sim2real transfer. <em>ICML 2022</em>.</li>
+  <li id="ch3-ref-21" value="21">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920.</li>
 </ol>
 </section>
 

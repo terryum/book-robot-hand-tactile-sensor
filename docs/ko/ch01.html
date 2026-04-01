@@ -84,7 +84,7 @@
 </section>
 <section id="sec-1-1" class="content-section">
 <h2>1.1 생물학적 촉각의 원리</h2>
-<p>인간의 손은 약 17,000개의 기계적 수용기(mechanoreceptor)를 갖추고 있으며, 이들은 접촉, 압력, 진동, 온도 변화를 감지합니다 [Johansson & Flanagan, 2009]. 손끝(fingertip)의 수용기 밀도는 약 240개/cm²에 달하여, 13μm 수준의 미세한 표면 구조까지 구별할 수 있습니다 [Kandel et al., 2000].</p>
+<p>인간의 손은 약 17,000개의 기계적 수용기(mechanoreceptor)를 갖추고 있으며, 이들은 접촉, 압력, 진동, 온도 변화를 감지합니다 <sup><a class="cite-link" href="#ch1-ref-1" title="Johansson & Flanagan, 2009">[1]</a></sup>. 손끝(fingertip)의 수용기 밀도는 약 240개/cm²에 달하여, 13μm 수준의 미세한 표면 구조까지 구별할 수 있습니다 <sup><a class="cite-link" href="#ch1-ref-2" title="Kandel et al., 2000">[2]</a></sup>.</p>
 <figure>
   <img src="../assets/figures/ch01/fig_1_1_mechanoreceptors_darkmode.png" alt="Figure 1.1: 인간 손의 기계적 수용기 분포. Adapted from Johansson & Flanagan (2009)." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_1_mechanoreceptors_technical.png'">
   <figcaption>Figure 1.1: 인간 손의 기계적 수용기 분포. Adapted from Johansson & Flanagan (2009).</figcaption>
@@ -139,12 +139,12 @@
 <blockquote class="key-paper"><strong>핵심 논문</strong>: Dahiya, R. S., Metta, G., Valle, M., & Sandini, G. (2010). "Tactile Sensing: From Humans to Humanoids." <em>IEEE Transactions on Robotics</em>, 26(1), 1-20.
 촉각 센싱의 변환 방법, 데이터 처리, 시스템 통합을 망라한 기초 서베이로, 촉각 로봇 연구의 사실상 표준 출발점입니다.</blockquote>
 <p><strong>3세대 — 촉각의 겨울 (2000-2015년)</strong>: 컴퓨터 비전의 비약적 발전(deep learning, CNNs)으로 연구 커뮤니티의 관심이 시각 기반 로봇 공학으로 집중되면서, 촉각 연구는 상대적으로 정체기를 겪었습니다. 그러나 이 시기에도 BioTac($5K-10K)과 같은 고성능 촉각 센서가 개발되어 꾸준한 기초 연구가 이어졌습니다.</p>
-<p><strong>4세대 — 부활 (2015-현재)</strong>: GelSight [Yuan et al., 2017]의 등장이 전환점이 되었습니다. 비전 기반 광학 촉각 센서(vision-based optical tactile sensor)는 기존 센서 대비 월등한 해상도를 낮은 비용($350 수준의 DIGIT [Lambeta et al., 2020])으로 제공했습니다. 2024년에는 Digit 360이 8.3M taxel과 18가지 이상의 센싱 모달리티를 갖춘 다중 모달 인공 손가락을 선보이며 [Lambeta et al., 2024], 촉각 센서의 "ImageNet 모멘트"가 도래했다는 평가가 나오고 있습니다.</p>
+<p><strong>4세대 — 부활 (2015-현재)</strong>: GelSight <sup><a class="cite-link" href="#ch1-ref-4" title="Yuan et al., 2017">[4]</a></sup>의 등장이 전환점이 되었습니다. 비전 기반 광학 촉각 센서(vision-based optical tactile sensor)는 기존 센서 대비 월등한 해상도를 낮은 비용($350 수준의 DIGIT <sup><a class="cite-link" href="#ch1-ref-5" title="Lambeta et al., 2020">[5]</a></sup>)으로 제공했습니다. 2024년에는 Digit 360이 8.3M taxel과 18가지 이상의 센싱 모달리티를 갖춘 다중 모달 인공 손가락을 선보이며 <sup><a class="cite-link" href="#ch1-ref-6" title="Lambeta et al., 2024">[6]</a></sup>, 촉각 센서의 "ImageNet 모멘트"가 도래했다는 평가가 나오고 있습니다.</p>
 <figure>
   <img src="../assets/figures/ch01/fig_1_3_sensor_evolution_darkmode.png" alt="Figure 1.3: 촉각 센서 기술의 진화 — GelSight (2017) → DIGIT (2020) → Digit 360 (2024). Source: Yuan et al. (2017), Lambeta et al. (2020, 2024)." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_3_sensor_evolution_technical.png'">
   <figcaption>Figure 1.3: 촉각 센서 기술의 진화 — GelSight (2017) → DIGIT (2020) → Digit 360 (2024). Source: Yuan et al. (2017), Lambeta et al. (2020, 2024).</figcaption>
 </figure>
-<p>이 부활을 가속화한 또 다른 동력은 <strong>저비용 로봇 핸드의 민주화</strong>입니다. LEAP Hand [Shaw et al., 2023]는 $2,000에 3D 프린팅으로 제작 가능한 인간형 핸드를 공개하여, $16,000의 Allegro Hand나 $100,000 이상의 Shadow Hand 없이도 다지 조작 연구를 수행할 수 있게 했습니다 (<a href="ch04.html">Chapter 4 참조</a>).</p>
+<p>이 부활을 가속화한 또 다른 동력은 <strong>저비용 로봇 핸드의 민주화</strong>입니다. LEAP Hand <sup><a class="cite-link" href="#ch1-ref-7" title="Shaw et al., 2023">[7]</a></sup>는 $2,000에 3D 프린팅으로 제작 가능한 인간형 핸드를 공개하여, $16,000의 Allegro Hand나 $100,000 이상의 Shadow Hand 없이도 다지 조작 연구를 수행할 수 있게 했습니다 (<a href="ch04.html">Chapter 4 참조</a>).</p>
 <hr>
 </section>
 <section id="sec-1-3" class="content-section">
@@ -161,7 +161,7 @@
 <h3>1.3.3 변형 가능 물체 (Deformable Objects)</h3>
 <p>천, 케이블, 식품과 같은 변형 가능 물체(deformable object)의 조작은 시각만으로는 본질적으로 어렵습니다. 물체의 강성(stiffness), 마찰 계수, 현재 변형 상태를 추론하려면 접촉 정보가 필수적입니다. PP-Tac [2025]은 R-Tac 촉각 센서와 미끄러짐 감지를 결합한 Diffusion Policy로 87.5%의 얇은 물체 파지 성공률을 달성했습니다 — 이는 종이, 카드 같은 극도로 얇은 물체에서의 성과입니다 (<a href="ch07.html">Chapter 7.3 참조</a>).</p>
 <h3>1.3.4 가려진 상태 (Occlusion)</h3>
-<p>로봇이 물체를 손 안에서 회전(in-hand rotation)시킬 때, 손가락이 물체의 대부분을 가립니다. NeuralFeels [Suresh et al., 2024]는 촉각과 시각을 결합한 신경장(neural field) 기반 SLAM으로 손 안에서 물체의 위치와 형상을 동시에 추정하는 In-hand SLAM을 구현했습니다 (<em>Science Robotics</em>, 2024). 시각만으로는 불가능한 과제입니다 (<a href="ch11.html">Chapter 11.1 참조</a>).</p>
+<p>로봇이 물체를 손 안에서 회전(in-hand rotation)시킬 때, 손가락이 물체의 대부분을 가립니다. NeuralFeels <sup><a class="cite-link" href="#ch1-ref-12" title="Suresh et al., 2024">[12]</a></sup>는 촉각과 시각을 결합한 신경장(neural field) 기반 SLAM으로 손 안에서 물체의 위치와 형상을 동시에 추정하는 In-hand SLAM을 구현했습니다 (<em>Science Robotics</em>, 2024). 시각만으로는 불가능한 과제입니다 (<a href="ch11.html">Chapter 11.1 참조</a>).</p>
 <hr>
 </section>
 <section id="sec-1-4" class="content-section">
@@ -172,9 +172,9 @@
 <h3>1.4.2 미끄러짐 감지와 반응 (Slip Detection and Response)</h3>
 <p>전단력(shear force)의 변화를 감지하여 물체가 미끄러지기 전에 힘을 증가시킵니다. 다축 센싱(multi-axis sensing)의 중요성은 법선력(normal force)만으로는 전단 방향의 미끄러짐을 예측할 수 없다는 사실에서 비롯됩니다 [세미나 2, Taejoon]. Cho et al. [2025]과 Hossain et al. [2025]은 다차원 촉각 센싱이 미끄러짐 감지와 물체 방향 추정에서 단축 센서를 크게 능가함을 보였습니다.</p>
 <h3>1.4.3 자세 추정 (Pose Estimation)</h3>
-<p>접촉점의 분포와 힘 벡터로부터 손 안 물체의 위치와 자세를 추정합니다. 촉각 전용 손안 회전(tactile-only in-hand rotation) [Yin et al., 2023; Pitz et al., 2024]은 시각 없이 이진 촉각(binary tactile) 센서만으로 물체를 연속적으로 회전시키는 것이 가능함을 입증했습니다 — 다만 세미나 1에서 논의된 바와 같이, 촉각만으로 가능한 조작은 현재 회전(rotation) 과제에 한정되며, 이는 촉각이 접촉 <em>후</em>의 국소(local) 정보만 제공하기 때문입니다.</p>
+<p>접촉점의 분포와 힘 벡터로부터 손 안 물체의 위치와 자세를 추정합니다. 촉각 전용 손안 회전(tactile-only in-hand rotation) <sup><a class="cite-link" href="#ch1-ref-10" title="Yin et al., 2023; Pitz et al., 2024">[10]</a></sup>은 시각 없이 이진 촉각(binary tactile) 센서만으로 물체를 연속적으로 회전시키는 것이 가능함을 입증했습니다 — 다만 세미나 1에서 논의된 바와 같이, 촉각만으로 가능한 조작은 현재 회전(rotation) 과제에 한정되며, 이는 촉각이 접촉 <em>후</em>의 국소(local) 정보만 제공하기 때문입니다.</p>
 <h3>1.4.4 질감 인식 (Texture Recognition)</h3>
-<p>표면의 미세 구조를 촉각으로 인식하는 것은 시각으로는 포착하기 어려운 물성(material property) 정보를 제공합니다. GelSight [Yuan et al., 2017]는 광도 입체법(photometric stereo)으로 접촉면의 3D 구조를 마이크로미터 수준으로 복원하며, UniTouch [Yang et al., 2024]는 대조 학습(contrastive learning)으로 촉각을 시각, 언어, 오디오와 정렬하여 제로샷 질감 분류를 가능하게 했습니다 (<a href="ch03.html">Chapter 3.6 참조</a>).</p>
+<p>표면의 미세 구조를 촉각으로 인식하는 것은 시각으로는 포착하기 어려운 물성(material property) 정보를 제공합니다. GelSight <sup><a class="cite-link" href="#ch1-ref-4" title="Yuan et al., 2017">[4]</a></sup>는 광도 입체법(photometric stereo)으로 접촉면의 3D 구조를 마이크로미터 수준으로 복원하며, UniTouch <sup><a class="cite-link" href="#ch1-ref-13" title="Yang et al., 2024">[13]</a></sup>는 대조 학습(contrastive learning)으로 촉각을 시각, 언어, 오디오와 정렬하여 제로샷 질감 분류를 가능하게 했습니다 (<a href="ch03.html">Chapter 3.6 참조</a>).</p>
 <figure>
   <img src="../assets/figures/ch01/fig_1_5_four_capabilities_darkmode.png" alt="Figure 1.5: 촉각이 가능하게 하는 4가지 핵심 능력 — 힘 조절, 미끄러짐 감지, 자세 추정, 질감 인식." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_5_four_capabilities_technical.png'">
   <figcaption>Figure 1.5: 촉각이 가능하게 하는 4가지 핵심 능력 — 힘 조절, 미끄러짐 감지, 자세 추정, 질감 인식.</figcaption>
@@ -262,70 +262,30 @@
 <p>다음 챕터에서는 이 촉각을 물리적으로 구현하는 센서 기술의 세계로 들어갑니다 (<a href="ch02.html">Chapter 2: 촉각 센서 기술 참조</a>).</p>
 <hr>
 </section>
-<section id="sec-참고문헌" class="content-section">
+<section id="sec-references" class="content-section">
 <h2>참고문헌</h2>
-<ol>
-<li>Johansson, R. S., & Flanagan, J. R. (2009). Coding and use of tactile signals from the fingertips in object manipulation tasks. <em>Nature Reviews Neuroscience</em>, 10, 345-359. https://doi.org/10.1038/nrn2621</li>
-</ol>
-<ol>
-<li>Kandel, E. R., Schwartz, J. H., & Jessell, T. M. (2000). <em>Principles of Neural Science</em> (4th ed.). McGraw-Hill.</li>
-</ol>
-<ol>
-<li>Dahiya, R. S., Metta, G., Valle, M., & Sandini, G. (2010). Tactile sensing: From humans to humanoids. <em>IEEE Transactions on Robotics</em>, 26(1), 1-20. https://doi.org/10.1109/TRO.2009.2033627</li>
-</ol>
-<ol>
-<li>Yuan, W., Dong, S., & Adelson, E. H. (2017). GelSight: High-resolution robot tactile sensors for estimating geometry and force. <em>Sensors</em>, 17(12), 2762. https://doi.org/10.3390/s17122762</li>
-</ol>
-<ol>
-<li>Lambeta, M., Chou, P.-W., Tian, S., Yang, B., Maloon, B., Most, V. R., ... & Calandra, R. (2020). DIGIT: A novel design for a low-cost compact high-resolution tactile sensor with application to in-hand manipulation. <em>IEEE Robotics and Automation Letters</em>, 5(3), 3838-3845. https://arxiv.org/abs/2005.14679</li>
-</ol>
-<ol>
-<li>Lambeta, M., Wu, T., Sengul, A., & Calandra, R. (2024). Digitizing touch with an artificial multimodal fingertip (Digit 360). <em>arXiv preprint</em>, arXiv:2411.02834.</li>
-</ol>
-<ol>
-<li>Shaw, K., Agarwal, A., & Pathak, D. (2023). LEAP Hand: Low-cost, efficient, and anthropomorphic hand for robot learning. <em>Robotics: Science and Systems (RSS)</em>.</li>
-</ol>
-<ol>
-<li>Hogan, N. (1985). Impedance control: An approach to manipulation. <em>Journal of Dynamic Systems, Measurement, and Control</em>, 107(1), 1-24. https://doi.org/10.1115/1.3140702</li>
-</ol>
-<ol>
-<li>Billard, A., & Kragic, D. (2019). Trends and challenges in robot manipulation. <em>Science</em>, 364(6446), eaat8414.</li>
-</ol>
-<ol>
-<li>Yin, Z.-H., Huang, B., Qin, Y., Chen, Q., & Wang, X. (2023). Rotating without seeing: Towards in-hand dexterity through touch. <em>Robotics: Science and Systems (RSS)</em>.</li>
-</ol>
-<ol>
-<li>Pitz, J., Röstel, L., Sievers, L., & Bäuml, B. (2024). Dextrous tactile in-hand manipulation using a modular reinforcement learning architecture. <em>IEEE-RAS International Conference on Humanoid Robots</em>.</li>
-</ol>
-<ol>
-<li>Suresh, S., Si, Z., Anderson, S., Kaess, M., & Mukadam, M. (2024). NeuralFeels: Neural fields for visuotactile perception. <em>Science Robotics</em>, 9(86).</li>
-</ol>
-<ol>
-<li>Yang, F., Feng, C., Chen, Z., Park, H., Wang, D., Dou, Y., ... & Wong, A. (2024). Binding touch to everything: Learning unified multimodal tactile representations. <em>CVPR 2024</em>.</li>
-</ol>
-<ol>
-<li>Lepora, N. F. (2025). Tactile Robotics: Past and Future. <em>arXiv preprint</em>, arXiv:2512.01106.</li>
-</ol>
-<ol>
-<li>Various. (2025). Recent advances in tactile sensing technologies for human-robot interaction: Current trends and future perspectives. <em>Sensors International</em>. https://doi.org/10.1016/j.sintl.2025.100345</li>
-</ol>
-<ol>
-<li>Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
-</ol>
-<ol>
-<li>Zhao, C., Yu, Y., Ye, Z., Tian, Z., Zhang, Y., & Zeng, L.-L. (2025). Universal slip detection of robotic hand with tactile sensing. <em>Frontiers in Neurorobotics</em>, 19. https://doi.org/10.3389/fnbot.2025.1478758</li>
-</ol>
-<ol>
-<li>Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>Robotics: Science and Systems (RSS) 2025</em>.</li>
-</ol>
-<ol>
-<li>Cho, W., et al. (2025). Multi-dimensional tactile sensing for force/noise decoupling. <em>ACS Applied Materials & Interfaces</em>.</li>
-</ol>
-<ol>
-<li>Hossain, M., et al. (2025). Multi-axis tactile for object orientation detection. <em>Sensors and Actuators A: Physical</em>.</li>
-</ol>
-<ol>
-<li>Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.10356.</li>
+<ol class="references-list">
+  <li id="ch1-ref-1" value="1">Johansson, R. S., & Flanagan, J. R. (2009). Coding and use of tactile signals from the fingertips in object manipulation tasks. <em>Nature Reviews Neuroscience</em>, 10, 345-359. https://doi.org/10.1038/nrn2621</li>
+  <li id="ch1-ref-2" value="2">Kandel, E. R., Schwartz, J. H., & Jessell, T. M. (2000). <em>Principles of Neural Science</em> (4th ed.). McGraw-Hill.</li>
+  <li id="ch1-ref-3" value="3">Dahiya, R. S., Metta, G., Valle, M., & Sandini, G. (2010). Tactile sensing: From humans to humanoids. <em>IEEE Transactions on Robotics</em>, 26(1), 1-20. https://doi.org/10.1109/TRO.2009.2033627</li>
+  <li id="ch1-ref-4" value="4">Yuan, W., Dong, S., & Adelson, E. H. (2017). GelSight: High-resolution robot tactile sensors for estimating geometry and force. <em>Sensors</em>, 17(12), 2762. https://doi.org/10.3390/s17122762</li>
+  <li id="ch1-ref-5" value="5">Lambeta, M., Chou, P.-W., Tian, S., Yang, B., Maloon, B., Most, V. R., ... & Calandra, R. (2020). DIGIT: A novel design for a low-cost compact high-resolution tactile sensor with application to in-hand manipulation. <em>IEEE Robotics and Automation Letters</em>, 5(3), 3838-3845. https://arxiv.org/abs/2005.14679</li>
+  <li id="ch1-ref-6" value="6">Lambeta, M., Wu, T., Sengul, A., & Calandra, R. (2024). Digitizing touch with an artificial multimodal fingertip (Digit 360). <em>arXiv preprint</em>, arXiv:2411.02834.</li>
+  <li id="ch1-ref-7" value="7">Shaw, K., Agarwal, A., & Pathak, D. (2023). LEAP Hand: Low-cost, efficient, and anthropomorphic hand for robot learning. <em>Robotics: Science and Systems (RSS)</em>.</li>
+  <li id="ch1-ref-8" value="8">Hogan, N. (1985). Impedance control: An approach to manipulation. <em>Journal of Dynamic Systems, Measurement, and Control</em>, 107(1), 1-24. https://doi.org/10.1115/1.3140702</li>
+  <li id="ch1-ref-9" value="9">Billard, A., & Kragic, D. (2019). Trends and challenges in robot manipulation. <em>Science</em>, 364(6446), eaat8414.</li>
+  <li id="ch1-ref-10" value="10">Yin, Z.-H., Huang, B., Qin, Y., Chen, Q., & Wang, X. (2023). Rotating without seeing: Towards in-hand dexterity through touch. <em>Robotics: Science and Systems (RSS)</em>.</li>
+  <li id="ch1-ref-11" value="11">Pitz, J., Röstel, L., Sievers, L., & Bäuml, B. (2024). Dextrous tactile in-hand manipulation using a modular reinforcement learning architecture. <em>IEEE-RAS International Conference on Humanoid Robots</em>.</li>
+  <li id="ch1-ref-12" value="12">Suresh, S., Si, Z., Anderson, S., Kaess, M., & Mukadam, M. (2024). NeuralFeels: Neural fields for visuotactile perception. <em>Science Robotics</em>, 9(86).</li>
+  <li id="ch1-ref-13" value="13">Yang, F., Feng, C., Chen, Z., Park, H., Wang, D., Dou, Y., ... & Wong, A. (2024). Binding touch to everything: Learning unified multimodal tactile representations. <em>CVPR 2024</em>.</li>
+  <li id="ch1-ref-14" value="14">Lepora, N. F. (2025). Tactile Robotics: Past and Future. <em>arXiv preprint</em>, arXiv:2512.01106.</li>
+  <li id="ch1-ref-15" value="15">Various. (2025). Recent advances in tactile sensing technologies for human-robot interaction: Current trends and future perspectives. <em>Sensors International</em>. https://doi.org/10.1016/j.sintl.2025.100345</li>
+  <li id="ch1-ref-16" value="16">Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
+  <li id="ch1-ref-17" value="17">Zhao, C., Yu, Y., Ye, Z., Tian, Z., Zhang, Y., & Zeng, L.-L. (2025). Universal slip detection of robotic hand with tactile sensing. <em>Frontiers in Neurorobotics</em>, 19. https://doi.org/10.3389/fnbot.2025.1478758</li>
+  <li id="ch1-ref-18" value="18">Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>Robotics: Science and Systems (RSS) 2025</em>.</li>
+  <li id="ch1-ref-19" value="19">Cho, W., et al. (2025). Multi-dimensional tactile sensing for force/noise decoupling. <em>ACS Applied Materials & Interfaces</em>.</li>
+  <li id="ch1-ref-20" value="20">Hossain, M., et al. (2025). Multi-axis tactile for object orientation detection. <em>Sensors and Actuators A: Physical</em>.</li>
+  <li id="ch1-ref-21" value="21">Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.10356.</li>
 </ol>
 </section>
 

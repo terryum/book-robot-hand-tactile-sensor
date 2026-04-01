@@ -84,7 +84,7 @@
 </section>
 <section id="sec-6-1" class="content-section">
 <h2>6.1 The Human Hand Model: MANO (778 Vertices, 16 Joints)</h2>
-<p>MANO [Romero et al., 2017] is a statistical human hand model learned from 1,000 3D scans (<em>SIGGRAPH Asia 2017</em>):</p>
+<p>MANO <sup><a class="cite-link" href="#ch6-ref-1" title="Romero et al., 2017">[1]</a></sup> is a statistical human hand model learned from 1,000 3D scans (<em>SIGGRAPH Asia 2017</em>):</p>
 <ul>
 <li><strong>778 vertices</strong>, 16 joints</li>
 <li><strong>PCA shape space</strong>: Low-dimensional representation of inter-individual hand size/shape variation</li>
@@ -220,7 +220,7 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
 <section id="sec-6-5" class="content-section">
 <h2>6.5 Learning from Internet Videos and Large-Scale Data</h2>
 <p>Shaw et al. [2024, CMU] proposed extracting human hand motions from internet videos and retargeting them to robot hands. The potential lies in <strong>scalability</strong> — millions of hand manipulation videos exist online, and converting them to robot learning data could fundamentally solve the teleoperation bottleneck.</p>
-<p>ImMimic [Liu et al., 2025] augments data by interpolating between large-scale human trajectories and a few teleoperation trajectories. As discussed in Seminar 1, this represents the direction of <strong>synergistically using human data instead of expensive teleop data</strong> (<a href="ch10.html">Chapter 10.2</a>).</p>
+<p>ImMimic <sup><a class="cite-link" href="#ch6-ref-14" title="Liu et al., 2025">[14]</a></sup> augments data by interpolating between large-scale human trajectories and a few teleoperation trajectories. As discussed in Seminar 1, this represents the direction of <strong>synergistically using human data instead of expensive teleop data</strong> (<a href="ch10.html">Chapter 10.2</a>).</p>
 <p>DexH2R [2024] implements task-oriented human-to-robot dexterous transfer, mapping the intent of human demonstrations to robot actions.</p>
 <figure>
   <img src="../assets/figures/ch06/fig_6_5_collection_spectrum_darkmode.png" alt="Figure 6.5: Spectrum of human hand data collection methods." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_5_collection_spectrum_technical.png'">
@@ -321,68 +321,28 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
 </section>
 <section id="sec-references" class="content-section">
 <h2>References</h2>
-<ol>
-<li>Romero, J., Tzionas, D., & Black, M. J. (2017). Embodied hands: Modeling and capturing hands and bodies together. <em>SIGGRAPH Asia 2017</em>.</li>
-</ol>
-<ol>
-<li>Various. (2024). Stretchable liquid-metal sensor glove. <em>Nature Communications</em>. https://doi.org/10.1038/s41467-024-50101-w</li>
-</ol>
-<ol>
-<li>Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
-</ol>
-<ol>
-<li>Ruppel, P., et al. (2024). Reduced tactile sensor array for grasp analysis. <em>Sensors</em>.</li>
-</ol>
-<ol>
-<li>Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920.</li>
-</ol>
-<ol>
-<li>Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>.</li>
-</ol>
-<ol>
-<li>Si, Z., et al. (2025). ExoStart: From 10 exoskeleton demos to dexterous robot manipulation.</li>
-</ol>
-<ol>
-<li>Fang, H.-S., Romero, B., Xie, Y., et al. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441.</li>
-</ol>
-<ol>
-<li>Qin, Y., et al. (2023). AnyTeleop: A general vision-based dexterous robot hand-arm teleoperation system. <em>RSS 2023</em>.</li>
-</ol>
-<ol>
-<li>Handa, A., & Van Wyk, K. (2020). DexPilot: Vision-based teleoperation for dexterous manipulation. <em>ICRA 2020</em>.</li>
-</ol>
-<ol>
-<li>Ding, Z., et al. (2024). Bunny-VisionPro: Real-time bimanual dexterous teleoperation for imitation learning. <em>arXiv preprint</em>. arXiv:2407.03162.</li>
-</ol>
-<ol>
-<li>Wang, C., et al. (2024). DexCap: Scalable and portable mocap data collection system. <em>RSS 2024</em>.</li>
-</ol>
-<ol>
-<li>Shaw, K., Bahl, S., & Pathak, D. (2024). Learning dexterity from human hand motion in internet videos. <em>arXiv preprint</em>. arXiv:2404.xxxxx.</li>
-</ol>
-<ol>
-<li>Liu, Y., et al. (2025). ImMimic: Large-scale human trajectory + few-shot teleoperation interpolation.</li>
-</ol>
-<ol>
-<li>Li, Y., et al. (2024). DexH2R: Task-oriented dexterous manipulation from human to robots. <em>arXiv preprint</em>.</li>
-</ol>
-<ol>
-<li>Various. (2025). DOGlove: Low-cost open-source haptic feedback glove.</li>
-</ol>
-<ol>
-<li>Various. (2026). Feel Robot Feels: Tactile feedback array glove.</li>
-</ol>
-<ol>
-<li>Murphy, L., et al. (2025). Capacitive tactile sensing for teaching by demonstration. <em>arXiv preprint</em>.</li>
-</ol>
-<ol>
-<li>Tang, M., et al. (2025). FSR sensor optimization for grasp classification. <em>IEEE Journal of Biomedical and Health Informatics</em>.</li>
-</ol>
-<ol>
-<li>Chen, H., et al. (2025). Capacitive sensor for lift-risk identification. <em>Applied Ergonomics</em>.</li>
-</ol>
-<ol>
-<li>Various. (2024). ML-based wearable sensors for real-time hand motion recognition. <em>PMC</em>. (Seoul National University)</li>
+<ol class="references-list">
+  <li id="ch6-ref-1" value="1">Romero, J., Tzionas, D., & Black, M. J. (2017). Embodied hands: Modeling and capturing hands and bodies together. <em>SIGGRAPH Asia 2017</em>.</li>
+  <li id="ch6-ref-2" value="2">Various. (2024). Stretchable liquid-metal sensor glove. <em>Nature Communications</em>. https://doi.org/10.1038/s41467-024-50101-w</li>
+  <li id="ch6-ref-3" value="3">Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
+  <li id="ch6-ref-4" value="4">Ruppel, P., et al. (2024). Reduced tactile sensor array for grasp analysis. <em>Sensors</em>.</li>
+  <li id="ch6-ref-5" value="5">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920.</li>
+  <li id="ch6-ref-6" value="6">Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>.</li>
+  <li id="ch6-ref-7" value="7">Si, Z., et al. (2025). ExoStart: From 10 exoskeleton demos to dexterous robot manipulation.</li>
+  <li id="ch6-ref-8" value="8">Fang, H.-S., Romero, B., Xie, Y., et al. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441.</li>
+  <li id="ch6-ref-9" value="9">Qin, Y., et al. (2023). AnyTeleop: A general vision-based dexterous robot hand-arm teleoperation system. <em>RSS 2023</em>.</li>
+  <li id="ch6-ref-10" value="10">Handa, A., & Van Wyk, K. (2020). DexPilot: Vision-based teleoperation for dexterous manipulation. <em>ICRA 2020</em>.</li>
+  <li id="ch6-ref-11" value="11">Ding, Z., et al. (2024). Bunny-VisionPro: Real-time bimanual dexterous teleoperation for imitation learning. <em>arXiv preprint</em>. arXiv:2407.03162.</li>
+  <li id="ch6-ref-12" value="12">Wang, C., et al. (2024). DexCap: Scalable and portable mocap data collection system. <em>RSS 2024</em>.</li>
+  <li id="ch6-ref-13" value="13">Shaw, K., Bahl, S., & Pathak, D. (2024). Learning dexterity from human hand motion in internet videos. <em>arXiv preprint</em>. arXiv:2404.xxxxx.</li>
+  <li id="ch6-ref-14" value="14">Liu, Y., et al. (2025). ImMimic: Large-scale human trajectory + few-shot teleoperation interpolation.</li>
+  <li id="ch6-ref-15" value="15">Li, Y., et al. (2024). DexH2R: Task-oriented dexterous manipulation from human to robots. <em>arXiv preprint</em>.</li>
+  <li id="ch6-ref-16" value="16">Various. (2025). DOGlove: Low-cost open-source haptic feedback glove.</li>
+  <li id="ch6-ref-17" value="17">Various. (2026). Feel Robot Feels: Tactile feedback array glove.</li>
+  <li id="ch6-ref-18" value="18">Murphy, L., et al. (2025). Capacitive tactile sensing for teaching by demonstration. <em>arXiv preprint</em>.</li>
+  <li id="ch6-ref-19" value="19">Tang, M., et al. (2025). FSR sensor optimization for grasp classification. <em>IEEE Journal of Biomedical and Health Informatics</em>.</li>
+  <li id="ch6-ref-20" value="20">Chen, H., et al. (2025). Capacitive sensor for lift-risk identification. <em>Applied Ergonomics</em>.</li>
+  <li id="ch6-ref-21" value="21">Various. (2024). ML-based wearable sensors for real-time hand motion recognition. <em>PMC</em>. (Seoul National University)</li>
 </ol>
 </section>
 

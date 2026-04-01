@@ -60,6 +60,141 @@ def parse_frontmatter(md):
     return meta, body
 
 
+def build_citation_map(md_text):
+    """Build a mapping from Author-Year citations to sequential numbers.
+
+    Parses the reference list at the end of a chapter markdown to create
+    a lookup from citation keys like 'Johansson & Flanagan, 2009' to
+    sequential numbers [1], [2], etc.
+    """
+    # Find the references section
+    ref_section = None
+    for marker in ['## 참고문헌', '## References']:
+        idx = md_text.find(marker)
+        if idx != -1:
+            ref_section = md_text[idx:]
+            break
+
+    if not ref_section:
+        return {}, []
+
+    # Parse numbered references: "1. Author, A., Author, B. (Year). Title..."
+    refs = []
+    for line in ref_section.split('\n'):
+        line = line.strip()
+        match = re.match(r'^\d+\.\s+(.+)', line)
+        if match:
+            ref_text = match.group(1)
+            refs.append(ref_text)
+
+    # Build citation key -> number mapping
+    cite_map = {}
+    for i, ref_text in enumerate(refs, 1):
+        # Extract year from reference
+        year_match = re.search(r'\((\d{4})\)', ref_text)
+        if not year_match:
+            continue
+        year = year_match.group(1)
+
+        # Extract author last name(s) from the beginning
+        # Format: "LastName, F., LastName2, F. (Year)..."
+        author_part = ref_text[:ref_text.find(f'({year})')].strip().rstrip(',').strip()
+
+        # Get first author's last name
+        first_author = author_part.split(',')[0].strip()
+
+        # Generate possible citation keys that might appear in text
+        # Single author: [LastName, Year]
+        cite_map[f'{first_author}, {year}'] = i
+        cite_map[f'{first_author} ({year})'] = i
+
+        # With et al.: [LastName et al., Year]
+        cite_map[f'{first_author} et al., {year}'] = i
+        cite_map[f'{first_author} et al. ({year})'] = i
+
+        # Two authors: [Last1 & Last2, Year]
+        authors_list = [a.strip() for a in author_part.split(',')]
+        # Filter out initials (single letter + period)
+        last_names = [a for a in authors_list if len(a) > 2 and not re.match(r'^[A-Z]\.\s*$', a.strip())]
+        if len(last_names) == 2:
+            cite_map[f'{last_names[0]} & {last_names[1]}, {year}'] = i
+            cite_map[f'{last_names[0]} and {last_names[1]}, {year}'] = i
+
+        # Also map just year for some edge cases like [2025]
+        # (but only if no other ref has the same year - skip this to avoid ambiguity)
+
+    return cite_map, refs
+
+
+def replace_citations_with_links(html_text, cite_map, ch_num):
+    """Replace [Author, Year] citations in HTML with superscript links.
+
+    Converts inline citations to clickable superscript numbers that
+    link to the reference list at the bottom of the chapter.
+    """
+    if not cite_map:
+        return html_text
+
+    def citation_replacer(match):
+        """Replace a single [citation] with a superscript link."""
+        full_match = match.group(0)  # e.g., [Yuan et al., 2017]
+        inner = match.group(1)       # e.g., Yuan et al., 2017
+
+        # Skip if this looks like a markdown link [text](url)
+        # Check what comes right after the match
+        end_pos = match.end()
+        if end_pos < len(html_text) and html_text[end_pos] == '(':
+            return full_match
+
+        # Skip things that aren't citations (e.g., [보충 필요], [PASS])
+        if not re.search(r'\d{4}', inner):
+            return full_match
+
+        # Try to find this citation in our map
+        inner_clean = inner.strip()
+
+        # Direct lookup
+        if inner_clean in cite_map:
+            num = cite_map[inner_clean]
+            return f'<sup><a class="cite-link" href="#ch{ch_num}-ref-{num}" title="{inner_clean}">[{num}]</a></sup>'
+
+        # Try fuzzy matching: normalize spaces and punctuation
+        for key, num in cite_map.items():
+            # Check if the key is substantially contained in the citation
+            key_author = key.split(',')[0].strip() if ',' in key else key.split('(')[0].strip()
+            key_year = re.search(r'\d{4}', key)
+            inner_year = re.search(r'\d{4}', inner_clean)
+
+            if key_year and inner_year and key_year.group() == inner_year.group():
+                # Years match, check author
+                if key_author.lower() in inner_clean.lower():
+                    return f'<sup><a class="cite-link" href="#ch{ch_num}-ref-{num}" title="{inner_clean}">[{num}]</a></sup>'
+
+        # No match found — keep original text
+        return full_match
+
+    # Match [anything that contains a year] but not markdown links [text](url)
+    # Use negative lookahead for ( to avoid matching markdown links
+    result = re.sub(r'\[([^\]]+)\](?!\()', citation_replacer, html_text)
+    return result
+
+
+def build_references_list_html(refs, ch_num):
+    """Build the chapter-level reference list as a proper numbered list with anchors."""
+    if not refs:
+        return ''
+
+    items = []
+    for i, ref_text in enumerate(refs, 1):
+        # Process inline formatting
+        ref_html = ref_text
+        ref_html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', ref_html)
+        ref_html = re.sub(r'\*(.+?)\*', r'<em>\1</em>', ref_html)
+        items.append(f'  <li id="ch{ch_num}-ref-{i}" value="{i}">{ref_html}</li>')
+
+    return '<ol class="references-list">\n' + '\n'.join(items) + '\n</ol>'
+
+
 def md_to_html_content(md_text, ch_num, lang):
     """Convert markdown body to HTML sections."""
     lines = md_text.strip().split('\n')
@@ -356,8 +491,36 @@ def build_chapter_html(ch_num, lang, chapters_meta, book_dir, lang_code):
             else:
                 in_sources = False
 
-    # Convert body
-    content_html = md_to_html_content(body, ch_num, lang)
+    # Build citation map from references in this chapter
+    cite_map, ref_list = build_citation_map(body)
+
+    # Split body: content before references section, and references section
+    ref_marker = None
+    body_content = body
+    for marker in ['## 참고문헌', '## References']:
+        idx = body.find(marker)
+        if idx != -1:
+            ref_marker = marker
+            body_content = body[:idx]
+            break
+
+    # Convert body (without references section)
+    content_html = md_to_html_content(body_content, ch_num, lang)
+
+    # Replace citations with superscript links
+    content_html = replace_citations_with_links(content_html, cite_map, ch_num)
+
+    # Build proper references list HTML
+    ref_section_title = '참고문헌' if lang == 'ko' else 'References'
+    ref_html = ''
+    if ref_list:
+        ref_html = f'<section id="sec-references" class="content-section">\n'
+        ref_html += f'<h2>{ref_section_title}</h2>\n'
+        ref_html += build_references_list_html(ref_list, ch_num)
+        ref_html += '\n</section>'
+
+    content_html = content_html + '\n' + ref_html
+
     sections = extract_sections(body, ch_num)
     sidebar_html = build_sidebar(sections, part_num)
 
