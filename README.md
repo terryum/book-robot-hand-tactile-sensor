@@ -111,4 +111,4 @@ AI tools were used in the production of this work: Claude (Anthropic) for litera
 
 ## License
 
-This work is intended for educational and research purposes.
+This work is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). You are free to share and adapt the material for non-commercial purposes with attribution. See [LICENSE](LICENSE) for details.

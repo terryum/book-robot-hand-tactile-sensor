@@ -111,4 +111,4 @@ bash scripts/build_pdf.sh en
 
 ## 라이선스
 
-이 저작물은 교육 및 연구 목적으로 제작되었습니다.
+이 저작물은 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ko) 라이선스를 따릅니다. 출처를 표시하면 비영리 목적으로 자유롭게 공유하고 변경할 수 있습니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
