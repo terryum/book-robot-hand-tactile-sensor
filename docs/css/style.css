@@ -200,13 +200,13 @@ main {
 
 /* --- Hero Section --- */
 .hero {
-  min-height: 80vh;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem 1.5rem;
   position: relative;
 }
 
