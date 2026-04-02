@@ -105,7 +105,7 @@ bash scripts/build_pdf.sh en
 
 ## Contributors
 
-> 기여량 순 정렬. 기여 방법은 [CONTRIBUTING.md](CONTRIBUTING.md)를 참고하세요.
+> 기여량 순 정렬. 기여 방법은 [CONTRIBUTING_ko.md](CONTRIBUTING_ko.md)를 참고하세요.
 
 <!-- CONTRIBUTORS-START -->
 | Avatar | Contributor | Contributions |
