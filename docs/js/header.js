@@ -23,23 +23,19 @@
       '</a>' +
     '</div>';
 
-  // Home button: iframe-aware navigation using postMessage
+  // Home button: iframe-aware navigation
   header.querySelector('.header-home').addEventListener('click', function(e) {
     e.preventDefault();
     if (isEmbedded) {
-      // Try postMessage first (works cross-origin)
-      try {
-        window.parent.postMessage({ type: 'navigate', url: '/projects' }, 'https://terry.artlab.ai');
-      } catch(err) {}
-      // Fallback: try direct navigation
-      try {
-        window.top.location.href = 'https://terry.artlab.ai/projects';
-      } catch(err) {
-        // Cross-origin blocked — open in new tab as last resort
-        window.open('https://terry.artlab.ai/projects', '_blank');
-      }
+      // Embedded in terry.artlab.ai iframe → navigate parent (same tab)
+      window.parent.postMessage({ type: 'navigate', url: '/projects' }, '*');
+      // Also try direct assignment as fallback (works if same-origin or relaxed policy)
+      setTimeout(function() {
+        try { window.top.location.href = 'https://terry.artlab.ai/projects'; } catch(err) {}
+      }, 200);
     } else {
-      window.open('https://terry.artlab.ai', '_blank');
+      // Standalone on vercel.app → new tab to projects
+      window.open('https://terry.artlab.ai/projects', '_blank');
     }
   });
 })();

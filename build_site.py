@@ -591,9 +591,8 @@ def build_chapter_html(ch_num, lang, chapters_meta, book_dir, lang_code):
     </article>
   </main>
 
-  <footer class="site-footer">
-    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
-  </footer>
+  <footer id="site-footer"></footer>
+  <script src="../js/footer.js"></script>
 
   <script src="../js/main.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -662,9 +661,8 @@ def build_glossary_html(lang_code, book_dir):
     </div>
   </main>
 
-  <footer class="site-footer">
-    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
-  </footer>
+  <footer id="site-footer"></footer>
+  <script src="../js/footer.js"></script>
 
   <script src="../js/main.js"></script>
 </body>
@@ -745,9 +743,8 @@ def build_references_html(lang_code, bib_path):
     </div>
   </main>
 
-  <footer class="site-footer">
-    <p>&copy; 2026 Tactile Sensing for Robot Hands</p>
-  </footer>
+  <footer id="site-footer"></footer>
+  <script src="../js/footer.js"></script>
 
   <script src="../js/main.js"></script>
 </body>
