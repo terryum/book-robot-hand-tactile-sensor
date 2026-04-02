@@ -740,6 +740,13 @@ def build_references_html(lang_code, bib_path):
         <p class="chapter-summary">{len(refs)} references</p>
       </header>
 {content}
+
+      <section class="acknowledgment-section">
+        <h2>{'감사의 글' if lang_code == 'ko' else 'Acknowledgment'}</h2>
+        <p>{'이 책은 서울대학교와 코스맥스의 공동연구 세미나 자료를 초기 Seed로 하여 만들어졌습니다. 세미나를 준비해주신 하준수, 송지환, 박태준, 정인철 박사과정과 공동연구를 함께해주신 박종우(Frank C. Park), 박용래(Yong-Lae Park), 조규진(Kyujin Cho) 교수님께 감사의 말씀 드립니다.' if lang_code == 'ko' else 'This work was seeded from joint research seminar materials between Seoul National University and Cosmax. Special thanks to Junsoo Ha, Jihwan Song, Taejoon Park, and Incheol Jeong (PhD candidates) for preparing the seminars, and to Professors Frank Chongwoo Park, Yong-Lae Park, and Kyujin Cho for their collaboration.'}</p>
+        <p>{'이 프로젝트는 황민호님의 <a href="https://github.com/revfactory/harness">Harness</a> 스킬을 이용하여 제작되었으며, 웹사이트 구조는 <a href="https://github.com/revfactory/ai-trend-onboarding">AI Trend Onboarding</a>을 참고하였습니다.' if lang_code == 'ko' else 'This project was built using the <a href="https://github.com/revfactory/harness">Harness</a> skill by Minho Hwang, and the site structure was adapted from <a href="https://github.com/revfactory/ai-trend-onboarding">AI Trend Onboarding</a> by Minho Hwang.'}</p>
+        <p>{'이 저작물의 제작에 AI 도구가 활용되었습니다. 문헌 조사, 콘텐츠 생성, 원고 작성에 Claude(Opus 4.6)를, 그림 생성에 /gemini-3-image-generation 스킬(Gemini 3 Pro Image)을 사용하였습니다.' if lang_code == 'ko' else 'AI tools were used in the production of this work: Claude (Opus 4.6) for literature survey, content generation, and manuscript preparation, and the gemini-3-image-generation skill (Gemini 3 Pro Image) for figure generation.'}</p>
+      </section>
     </div>
   </main>
 

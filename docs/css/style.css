@@ -1133,6 +1133,36 @@ pre code {
   line-height: 1.6;
 }
 
+/* --- Acknowledgment Section --- */
+.acknowledgment-section {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.acknowledgment-section h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.acknowledgment-section p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+.acknowledgment-section a {
+  color: var(--accent-part1);
+  text-decoration: none;
+}
+
+.acknowledgment-section a:hover {
+  text-decoration: underline;
+}
+
 /* --- Footer --- */
 .site-footer {
   position: relative;

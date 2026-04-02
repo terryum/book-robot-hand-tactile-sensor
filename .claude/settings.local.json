@@ -87,7 +87,8 @@
       "Bash(NODE_EXTRA_CA_CERTS=/tmp/eprism-ca.pem npx vercel deploy --prod --yes)",
       "WebFetch(domain:api.github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(/Users/terrytaewoongum/.local/bin/tectonic main.tex)"
     ]
   }
 }
