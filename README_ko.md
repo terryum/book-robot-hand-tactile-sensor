@@ -110,6 +110,7 @@ bash scripts/build_pdf.sh en
 <!-- CONTRIBUTORS-START -->
 | Avatar | Contributor | Contributions |
 |:------:|:-----------:|:-------------|
+| <img src="https://github.com/revfactory.png" width="50"> | [@revfactory](https://github.com/revfactory) | :wrench: [Harness](https://github.com/revfactory/harness) 에이전트 프레임워크, :art: [웹 디자인](https://github.com/revfactory/ai-trend-onboarding) 패턴 |
 | <img src="https://github.com/sjchoi86.png" width="50"> | [@sjchoi86](https://github.com/sjchoi86) | :book: Ch02: 상용 촉각 센서 제품 정보 및 3개 신규 센서 카테고리 ([`f6f6e59`](https://github.com/terryum/book-robot-hand-tactile-sensor/commit/f6f6e59)) |
 <!-- CONTRIBUTORS-END -->
 

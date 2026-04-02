@@ -110,6 +110,7 @@ bash scripts/build_pdf.sh en
 <!-- CONTRIBUTORS-START -->
 | Avatar | Contributor | Contributions |
 |:------:|:-----------:|:-------------|
+| <img src="https://github.com/revfactory.png" width="50"> | [@revfactory](https://github.com/revfactory) | :wrench: [Harness](https://github.com/revfactory/harness) agent framework, :art: [Web design](https://github.com/revfactory/ai-trend-onboarding) patterns |
 | <img src="https://github.com/sjchoi86.png" width="50"> | [@sjchoi86](https://github.com/sjchoi86) | :book: Ch02: Commercial tactile sensor products & 3 new sensor categories ([`f6f6e59`](https://github.com/terryum/book-robot-hand-tactile-sensor/commit/f6f6e59)) |
 <!-- CONTRIBUTORS-END -->
 
