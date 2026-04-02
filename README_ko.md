@@ -6,7 +6,7 @@
 
 **웹사이트**: [terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor](https://terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor)
 
-**PDF 다운로드**: [English](https://drive.google.com/file/d/1z5NgFRtOwcWLiZka3bYFnZ-k4Zs7cUa4/view?usp=sharing) | [한글](https://drive.google.com/file/d/1XxPH3N72TOpz2vSSNsrT9C59IUdQpstR/view?usp=sharing) | [ArXiv Paper](https://drive.google.com/file/d/1aF8fDEkFN8vxRfvtyOHLwmz6glowe3f_/view?usp=sharing)
+**PDF 다운로드**: [English](https://github.com/terryum/book-robot-hand-tactile-sensor/raw/main/book/en/tactile_book_en.pdf) | [한글](https://github.com/terryum/book-robot-hand-tactile-sensor/raw/main/book/ko/tactile_book_ko.pdf) | [ArXiv Paper](https://github.com/terryum/book-robot-hand-tactile-sensor/raw/main/paper/main.pdf)
 
 ## 산출물
 
