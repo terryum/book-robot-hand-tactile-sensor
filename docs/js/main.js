@@ -104,6 +104,8 @@
 document.addEventListener('click', function(e) {
   const anchor = e.target.closest('a[href^="#"]');
   if (!anchor) return;
+  // Skip cite-links — handled by chapter.js with highlight + back-link
+  if (anchor.classList.contains('cite-link') || anchor.classList.contains('cite-backlink')) return;
   const targetId = anchor.getAttribute('href').slice(1);
   const target = document.getElementById(targetId);
   if (target) {

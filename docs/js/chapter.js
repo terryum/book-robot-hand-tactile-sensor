@@ -99,16 +99,31 @@ document.addEventListener('DOMContentLoaded', function() {
         const targetId = dot.getAttribute('data-section');
         const target = document.getElementById(targetId);
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const headerOffset = 100;
+          const y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
         }
       });
     });
   }
 
   // --- Citation click: scroll reference to top with offset ---
+  function scrollToWithOffset(el, offset) {
+    const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    // Re-adjust after layout settles (images loading can shift positions)
+    setTimeout(function() {
+      const y2 = el.getBoundingClientRect().top + window.pageYOffset - offset;
+      if (Math.abs(y2 - window.pageYOffset) > 5) {
+        window.scrollTo({ top: y2, behavior: 'smooth' });
+      }
+    }, 600);
+  }
+
   document.querySelectorAll('a.cite-link').forEach((link, idx) => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
+      e.stopPropagation();
       const targetId = this.getAttribute('href').substring(1);
       const target = document.getElementById(targetId);
       if (!target) return;
@@ -119,8 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Scroll reference into view with padding at top
       const headerOffset = 100;
-      const y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      scrollToWithOffset(target, headerOffset);
 
       // Highlight the reference
       target.classList.add('ref-highlight');
@@ -135,10 +149,10 @@ document.addEventListener('DOMContentLoaded', function() {
         backLink.title = 'Back to text';
         backLink.addEventListener('click', function(ev) {
           ev.preventDefault();
+          ev.stopPropagation();
           const backTarget = document.getElementById(backId);
           if (backTarget) {
-            const by = backTarget.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-            window.scrollTo({ top: by, behavior: 'smooth' });
+            scrollToWithOffset(backTarget, headerOffset);
             backTarget.classList.add('cite-back-highlight');
             setTimeout(() => backTarget.classList.remove('cite-back-highlight'), 2000);
           }

@@ -82,7 +82,7 @@
   <figcaption>Figure 3.1: Albini et al.의 촉각 데이터 표현 분류 체계. Source: Albini et al. (2025).</figcaption>
 </figure>
 <h3>3.1.1 벡터 (Vector)</h3>
-<p>가장 단순한 형태로, 각 센서의 측정값을 1차원 벡터로 나열합니다. 다축 센서의 경우 [fx, fy, fz]와 같은 힘 벡터가 됩니다. OSMO 글로브 [2025]의 12개 3축 센서는 36차원 벡터로 촉각 상태를 표현합니다.</p>
+<p>가장 단순한 형태로, 각 센서의 측정값을 1차원 벡터로 나열합니다. 다축 센서의 경우 [fx, fy, fz]와 같은 힘 벡터가 됩니다. OSMO 글로브 <sup><a class="cite-link" href="#ch3-ref-21" title="OSMO, 2025">[21]</a></sup>의 12개 3축 센서는 36차원 벡터로 촉각 상태를 표현합니다.</p>
 <p><strong>적합한 태스크</strong>: 분류(classification), 힘 제어, 미끄러짐 감지</p>
 <p><strong>한계</strong>: 공간 관계 정보 손실</p>
 <h3>3.1.2 행렬 (Matrix)</h3>
@@ -129,10 +129,10 @@
 <h2>3.3 정규 표현과 센서 무관 표현</h2>
 <p>촉각 연구의 근본적 한계 중 하나는 <strong>센서 특이성(sensor specificity)</strong>입니다. GelSight에서 학습한 표현은 DIGIT에서 작동하지 않으며, DIGIT에서 학습한 표현은 ReSkin에서 작동하지 않습니다. 이 문제를 해결하려는 세 가지 주요 접근이 있습니다:</p>
 <h3>3.3.1 AnyTouch / AnyTouch 2 (2025)</h3>
-<p>AnyTouch<sup><a class="cite-link" href="#ch3-ref-7" title="AnyTouch 2025">[7]</a></sup>는 여러 비전 기반 촉각 센서에 걸쳐 정적/동적 촉각의 <strong>통합 표현(unified representation)</strong>을 학습합니다. AnyTouch 2 [2025]는 이를 동적 인지(dynamic perception)로 확장하여, 센서 유형에 무관한 배치(deployment)를 가능하게 합니다.</p>
+<p>AnyTouch<sup><a class="cite-link" href="#ch3-ref-7" title="AnyTouch 2025">[7]</a></sup>는 여러 비전 기반 촉각 센서에 걸쳐 정적/동적 촉각의 <strong>통합 표현(unified representation)</strong>을 학습합니다. AnyTouch 2 <sup><a class="cite-link" href="#ch3-ref-7" title="AnyTouch 2, 2025">[7]</a></sup>는 이를 동적 인지(dynamic perception)로 확장하여, 센서 유형에 무관한 배치(deployment)를 가능하게 합니다.</p>
 <h3>3.3.2 Sensor-Invariant Tactile Representation (2025)</h3>
 <p>광학 센서 설계 간 <strong>제로샷 전이(zero-shot transfer)</strong>를 달성합니다. 센서 특이적 정보를 제거하고 접촉의 본질적 특성만 보존하는 표현을 학습합니다.</p>
-<h3>3.3.3 Canonical 3D Tactile (Wu et al., 2025)</h3>
+<h3>3.3.3 Canonical 3D Tactile <sup><a class="cite-link" href="#ch3-ref-9" title="Wu et al., 2025">[9]</a></sup></h3>
 <p>센서의 원시 출력을 3D 정규 좌표계로 변환하여, 센서에 독립적인 촉각 표현을 구축합니다. 태스크 무관 play data 사전학습과 결합하여, 소수 시연으로의 전이를 가능하게 합니다.</p>
 <blockquote class=""><strong>핵심 관점</strong>: 센서 무관 표현은 촉각의 "CLIP 순간"을 향한 핵심 방향입니다 — 시각-언어에서 CLIP이 달성한 것처럼, 다양한 촉각 센서의 출력을 통합된 임베딩 공간에 정렬하는 것이 궁극적 목표입니다.</blockquote>
 <figure>
@@ -276,7 +276,7 @@
 <blockquote class="key-paper"><strong>핵심 논문</strong>: Yang, F., Feng, C., Chen, Z., Park, H., Wang, D., Dou, Y., ... & Wong, A. (2024). "Binding Touch to Everything: Learning Unified Multimodal Tactile Representations." <em>CVPR 2024</em>.
 대조 학습으로 촉각을 시각, 언어, 오디오와 정렬하여 교차 모달 검색과 제로샷 분류를 달성합니다.</blockquote>
 <h3>Tactile Sensing for Dexterous Manipulation (2024)</h3>
-<p>이 서베이 [2024]는 촉각 센싱, 데이터셋, 시뮬레이션-현실 전이를 포괄적으로 다루며, 본 챕터에서 다룬 데이터 표현, 수집, 사전학습의 전체 맥락을 제공합니다.</p>
+<p>이 서베이 <sup><a class="cite-link" href="#ch3-ref-17" title="Tactile sensing survey, 2024">[17]</a></sup>는 촉각 센싱, 데이터셋, 시뮬레이션-현실 전이를 포괄적으로 다루며, 본 챕터에서 다룬 데이터 표현, 수집, 사전학습의 전체 맥락을 제공합니다.</p>
 <figure>
   <a href="../assets/figures/ch03/fig_3_6_foundation_models_technical.png" target="_blank"><img src="../assets/figures/ch03/fig_3_6_foundation_models_darkmode.png" alt="Figure 3.6: 촉각 Foundation Model의 구조 — Sparsh(자기지도)와 UniTouch(대조 학습)의 비교." loading="lazy" onerror="this.src='../assets/figures/ch03/fig_3_6_foundation_models_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 3.6: 촉각 Foundation Model의 구조 — Sparsh(자기지도)와 UniTouch(대조 학습)의 비교.</figcaption>

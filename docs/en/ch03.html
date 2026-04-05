@@ -129,10 +129,10 @@ Point cloud-based tactile representation with teacher-student RL for visuotactil
 <h2>3.3 Canonical and Sensor-Agnostic Representations</h2>
 <p>A fundamental limitation of tactile research is <strong>sensor specificity</strong>: representations learned on GelSight do not work on DIGIT; those from DIGIT do not transfer to ReSkin. Three main approaches address this problem:</p>
 <h3>3.3.1 AnyTouch / AnyTouch 2 (2025)</h3>
-<p>AnyTouch<sup><a class="cite-link" href="#ch3-ref-7" title="AnyTouch 2025">[7]</a></sup> learns <strong>unified representations</strong> of static and dynamic touch across multiple vision-based tactile sensors. AnyTouch 2 [2025] extends this to dynamic perception, enabling sensor-agnostic deployment.</p>
+<p>AnyTouch<sup><a class="cite-link" href="#ch3-ref-7" title="AnyTouch 2025">[7]</a></sup> learns <strong>unified representations</strong> of static and dynamic touch across multiple vision-based tactile sensors. AnyTouch 2 <sup><a class="cite-link" href="#ch3-ref-7" title="AnyTouch 2, 2025">[7]</a></sup> extends this to dynamic perception, enabling sensor-agnostic deployment.</p>
 <h3>3.3.2 Sensor-Invariant Tactile Representation (2025)</h3>
 <p>Achieves <strong>zero-shot transfer</strong> across optical sensor designs by learning representations that strip sensor-specific information while preserving essential contact characteristics.</p>
-<h3>3.3.3 Canonical 3D Tactile (Wu et al., 2025)</h3>
+<h3>3.3.3 Canonical 3D Tactile <sup><a class="cite-link" href="#ch3-ref-9" title="Wu et al., 2025">[9]</a></sup></h3>
 <p>Transforms raw sensor output into a 3D canonical coordinate frame, constructing sensor-independent tactile representations. Combined with task-agnostic play data pretraining, it enables transfer from few demonstrations.</p>
 <blockquote class=""><strong>Key Insight</strong>: Sensor-agnostic representations are the path toward tactile sensing's "CLIP moment" — the ultimate goal is aligning outputs from diverse tactile sensors into a unified embedding space, just as CLIP did for vision-language.</blockquote>
 <figure>
@@ -276,7 +276,7 @@ Self-supervised tactile foundation model pretrained on 460K+ images from multipl
 <blockquote class="key-paper"><strong>Key Paper</strong>: Yang, F., Feng, C., Chen, Z., Park, H., Wang, D., Dou, Y., ... & Wong, A. (2024). "Binding Touch to Everything: Learning Unified Multimodal Tactile Representations." <em>CVPR 2024</em>.
 Contrastive learning aligning touch with vision, language, and audio for cross-modal retrieval and zero-shot classification.</blockquote>
 <h3>Tactile Sensing for Dexterous Manipulation Survey (2024)</h3>
-<p>This survey [2024] comprehensively covers tactile sensing, datasets, and sim-to-real transfer, providing the full context for the data representation, collection, and pretraining topics in this chapter.</p>
+<p>This survey <sup><a class="cite-link" href="#ch3-ref-17" title="Tactile sensing survey, 2024">[17]</a></sup> comprehensively covers tactile sensing, datasets, and sim-to-real transfer, providing the full context for the data representation, collection, and pretraining topics in this chapter.</p>
 <figure>
   <a href="../assets/figures/ch03/fig_3_6_foundation_models_technical.png" target="_blank"><img src="../assets/figures/ch03/fig_3_6_foundation_models_darkmode.png" alt="Figure 3.6: Tactile foundation model architectures — Sparsh (self-supervised) vs. UniTouch (contrastive learning)." loading="lazy" onerror="this.src='../assets/figures/ch03/fig_3_6_foundation_models_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 3.6: Tactile foundation model architectures — Sparsh (self-supervised) vs. UniTouch (contrastive learning).</figcaption>
