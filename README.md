@@ -4,6 +4,8 @@ English | [한국어](README_ko.md)
 
 A bilingual (Korean/English) book and IEEE survey paper covering tactile sensing, robot hand design, learning-based manipulation, and Physical AI — from foundations to industrial outlook.
 
+**First published**: 2026-04-01 | **Last updated**: 2026-04-07
+
 **Live Website**: [terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor](https://terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor)
 
 **PDF Download**: [English](https://github.com/terryum/book-robot-hand-tactile-sensor/raw/main/book/en/tactile_book_en.pdf) | [한글](https://github.com/terryum/book-robot-hand-tactile-sensor/raw/main/book/ko/tactile_book_ko.pdf) | [ArXiv Paper](https://github.com/terryum/book-robot-hand-tactile-sensor/raw/main/paper/main.pdf)
@@ -102,6 +104,18 @@ bash scripts/build_pdf.sh en
     ├── agents/      # 7 agents (researcher, writer, illustrator, etc.)
     └── skills/      # 7 skills (literature-research, web-build, etc.)
 ```
+
+## Changelog
+
+### 2026-04-07: Human-to-Robot Transfer Survey Update
+Based on a survey of 40+ papers (2024-2026), major updates across 7 chapters:
+- **Ch10 (Embodiment Retargeting)**: Restructured from 6 to 8 sections. Added §10.6 Human+Robot Co-training (EgoMimic, EgoScale, AoE, pi0) and §10.7 Teleop-Free Approaches (X-Sim, EgoZero, VidBot, Human2Bot). 14 new papers.
+- **Ch06 (Human Hand Data)**: Added TacCap, VTDexManip, AirExo/AirExo-2, NuExo, HumanoidExo, ACE, EgoDex. 8 new papers.
+- **Ch13 (Limitations & Future)**: Updated data scarcity limitation with EgoScale scaling law, cross-embodiment progress, egocentric data trends.
+- **Ch03, Ch07, Ch08, Ch09**: Added VTDexManip, EgoDex, LAPA, Ye et al., pi0 human transfer, EgoVLA, PhysBrain, DexWM.
+
+### 2026-04-01: Initial Release
+First publication with 13 chapters, 146 references, 222 illustrations, IEEE survey paper, and bilingual web viewer.
 
 ## Contributors
 

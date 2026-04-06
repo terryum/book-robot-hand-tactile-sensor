@@ -4,6 +4,8 @@
 
 촉각 센서, 로봇 핸드 설계, 학습 기반 조작, Physical AI를 아우르는 한국어/영어 이중 언어 기술 서적 및 IEEE 서베이 논문입니다.
 
+**최초 발행**: 2026-04-01 | **최종 업데이트**: 2026-04-07
+
 **웹사이트**: [terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor](https://terry.artlab.ai/ko/projects/book-robot-hand-tactile-sensor)
 
 **PDF 다운로드**: [English](https://github.com/terryum/book-robot-hand-tactile-sensor/raw/main/book/en/tactile_book_en.pdf) | [한글](https://github.com/terryum/book-robot-hand-tactile-sensor/raw/main/book/ko/tactile_book_ko.pdf) | [ArXiv Paper](https://github.com/terryum/book-robot-hand-tactile-sensor/raw/main/paper/main.pdf)
@@ -102,6 +104,18 @@ bash scripts/build_pdf.sh en
     ├── agents/      # 7개 에이전트 (researcher, writer, illustrator 등)
     └── skills/      # 7개 스킬 (literature-research, web-build 등)
 ```
+
+## 변경 이력
+
+### 2026-04-07: Human-to-Robot Transfer 서베이 업데이트
+2024-2026년 40+편 논문 서베이를 기반으로 7개 챕터 대규모 업데이트:
+- **Ch10 (Embodiment Retargeting)**: 6절 → 8절로 재구성. §10.6 Human+Robot Co-training (EgoMimic, EgoScale, AoE, pi0), §10.7 Teleop-Free 접근 (X-Sim, EgoZero, VidBot, Human2Bot) 신규. 14편 추가.
+- **Ch06 (사람 손 데이터 수집)**: TacCap, VTDexManip, AirExo/AirExo-2, NuExo, HumanoidExo, ACE, EgoDex 추가. 8편 추가.
+- **Ch13 (한계와 미래)**: EgoScale 스케일링 법칙으로 데이터 부족 한계 업데이트, cross-embodiment 진전, egocentric 데이터 트렌드.
+- **Ch03, Ch07, Ch08, Ch09**: VTDexManip, EgoDex, LAPA, Ye et al., pi0 human transfer, EgoVLA, PhysBrain, DexWM 추가.
+
+### 2026-04-01: 최초 릴리스
+13챕터, 146편 참고문헌, 222개 일러스트, IEEE 서베이 논문, 이중 언어 웹 뷰어 최초 공개.
 
 ## Contributors
 
