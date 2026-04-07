@@ -136,7 +136,7 @@
 <p>These sensors image the deformation of a transparent gel or elastomer using an embedded camera, extracting contact information from the resulting images. This approach has become the <strong>dominant paradigm</strong> in tactile robotics research — discussed in detail in Section 2.2.</p>
 <h3>2.1.4 Magnetic</h3>
 <p>Combinations of magnets with Hall-effect or magnetoresistive sensors measure deformation. ReSkin <sup><a class="cite-link" href="#ch2-ref-7" title="Bhirangi et al., 2021">[7]</a></sup> introduced a magnetic elastomer tactile skin costing less than $6 per unit, 2-3 mm thick, and durable for 50,000+ interactions. The key innovation is separating electronics from the passive sensing surface. AnySkin <sup><a class="cite-link" href="#ch2-ref-8" title="Bhirangi et al., 2024">[8]</a></sup> advanced this idea to achieve <strong>12-second replacement</strong> without recalibration, maintaining 92% slip detection accuracy.</p>
-<blockquote class="key-paper"><strong>Key Paper</strong>: Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). "ReSkin: Versatile, Replaceable, Lasting Tactile Skins." <em>arXiv preprint</em>.
+<blockquote class="key-paper"><strong>Key Paper</strong>: Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). "ReSkin: Versatile, Replaceable, Lasting Tactile Skin <a href="https://terry.artlab.ai/en/posts/2407-tactile-skin-inhand-translation">#13</a>s." <em>arXiv preprint</em>.
 A magnetic elastomer-based, low-cost ($6/unit), replaceable tactile skin offering a practical answer to the sensor durability challenge in industrial settings.</blockquote>
 <p><strong>Commercial Products</strong>:</p>
 <table class="styled-table">
@@ -156,7 +156,7 @@ A magnetic elastomer-based, low-cost ($6/unit), replaceable tactile skin offerin
 <ul>
 <li><strong>XELA uSkin</strong>: Three-axis tactile sensing in a thin, soft package. Up to 64 sensing points per module, 0.1 gf resolution, 500 Hz sampling, measuring both shear and normal forces per sensing point.</li>
 </ul>
-<p>The OSMO glove<sup><a class="cite-link" href="#ch2-ref-27" title="glove 2025">[27]</a></sup> uses 12 three-axis magnetic sensors to simultaneously measure normal and shear forces, with MuMetal shielding to suppress external magnetic interference (<a href="ch06.html">Chapter 6.3</a>).</p>
+<p>The OSMO glove<sup><a class="cite-link" href="#ch2-ref-27" title="glove 2025">[27]</a></sup> <a href="https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove">#18</a> uses 12 three-axis magnetic sensors to simultaneously measure normal and shear forces, with MuMetal shielding to suppress external magnetic interference (<a href="ch06.html">Chapter 6.3</a>).</p>
 <h3>2.1.5 Piezoelectric</h3>
 <p>Piezoelectric materials (PZT, PVDF) generate charge under deformation. These sensors excel at detecting dynamic changes — vibration and texture — rather than static forces, serving as functional analogs of Pacinian corpuscles. Combined with energy harvesting, self-powered sensors become feasible <sup><a class="cite-link" href="#ch2-ref-12" title="Yu et al., 2025">[12]</a></sup>.</p>
 <p><strong>Commercial Products</strong>:</p>
@@ -350,7 +350,7 @@ The foundational paper for photometric stereo-based high-resolution 3D tactile s
 <h3>Modularized GelSight Design (2025)</h3>
 <p>Agarwal et al.<sup><a class="cite-link" href="#ch2-ref-6" title="al. 2025">[6]</a></sup> proposed a systematic modular design framework for GelSight-family sensors (<em>IJRR</em>), enabling application-specific customization by combining gel materials, illumination layouts, camera positions, and housings as modular units.</p>
 <h3>Limitations of Vision-Based Sensors</h3>
-<p>The primary limitation is <strong>durability</strong>. Gel surfaces wear with repeated contact; light sources degrade; dust infiltration and cleaning difficulties constrain long-term industrial operation. When the F-TAC Hand<sup><a class="cite-link" href="#ch2-ref-15" title="Hand 2025">[15]</a></sup> placed 17 sensors across the hand, it also created 17 potential failure points. AnySkin's <sup><a class="cite-link" href="#ch2-ref-8" title="Bhirangi et al., 2024">[8]</a></sup> 12-second replacement approach offers one practical remedy (<a href="ch13.html">Chapter 13.1</a>).</p>
+<p>The primary limitation is <strong>durability</strong>. Gel surfaces wear with repeated contact; light sources degrade; dust infiltration and cleaning difficulties constrain long-term industrial operation. When the F-TAC Hand<sup><a class="cite-link" href="#ch2-ref-15" title="Hand 2025">[15]</a></sup> placed 17 sensors across the hand, it also created 17 potential failure points. AnySkin's [2024] 12-second replacement approach offers one practical remedy (<a href="ch13.html">Chapter 13.1</a>).</p>
 <figure>
   <a href="../assets/figures/ch02/fig_2_3_photometric_stereo_technical.png" target="_blank"><img src="../assets/figures/ch02/fig_2_3_photometric_stereo_darkmode.png" alt="Figure 2.3: Operating principle of vision-based tactile sensors — photometric stereo-based 3D contact map reconstruction." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_3_photometric_stereo_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 2.3: Operating principle of vision-based tactile sensors — photometric stereo-based 3D contact map reconstruction.</figcaption>
@@ -493,7 +493,7 @@ A comprehensive review of force measurement approaches in vision-based tactile s
   <li id="ch2-ref-4" value="4">Lambeta, M., Chou, P.-W., Tian, S., Yang, B., Maloon, B., Most, V. R., ... & Calandra, R. (2020). DIGIT: A novel design for a low-cost compact high-resolution tactile sensor with application to in-hand manipulation. <em>IEEE Robotics and Automation Letters</em>, 5(3), 3838-3845.</li>
   <li id="ch2-ref-5" value="5">Lambeta, M., Wu, T., Sengul, A., & Calandra, R. (2024). Digitizing touch with an artificial multimodal fingertip (Digit 360). <em>arXiv preprint</em>, arXiv:2411.02834.</li>
   <li id="ch2-ref-6" value="6">Agarwal, A., Mirzaee, M. A., Sun, X., & Yuan, W. (2025). A modularized design approach for GelSight family of vision-based tactile sensors. <em>International Journal of Robotics Research</em>. https://doi.org/10.1177/02783649251339680</li>
-  <li id="ch2-ref-7" value="7">Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). ReSkin: Versatile, replaceable, lasting tactile skins. <em>arXiv preprint</em>, arXiv:2111.00071.</li>
+  <li id="ch2-ref-7" value="7">Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). ReSkin: Versatile, replaceable, lasting tactile skins. <em>arXiv preprint</em>, arXiv:2111.00071. [#13](https://terry.artlab.ai/en/posts/2407-tactile-skin-inhand-translation)</li>
   <li id="ch2-ref-8" value="8">Bhirangi, R., Pattabiraman, V., Norcross, E., Shocher, A., & Pinto, L. (2024). AnySkin: Plug-and-play skin sensing for robotic touch. <em>ICRA 2025</em>. arXiv:2409.08276.</li>
   <li id="ch2-ref-9" value="9">Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
   <li id="ch2-ref-10" value="10">Murphy, L., et al. (2025). Capacitive tactile sensing for teaching by demonstration. <em>arXiv preprint</em>.</li>
@@ -513,7 +513,7 @@ A comprehensive review of force measurement approaches in vision-based tactile s
   <li id="ch2-ref-24" value="24">Lach, L., et al. (2023). Tactile-based object orientation detection for blind manipulation. <em>arXiv preprint</em>.</li>
   <li id="ch2-ref-25" value="25">Cho, W., et al. (2025). Multi-dimensional tactile sensing for force/noise decoupling. <em>ACS Applied Materials & Interfaces</em>.</li>
   <li id="ch2-ref-26" value="26">Various. (2025). Recent advances in tactile sensing technologies for human-robot interaction. <em>Sensors International</em>. https://doi.org/10.1016/j.sintl.2025.100345</li>
-  <li id="ch2-ref-27" value="27">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920.</li>
+  <li id="ch2-ref-27" value="27">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920. [#18](https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove)</li>
   <li id="ch2-ref-28" value="28">Albini, A., Kaboli, M., Cannata, G., & Maiolino, P. (2025). Representing data in robotic tactile perception — A review. <em>arXiv preprint</em> (submitted to IEEE Trans. Robot.). arXiv:2510.10804.</li>
   <li id="ch2-ref-29" value="29">Choi, S. (Korea University). (2026). Commercial tactile sensor survey. https://www.notion.so/2026-03-26-Tactile-sensors-32f13b6f5ea48054a5e3f4cee07f00c6</li>
 </ol>

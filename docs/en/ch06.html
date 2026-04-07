@@ -32,11 +32,11 @@
     </a>
     <a class="nav-dot" data-section="sec-6-4">
       <span class="dot"></span>
-      <span class="label">6.4 Exoskeleton Approaches: DexUMI,...</span>
+      <span class="label">6.4 Exoskeleton Approaches: DexUMI ...</span>
     </a>
     <a class="nav-dot" data-section="sec-6-5">
       <span class="dot"></span>
-      <span class="label">6.5 Learning from Internet Videos a...</span>
+      <span class="label">6.5 Large-Scale Data: From Internet...</span>
     </a>
     <a class="nav-dot" data-section="sec-6-6">
       <span class="dot"></span>
@@ -58,17 +58,17 @@
         <h1>Chapter 6: Human Hand Data Collection — Teaching by Demonstration</h1>
         <div class="chapter-meta">
           <span>Written: 2026-04-01</span>
-          <span>Last updated: 2026-04-01</span>
+          <span>Last updated: 2026-04-07</span>
         </div>
       </header>
 
 <section id="sec-overview" class="content-section">
 <h2>Overview</h2>
-<p>The most intuitive way to teach robots to manipulate is to <strong>show them human demonstrations</strong>. Yet transferring the 27-DoF motion and tactile information of the human hand to a robot presents fundamental challenges. This chapter covers human hand modeling (MANO), motion tracking gloves, tactile gloves, exoskeletons, and teleoperation systems, surveying the data pipeline from human to robot.</p>
+<p>The most intuitive way to teach robots to manipulate is to <strong>show them human demonstrations</strong>. Yet transferring the 27-DoF motion and tactile information of the human hand to a robot presents fundamental challenges. This chapter covers human hand modeling (MANO <a href="https://terry.artlab.ai/en/posts/2201-mano-hand-model">#17</a>), motion tracking gloves, tactile gloves, exoskeletons, and teleoperation systems, surveying the data pipeline from human to robot.</p>
 <blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
 - Describe the MANO hand model's structure and applications.
 - Compare the characteristics of major motion tracking gloves.
-- Understand tactile glove designs (STAG, OSMO) and their cross-embodiment potential.
+- Understand tactile glove designs (STAG, OSMO <a href="https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove">#18</a>) and their cross-embodiment potential.
 - Evaluate the strengths and limitations of exoskeleton and teleoperation approaches.</blockquote>
 <hr>
 </section>
@@ -139,7 +139,7 @@ A 9-sensor eGaIn glove adapting to all hand sizes. The 4.02 mm fingertip error i
   <figcaption>Figure 6.2: Motion tracking glove comparison.</figcaption>
 </figure>
 <h3>Korean Research: ML-Based Wearable Sensors</h3>
-<p>Seoul National University research <sup><a class="cite-link" href="#ch6-ref-21" title="SNU, 2024">[21]</a></sup> implemented real-time hand motion recognition with ML-based wearable sensors, bridging the gap between lab research and practical applications.</p>
+<p>Seoul National University research [2024, <em>PMC</em>] implemented real-time hand motion recognition with ML-based wearable sensors, bridging the gap between lab research and practical applications.</p>
 <hr>
 </section>
 <section id="sec-6-3" class="content-section">
@@ -168,12 +168,30 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
   <a href="../assets/figures/ch06/fig_6_3_osmo_bridge_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_3_osmo_bridge_darkmode.png" alt="Figure 6.3: OSMO glove's Embodiment Bridge concept. Source: OSMO (2025)." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_3_osmo_bridge_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 6.3: OSMO glove's Embodiment Bridge concept. Source: OSMO (2025).</figcaption>
 </figure>
+<h3>TacCap (2025)</h3>
+<p>TacCap [arXiv, Mar 2025] implements FBG (Fiber Bragg Grating) optical tactile sensors in a fingertip thimble form factor:</p>
+<ul>
+<li><strong>FBG fiber-optic tactile sensors</strong>: High sensitivity and fast response</li>
+<li><strong>Mountable on both human and robot fingers</strong>: Cross-embodiment approach similar to OSMO</li>
+<li><strong>EMI immune (electromagnetic interference immune)</strong>: Fully immune to electromagnetic interference due to optical sensing — usable in MRI environments or near strong electromagnetic fields</li>
+<li>Thimble form factor for easy attachment to existing gloves or robot fingertips</li>
+</ul>
+<blockquote class="">TacCap occupies a complementary position to OSMO's magnetic sensors. In environments where magnetic sensors are vulnerable to external fields, FBG optical sensing provides a robust alternative.</blockquote>
+<h3>VTDexManip (2025)</h3>
+<p>VTDexManip [ICLR 2025] is the first large-scale visual-tactile human demonstration dataset:</p>
+<ul>
+<li><strong>565,000 frames</strong>: Simultaneous visual and tactile data collection</li>
+<li><strong>10 tasks, 182 objects</strong>: Covering diverse manipulation scenarios</li>
+<li><strong>First visual-tactile human demonstration dataset</strong>: While prior datasets provided either visual or tactile data, this integrates both modalities</li>
+<li>Serves as a benchmark for cross-embodiment policy learning</li>
+</ul>
+<blockquote class="">VTDexManip provides a concrete answer to "how to utilize demonstration data collected with tactile gloves." The 565K frames represent sufficient scale for large-scale imitation learning.</blockquote>
 <h3>FSR Optimization</h3>
 <p>Tang et al.<sup><a class="cite-link" href="#ch6-ref-5" title="al. 2025">[5]</a></sup> and Chen et al.<sup><a class="cite-link" href="#ch6-ref-5" title="al. 2025">[5]</a></sup> addressed the optimal placement of FSR sensors, exploring how to extract maximum information from limited sensors — answering the "high spatial resolution vs. optimized sensor count/position" trade-off.</p>
 <hr>
 </section>
 <section id="sec-6-4" class="content-section">
-<h2>6.4 Exoskeleton Approaches: DexUMI, ExoStart, DEXOP</h2>
+<h2>6.4 Exoskeleton Approaches: DexUMI <a href="https://terry.artlab.ai/en/posts/2505-dexumi">#8</a>, ExoStart <a href="https://terry.artlab.ai/en/posts/2506-exostart">#9</a>, DEXOP <a href="https://terry.artlab.ai/en/posts/2509-dexop">#10</a></h2>
 <p>Exoskeletons mechanically connect to the human hand, directly capturing motion.</p>
 <h3>DexUMI (2025)</h3>
 <p>Xu et al.<sup><a class="cite-link" href="#ch6-ref-5" title="al. 2025">[5]</a></sup> — "Human Hand as Universal Interface":</p>
@@ -204,14 +222,60 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
 <li>Direct contact feedback</li>
 <li><strong>51.3% vs. 42.5%</strong> success (vs. teleoperation)</li>
 </ul>
-<blockquote class=""><strong>Key Perspective</strong>: DexUMI, ExoStart, and DEXOP each bridge the human-robot gap differently, but all share the goal of overcoming <strong>teleoperation's throughput bottleneck (~10 demos/hr)</strong>.</blockquote>
+<h3>AirExo / AirExo-2 (SJTU, 2024-2025)</h3>
+<p>AirExo [ICRA 2024] and AirExo-2 [CoRL 2025] are low-cost passive exoskeletons developed at Shanghai Jiao Tong University:</p>
+<ul>
+<li><strong>Approximately $300 fabrication cost</strong>: Constructed from 3D-printed parts and low-cost sensors</li>
+<li><strong>Passive actuation</strong>: Records human motion without motors</li>
+<li><strong>In-the-wild human demonstration collection</strong>: Enables data capture outside laboratory settings in everyday environments</li>
+<li>Key finding from AirExo-2: <strong>3 min teleop + in-the-wild data >= 20 min teleop only</strong> — empirically demonstrating that expensive teleoperation data can be supplemented or replaced by natural environment demonstrations</li>
+<li>Full upper-body exoskeleton covering both arm and hand</li>
+</ul>
+<blockquote class="">The AirExo series exemplifies the <strong>democratization of data collection</strong>. The finding that in-the-wild data from a $300 exoskeleton can complement or replace costly teleoperation data presents a new solution to the scalability problem of robot learning data.</blockquote>
+<h3>ACE (UCSD, CoRL 2024)</h3>
+<p>ACE [CoRL 2024] is a universal teleoperation interface developed at the University of California San Diego:</p>
+<ul>
+<li><strong>Hand-facing camera + exoskeleton</strong>: Tracks finger poses via hand-facing camera while capturing arm motion through the exoskeleton</li>
+<li><strong>Single system supports diverse robot platforms</strong>: Enables teleoperation of humanoids, robot arms, grippers, and quadrupeds</li>
+<li>Cross-embodiment switching occurs at the software level, requiring no hardware changes</li>
+<li>Intuitive operation: Natural human motions map directly to robot actions</li>
+</ul>
+<blockquote class="">ACE's key contribution is enabling <strong>control of any robot through a single interface</strong>. This maximizes the reusability of collected human demonstration data.</blockquote>
+<h3>NuExo (Nubot Lab, ICRA 2025)</h3>
+<p>NuExo [ICRA 2025] is an active exoskeleton system developed at Nubot Lab:</p>
+<ul>
+<li><strong>5.2 kg backpack-style active exoskeleton</strong>: Motor-driven with haptic feedback</li>
+<li><strong>100% upper-limb ROM (Range of Motion)</strong>: Captures the full range of human upper-limb motion without restriction</li>
+<li><strong>Successful 2.5 mm screw tightening</strong>: Performs extremely precise manipulation tasks remotely</li>
+<li>Backpack form factor ensures mobility across diverse environments</li>
+</ul>
+<blockquote class="">NuExo takes the opposite approach from passive exoskeletons (AirExo). Active actuation and haptic feedback push the <strong>upper bound of precision</strong>, specializing in fine manipulation demonstration collection.</blockquote>
+<h3>HumanoidExo (NUDT, 2025)</h3>
+<p>HumanoidExo [arXiv, Oct 2025] is a full-body exoskeleton developed at the National University of Defense Technology (NUDT):</p>
+<ul>
+<li><strong>Lightweight exoskeleton + LiDAR</strong>: Exoskeleton captures upper body/arm motion; LiDAR captures lower body/locomotion trajectories</li>
+<li><strong>Full-body trajectory collection</strong>: Simultaneously records upper-limb manipulation and lower-limb locomotion</li>
+<li><strong>Locomotion learning from exoskeleton data alone</strong>: Directly learns locomotion policies from human demonstrations without separate gait simulation</li>
+<li>Optimized for full-body teleoperation of humanoid robots</li>
+</ul>
+<blockquote class="">HumanoidExo extends the application scope of exoskeletons <strong>from hands/arms to the entire body</strong>. As humanoid robots approach commercialization, the importance of full-body demonstration collection infrastructure is growing.</blockquote>
+<blockquote class=""><strong>Key Perspective</strong>: DexUMI, ExoStart, and DEXOP each bridge the human-robot gap differently, but all share the goal of overcoming <strong>teleoperation's throughput bottleneck (~10 demos/hr)</strong>. AirExo addresses cost barriers, ACE tackles platform compatibility, NuExo pushes precision limits, and HumanoidExo enables full-body applications.</blockquote>
 <hr>
 </section>
 <section id="sec-6-5" class="content-section">
-<h2>6.5 Learning from Internet Videos and Large-Scale Data</h2>
+<h2>6.5 Large-Scale Data: From Internet Videos to Egocentric Capture</h2>
 <p>Shaw et al. [2024, CMU] proposed extracting human hand motions from internet videos and retargeting them to robot hands. The potential lies in <strong>scalability</strong> — millions of hand manipulation videos exist online, and converting them to robot learning data could fundamentally solve the teleoperation bottleneck.</p>
 <p>ImMimic <sup><a class="cite-link" href="#ch6-ref-14" title="Liu et al., 2025">[14]</a></sup> augments data by interpolating between large-scale human trajectories and a few teleoperation trajectories. As discussed in Seminar 1, this represents the direction of <strong>synergistically using human data instead of expensive teleop data</strong> (<a href="ch10.html">Chapter 10.2</a>).</p>
 <p>DexH2R<sup><a class="cite-link" href="#ch6-ref-15" title="DexH2R 2024">[15]</a></sup> implements task-oriented human-to-robot dexterous transfer, mapping the intent of human demonstrations to robot actions.</p>
+<h3>EgoDex (Apple, 2025)</h3>
+<p>EgoDex [Apple, 2025] is a large-scale egocentric hand manipulation dataset leveraging Apple Vision Pro and ARKit:</p>
+<ul>
+<li><strong>829 hours, 90M (90 million) frames</strong>: The largest hand manipulation dataset to date</li>
+<li><strong>194 tasks</strong>: Spanning from everyday object manipulation to tool use</li>
+<li><strong>30 Hz per-finger tracking</strong>: Real-time 3D trajectory recording for each finger via ARKit hand tracking</li>
+<li>Collected with consumer hardware (Apple Vision Pro), ensuring scalability</li>
+</ul>
+<blockquote class="">EgoDex opens a <strong>new middle ground</strong> between internet video and teleoperation approaches. It is as large-scale as video data while providing accurate 3D finger trajectories like teleoperation. The 829-hour scale exceeds existing robot demonstration datasets by orders of magnitude, approaching the data volume required for foundation model training.</blockquote>
 <figure>
   <a href="../assets/figures/ch06/fig_6_5_collection_spectrum_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_5_collection_spectrum_darkmode.png" alt="Figure 6.5: Spectrum of human hand data collection methods." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_5_collection_spectrum_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 6.5: Spectrum of human hand data collection methods.</figcaption>
@@ -293,6 +357,34 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
 <td>Low</td>
 </tr>
 <tr>
+<td>AirExo</td>
+<td>Passive exoskeleton</td>
+<td>None</td>
+<td>High (in-the-wild)</td>
+<td>Very low (~$300)</td>
+</tr>
+<tr>
+<td>ACE</td>
+<td>Camera+exoskeleton</td>
+<td>None</td>
+<td>Baseline</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>NuExo</td>
+<td>Active exoskeleton</td>
+<td>Yes (haptic)</td>
+<td>Baseline</td>
+<td>High</td>
+</tr>
+<tr>
+<td>EgoDex</td>
+<td>Vision Pro + ARKit</td>
+<td>None</td>
+<td>Very high (829h)</td>
+<td>Medium</td>
+</tr>
+<tr>
 <td>Internet video</td>
 <td>None (observation)</td>
 <td>None</td>
@@ -305,6 +397,7 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
 <section id="sec-summary-and-outlook" class="content-section">
 <h2>Summary and Outlook</h2>
 <p>Human hand data collection sits on a trade-off between <strong>throughput</strong> and <strong>data quality</strong>. Teleoperation provides high quality but scales poorly at ~10 demos/hr; internet video offers unlimited scale but lacks action labels and tactile information. The OSMO glove's Embodiment Bridge and DEXOP's mechanical coupling propose new solutions to this trade-off.</p>
+<p>AirExo's $300 passive exoskeleton and EgoDex's 829-hour Vision Pro dataset are simultaneously advancing <strong>democratization and scaling</strong> of data collection. Furthermore, VTDexManip's 565K-frame visual-tactile dataset and TacCap's EMI-immune FBG sensors are accelerating the practical deployment of tactile-inclusive demonstration collection.</p>
 <p>NVIDIA Isaac Teleop + MANUS standardization, internet video mining at scale, and extending synthetic data (780K trajectories/11 hours) to the tactile domain are the key directions for resolving the data bottleneck.</p>
 <p>The next chapter examines <strong>how robots learn to manipulate</strong> from such collected data (<a href="ch07.html">Chapter 7: Learning to Manipulate</a>).</p>
 <hr>
@@ -321,10 +414,10 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
   <li id="ch6-ref-2" value="2">Various. (2024). Stretchable liquid-metal sensor glove. <em>Nature Communications</em>. https://doi.org/10.1038/s41467-024-50101-w</li>
   <li id="ch6-ref-3" value="3">Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
   <li id="ch6-ref-4" value="4">Ruppel, P., et al. (2024). Reduced tactile sensor array for grasp analysis. <em>Sensors</em>.</li>
-  <li id="ch6-ref-5" value="5">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920.</li>
-  <li id="ch6-ref-6" value="6">Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>.</li>
-  <li id="ch6-ref-7" value="7">Si, Z., et al. (2025). ExoStart: From 10 exoskeleton demos to dexterous robot manipulation.</li>
-  <li id="ch6-ref-8" value="8">Fang, H.-S., Romero, B., Xie, Y., et al. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441.</li>
+  <li id="ch6-ref-5" value="5">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920. [#18](https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove)</li>
+  <li id="ch6-ref-6" value="6">Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>. [#8](https://terry.artlab.ai/en/posts/2505-dexumi)</li>
+  <li id="ch6-ref-7" value="7">Si, Z., et al. (2025). ExoStart: From 10 exoskeleton demos to dexterous robot manipulation. [#9](https://terry.artlab.ai/en/posts/2506-exostart)</li>
+  <li id="ch6-ref-8" value="8">Fang, H.-S., Romero, B., Xie, Y., et al. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441. [#10](https://terry.artlab.ai/en/posts/2509-dexop)</li>
   <li id="ch6-ref-9" value="9">Qin, Y., et al. (2023). AnyTeleop: A general vision-based dexterous robot hand-arm teleoperation system. <em>RSS 2023</em>.</li>
   <li id="ch6-ref-10" value="10">Handa, A., & Van Wyk, K. (2020). DexPilot: Vision-based teleoperation for dexterous manipulation. <em>ICRA 2020</em>.</li>
   <li id="ch6-ref-11" value="11">Ding, Z., et al. (2024). Bunny-VisionPro: Real-time bimanual dexterous teleoperation for imitation learning. <em>arXiv preprint</em>. arXiv:2407.03162.</li>
@@ -338,6 +431,14 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
   <li id="ch6-ref-19" value="19">Tang, M., et al. (2025). FSR sensor optimization for grasp classification. <em>IEEE Journal of Biomedical and Health Informatics</em>.</li>
   <li id="ch6-ref-20" value="20">Chen, H., et al. (2025). Capacitive sensor for lift-risk identification. <em>Applied Ergonomics</em>.</li>
   <li id="ch6-ref-21" value="21">Various. (2024). ML-based wearable sensors for real-time hand motion recognition. <em>PMC</em>. (Seoul National University)</li>
+  <li id="ch6-ref-22" value="22">TacCap. (2025). TacCap: FBG optical tactile sensor thimble for human and robot fingertips. <em>arXiv preprint</em>, Mar 2025.</li>
+  <li id="ch6-ref-23" value="23">VTDexManip. (2025). VTDexManip: A large-scale visual-tactile dataset for dexterous manipulation from human demonstrations. <em>ICLR 2025</em>.</li>
+  <li id="ch6-ref-24" value="24">Fang, J., et al. (2024). AirExo: Low-cost exoskeletons for learning whole-arm manipulation in the wild. <em>ICRA 2024</em>.</li>
+  <li id="ch6-ref-25" value="25">Fang, J., et al. (2025). AirExo-2: Scaling up generalizable manipulation skills via purely kinesthetic demonstrations in the wild. <em>CoRL 2025</em>.</li>
+  <li id="ch6-ref-26" value="26">Zhao, Q., et al. (2024). ACE: A cross-platform visual-exoskeleton system for low-cost dexterous teleoperation. <em>CoRL 2024</em>.</li>
+  <li id="ch6-ref-27" value="27">NuExo. (2025). NuExo: A 5.2 kg active upper-limb exoskeleton for dexterous teleoperation with 100% ROM. <em>ICRA 2025</em>.</li>
+  <li id="ch6-ref-28" value="28">HumanoidExo. (2025). HumanoidExo: Lightweight exoskeleton with LiDAR for full-body humanoid teleoperation and locomotion learning. <em>arXiv preprint</em>, Oct 2025.</li>
+  <li id="ch6-ref-29" value="29">EgoDex. (2025). EgoDex: Learning dexterous manipulation from large-scale egocentric hand data via Apple Vision Pro. <em>Apple</em>, 2025.</li>
 </ol>
 </section>
 

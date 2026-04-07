@@ -40,7 +40,15 @@
     </a>
     <a class="nav-dot" data-section="sec-10-6">
       <span class="dot"></span>
-      <span class="label">10.6 Open Challenges: No General So...</span>
+      <span class="label">10.6 Human + Robot Co-training</span>
+    </a>
+    <a class="nav-dot" data-section="sec-10-7">
+      <span class="dot"></span>
+      <span class="label">10.7 Teleop-Free Approaches</span>
+    </a>
+    <a class="nav-dot" data-section="sec-10-8">
+      <span class="dot"></span>
+      <span class="label">10.8 Open Challenges: Tactile Domai...</span>
     </a>
     <a class="nav-dot" data-section="sec-summary-and-outlook">
       <span class="dot"></span>
@@ -58,17 +66,20 @@
         <h1>Chapter 10: From Human to Robot — Embodiment Retargeting</h1>
         <div class="chapter-meta">
           <span>Written: 2026-04-01</span>
-          <span>Last updated: 2026-04-01</span>
+          <span>Last updated: 2026-04-07</span>
         </div>
       </header>
 
 <section id="sec-overview" class="content-section">
 <h2>Overview</h2>
-<p>Converting human demonstration data (Chapter 6) into robot policies requires overcoming the <strong>cross-embodiment gap</strong> between human and robot. The human hand's 27 DoF and a robot hand's 7-22 DoF represent fundamentally different kinematic structures, with differences in visual appearance and tactile properties as well. This chapter addresses three dimensions of the gap — kinematic, visual, and tactile — and their respective solutions.</p>
+<p>Converting human demonstration data (Chapter 6) into robot policies requires overcoming the <strong>cross-embodiment gap</strong> between human and robot. The human hand's 27 DoF and a robot hand's 7-22 DoF represent fundamentally different kinematic structures, with differences in visual appearance and tactile properties as well. This chapter addresses three dimensions of the gap — kinematic, visual, and tactile — and their respective solutions, as well as emerging paradigms of human-robot co-training and teleop-free policy learning from human data alone.</p>
 <blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
 - Distinguish the three dimensions of the cross-embodiment gap.
-- Compare kinematic retargeting approaches (AnyTeleop, ImMimic, DexH2R).
-- Understand UniTacHand and OSMO's tactile gap solutions.
+- Compare kinematic retargeting approaches (AnyTeleop, ImMimic, DexH2R, ManipTrans).
+- Understand recent visual gap solutions including Mirage and H2R.
+- Understand UniTacHand <a href="https://terry.artlab.ai/en/posts/2512-unitachand">#16</a> and OSMO <a href="https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove">#18</a>'s tactile gap solutions.
+- Explain the scaling laws of human-robot co-training (EgoMimic, EgoScale).
+- Assess the possibilities and limitations of teleop-free approaches (X-Sim, EgoZero, VidBot).
 - Explain why no general solution exists for the tactile domain gap.</blockquote>
 <hr>
 </section>
@@ -117,6 +128,22 @@
 Data augmentation through interpolation, mitigating the cross-embodiment gap from the data side.</blockquote>
 <h3>DexH2R (2024)</h3>
 <p>Task-oriented retargeting: extracts the <strong>intent</strong> of human demonstrations and reproduces it within the robot's kinematics.</p>
+<h3>ManipTrans (CVPR 2025)</h3>
+<p>Lv et al. [2025, CVPR] — the first large-scale framework for bimanual manipulation retargeting:</p>
+<ul>
+<li>Retargets human bimanual trajectories to robot bimanual hands</li>
+<li><strong>DexManipNet</strong>: dataset of 3,300+ bimanual manipulation episodes</li>
+<li>Optimization-based retargeting ensuring both physical feasibility and contact consistency</li>
+<li>Extends beyond single-hand retargeting into bimanual coordination</li>
+</ul>
+<h3>Park et al. (CMU/SNU, 2025)</h3>
+<p>Park et al. [arXiv, Jan 2025]:</p>
+<ul>
+<li>Aligns the <strong>joint motion manifolds</strong> of human and robot hands</li>
+<li>Latent-space mapping naturally preserves physical feasibility</li>
+<li>Retargeting accuracy <strong>0.59 vs. 0.39</strong> over baseline</li>
+<li>Manifold-based approach enables rapid adaptation to new robot hands</li>
+</ul>
 <h3>Human2Sim2Robot</h3>
 <p>Human video → simulation reproduction → robot policy. Extension of internet video utilization (<a href="ch06.html">Chapter 6.5</a>).</p>
 <figure>
@@ -126,14 +153,37 @@ Data augmentation through interpolation, mitigating the cross-embodiment gap fro
 <hr>
 </section>
 <section id="sec-10-3" class="content-section">
-<h2>10.3 Bridging the Visual Gap: DexUMI and RoboPaint</h2>
+<h2>10.3 Bridging the Visual Gap: DexUMI <a href="https://terry.artlab.ai/en/posts/2505-dexumi">#8</a>, RoboPaint <a href="https://terry.artlab.ai/en/posts/2602-robopaint">#15</a>, Mirage, H2R</h2>
 <h3>DexUMI (2025)</h3>
 <p><strong>SAM2 inpainting</strong>: Erases human hand from camera images, replaces with robot hand. Visual policies become independent of human hand appearance. Kinematic gap resolved separately via exoskeleton.</p>
 <h3>RoboPaint (2025)</h3>
 <p>3DGS reconstructs real scenes in simulation, reducing the visual sim-to-real gap (<a href="ch09.html">Chapter 9.4</a>).</p>
+<h3>Mirage (RSS 2024)</h3>
+<p>Chen et al. [2024, RSS] — Cross-Painting for zero-shot visual transfer:</p>
+<ul>
+<li><strong>Cross-painting</strong> technique visually transforms human hands into robot hands</li>
+<li>Achieves <strong>zero-shot</strong> visual transfer without additional training</li>
+<li>Directly converts human demonstration videos into robot-perspective images for policy learning</li>
+<li>Complementary to DexUMI's inpainting — Mirage does style transfer, DexUMI does full replacement</li>
+</ul>
+<h3>H2R (2025)</h3>
+<p>Human-to-Robot Video Augmentation:</p>
+<ul>
+<li>Transforms human demonstration videos into robot visual data for pretraining</li>
+<li>Automatically generates synthetic robot video from large-scale human video</li>
+<li>Maximizes data efficiency for visual representation learning</li>
+<li>A novel approach: bridging the visual gap at the pretraining stage</li>
+</ul>
+<h3>Masquerade (2025)</h3>
+<p>A framework for transforming human video into robot-compatible visuals:</p>
+<ul>
+<li>Automatically converts visual elements of human demonstrations for the robot domain</li>
+<li>Combines masking and regeneration in a style transfer pipeline</li>
+<li>Makes existing human video datasets immediately usable for robot learning</li>
+</ul>
 <figure>
-  <a href="../assets/figures/ch10/fig_10_3_visual_gap_technical.png" target="_blank"><img src="../assets/figures/ch10/fig_10_3_visual_gap_darkmode.png" alt="Figure 10.3: Visual gap bridging — DexUMI and RoboPaint." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_3_visual_gap_technical.png'" style="cursor:zoom-in"></a>
-  <figcaption>Figure 10.3: Visual gap bridging — DexUMI and RoboPaint.</figcaption>
+  <a href="../assets/figures/ch10/fig_10_3_visual_gap_technical.png" target="_blank"><img src="../assets/figures/ch10/fig_10_3_visual_gap_darkmode.png" alt="Figure 10.3: Visual gap bridging — DexUMI, RoboPaint, Mirage, H2R." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_3_visual_gap_technical.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 10.3: Visual gap bridging — DexUMI, RoboPaint, Mirage, H2R.</figcaption>
 </figure>
 <hr>
 </section>
@@ -143,7 +193,7 @@ Data augmentation through interpolation, mitigating the cross-embodiment gap fro
 <h3>UniTacHand (2025)</h3>
 <p>Zhang et al.<sup><a class="cite-link" href="#ch10-ref-2" title="al. 2025">[2]</a></sup>:</p>
 <ul>
-<li><strong>MANO UV map</strong>: Unfolds hand surface into 2D UV space</li>
+<li><strong>MANO <a href="https://terry.artlab.ai/en/posts/2201-mano-hand-model">#17</a> UV map</strong>: Unfolds hand surface into 2D UV space</li>
 <li>Human glove tactile → projected onto MANO UV map</li>
 <li>Robot hand tactile → projected onto same MANO UV map</li>
 <li><strong>Shared representation space</strong> for tactile policy learning</li>
@@ -170,7 +220,7 @@ The first systematic treatment of tactile cross-embodiment transfer, using MANO 
 <hr>
 </section>
 <section id="sec-10-5" class="content-section">
-<h2>10.5 Mechanical Coupling: The DEXOP Four-Bar Linkage Approach</h2>
+<h2>10.5 Mechanical Coupling: The DEXOP <a href="https://terry.artlab.ai/en/posts/2509-dexop">#10</a> Four-Bar Linkage Approach</h2>
 <p>DEXOP<sup><a class="cite-link" href="#ch10-ref-8" title="DEXOP 2025">[8]</a></sup> directly mechanically couples human and robot fingers via <strong>four-bar linkage</strong>:</p>
 <ul>
 <li>Resolves all three gaps simultaneously:</li>
@@ -187,7 +237,93 @@ The first systematic treatment of tactile cross-embodiment transfer, using MANO 
 <hr>
 </section>
 <section id="sec-10-6" class="content-section">
-<h2>10.6 Open Challenges: No General Solution for the Tactile Domain Gap</h2>
+<h2>10.6 Human + Robot Co-training</h2>
+<p>The most prominent emerging paradigm is <strong>co-training</strong> — jointly training on human demonstration data and robot data. Rather than requiring kinematic retargeting, human data directly improves robot policies.</p>
+<h3>EgoMimic (Georgia Tech, 2024)</h3>
+<p>Kareer et al. [arXiv, 2024]:</p>
+<ul>
+<li>Co-trains on human egocentric video and robot data</li>
+<li><strong>1 hour of human demonstrations outperforms 2 hours of robot data</strong> — counterintuitive but reproducible</li>
+<li><strong>+34-228%</strong> performance improvement over robot-only training</li>
+<li>The richness and diversity of human data compensates for robot data quantity</li>
+</ul>
+<blockquote class="key-paper"><strong>Key Paper</strong>: Kareer, S., et al. (2024). "EgoMimic: Scaling Imitation Learning via Egocentric Video." <em>arXiv preprint</em>.
+Demonstrates the counterintuitive result that 1 hour of human egocentric data outperforms 2 hours of robot data. Establishes the foundation for the human-robot co-training paradigm.</blockquote>
+<h3>EgoScale (NVIDIA, 2026)</h3>
+<p>EgoScale [arXiv, Feb 2026]:</p>
+<ul>
+<li>Leverages <strong>20,854 hours</strong> of large-scale human egocentric data</li>
+<li>Discovers a <strong>log-linear scaling law</strong> between human data scale and robot performance: R² = 0.998</li>
+<li><strong>+54%</strong> improvement over robot-only training</li>
+<li>Predictable performance gains with data scale — enables estimating return on investment</li>
+</ul>
+<blockquote class="key-paper"><strong>Key Paper</strong>: NVIDIA. (2026). "EgoScale: Scaling Robot Policy Learning with Human Egocentric Data." <em>arXiv preprint</em>.
+Discovers a log-linear scaling law (R² = 0.998) from 20,854 hours of human data. Demonstrates that human data scaling provides predictable gains for robot learning.</blockquote>
+<h3>AoE (2026)</h3>
+<p>AoE (Augmentation of Experience) [arXiv, Feb 2026]:</p>
+<ul>
+<li>Small-scale mixture of <strong>50 teleop + 200 human ego demonstrations</strong></li>
+<li>Close Laptop task: success rate <strong>45% → 95%</strong></li>
+<li>Small amounts of human data effectively compensate for limited robot data</li>
+<li>A practical co-training approach under resource constraints</li>
+</ul>
+<h3>pi0 <a href="https://terry.artlab.ai/en/posts/2410-pi0-vla-flow-model">#2</a> Human-to-Robot Transfer (Physical Intelligence, 2025)</h3>
+<p>Physical Intelligence [Dec 2025]:</p>
+<ul>
+<li><strong>Co-finetuning</strong> the pretrained pi0 foundation model with human data</li>
+<li><strong>2x performance improvement</strong> across 4 generalization scenarios (new objects, environments, tasks, robots)</li>
+<li><strong>Emergent alignment</strong>: the model automatically learns human-robot correspondences without explicit retargeting</li>
+<li>Cross-embodiment transfer in the Foundation Model era — at sufficient scale, explicit mapping becomes unnecessary</li>
+</ul>
+<figure>
+  <a href="../assets/figures/ch10/fig_10_6_co_training_scaling.png" target="_blank"><img src="../assets/figures/ch10/fig_10_6_co_training_scaling.png" alt="Figure 10.6: Human-robot co-training scaling. From EgoMimic's counterintuitive findings to EgoScale's scaling law." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_6_co_training_scaling.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 10.6: Human-robot co-training scaling. From EgoMimic's counterintuitive findings to EgoScale's scaling law.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-10-7" class="content-section">
+<h2>10.7 Teleop-Free Approaches</h2>
+<p>A more radical direction <strong>entirely eliminates robot data</strong>, learning robot policies from human data alone. If successful, this fundamentally removes the cost and bottleneck of teleoperation.</p>
+<h3>X-Sim (Cornell, CoRL 2025 Oral)</h3>
+<p>Dan et al. [2025, CoRL Oral]:</p>
+<ul>
+<li>A <strong>single</strong> human RGBD video → RL training in simulation → real robot deployment</li>
+<li>Achieves real robot control with <strong>zero robot data</strong></li>
+<li>Complete realization of the Real-to-Sim-to-Real pipeline</li>
+<li>CoRL 2025 Oral — demonstrates the feasibility of generating robot policies from human demonstrations alone</li>
+</ul>
+<h3>EgoZero (2025)</h3>
+<p>EgoZero<sup><a class="cite-link" href="#ch10-ref-25" title="EgoZero 2025">[25]</a></sup>:</p>
+<ul>
+<li>Learns robot policies from <strong>smart glasses</strong> egocentric video alone</li>
+<li>Achieves <strong>70% success rate</strong> across 7 manipulation tasks</li>
+<li>Zero robot data — uses only wearable device data from daily activities</li>
+<li>The most natural form of human demonstration collection, requiring no special equipment (gloves, exoskeletons)</li>
+</ul>
+<h3>VidBot (TU Munich, CVPR 2025)</h3>
+<p>VidBot [2025, CVPR]:</p>
+<ul>
+<li><strong>Internet video</strong> → 3D affordance extraction → zero-shot robot control</li>
+<li><strong>+20%</strong> improvement over existing robot data approaches</li>
+<li>Transforms the internet's vast video data into robot learning resources</li>
+<li>Affordance-based representations naturally abstract away the embodiment gap</li>
+</ul>
+<h3>Human2Bot (Autonomous Robots, 2025)</h3>
+<p>Human2Bot [Autonomous Robots, 2025]:</p>
+<ul>
+<li>Human video → <strong>task similarity reward</strong> design → zero-shot robot control</li>
+<li>No robot data required — human video serves as the reward function</li>
+<li>Indirect knowledge transfer through reward shaping</li>
+<li>Task-level abstraction bypasses the embodiment gap entirely</li>
+</ul>
+<figure>
+  <a href="../assets/figures/ch10/fig_10_7_teleop_free_approaches.png" target="_blank"><img src="../assets/figures/ch10/fig_10_7_teleop_free_approaches.png" alt="Figure 10.7: Teleop-free approaches. Four paths to learning robot policies from human data alone." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_7_teleop_free_approaches.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 10.7: Teleop-free approaches. Four paths to learning robot policies from human data alone.</figcaption>
+</figure>
+<hr>
+</section>
+<section id="sec-10-8" class="content-section">
+<h2>10.8 Open Challenges: Tactile Domain Gap and the Limits of New Paradigms</h2>
 <p>One of Seminar 1's most important insights: <strong>no general methodology exists for solving the cross-embodiment gap in the tactile domain</strong>.</p>
 <ul>
 <li>UniTacHand: MANO UV map-based, limited to MANO-compatible hands</li>
@@ -200,15 +336,31 @@ The first systematic treatment of tactile cross-embodiment transfer, using MANO 
 <li><strong>Universal tactile UV maps</strong>: Shared representations applicable beyond MANO</li>
 <li><strong>Simulation-based tactile transfer</strong>: Overcoming the tactile gap via DiffTactile</li>
 </ol>
+<h3>Open Problems in Co-training and Teleop-Free Approaches</h3>
+<p>The new paradigms covered in Sections 10.6 and 10.7 are powerful, but several challenges remain:</p>
+<ol>
+<li><strong>Counterintuitive scaling</strong>: EgoMimic's result (1hr human > 2hr robot) shows that <strong>diversity</strong> of human data is key, but which kinds of diversity matter remains unclear.</li>
+<li><strong>Human-only robot control scope</strong>: X-Sim, EgoZero, and VidBot demonstrate robot control from human data alone, but the range of successful tasks remains limited.</li>
+<li><strong>Universality of scaling laws</strong>: Whether EgoScale's log-linear law (R² = 0.998) generalizes across diverse tasks and robot platforms requires further validation.</li>
+<li><strong>Conditions for emergent alignment</strong>: pi0's results may be a phenomenon that only emerges at Foundation Model scale; the necessary conditions are poorly understood.</li>
+<li><strong>Absence of tactile data</strong>: Both co-training and teleop-free approaches rely on visual data; transfer of tactile information remains entirely unaddressed.</li>
+</ol>
 <figure>
-  <a href="../assets/figures/ch10/fig_10_6_future_challenges_technical.png" target="_blank"><img src="../assets/figures/ch10/fig_10_6_future_challenges_darkmode.png" alt="Figure 10.6: Unsolved challenges in tactile cross-embodiment transfer." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_6_future_challenges_technical.png'" style="cursor:zoom-in"></a>
-  <figcaption>Figure 10.6: Unsolved challenges in tactile cross-embodiment transfer.</figcaption>
+  <a href="../assets/figures/ch10/fig_10_8_future_challenges_technical.png" target="_blank"><img src="../assets/figures/ch10/fig_10_8_future_challenges_darkmode.png" alt="Figure 10.8: Open challenges in tactile cross-embodiment transfer and new paradigms." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_8_future_challenges_technical.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 10.8: Open challenges in tactile cross-embodiment transfer and new paradigms.</figcaption>
 </figure>
 <hr>
 </section>
 <section id="sec-summary-and-outlook" class="content-section">
 <h2>Summary and Outlook</h2>
-<p>Embodiment Retargeting proceeds along four dimensions: kinematic (AnyTeleop, ImMimic), visual (DexUMI, RoboPaint), tactile (UniTacHand, OSMO), and mechanical (DEXOP). Yet tactile cross-embodiment transfer remains addressed by only one paper (UniTacHand), making this the field's largest open problem.</p>
+<p>Embodiment Retargeting proceeds along four dimensions: kinematic (AnyTeleop, ImMimic, ManipTrans), visual (DexUMI, RoboPaint, Mirage), tactile (UniTacHand, OSMO), and mechanical (DEXOP). Recently, human-robot co-training (EgoMimic, EgoScale, pi0) and teleop-free approaches (X-Sim, EgoZero, VidBot) are driving a fundamental paradigm shift.</p>
+<p>Three counterintuitive findings are redefining the field's direction:</p>
+<ol>
+<li><strong>1 hour human > 2 hours robot</strong> (EgoMimic): human data diversity dominates quantity</li>
+<li><strong>Human-only robot control is possible</strong> (X-Sim, EgoZero, VidBot): robot data may be unnecessary</li>
+<li><strong>Log-linear scaling</strong> (EgoScale, R² = 0.998): returns on human data investment are predictable</li>
+</ol>
+<p>Yet tactile cross-embodiment transfer remains addressed by only one paper (UniTacHand), and neither co-training nor teleop-free approaches handle tactile information. This remains the field's largest open problem.</p>
 <p>The <strong>"Shared Sensing Platform"</strong> direction proposed in Chapter 13 — generalizing OSMO/UniTacHand-style cross-embodiment tactile transfer — is the key research direction for closing this gap.</p>
 <p>The next part addresses <strong>system integration and outlook</strong> (<a href="ch11.html">Chapter 11: Research Integration</a>).</p>
 <hr>
@@ -224,18 +376,30 @@ The first systematic treatment of tactile cross-embodiment transfer, using MANO 
   <li id="ch10-ref-1" value="1">Qin, Y., et al. (2023). AnyTeleop: A general vision-based dexterous robot teleoperation system. <em>RSS 2023</em>.</li>
   <li id="ch10-ref-2" value="2">Liu, Y., et al. (2025). ImMimic: Large-scale human trajectory + few-shot teleoperation interpolation.</li>
   <li id="ch10-ref-3" value="3">Li, Y., et al. (2024). DexH2R: Task-oriented dexterous manipulation from human to robots. <em>arXiv preprint</em>.</li>
-  <li id="ch10-ref-4" value="4">Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>.</li>
-  <li id="ch10-ref-5" value="5">Various. (2025). RoboPaint: 3DGS for Real-Sim-Real visual transfer.</li>
-  <li id="ch10-ref-6" value="6">Zhang, C., Xue, Z., Yin, S., Zhao, B., et al. (2025). UniTacHand: Unified spatio-tactile representation for human to robotic hand skill transfer. <em>arXiv preprint</em>.</li>
-  <li id="ch10-ref-7" value="7">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920.</li>
-  <li id="ch10-ref-8" value="8">Fang, H.-S., Romero, B., Xie, Y., et al. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441.</li>
-  <li id="ch10-ref-9" value="9">Dan, Y., et al. (2025). X-Sim: Real-to-Sim-to-Real pipeline.</li>
-  <li id="ch10-ref-10" value="10">Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>.</li>
+  <li id="ch10-ref-4" value="4">Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>. [#8](https://terry.artlab.ai/en/posts/2505-dexumi)</li>
+  <li id="ch10-ref-5" value="5">Various. (2025). RoboPaint: 3DGS for Real-Sim-Real visual transfer. [#15](https://terry.artlab.ai/en/posts/2602-robopaint)</li>
+  <li id="ch10-ref-6" value="6">Zhang, C., Xue, Z., Yin, S., Zhao, B., et al. (2025). UniTacHand: Unified spatio-tactile representation for human to robotic hand skill transfer. <em>arXiv preprint</em>. [#16](https://terry.artlab.ai/en/posts/2512-unitachand)</li>
+  <li id="ch10-ref-7" value="7">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920. [#18](https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove)</li>
+  <li id="ch10-ref-8" value="8">Fang, H.-S., Romero, B., Xie, Y., et al. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441. [#10](https://terry.artlab.ai/en/posts/2509-dexop)</li>
+  <li id="ch10-ref-9" value="9">Dan, Y., et al. (2025). X-Sim: Cross-embodiment learning via real-to-sim-to-real. <em>CoRL 2025 (Oral)</em>.</li>
+  <li id="ch10-ref-10" value="10">Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>. [#9](https://terry.artlab.ai/en/posts/2506-exostart)</li>
   <li id="ch10-ref-11" value="11">Shaw, K., Bahl, S., & Pathak, D. (2024). Learning dexterity from human hand motion in internet videos. <em>arXiv preprint</em>. arXiv:2404.xxxxx.</li>
-  <li id="ch10-ref-12" value="12">Romero, J., Tzionas, D., & Black, M. J. (2017). Embodied hands (MANO). <em>SIGGRAPH Asia 2017</em>.</li>
+  <li id="ch10-ref-12" value="12">Romero, J., Tzionas, D., & Black, M. J. (2017). Embodied hands (MANO). <em>SIGGRAPH Asia 2017</em>. [#17](https://terry.artlab.ai/en/posts/2201-mano-hand-model)</li>
   <li id="ch10-ref-13" value="13">Various. (2025). Human2Sim2Robot: Internet video to robot policy pipeline.</li>
   <li id="ch10-ref-14" value="14">Various. (2025). AnyTouch: Unified static-dynamic tactile representation. <em>arXiv:2502.12191</em>.</li>
   <li id="ch10-ref-15" value="15">Various. (2025). Sensor-invariant tactile representation. <em>OpenReview</em>.</li>
+  <li id="ch10-ref-16" value="16">Lv, Y., et al. (2025). ManipTrans: Efficient bimanual dexterous manipulation retargeting. <em>CVPR 2025</em>.</li>
+  <li id="ch10-ref-17" value="17">Park, J., et al. (2025). Joint motion manifold for human-to-robot hand retargeting. <em>arXiv preprint, Jan 2025</em>.</li>
+  <li id="ch10-ref-18" value="18">Chen, B., et al. (2024). Mirage: Cross-embodiment zero-shot transfer via cross-painting. <em>RSS 2024</em>.</li>
+  <li id="ch10-ref-19" value="19">Various. (2025). H2R: Human-to-robot video augmentation for policy pretraining. <em>arXiv preprint</em>.</li>
+  <li id="ch10-ref-20" value="20">Various. (2025). Masquerade: Human video to robot visual transformation. <em>arXiv preprint</em>.</li>
+  <li id="ch10-ref-21" value="21">Kareer, S., et al. (2024). EgoMimic: Scaling imitation learning via egocentric video. <em>arXiv preprint</em>.</li>
+  <li id="ch10-ref-22" value="22">NVIDIA. (2026). EgoScale: Scaling robot policy learning with 20K hours of human egocentric data. <em>arXiv preprint, Feb 2026</em>.</li>
+  <li id="ch10-ref-23" value="23">Various. (2026). AoE: Augmentation of experience via human ego demonstrations. <em>arXiv preprint, Feb 2026</em>.</li>
+  <li id="ch10-ref-24" value="24">Physical Intelligence. (2025). pi0 human-to-robot transfer: Co-finetuning for cross-embodiment generalization. <em>Technical Report, Dec 2025</em>. [#2](https://terry.artlab.ai/en/posts/2410-pi0-vla-flow-model)</li>
+  <li id="ch10-ref-25" value="25">Various. (2025). EgoZero: Zero robot data policy learning from smart glasses. <em>arXiv preprint</em>.</li>
+  <li id="ch10-ref-26" value="26">Various. (2025). VidBot: Internet video to 3D affordance for zero-shot robot control. <em>CVPR 2025</em>.</li>
+  <li id="ch10-ref-27" value="27">Various. (2025). Human2Bot: Task similarity reward from human video for zero-shot robot control. <em>Autonomous Robots, 2025</em>.</li>
 </ol>
 </section>
 

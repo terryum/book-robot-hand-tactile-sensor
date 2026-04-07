@@ -50,7 +50,7 @@
         <h1>Chapter 13: Limitations and Future — Toward Physical AI for Manufacturing</h1>
         <div class="chapter-meta">
           <span>Written: 2026-04-01</span>
-          <span>Last updated: 2026-04-01</span>
+          <span>Last updated: 2026-04-07</span>
         </div>
       </header>
 
@@ -99,7 +99,7 @@
 <td>4</td>
 <td><strong>Data Scarcity</strong></td>
 <td>12+</td>
-<td>~10 demos/hr; tactile especially hard</td>
+<td>~10 demos/hr; tactile especially hard. However, EgoScale (NVIDIA, 2026) [21] discovered a log-linear scaling law for human data — with R²=0.998 across 20,854 hours of human data, performance improves predictably as data volume increases. This suggests that systematic data collection directly translates to performance gains</td>
 <td>Ch3, Ch6</td>
 </tr>
 <tr>
@@ -113,7 +113,7 @@
 <td>6</td>
 <td><strong>Cross-Embodiment Transfer</strong></td>
 <td>10+</td>
-<td>Tactile: UniTacHand only</td>
+<td>Tactile: UniTacHand only. However, rapid progress in kinematic/visual domains during 2024-2026 — EgoMimic (Georgia Tech, 2024) [22]: 1hr human data > 2hr robot data (+34-228%); X-Sim (Cornell, CoRL 2025 Oral) [23]: real task success with zero robot data; VidBot (TU Munich, CVPR 2025) [24]: +20% zero-shot from internet video alone; EgoZero (2025) [25]: 70% success on 7 tasks from smart glasses only. A general solution for the tactile domain remains elusive, but cross-embodiment transfer possibilities are expanding rapidly</td>
 <td>Ch10</td>
 </tr>
 <tr>
@@ -163,8 +163,8 @@
 </ul>
 <h3>B. Learning & Control</h3>
 <ul>
-<li>VLA + tactile as first-class modality (ForceVLA, Tactile-VLA)</li>
-<li>Post-deployment RL for continuous improvement (pi0.6/RECAP)</li>
+<li>VLA + tactile as first-class modality (ForceVLA <a href="https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe">#1</a>, Tactile-VLA)</li>
+<li>Post-deployment RL for continuous improvement (pi0.6 <a href="https://terry.artlab.ai/en/posts/2511-pi0-6-recap">#4</a>/RECAP)</li>
 <li>One-demo/zero-demo learning from human video</li>
 <li>World models with tactile feedback for model-based planning</li>
 <li>Hierarchical VLA for long-horizon dexterous tasks with error recovery</li>
@@ -182,6 +182,8 @@
 <li>Massive synthetic data (NVIDIA 780K approach for tactile)</li>
 <li>Shared tactile datasets (Touch-and-Go 3M → 100M+)</li>
 <li>Cross-embodiment data reuse (OXE for hands)</li>
+<li><strong>Explosive growth in egocentric data collection</strong>: EgoDex (Apple, 2025) [26] provides 829 hours and 90 million frames of hand manipulation data, while Ego4D (Meta) [27] offers 3,670 hours from 931 participants. Human egocentric video is emerging as a key data source for robot learning (→ Ch6.5)</li>
+<li><strong>Scaling-law-driven data strategy</strong>: The log-linear scaling law discovered by EgoScale (NVIDIA, 2026) [21] (R²=0.998) demonstrates that systematically increasing human data volume yields predictable robot performance gains. This provides a quantitative basis for estimating ROI on data collection investments</li>
 </ul>
 <h3>E. Deployment & Application</h3>
 <ul>
@@ -290,11 +292,23 @@
 </figure>
 <h3>Additional Directions</h3>
 <ul>
-<li><strong>Shared Sensing Platform</strong>: Generalizing OSMO/UniTacHand cross-embodiment tactile transfer (<a href="ch10.html">Chapter 10.4</a>)</li>
+<li><strong>Shared Sensing Platform</strong>: Generalizing OSMO <a href="https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove">#18</a>/UniTacHand <a href="https://terry.artlab.ai/en/posts/2512-unitachand">#16</a> cross-embodiment tactile transfer (<a href="ch10.html">Chapter 10.4</a>)</li>
 <li><strong>Factory-Specific Foundation Model</strong>: Tactile-visual foundation model specialized for factory environments</li>
 <li><strong>Open Hardware + Open Data</strong>: Sub-$2K hands + Touch100k-scale dataset expansion</li>
 <li><strong>Continuous-Contact Manipulation</strong>: Seminar 3's original insight — mechanism-induced continuous contact reduces sensing/learning burden</li>
 </ul>
+<h3>Key Counterintuitive Findings from 2024-2026</h3>
+<p>Recent studies report results that challenge conventional assumptions about robot learning:</p>
+<ol>
+<li><strong>1 hour of human data > 2 hours of robot data</strong>: EgoMimic [22] demonstrated that 1 hour of human demonstrations outperforms 2 hours of robot teleoperation by +34-228%. The quality and diversity of human data overwhelms the quantity of robot data.</li>
+</ol>
+<ol>
+<li><strong>Human data alone can control robots</strong>: X-Sim [23] achieved real robot task success with zero robot data using only human video, EgoZero [25] achieved 70% success on 7 tasks from smart glasses demonstrations alone, and VidBot [24] achieved +20% zero-shot performance from internet videos only.</li>
+</ol>
+<ol>
+<li><strong>Log-linear scaling: more human data yields predictably better performance</strong>: EgoScale [21] discovered a log-linear scaling law (R²=0.998) across 20,854 hours of human data. Analogous to scaling laws in large language models, this implies that systematic investment in human data collection leads to predictable improvements in robot performance.</li>
+</ol>
+<blockquote class=""><strong>Implications</strong>: These three findings challenge the prevailing paradigm that "robot learning requires robot data." Large-scale collection of human egocentric data combined with cross-embodiment transfer may be the key pathway to resolving the data bottleneck in tactile robotics.</blockquote>
 <hr>
 </section>
 <section id="sec-closing-message" class="content-section">
@@ -318,20 +332,27 @@
   <li id="ch13-ref-4" value="4">Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
   <li id="ch13-ref-5" value="5">Various. (2025). NRE-skin. <em>PNAS</em>.</li>
   <li id="ch13-ref-6" value="6">Various. (2026). Bioinspired spiking architecture. <em>Nature Communications</em>.</li>
-  <li id="ch13-ref-7" value="7">Yu, J., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>.</li>
+  <li id="ch13-ref-7" value="7">Yu, J., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. [#1](https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe)</li>
   <li id="ch13-ref-8" value="8">Various. (2025). Tactile-VLA. <em>OpenReview</em>.</li>
-  <li id="ch13-ref-9" value="9">Physical Intelligence. (2025). pi0.5/RECAP: Post-deployment RL for continuous improvement. <em>arXiv preprint</em>. arXiv:2504.16932.</li>
+  <li id="ch13-ref-9" value="9">Physical Intelligence. (2025). pi0.5/RECAP: Post-deployment RL for continuous improvement. <em>arXiv preprint</em>. arXiv:2504.16932. [#4](https://terry.artlab.ai/en/posts/2511-pi0-6-recap)</li>
   <li id="ch13-ref-10" value="10">Shaw, K., et al. (2024). Learning from internet videos. <em>CMU</em>.</li>
   <li id="ch13-ref-11" value="11">Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator. <em>ICLR 2024</em>.</li>
   <li id="ch13-ref-12" value="12">Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776.</li>
   <li id="ch13-ref-13" value="13">NVIDIA. (2026). 780K trajectories in 11 hours. <em>GTC 2026</em>.</li>
-  <li id="ch13-ref-14" value="14">Various. (2025). OSMO. <em>arXiv:2512.08920</em>.</li>
-  <li id="ch13-ref-15" value="15">Zhang, Y., et al. (2025). UniTacHand. <em>Various</em>.</li>
+  <li id="ch13-ref-14" value="14">Various. (2025). OSMO. <em>arXiv:2512.08920</em>. [#18](https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove)</li>
+  <li id="ch13-ref-15" value="15">Zhang, Y., et al. (2025). UniTacHand. <em>Various</em>. [#16](https://terry.artlab.ai/en/posts/2512-unitachand)</li>
   <li id="ch13-ref-16" value="16">Bicchi, A. (2000). Hands for dexterous manipulation. <em>IEEE T-RA</em>.</li>
   <li id="ch13-ref-17" value="17">Billard, A., & Kragic, D. (2019). Trends and challenges. <em>Science</em>.</li>
   <li id="ch13-ref-18" value="18">Various. (2026). VLA systematic review. <em>Information Fusion</em>.</li>
   <li id="ch13-ref-19" value="19">Various. (2025). What matters in building VLA models. <em>Nature MI</em>.</li>
   <li id="ch13-ref-20" value="20">Hogan, N. (1985). Impedance control. <em>JDSMC</em>.</li>
+  <li id="ch13-ref-21" value="21">Bansal, A., et al. (2026). EgoScale: Scaling laws for egocentric human data in robot learning. <em>arXiv preprint</em>. NVIDIA Research.</li>
+  <li id="ch13-ref-22" value="22">Kareer, S., et al. (2024). EgoMimic: Scaling imitation learning via egocentric video. <em>arXiv preprint</em>. Georgia Tech.</li>
+  <li id="ch13-ref-23" value="23">Rishabh, A., et al. (2025). X-Sim: Cross-embodiment simulation for robot learning. <em>CoRL 2025 (Oral)</em>. Cornell University.</li>
+  <li id="ch13-ref-24" value="24">Bahl, S., et al. (2025). VidBot: Learning robot policies from internet videos. <em>CVPR 2025</em>. TU Munich.</li>
+  <li id="ch13-ref-25" value="25">Wang, Y., et al. (2025). EgoZero: Robot learning from smart glasses demonstrations. <em>arXiv preprint</em>.</li>
+  <li id="ch13-ref-26" value="26">Apple ML Research. (2025). EgoDex: Learning dexterous manipulation from large-scale egocentric video. 829 hours, 90M frames. <em>arXiv preprint</em>.</li>
+  <li id="ch13-ref-27" value="27">Grauman, K., et al. (2022). Ego4D: Around the world in 3,000 hours of egocentric video. <em>CVPR 2022</em>. Meta AI. 3,670 hours, 931 participants.</li>
 </ol>
 </section>
 

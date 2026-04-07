@@ -119,7 +119,7 @@ A foundational neuroscience study revealing how fingertip tactile signals are en
 </section>
 <section id="sec-1-2" class="content-section">
 <h2>1.2 A Brief History of Tactile Robotics</h2>
-<p>The history of tactile robotics stretches back to the 1960s. The survey "Tactile Robotics: Past and Future" <sup><a class="cite-link" href="#ch1-ref-14" title="Lepora, 2025">[14]</a></sup> organizes this history into four generations:</p>
+<p>The history of tactile robotics stretches back to the 1960s. The survey "Tactile Robotics: Past and Future" [2025] organizes this history into four generations:</p>
 <figure>
   <a href="../assets/figures/ch01/fig_1_2_timeline_technical.png" target="_blank"><img src="../assets/figures/ch01/fig_1_2_timeline_darkmode.png" alt="Figure 1.2: Four generations of tactile robotics (1965-2026). Adapted from Tactile Robotics: Past and Future (2025)." loading="lazy" onerror="this.src='../assets/figures/ch01/fig_1_2_timeline_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 1.2: Four generations of tactile robotics (1965-2026). Adapted from Tactile Robotics: Past and Future (2025).</figcaption>
@@ -149,7 +149,7 @@ The de facto starting reference for tactile robotics research, covering transduc
   <figcaption>Figure 1.4: Temporal response comparison — vision vs. tactile for slip detection.</figcaption>
 </figure>
 <h3>1.3.3 Deformable Objects</h3>
-<p>Manipulating cloth, cables, and food is inherently difficult with vision alone. Estimating stiffness, friction coefficients, and current deformation state requires contact information. PP-Tac<sup><a class="cite-link" href="#ch1-ref-18" title="PP-Tac 2025">[18]</a></sup> combined an R-Tac tactile sensor with slip detection in a Diffusion Policy framework, achieving 87.5% success on thin-object grasping — including paper and cards (<a href="ch07.html">Chapter 7.3</a>).</p>
+<p>Manipulating cloth, cables, and food is inherently difficult with vision alone. Estimating stiffness, friction coefficients, and current deformation state requires contact information. PP-Tac<sup><a class="cite-link" href="#ch1-ref-18" title="PP-Tac 2025">[18]</a></sup> <a href="https://terry.artlab.ai/en/posts/2504-pp-tac">#12</a> combined an R-Tac tactile sensor with slip detection in a Diffusion Policy framework, achieving 87.5% success on thin-object grasping — including paper and cards (<a href="ch07.html">Chapter 7.3</a>).</p>
 <h3>1.3.4 Occlusion</h3>
 <p>During in-hand rotation, the robot's own fingers occlude most of the object. NeuralFeels <sup><a class="cite-link" href="#ch1-ref-12" title="Suresh et al., 2024">[12]</a></sup> addressed this through neural field-based visuotactile SLAM, simultaneously estimating object pose and shape inside the hand (<em>Science Robotics</em>, 2024) — a task impossible with vision alone (<a href="ch11.html">Chapter 11.1</a>).</p>
 <hr>
@@ -158,7 +158,7 @@ The de facto starting reference for tactile robotics research, covering transduc
 <h2>1.4 What Touch Enables</h2>
 <p>Tactile sensing provides four core capabilities for robotic manipulation:</p>
 <h3>1.4.1 Force Modulation</h3>
-<p>Tactile feedback enables real-time adjustment of grip force. Hogan <sup><a class="cite-link" href="#ch1-ref-8" title="1985">[8]</a></sup> established the theoretical foundations of impedance control — governing the relationship between force and displacement during robot-environment interaction — which remains the bedrock of tactile-aware force control. DexForce<sup><a class="cite-link" href="#ch1-ref-21" title="DexForce 2025">[21]</a></sup> demonstrated kinesthetic teaching that simultaneously records force-torque information through a spring model (<a href="ch07.html">Chapter 7.4</a>).</p>
+<p>Tactile feedback enables real-time adjustment of grip force. Hogan <sup><a class="cite-link" href="#ch1-ref-8" title="1985">[8]</a></sup> established the theoretical foundations of impedance control — governing the relationship between force and displacement during robot-environment interaction — which remains the bedrock of tactile-aware force control. DexForce<sup><a class="cite-link" href="#ch1-ref-21" title="DexForce 2025">[21]</a></sup> <a href="https://terry.artlab.ai/en/posts/2501-dexforce-force-informed-actions">#3</a> demonstrated kinesthetic teaching that simultaneously records force-torque information through a spring model (<a href="ch07.html">Chapter 7.4</a>).</p>
 <h3>1.4.2 Slip Detection and Response</h3>
 <p>By detecting changes in shear force, robots can increase grip force before an object slips. As discussed in Seminar 2, multi-axis sensing is essential because normal force alone cannot predict shear-direction slip <sup><a class="cite-link" href="#ch1-ref-19" title="Cho et al., 2025; Hossain et al., 2025">[19]</a></sup>.</p>
 <h3>1.4.3 Pose Estimation</h3>
@@ -277,10 +277,10 @@ The de facto starting reference for tactile robotics research, covering transduc
   <li id="ch1-ref-15" value="15">Various. (2025). Recent advances in tactile sensing technologies for human-robot interaction: Current trends and future perspectives. <em>Sensors International</em>. https://doi.org/10.1016/j.sintl.2025.100345</li>
   <li id="ch1-ref-16" value="16">Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
   <li id="ch1-ref-17" value="17">Zhao, C., Yu, Y., Ye, Z., Tian, Z., Zhang, Y., & Zeng, L.-L. (2025). Universal slip detection of robotic hand with tactile sensing. <em>Frontiers in Neurorobotics</em>, 19. https://doi.org/10.3389/fnbot.2025.1478758</li>
-  <li id="ch1-ref-18" value="18">Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>Robotics: Science and Systems (RSS) 2025</em>.</li>
+  <li id="ch1-ref-18" value="18">Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>Robotics: Science and Systems (RSS) 2025</em>. [#12](https://terry.artlab.ai/en/posts/2504-pp-tac)</li>
   <li id="ch1-ref-19" value="19">Cho, W., et al. (2025). Multi-dimensional tactile sensing for force/noise decoupling. <em>ACS Applied Materials & Interfaces</em>.</li>
   <li id="ch1-ref-20" value="20">Hossain, M., et al. (2025). Multi-axis tactile for object orientation detection. <em>Sensors and Actuators A: Physical</em>.</li>
-  <li id="ch1-ref-21" value="21">Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.10356.</li>
+  <li id="ch1-ref-21" value="21">Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.10356. [#3](https://terry.artlab.ai/en/posts/2501-dexforce-force-informed-actions)</li>
 </ol>
 </section>
 

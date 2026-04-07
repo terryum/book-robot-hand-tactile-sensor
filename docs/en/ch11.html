@@ -59,7 +59,7 @@
 <p>The preceding ten chapters covered individual components — sensors, data, hands, learning, and transfer. This chapter examines how these components <strong>integrate into unified systems</strong>. We survey multi-modal fusion architectures, end-to-end system case studies, the open-source ecosystem, and benchmarks with standardization trends.</p>
 <blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
 - Compare major visuo-tactile fusion architectures (early/late/MoE).
-- Explain the systemic significance of Mobile ALOHA, PP-Tac, and the Seminar 3 integrated gripper.
+- Explain the systemic significance of Mobile ALOHA, PP-Tac <a href="https://terry.artlab.ai/en/posts/2504-pp-tac">#12</a>, and the Seminar 3 integrated gripper.
 - Understand how open-source hardware/software/data accelerates research.
 - Assess the current state and need for benchmarks like RGMC.</blockquote>
 <hr>
@@ -71,7 +71,7 @@
 <p><strong>NeuralFeels</strong> <sup><a class="cite-link" href="#ch11-ref-2" title="Suresh et al., 2024">[2]</a></sup>: Neural field-based visuotactile perception. Simultaneous pose and shape estimation inside the hand. <em>Science Robotics</em> (<a href="ch01.html">Chapter 1.3.4</a>).</p>
 <p><strong>3D-ViTac</strong> <sup><a class="cite-link" href="#ch11-ref-3" title="Huang et al., 2024">[3]</a></sup>: Dense tactile (3mm²) + vision unified 3D representation. 85-90% bimanual success with Diffusion Policy vs. 45-50% vision-only (<a href="ch02.html">Chapter 2.4</a>).</p>
 <h3>Force-Vision-Language Fusion</h3>
-<p><strong>ForceVLA</strong> <sup><a class="cite-link" href="#ch11-ref-12" title="Yu et al., 2025">[12]</a></sup>: FVLMoE dynamic routing across 4 experts. +23.2pp, 90% under occlusion (→ Chapters 7.4, 8.4).</p>
+<p><strong>ForceVLA</strong> <sup><a class="cite-link" href="#ch11-ref-12" title="Yu et al., 2025">[12]</a></sup> <a href="https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe">#1</a>: FVLMoE dynamic routing across 4 experts. +23.2pp, 90% under occlusion (→ Chapters 7.4, 8.4).</p>
 <p><strong>Tactile-VLA</strong><sup><a class="cite-link" href="#ch11-ref-5" title="Tactile-VLA 2025">[5]</a></sup>: Unlocks VLA physical knowledge through tactile sensing (<a href="ch08.html">Chapter 8.4</a>).</p>
 <h3>Representation Alignment</h3>
 <p><strong>UniTouch</strong> <sup><a class="cite-link" href="#ch11-ref-6" title="Yang et al., 2024">[6]</a></sup>: Contrastive alignment of touch-vision-language-audio. Zero-shot classification (<a href="ch03.html">Chapter 3.6</a>).</p>
@@ -181,14 +181,14 @@
   <li id="ch11-ref-1" value="1">Yuan, Y., et al. (2024). Robot Synesthesia. <em>ICRA 2024</em>.</li>
   <li id="ch11-ref-2" value="2">Suresh, S., et al. (2024). NeuralFeels. <em>Science Robotics</em>, 9(86).</li>
   <li id="ch11-ref-3" value="3">Huang, B., et al. (2024). 3D-ViTac. <em>CoRL 2024</em>.</li>
-  <li id="ch11-ref-4" value="4">Yu, J., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>.</li>
+  <li id="ch11-ref-4" value="4">Yu, J., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. [#1](https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe)</li>
   <li id="ch11-ref-5" value="5">Various. (2025). Tactile-VLA. <em>OpenReview</em>.</li>
   <li id="ch11-ref-6" value="6">Yang, F., et al. (2024). UniTouch. <em>CVPR 2024</em>.</li>
   <li id="ch11-ref-7" value="7">Higuera, C., et al. (2024). Sparsh. <em>CoRL 2024</em>.</li>
   <li id="ch11-ref-8" value="8">Liu, K., et al. (2025). VTV-LLM: Robotic perception with a large tactile-vision-language model. <em>arXiv preprint</em>. arXiv:2506.19303.</li>
   <li id="ch11-ref-9" value="9">Fu, Z., Zhao, T. Z., & Finn, C. (2024). Mobile ALOHA: Learning bimanual mobile manipulation with low-cost whole-body teleoperation. <em>arXiv preprint</em>. arXiv:2401.02117.</li>
   <li id="ch11-ref-10" value="10">Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776.</li>
-  <li id="ch11-ref-11" value="11">Various. (2025). PP-Tac. <em>RSS 2025</em>.</li>
+  <li id="ch11-ref-11" value="11">Various. (2025). PP-Tac. <em>RSS 2025</em>. [#12](https://terry.artlab.ai/en/posts/2504-pp-tac)</li>
   <li id="ch11-ref-12" value="12">Yu, M., et al. (2025). RGMC Champion. <em>IEEE RA-L</em>.</li>
   <li id="ch11-ref-13" value="13">Albini, A., et al. (2025). Tactile data representation review. <em>arXiv (IEEE T-RO)</em>.</li>
   <li id="ch11-ref-14" value="14">Open X-Embodiment Collaboration. (2024). <em>ICRA 2024</em>.</li>

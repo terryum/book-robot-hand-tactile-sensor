@@ -58,7 +58,7 @@
         <h1>Chapter 7: Learning to Manipulate — Learning by Touch</h1>
         <div class="chapter-meta">
           <span>Written: 2026-04-01</span>
-          <span>Last updated: 2026-04-01</span>
+          <span>Last updated: 2026-04-07</span>
         </div>
       </header>
 
@@ -68,7 +68,7 @@
 <blockquote class=""><strong>After reading this chapter, you will be able to...</strong>
 - Explain the mechanisms and differences between Diffusion Policy and ACT/ALOHA.
 - Compare tactile-only vs. visuo-tactile manipulation approaches.
-- Understand force-informed learning (DexForce, ForceVLA) and its significance.
+- Understand force-informed learning (DexForce <a href="https://terry.artlab.ai/en/posts/2501-dexforce-force-informed-actions">#3</a>, ForceVLA <a href="https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe">#1</a>) and its significance.
 - Evaluate the methodological trade-offs among IL, RL, and optimization.</blockquote>
 <hr>
 </section>
@@ -93,6 +93,15 @@ Action diffusion for visuomotor policy learning. Natural handling of multimodal 
 </ul>
 <blockquote class="key-paper"><strong>Key Paper</strong>: Zhao, T. Z., Kumar, V., Levine, S., & Finn, C. (2023). "Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware." <em>RSS 2023</em>.
 Transformer-based action chunking achieving fine-grained bimanual manipulation on low-cost hardware, open-sourced with ALOHA.</blockquote>
+<h3>LAPA (2025)</h3>
+<p>LAPA [ICLR 2025] introduces <strong>latent action pretraining from human videos</strong>:</p>
+<ul>
+<li><strong>VQ-VAE</strong> encodes human video actions into a latent space</li>
+<li>Learns action representations from human videos alone, without robot data</li>
+<li>Fine-tuned with small amounts of robot data afterward</li>
+<li><strong>30x data efficiency</strong> improvement over prior methods</li>
+<li>Aligns with the teleop-free approaches discussed in Chapter 10.7</li>
+</ul>
 <figure>
   <a href="../assets/figures/ch07/fig_7_1_diffusion_vs_act_technical.png" target="_blank"><img src="../assets/figures/ch07/fig_7_1_diffusion_vs_act_darkmode.png" alt="Figure 7.1: Diffusion Policy vs. ACT/ALOHA — comparing the two dominant IL approaches." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_1_diffusion_vs_act_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 7.1: Diffusion Policy vs. ACT/ALOHA — comparing the two dominant IL approaches.</figcaption>
@@ -119,7 +128,7 @@ Transformer-based action chunking achieving fine-grained bimanual manipulation o
 <li><strong>200+ citations</strong> (<a href="ch09.html">Chapter 9.2 for details</a>)</li>
 </ul>
 <h3>Tactile-Based Sim-to-Real RL</h3>
-<p>Yin et al.<sup><a class="cite-link" href="#ch7-ref-6" title="al. 2024">[6]</a></sup> developed a binary 3-axis tactile skin sensor model:</p>
+<p>Yin et al.<sup><a class="cite-link" href="#ch7-ref-6" title="al. 2024">[6]</a></sup> developed a binary 3-axis tactile skin <a href="https://terry.artlab.ai/en/posts/2407-tactile-skin-inhand-translation">#13</a> sensor model:</p>
 <ul>
 <li><strong>5,000 FPS</strong> simulation speed</li>
 <li>S3-Axis: <strong>93% success</strong> on out-of-distribution objects</li>
@@ -133,7 +142,7 @@ Transformer-based action chunking achieving fine-grained bimanual manipulation o
 <hr>
 </section>
 <section id="sec-7-3" class="content-section">
-<h2>7.3 Tactile-Based Manipulation: Tactile-Only Rotation, Visuo-Tactile Fusion, PP-Tac</h2>
+<h2>7.3 Tactile-Based Manipulation: Tactile-Only Rotation, Visuo-Tactile Fusion, PP-Tac <a href="https://terry.artlab.ai/en/posts/2504-pp-tac">#12</a></h2>
 <h3>7.3.1 Tactile-Only In-Hand Rotation</h3>
 <p>Yin et al. [2023, <em>RSS</em>] and Pitz et al.<sup><a class="cite-link" href="#ch7-ref-6" title="al. 2024">[6]</a></sup> proved continuous object rotation possible with touch alone. However, as discussed in Seminar 1:</p>
 <ul>
@@ -144,12 +153,21 @@ Transformer-based action chunking achieving fine-grained bimanual manipulation o
 <h3>7.3.2 Visuo-Tactile Manipulation</h3>
 <p>Wu et al. [2025, <em>ICRA</em>] combined 3-axis tactile + vision (Realsense D435) + robot state:</p>
 <ul>
-<li><strong>Canonical 3D Tactile</strong> representation for sensor-independent transfer</li>
+<li><strong>Canonical 3D Tactile <a href="https://terry.artlab.ai/en/posts/2409-3dtactile-dex">#14</a></strong> representation for sensor-independent transfer</li>
 <li>Play data pretraining + few-shot expert fine-tuning</li>
 <li><strong>78% average success</strong> (vs. T-DEX 63%)</li>
 </ul>
 <p>Robot Synesthesia <sup><a class="cite-link" href="#ch7-ref-9" title="Yuan et al., 2024">[9]</a></sup> achieved double-ball and 3-axis rotation using point cloud-based tactile representations (<a href="ch03.html">Chapter 3.1.4</a>).</p>
-<h3>7.3.3 PP-Tac: Tactile Grasping of Thin Objects</h3>
+<h3>7.3.3 Visual-Tactile Self-Supervised Pretraining + RL (Ye et al., 2025)</h3>
+<p>Ye et al. [Science Robotics, 2025/26] perform <strong>visual-tactile self-supervised pretraining</strong> from human demonstrations, then learn robot policies with <strong>binary tactile sensing + RL</strong>:</p>
+<ul>
+<li>Self-supervised visual-tactile representation learning from human demo data</li>
+<li>Achieves <strong>85% success</strong> with binary (contact/no-contact) tactile sensors alone</li>
+<li><strong>Counterintuitive finding</strong>: Simple sensors with wide coverage outperform high-resolution sensors with narrow coverage</li>
+<li>Consistent with Yin et al.<sup><a class="cite-link" href="#ch7-ref-6" title="al. 2024">[6]</a></sup>'s finding (binary tactile 93%) in §7.2</li>
+</ul>
+<p>This result carries significant implications for tactile sensor design — <strong>spatial coverage</strong> may matter more than <strong>resolution</strong> for manipulation learning.</p>
+<h3>7.3.4 PP-Tac: Tactile Grasping of Thin Objects</h3>
 <p>PP-Tac [2025, <em>RSS</em>] solves grasping of extremely thin objects (paper, cards):</p>
 <ul>
 <li><strong>R-Tac</strong>: Round camera-based gel tactile sensor</li>
@@ -202,7 +220,7 @@ Spring model-based force-informed demonstration learning. A single parameter $k_
 </ul>
 <p>This result shows that for structured problems, optimization can match or exceed learning-based approaches.</p>
 <h3>FARM: Tactile-Conditioned Diffusion Policy (2025)</h3>
-<p>FARM <sup><a class="cite-link" href="#ch7-ref-14" title="FARM, 2025">[14]</a></sup> infers force signals from high-dimensional tactile data and conditions Diffusion Policy on tactile feedback.</p>
+<p>FARM [2025] infers force signals from high-dimensional tactile data and conditions Diffusion Policy on tactile feedback.</p>
 <h3>TLA: Tactile-Language-Action Model (2025)</h3>
 <p>TLA<sup><a class="cite-link" href="#ch7-ref-15" title="TLA 2025">[15]</a></sup> implements language-conditioned tactile control with 24,000 tactile-action instruction pairs, enabling natural language commands for contact-rich manipulation.</p>
 <h3>Non-Prehensile Tactile Manipulation</h3>
@@ -296,13 +314,13 @@ Spring model-based force-informed demonstration learning. A single parameter $k_
   <li id="ch7-ref-3" value="3">Various. (2020). OpenAI Dactyl: Solving Rubik's Cube with a robot hand. <em>IJRR</em>.</li>
   <li id="ch7-ref-4" value="4">Handa, A., et al. (2023). DeXtreme: Transfer of agile in-hand manipulation from simulation to reality. <em>ICRA 2023</em>. arXiv:2210.13702.</li>
   <li id="ch7-ref-5" value="5">Yin, Z.-H., et al. (2023). Rotating without seeing: Towards in-hand dexterity through touch. <em>RSS 2023</em>.</li>
-  <li id="ch7-ref-6" value="6">Yin, Z.-H., et al. (2024). Learning in-hand translation using a binary 3-axis tactile skin. <em>arXiv preprint</em>.</li>
+  <li id="ch7-ref-6" value="6">Yin, Z.-H., et al. (2024). Learning in-hand translation using a binary 3-axis tactile skin. <em>arXiv preprint</em>. [#13](https://terry.artlab.ai/en/posts/2407-tactile-skin-inhand-translation)</li>
   <li id="ch7-ref-7" value="7">Pitz, J., et al. (2024). Dextrous tactile in-hand manipulation using modular RL. <em>Humanoid Robots</em>.</li>
-  <li id="ch7-ref-8" value="8">Wu, C., et al. (2025). Canonical 3D tactile for visuo-tactile imitation learning. <em>ICRA 2025</em>.</li>
+  <li id="ch7-ref-8" value="8">Wu, C., et al. (2025). Canonical 3D tactile for visuo-tactile imitation learning. <em>ICRA 2025</em>. [#14](https://terry.artlab.ai/en/posts/2409-3dtactile-dex)</li>
   <li id="ch7-ref-9" value="9">Yuan, Y., et al. (2024). Robot Synesthesia: In-hand manipulation with visuotactile sensing. <em>ICRA 2024</em>.</li>
-  <li id="ch7-ref-10" value="10">Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>RSS 2025</em>.</li>
-  <li id="ch7-ref-11" value="11">Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>.</li>
-  <li id="ch7-ref-12" value="12">Yu, J., Liu, H., Yu, Q., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>.</li>
+  <li id="ch7-ref-10" value="10">Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>RSS 2025</em>. [#12](https://terry.artlab.ai/en/posts/2504-pp-tac)</li>
+  <li id="ch7-ref-11" value="11">Chen, C., Yu, Z., Choi, H., Cutkosky, M., & Bohg, J. (2025). DexForce: Extracting force-informed actions from kinesthetic demonstrations for dexterous manipulation. <em>IEEE Robotics and Automation Letters</em>. [#3](https://terry.artlab.ai/en/posts/2501-dexforce-force-informed-actions)</li>
+  <li id="ch7-ref-12" value="12">Yu, J., Liu, H., Yu, Q., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. [#1](https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe)</li>
   <li id="ch7-ref-13" value="13">Yu, M., et al. (2025). RGMC Champion: Kinematic trajectory optimization. <em>IEEE RA-L</em>.</li>
   <li id="ch7-ref-14" value="14">Helmut, E., Funk, N., Schneider, T., de Farias, C., & Peters, J. (2025). Tactile-conditioned diffusion policy for force-aware robotic manipulation. <em>ICRA 2026</em>. arXiv:2510.13324.</li>
   <li id="ch7-ref-15" value="15">Hao, P., Zhang, C., Li, D., Cao, X., Hao, X., Cui, S., & Wang, S. (2025). TLA: Tactile-language-action model for contact-rich manipulation. <em>arXiv preprint</em>. arXiv:2503.08548.</li>
@@ -314,6 +332,8 @@ Spring model-based force-informed demonstration learning. A single parameter $k_
   <li id="ch7-ref-21" value="21">Zhao, C., Yu, Y., Ye, Z., Tian, Z., Zhang, Y., & Zeng, L.-L. (2025). Universal slip detection of robotic hand with tactile sensing. <em>Frontiers in Neurorobotics</em>, 19. https://doi.org/10.3389/fnbot.2025.1478758</li>
   <li id="ch7-ref-22" value="22">Li, Y., et al. (2025). Dexterous manipulation through imitation learning: A survey. <em>arXiv preprint</em>. arXiv:2504.03515.</li>
   <li id="ch7-ref-23" value="23">Hogan, N. (1985). Impedance control: An approach to manipulation. <em>JDSMC</em>, 107(1), 1-24.</li>
+  <li id="ch7-ref-24" value="24">Various. (2025). LAPA: Latent action pretraining from human videos. <em>ICLR 2025</em>.</li>
+  <li id="ch7-ref-25" value="25">Ye, L., et al. (2025). Visual-tactile self-supervised pretraining for robotic manipulation. <em>Science Robotics</em>.</li>
 </ol>
 </section>
 

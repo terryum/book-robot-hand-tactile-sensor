@@ -32,11 +32,11 @@
     </a>
     <a class="nav-dot" data-section="sec-6-4">
       <span class="dot"></span>
-      <span class="label">6.4 외골격 접근: DexUMI, ExoStart, DEXOP</span>
+      <span class="label">6.4 외골격 접근: DexUMI [#8](https://ter...</span>
     </a>
     <a class="nav-dot" data-section="sec-6-5">
       <span class="dot"></span>
-      <span class="label">6.5 인터넷 비디오 학습과 대규모 데이터</span>
+      <span class="label">6.5 대규모 데이터: 인터넷 비디오에서 에고센트릭 캡처까지</span>
     </a>
     <a class="nav-dot" data-section="sec-6-6">
       <span class="dot"></span>
@@ -58,17 +58,17 @@
         <h1>Chapter 6: 사람 손 데이터 수집 — 시연으로 가르치기</h1>
         <div class="chapter-meta">
           <span>집필일: 2026-04-01</span>
-          <span>최종수정일: 2026-04-01</span>
+          <span>최종수정일: 2026-04-07</span>
         </div>
       </header>
 
 <section id="sec-개요" class="content-section">
 <h2>개요</h2>
-<p>로봇에게 조작을 가르치는 가장 직관적인 방법은 <strong>인간의 시연(demonstration)</strong>을 보여주는 것입니다. 그러나 인간 손의 27 DoF 동작과 촉각 정보를 로봇에 전달하는 것은 근본적인 도전입니다. 이 챕터에서는 인간 손 모델링(MANO), 모션 트래킹 글로브, 촉각 글로브, 외골격, 원격 조작 시스템을 다루며, "사람에서 로봇으로"의 데이터 파이프라인을 조망합니다.</p>
+<p>로봇에게 조작을 가르치는 가장 직관적인 방법은 <strong>인간의 시연(demonstration)</strong>을 보여주는 것입니다. 그러나 인간 손의 27 DoF 동작과 촉각 정보를 로봇에 전달하는 것은 근본적인 도전입니다. 이 챕터에서는 인간 손 모델링(MANO <a href="https://terry.artlab.ai/ko/posts/2201-mano-hand-model">#17</a>), 모션 트래킹 글로브, 촉각 글로브, 외골격, 원격 조작 시스템을 다루며, "사람에서 로봇으로"의 데이터 파이프라인을 조망합니다.</p>
 <blockquote class=""><strong>이 챕터를 읽고 나면...</strong>
 - MANO 손 모델의 구조와 활용을 설명할 수 있습니다.
 - 주요 모션 트래킹 글로브의 특성을 비교할 수 있습니다.
-- 촉각 글로브(STAG, OSMO)의 설계와 교차 체현 잠재력을 이해합니다.
+- 촉각 글로브(STAG, OSMO <a href="https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove">#18</a>)의 설계와 교차 체현 잠재력을 이해합니다.
 - 외골격과 원격 조작의 장단점을 파악합니다.</blockquote>
 <hr>
 </section>
@@ -139,7 +139,7 @@
   <figcaption>Figure 6.2: 모션 트래킹 글로브 비교.</figcaption>
 </figure>
 <h3>한국 연구: ML 기반 착용형 센서</h3>
-<p>Seoul National University의 연구 <sup><a class="cite-link" href="#ch6-ref-21" title="SNU, 2024">[21]</a></sup>는 ML 기반 착용형 센서로 실시간 손 동작 인식을 구현하여, 실험실과 실용 환경 사이의 격차를 줄이고 있습니다.</p>
+<p>Seoul National University의 연구 [2024, <em>PMC</em>]는 ML 기반 착용형 센서로 실시간 손 동작 인식을 구현하여, 실험실과 실용 환경 사이의 격차를 줄이고 있습니다.</p>
 <hr>
 </section>
 <section id="sec-6-3" class="content-section">
@@ -168,12 +168,30 @@
   <a href="../assets/figures/ch06/fig_6_3_osmo_bridge_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_3_osmo_bridge_darkmode.png" alt="Figure 6.3: OSMO 글로브의 Embodiment Bridge 개념. Source: OSMO (2025)." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_3_osmo_bridge_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 6.3: OSMO 글로브의 Embodiment Bridge 개념. Source: OSMO (2025).</figcaption>
 </figure>
+<h3>TacCap (2025)</h3>
+<p>TacCap [arXiv, Mar 2025]은 FBG(Fiber Bragg Grating) 광학 촉각 센서를 손가락 끝 골무(thimble) 형태로 구현한 시스템입니다:</p>
+<ul>
+<li><strong>FBG 광섬유 기반 촉각 센서</strong>: 높은 감도와 빠른 응답 속도</li>
+<li><strong>인간/로봇 양쪽 장착 가능</strong>: OSMO와 유사한 교차 체현 접근</li>
+<li><strong>EMI 면역(electromagnetic interference immune)</strong>: 광학 기반이므로 전자기 간섭에 완전 면역 — MRI 환경이나 강한 전자기장 근처에서도 사용 가능</li>
+<li>골무 형태로 기존 글로브나 로봇 핑거팁에 쉽게 부착</li>
+</ul>
+<blockquote class="">TacCap은 OSMO의 자기 센서와 보완적인 위치에 있습니다. 자기 센서가 외부 자기장에 취약한 환경에서는 FBG 광학 방식이 대안이 됩니다.</blockquote>
+<h3>VTDexManip (2025)</h3>
+<p>VTDexManip [ICLR 2025]은 최초의 대규모 visual-tactile 인간 시연 데이터셋입니다:</p>
+<ul>
+<li><strong>565,000 프레임</strong>: 시각(visual)과 촉각(tactile) 정보를 동시에 수집</li>
+<li><strong>10개 태스크, 182개 물체</strong>: 다양한 조작 시나리오를 포괄</li>
+<li><strong>최초의 visual-tactile 인간 시연 데이터셋</strong>: 기존 데이터셋이 시각 또는 촉각 중 하나만 제공한 반면, 두 모달리티를 통합</li>
+<li>교차 체현 정책 학습을 위한 벤치마크 역할</li>
+</ul>
+<blockquote class="">VTDexManip은 "촉각 글로브로 수집한 시연 데이터를 어떻게 활용할 것인가"에 대한 구체적 답을 제공합니다. 565K 프레임은 대규모 모방 학습(imitation learning)에 충분한 규모입니다.</blockquote>
 <h3>FSR 최적화 접근</h3>
 <p>Tang et al.<sup><a class="cite-link" href="#ch6-ref-5" title="al. 2025">[5]</a></sup>과 Chen et al.<sup><a class="cite-link" href="#ch6-ref-5" title="al. 2025">[5]</a></sup>은 FSR(Force Sensing Resistor) 센서의 최적 배치 문제를 다루어, 제한된 센서 수로 최대 정보를 추출하는 방법을 탐구했습니다. 이는 "고공간 해상도 vs 최적화된 센서 수/위치"의 트레이드오프에 대한 답입니다.</p>
 <hr>
 </section>
 <section id="sec-6-4" class="content-section">
-<h2>6.4 외골격 접근: DexUMI, ExoStart, DEXOP</h2>
+<h2>6.4 외골격 접근: DexUMI <a href="https://terry.artlab.ai/ko/posts/2505-dexumi">#8</a>, ExoStart <a href="https://terry.artlab.ai/ko/posts/2506-exostart">#9</a>, DEXOP <a href="https://terry.artlab.ai/ko/posts/2509-dexop">#10</a></h2>
 <p>외골격(exoskeleton)은 인간 손에 기계적으로 연결되어 동작을 직접 캡처하는 접근입니다.</p>
 <h3>DexUMI (2025)</h3>
 <p>Xu et al.<sup><a class="cite-link" href="#ch6-ref-5" title="al. 2025">[5]</a></sup>의 DexUMI는 "인간 손을 범용 인터페이스로":</p>
@@ -204,14 +222,60 @@
 <li>직접 접촉 피드백(direct contact feedback) 제공</li>
 <li><strong>51.3% vs 42.5%</strong> (원격 조작 대비) 성공률</li>
 </ul>
-<blockquote class=""><strong>핵심 관점</strong>: DexUMI, ExoStart, DEXOP는 각각 다른 방식으로 인간-로봇 격차를 메우지만, 공통적으로 <strong>원격 조작의 처리량 병목(~10 demos/hr)</strong>을 극복하려는 시도입니다.</blockquote>
+<h3>AirExo / AirExo-2 (SJTU, 2024–2025)</h3>
+<p>AirExo [ICRA 2024]와 AirExo-2 [CoRL 2025]는 Shanghai Jiao Tong University에서 개발한 저비용 패시브 외골격입니다:</p>
+<ul>
+<li><strong>약 $300의 제작 비용</strong>: 3D 프린팅 부품과 저가 센서로 구성</li>
+<li><strong>패시브 구동(passive)</strong>: 모터 없이 인간 동작을 직접 기록</li>
+<li><strong>"in-the-wild" 인간 시연 수집</strong>: 실험실 밖 일상 환경에서 데이터 수집 가능</li>
+<li>AirExo-2의 핵심 발견: <strong>3분 텔레옵 + in-the-wild 데이터 ≥ 20분 텔레옵 단독</strong> — 값비싼 원격 조작 데이터를 자연 환경 시연으로 대체할 수 있음을 실증</li>
+<li>팔(arm) + 손(hand)을 모두 커버하는 전신 상지 외골격</li>
+</ul>
+<blockquote class="">AirExo 시리즈는 <strong>데이터 수집의 민주화</strong>를 보여주는 대표적 사례입니다. $300 외골격으로 수집한 in-the-wild 데이터가 고가의 원격 조작 데이터를 보완하거나 대체할 수 있다는 결과는, 로봇 학습 데이터의 확장성 문제에 새로운 해법을 제시합니다.</blockquote>
+<h3>ACE (UCSD, CoRL 2024)</h3>
+<p>ACE [CoRL 2024]는 University of California San Diego에서 개발한 범용 원격 조작 인터페이스입니다:</p>
+<ul>
+<li><strong>Hand-facing camera + 외골격</strong>: 손 방향 카메라로 손가락 자세를 추적하고 외골격으로 팔 동작을 캡처</li>
+<li><strong>단일 시스템으로 다양한 로봇 플랫폼 지원</strong>: humanoid, robot arm, gripper, quadruped 모두 텔레옵 가능</li>
+<li>체현 간 전환이 소프트웨어 수준에서 이루어져 하드웨어 교체 불필요</li>
+<li>직관적 조작: 인간의 자연스러운 동작이 로봇 동작으로 즉시 매핑</li>
+</ul>
+<blockquote class="">ACE의 핵심 기여는 <strong>하나의 인터페이스로 모든 로봇을 조작</strong>할 수 있다는 것입니다. 이는 수집한 인간 시연 데이터의 재활용성을 극대화합니다.</blockquote>
+<h3>NuExo (Nubot Lab, ICRA 2025)</h3>
+<p>NuExo [ICRA 2025]는 Nubot Lab에서 개발한 능동(active) 외골격 시스템입니다:</p>
+<ul>
+<li><strong>5.2kg 백팩형 능동 외골격</strong>: 모터 구동으로 햅틱 피드백 제공</li>
+<li><strong>100% 상지 ROM(Range of Motion)</strong>: 인간 상지의 전체 운동 범위를 제한 없이 캡처</li>
+<li><strong>2.5mm 나사 조이기 성공</strong>: 극도로 정밀한 조작 태스크를 원격으로 수행</li>
+<li>백팩 형태로 이동성 확보, 다양한 환경에서 사용 가능</li>
+</ul>
+<blockquote class="">NuExo는 패시브 외골격(AirExo)과 반대 방향의 접근입니다. 능동 구동과 햅틱 피드백으로 <strong>정밀도의 상한</strong>을 끌어올려, 미세 조작(fine manipulation) 시연 수집에 특화되어 있습니다.</blockquote>
+<h3>HumanoidExo (NUDT, 2025)</h3>
+<p>HumanoidExo [arXiv, Oct 2025]는 National University of Defense Technology(NUDT)에서 개발한 전신 외골격입니다:</p>
+<ul>
+<li><strong>경량 외골격 + LiDAR</strong>: 외골격으로 상체/팔 동작을, LiDAR로 하체/보행 궤적을 캡처</li>
+<li><strong>전신 궤적(full-body trajectory)</strong> 수집: 상지 조작과 하지 이동을 동시에 기록</li>
+<li><strong>외골격 데이터만으로 보행 학습</strong>: 별도의 보행 시뮬레이션 없이 인간 시연 데이터로 직접 정책 학습</li>
+<li>휴머노이드 로봇의 전신 원격 조작에 최적화</li>
+</ul>
+<blockquote class="">HumanoidExo는 외골격의 응용 범위를 <strong>손/팔에서 전신으로 확장</strong>한 사례입니다. 휴머노이드 로봇이 상용화되는 시점에서, 전신 시연 수집 인프라의 중요성이 부각되고 있습니다.</blockquote>
+<blockquote class=""><strong>핵심 관점</strong>: DexUMI, ExoStart, DEXOP는 각각 다른 방식으로 인간-로봇 격차를 메우지만, 공통적으로 <strong>원격 조작의 처리량 병목(~10 demos/hr)</strong>을 극복하려는 시도입니다. AirExo는 비용 장벽을, ACE는 플랫폼 호환성을, NuExo는 정밀도를, HumanoidExo는 전신 적용을 해결합니다.</blockquote>
 <hr>
 </section>
 <section id="sec-6-5" class="content-section">
-<h2>6.5 인터넷 비디오 학습과 대규모 데이터</h2>
+<h2>6.5 대규모 데이터: 인터넷 비디오에서 에고센트릭 캡처까지</h2>
 <p>Shaw et al. [2024, CMU]은 인터넷 비디오에서 인간 손 동작을 추출하고 로봇 핸드로 리타게팅하는 접근을 제안했습니다. 이 접근의 잠재력은 <strong>확장성(scalability)</strong>에 있습니다 — 인터넷에는 수백만 개의 손 조작 비디오가 있으며, 이를 로봇 학습 데이터로 변환할 수 있다면 원격 조작의 병목을 근본적으로 해결할 수 있습니다.</p>
 <p>ImMimic <sup><a class="cite-link" href="#ch6-ref-14" title="Liu et al., 2025">[14]</a></sup>은 대규모 인간 궤적(human trajectory)과 소수의 원격 조작 궤적(teleoperation trajectory)을 보간(interpolation)하여 데이터를 증강(augment)합니다. 세미나 1에서 논의된 바와 같이, 이 접근은 <strong>비싼 teleop data 대신 human data를 시너지적으로 활용</strong>하는 방향을 대표합니다 (<a href="ch10.html">Chapter 10.2 참조</a>).</p>
 <p>DexH2R<sup><a class="cite-link" href="#ch6-ref-15" title="DexH2R 2024">[15]</a></sup>은 태스크 지향 인간-로봇 다지 전이(task-oriented human-to-robot dexterous transfer)를 구현하여, 인간 시연의 의도를 로봇 동작으로 매핑합니다.</p>
+<h3>EgoDex (Apple, 2025)</h3>
+<p>EgoDex [Apple, 2025]는 Apple Vision Pro와 ARKit을 활용한 대규모 에고센트릭(egocentric) 손 조작 데이터셋입니다:</p>
+<ul>
+<li><strong>829시간, 90M(9,000만) 프레임</strong>: 현존 최대 규모의 손 조작 데이터셋</li>
+<li><strong>194개 태스크</strong>: 일상 물체 조작부터 도구 사용까지 광범위한 시나리오</li>
+<li><strong>30Hz per-finger tracking</strong>: ARKit의 손 추적으로 각 손가락의 3D 궤적을 실시간 기록</li>
+<li>소비자 하드웨어(Apple Vision Pro)로 수집하여 확장성 확보</li>
+</ul>
+<blockquote class="">EgoDex는 인터넷 비디오 접근과 원격 조작 접근 사이의 <strong>새로운 중간 지대</strong>를 개척합니다. 비디오처럼 대규모이면서도 원격 조작처럼 정확한 3D 손가락 궤적을 제공합니다. 829시간이라는 규모는 기존 로봇 시연 데이터셋을 수십 배 초과하며, Foundation Model 학습에 필요한 데이터 규모에 근접합니다.</blockquote>
 <figure>
   <a href="../assets/figures/ch06/fig_6_5_collection_spectrum_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_5_collection_spectrum_darkmode.png" alt="Figure 6.5: 인간 손 데이터 수집 방법의 스펙트럼." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_5_collection_spectrum_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 6.5: 인간 손 데이터 수집 방법의 스펙트럼.</figcaption>
@@ -293,6 +357,34 @@
 <td>낮음</td>
 </tr>
 <tr>
+<td>AirExo</td>
+<td>패시브 외골격</td>
+<td>없음</td>
+<td>높음 (in-the-wild)</td>
+<td>매우 낮음 (~$300)</td>
+</tr>
+<tr>
+<td>ACE</td>
+<td>카메라+외골격</td>
+<td>없음</td>
+<td>기준</td>
+<td>중간</td>
+</tr>
+<tr>
+<td>NuExo</td>
+<td>능동 외골격</td>
+<td>있음 (햅틱)</td>
+<td>기준</td>
+<td>높음</td>
+</tr>
+<tr>
+<td>EgoDex</td>
+<td>Vision Pro + ARKit</td>
+<td>없음</td>
+<td>매우 높음 (829h)</td>
+<td>중간</td>
+</tr>
+<tr>
 <td>인터넷 비디오</td>
 <td>없음 (관찰)</td>
 <td>없음</td>
@@ -305,6 +397,7 @@
 <section id="sec-요약-및-전망" class="content-section">
 <h2>요약 및 전망</h2>
 <p>인간 손 데이터 수집은 <strong>처리량(throughput)</strong>과 <strong>데이터 품질(quality)</strong>의 트레이드오프 위에 있습니다. 원격 조작은 높은 품질을 제공하지만 ~10 demos/hr로 확장이 어렵고, 인터넷 비디오는 무제한 확장이 가능하지만 동작 라벨과 촉각 정보가 부재합니다. OSMO 글로브의 Embodiment Bridge 접근과 DEXOP의 기계적 직접 결합은 이 트레이드오프의 새로운 해법을 제시합니다.</p>
+<p>AirExo의 $300 패시브 외골격과 EgoDex의 829시간 Vision Pro 데이터셋은 <strong>데이터 수집의 민주화와 대규모화</strong>라는 두 축을 동시에 추진하고 있습니다. 또한 VTDexManip의 565K 프레임 visual-tactile 데이터셋과 TacCap의 EMI-면역 FBG 센서는 촉각 정보를 포함한 시연 수집의 실용화를 앞당기고 있습니다.</p>
 <p>NVIDIA Isaac Teleop + MANUS의 산업 표준화, 인터넷 비디오 마이닝의 확장, 그리고 합성 데이터(780K 궤적/11시간)의 촉각 확장이 데이터 병목을 해소할 핵심 방향입니다.</p>
 <p>다음 챕터에서는 이렇게 수집된 데이터로 <strong>로봇이 조작을 학습하는 방법</strong>을 다룹니다 (<a href="ch07.html">Chapter 7: 조작 학습 참조</a>).</p>
 <hr>
@@ -321,10 +414,10 @@
   <li id="ch6-ref-2" value="2">Various. (2024). Stretchable liquid-metal sensor glove. <em>Nature Communications</em>. https://doi.org/10.1038/s41467-024-50101-w</li>
   <li id="ch6-ref-3" value="3">Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
   <li id="ch6-ref-4" value="4">Ruppel, P., et al. (2024). Reduced tactile sensor array for grasp analysis. <em>Sensors</em>. <em>Sensors</em>.</li>
-  <li id="ch6-ref-5" value="5">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920.</li>
-  <li id="ch6-ref-6" value="6">Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>. arXiv:2505.21864.</li>
-  <li id="ch6-ref-7" value="7">Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>. arXiv:2506.11775.</li>
-  <li id="ch6-ref-8" value="8">Fang, H.-S., Romero, B., Xie, Y., Hu, A., Huang, B.-R., Alvarez, J., Kim, M., Margolis, G., Anbarasu, K., Tomizuka, M., Adelson, E., & Agrawal, P. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441.</li>
+  <li id="ch6-ref-5" value="5">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920. [#18](https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove)</li>
+  <li id="ch6-ref-6" value="6">Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>. arXiv:2505.21864. [#8](https://terry.artlab.ai/ko/posts/2505-dexumi)</li>
+  <li id="ch6-ref-7" value="7">Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>. arXiv:2506.11775. [#9](https://terry.artlab.ai/ko/posts/2506-exostart)</li>
+  <li id="ch6-ref-8" value="8">Fang, H.-S., Romero, B., Xie, Y., Hu, A., Huang, B.-R., Alvarez, J., Kim, M., Margolis, G., Anbarasu, K., Tomizuka, M., Adelson, E., & Agrawal, P. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441. [#10](https://terry.artlab.ai/ko/posts/2509-dexop)</li>
   <li id="ch6-ref-9" value="9">Qin, Y., et al. (2023). AnyTeleop: A general vision-based dexterous robot hand-arm teleoperation system. <em>RSS 2023</em>.</li>
   <li id="ch6-ref-10" value="10">Handa, A., & Van Wyk, K. (2020). DexPilot: Vision-based teleoperation for dexterous manipulation. <em>ICRA 2020</em>.</li>
   <li id="ch6-ref-11" value="11">Ding, Z., et al. (2024). Bunny-VisionPro: Real-time bimanual dexterous teleoperation for imitation learning. <em>arXiv preprint</em>. arXiv:2407.03162.</li>
@@ -338,6 +431,14 @@
   <li id="ch6-ref-19" value="19">Tang, M., et al. (2025). FSR sensor optimization for grasp classification. <em>IEEE Journal of Biomedical and Health Informatics</em>.</li>
   <li id="ch6-ref-20" value="20">Chen, H., et al. (2025). Capacitive sensor for lift-risk identification. <em>Applied Ergonomics</em>.</li>
   <li id="ch6-ref-21" value="21">Various. (2024). ML-based wearable sensors for real-time hand motion recognition. <em>PMC</em>. (Seoul National University)</li>
+  <li id="ch6-ref-22" value="22">TacCap. (2025). TacCap: FBG optical tactile sensor thimble for human and robot fingertips. <em>arXiv preprint</em>, Mar 2025.</li>
+  <li id="ch6-ref-23" value="23">VTDexManip. (2025). VTDexManip: A large-scale visual-tactile dataset for dexterous manipulation from human demonstrations. <em>ICLR 2025</em>.</li>
+  <li id="ch6-ref-24" value="24">Fang, J., et al. (2024). AirExo: Low-cost exoskeletons for learning whole-arm manipulation in the wild. <em>ICRA 2024</em>.</li>
+  <li id="ch6-ref-25" value="25">Fang, J., et al. (2025). AirExo-2: Scaling up generalizable manipulation skills via purely kinesthetic demonstrations in the wild. <em>CoRL 2025</em>.</li>
+  <li id="ch6-ref-26" value="26">Zhao, Q., et al. (2024). ACE: A cross-platform visual-exoskeleton system for low-cost dexterous teleoperation. <em>CoRL 2024</em>.</li>
+  <li id="ch6-ref-27" value="27">NuExo. (2025). NuExo: A 5.2kg active upper-limb exoskeleton for dexterous teleoperation with 100% ROM. <em>ICRA 2025</em>.</li>
+  <li id="ch6-ref-28" value="28">HumanoidExo. (2025). HumanoidExo: Lightweight exoskeleton with LiDAR for full-body humanoid teleoperation and locomotion learning. <em>arXiv preprint</em>, Oct 2025.</li>
+  <li id="ch6-ref-29" value="29">EgoDex. (2025). EgoDex: Learning dexterous manipulation from large-scale egocentric hand data via Apple Vision Pro. <em>Apple</em>, 2025.</li>
 </ol>
 </section>
 
