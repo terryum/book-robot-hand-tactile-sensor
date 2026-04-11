@@ -165,8 +165,12 @@
 인간과 로봇 손 모두에 사용 가능한 12개 3축 자기 촉각 글로브. 교차 체현 촉각 전이의 새로운 패러다임을 제시합니다.</blockquote>
 <p>세미나 2의 핵심 인사이트: <strong>인간/로봇에 동일 센싱 글로브를 사용하면 cross-embodiment 문제 단순화</strong>. 인간의 시연에서 촉각 데이터를 수집하고, 같은 글로브를 로봇 손에 장착하여 정책을 학습하면, 촉각 도메인 갭(tactile domain gap)이 제거됩니다 (<a href="ch10.html">Chapter 10.4 참조</a>).</p>
 <figure>
-  <a href="../assets/figures/ch06/fig_6_3_osmo_bridge_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_3_osmo_bridge_darkmode.png" alt="Figure 6.3: OSMO 글로브의 Embodiment Bridge 개념. Source: OSMO (2025)." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_3_osmo_bridge_technical.png'" style="cursor:zoom-in"></a>
-  <figcaption>Figure 6.3: OSMO 글로브의 Embodiment Bridge 개념. Source: OSMO (2025).</figcaption>
+  <a href="../assets/figures/ch06/fig_osmo_overview.png" target="_blank"><img src="../assets/figures/ch06/fig_osmo_overview.png" alt="OSMO 글로브 시스템 — 인간과 로봇 손 모두에 동일한 글로브 착용. 출처: Yin et al. (2025), Fig. 1." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_osmo_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>OSMO 글로브 시스템 — 인간과 로봇 손 모두에 동일한 글로브 착용. 출처: Yin et al. (2025), Fig. 1.</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch06/fig_osmo_hardware.png" target="_blank"><img src="../assets/figures/ch06/fig_osmo_hardware.png" alt="OSMO 하드웨어 — 12개 3축 자기 센서와 MuMetal 차폐. 출처: Yin et al. (2025), Fig. 2." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_osmo_hardware.png'" style="cursor:zoom-in"></a>
+  <figcaption>OSMO 하드웨어 — 12개 3축 자기 센서와 MuMetal 차폐. 출처: Yin et al. (2025), Fig. 2.</figcaption>
 </figure>
 <h3>TacCap (2025)</h3>
 <p>TacCap [arXiv, Mar 2025]은 FBG(Fiber Bragg Grating) 광학 촉각 센서를 손가락 끝 골무(thimble) 형태로 구현한 시스템입니다:</p>
@@ -202,8 +206,12 @@
 <li>원격 조작 대비 <strong>3.2배 빠른</strong> 데이터 수집</li>
 </ul>
 <figure>
-  <a href="../assets/figures/ch06/fig_6_4_dexumi_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_4_dexumi_darkmode.png" alt="Figure 6.4: DexUMI의 이중 격차 해소. Source: DexUMI (2025)." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_4_dexumi_technical.png'" style="cursor:zoom-in"></a>
-  <figcaption>Figure 6.4: DexUMI의 이중 격차 해소. Source: DexUMI (2025).</figcaption>
+  <a href="../assets/figures/ch06/fig_dexumi_overview.png" target="_blank"><img src="../assets/figures/ch06/fig_dexumi_overview.png" alt="DexUMI 시스템 — 웨어러블 외골격 + SAM2 인페인팅으로 이중 격차 해소. 출처: Xu et al. (2025), Fig. 1." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_dexumi_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>DexUMI 시스템 — 웨어러블 외골격 + SAM2 인페인팅으로 이중 격차 해소. 출처: Xu et al. (2025), Fig. 1.</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch06/fig_dexumi_pipeline.png" target="_blank"><img src="../assets/figures/ch06/fig_dexumi_pipeline.png" alt="DexUMI 파이프라인 — 운동학적 리타게팅 + 시각적 격차 해소. 출처: Xu et al. (2025), Fig. 2." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_dexumi_pipeline.png'" style="cursor:zoom-in"></a>
+  <figcaption>DexUMI 파이프라인 — 운동학적 리타게팅 + 시각적 격차 해소. 출처: Xu et al. (2025), Fig. 2.</figcaption>
 </figure>
 <h3>ExoStart (2025)</h3>
 <p>Si et al.<sup><a class="cite-link" href="#ch6-ref-5" title="al. 2025">[5]</a></sup>의 ExoStart는 <strong>10회 외골격 시연만으로</strong> 다지 조작 정책을 학습합니다:</p>
@@ -305,6 +313,11 @@
 <figure>
   <a href="../assets/figures/ch06/fig_6_6_teleop_comparison_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_6_teleop_comparison_darkmode.png" alt="Figure 6.6: 원격 조작 시스템 비교." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_6_teleop_comparison_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 6.6: 원격 조작 시스템 비교.</figcaption>
+</figure>
+<p>UMI-FT [Choi et al., 2025]는 이 스펙트럼에서 독특한 위치를 차지합니다: 인간의 손재주를 보존하면서 자연스러운 햅틱 피드백(원격 조작 지연 없음)을 제공하고, CoinFT 센서로 <strong>6축 힘/토크 데이터</strong>를 수집하며, 야외 환경까지 확장 가능합니다. 수백 명이 로봇이나 훈련된 조작자 없이 매일 시연 데이터를 수집할 수 있습니다. 장치가 로봇의 그리퍼 형태를 모방하므로 체화 격차(embodiment gap)도 작습니다 [Choi, SNU 세미나 2026].</p>
+<figure>
+  <a href="../assets/figures/seminar/in_wild_generalization.png" target="_blank"><img src="../assets/figures/seminar/in_wild_generalization.png" alt="Figure 6.6a: 데이터 수집 전략 비교 — 원격조작 vs. 비디오 학습 vs. UMI 방식. Source: Choi, SNU Data Science Seminar 2026." loading="lazy" onerror="this.src='../assets/figures/seminar/in_wild_generalization.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 6.6a: 데이터 수집 전략 비교 — 원격조작 vs. 비디오 학습 vs. UMI 방식. Source: Choi, SNU Data Science Seminar 2026.</figcaption>
 </figure>
 <table class="styled-table">
 <thead><tr>

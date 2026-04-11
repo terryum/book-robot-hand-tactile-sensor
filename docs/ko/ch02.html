@@ -130,6 +130,7 @@
 <li><strong>Robotiq TSF-85</strong>: Capacitive array 기반 센서. 28 taxels, 1000 Hz 샘플링, 0–225 N 범위를 제공합니다.</li>
 <li><strong>PPS (Pressure Profile Systems) RoboTact</strong>: Capacitive tactile sensing 기반의 유연한 촉각 센서 시스템입니다.</li>
 </ul>
+<p><strong>주목할 연구 설계 — CoinFT [Choi et al., 2024]</strong>: 동전 크기의 소형 정전용량식 <strong>6축 힘/토크 센서</strong> — 두께 2 mm, 무게 2 g, 재료비 $10 미만. 빗살(comb) 패턴 전극이 있는 두 장의 PCB를 실리콘 고무 기둥(pillar) 배열로 연결한 구조입니다. 칩의 내부 전극 재구성 기능을 활용하여 단일 PCB 쌍에서 6축 모두를 센싱합니다. 기둥 직경(100-200 μm)과 재료를 조절하면 감도와 동적 범위를 응용별로 최적화할 수 있습니다. ~360 Hz 샘플링, 해머 충격 시험에서도 작동 — 비구조 환경의 우발적 접촉에 강합니다. 학술용 오픈소스 공개 (→ 2.3절 상세 비교 참조).</p>
 <p><strong>장점</strong>: 높은 감도, 반복성(repeatability), 안정성(stability)이 강점. 정적 힘/압력 분포를 안정적으로 읽기 좋으며, 설계 유연성과 근접 감지가 가능</p>
 <p><strong>단점</strong>: 기생 정전용량(parasitic capacitance), 긴 배선 노이즈, 프론트엔드 전자 회로의 복잡도가 높으며, 전자기 간섭(EMI)에 취약</p>
 <h3>2.1.3 광학식 — 비전 기반 촉각 센서 (Optical / Vision-Based)</h3>
@@ -138,6 +139,14 @@
 <p>자석과 홀 효과(Hall effect) 센서 또는 자기 저항(magnetoresistive) 센서의 조합으로 변형을 측정합니다. ReSkin <sup><a class="cite-link" href="#ch2-ref-7" title="Bhirangi et al., 2021">[7]</a></sup>은 자기 탄성체(magnetic elastomer) 기반으로 단가 $6 미만, 두께 2-3mm, 50,000회 이상 반복 사용 가능한 촉각 피부를 구현했습니다. 전자부와 감지부의 분리 설계가 핵심으로, AnySkin <sup><a class="cite-link" href="#ch2-ref-8" title="Bhirangi et al., 2024">[8]</a></sup>은 이를 발전시켜 <strong>12초 만에 교체 가능</strong>한 플러그 앤 플레이 방식을 달성했습니다 — 재교정(recalibration) 없이 92%의 미끄러짐 감지 정확도를 유지합니다.</p>
 <blockquote class="key-paper"><strong>핵심 논문</strong>: Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). "ReSkin: Versatile, Replaceable, Lasting Tactile Skin <a href="https://terry.artlab.ai/ko/posts/2407-tactile-skin-inhand-translation">#13</a>s." <em>arXiv preprint</em>.
 자기 탄성체 기반의 저비용($6/개), 교체 가능한 촉각 피부. 산업 환경에서의 센서 내구성 문제에 대한 실용적 해답을 제시했습니다.</blockquote>
+<figure>
+  <a href="../assets/figures/ch02/fig_reskin_overview.png" target="_blank"><img src="../assets/figures/ch02/fig_reskin_overview.png" alt="Figure 2.1a: ReSkin 개요 — 소형, 교체 가능한 자기 촉각 피부. 로봇 그리퍼부터 웨어러블까지 다양한 응용 가능. 출처: Bhirangi et al. (2021), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch02/fig_reskin_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.1a: ReSkin 개요 — 소형, 교체 가능한 자기 촉각 피부. 로봇 그리퍼부터 웨어러블까지 다양한 응용 가능. 출처: Bhirangi et al. (2021), Fig. 1</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch02/fig_anyskin_overview.png" target="_blank"><img src="../assets/figures/ch02/fig_anyskin_overview.png" alt="Figure 2.1b: AnySkin 개요 — 12초 만에 교체 가능한 플러그 앤 플레이 촉각 피부. 다양한 로봇 플랫폼과 호환. 출처: Bhirangi et al. (2024), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch02/fig_anyskin_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.1b: AnySkin 개요 — 12초 만에 교체 가능한 플러그 앤 플레이 촉각 피부. 다양한 로봇 플랫폼과 호환. 출처: Bhirangi et al. (2024), Fig. 1</figcaption>
+</figure>
 <p><strong>상용 제품 사례</strong>:</p>
 <table class="styled-table">
 <thead><tr>
@@ -188,8 +197,10 @@
 <li><strong>ATI Nano17</strong>: 직경 17 mm, 높이 14.5 mm의 소형 상용 6축 F/T 센서. Silicon strain gauge와 높은 SNR이 강점입니다.</li>
 <li><strong>Adin Miniature FT</strong>: 직경 15 mm, 높이 10.5 mm로 Nano17보다 더 소형화된 6축 F/T 센서입니다.</li>
 </ul>
+<p>6축 F/T 센서의 설계 공간은 다양한 변환 방식으로 탐색되어 왔습니다. Kim et al. <sup><a class="cite-link" href="#ch2-ref-2" title="2017">[2]</a></sup>은 광학 측정 원리를 이용한 광전자식 6축 F/T 센서를 개발했고 (<em>IEEE/ASME Trans. Mechatronics</em>), Palli et al. [2014]은 cross-beam 설계에 photodetector/LED 반사광 측정 방식을 제안했습니다 (<em>Sensors and Actuators A</em>). 비전 기반 측에서는 Fernandez et al.<sup><a class="cite-link" href="#ch2-ref-3" title="al. 2021">[3]</a></sup>이 소형 카메라를 이용한 저비용 유연 촉각 손가락 끝 Visiflex를 소개하여 (<em>IEEE RA-L</em>) 비전 기반 촉각 센싱과 F/T 측정을 결합했습니다.</p>
+<p>이런 연구 다양성에도 불구하고, 상용 6축 F/T 센서는 <strong>매우 고가</strong>입니다: ATI >$7,000, Mitsumi >$1,000, Resense >$5,000 <sup><a class="cite-link" href="#ch2-ref-29" title="Choi, SNU 세미나 2026">[29]</a></sup>. 또한 매우 취약하여 — 낙하 시 교정이 틀어지고, 수리비가 수천 달러에 달합니다. Flexiv, OnRobot 같은 산업용 로봇 기업이 협동로봇에 F/T 센싱을 통합하고 있으나 센서 자체는 여전히 고가 OEM 부품입니다. 이러한 제약은 소형 로봇 핸드, 웨어러블 로봇, 드론에 기존 F/T 센서를 장착하는 것을 사실상 불가능하게 만들어, CoinFT 같은 저가 대안 연구를 촉진합니다 (→ 2.1.2절 참조).</p>
 <p><strong>장점</strong>: 정확도, 해상도, 교정(calibration) 품질이 우수. 손목/손가락 끝 F/T 측정에 적합</p>
-<p><strong>단점</strong>: 넓은 면적의 soft tactile skin 용도보다는 포인트 F/T 센싱에 특화. 가격이 높고 대면적 확장성이 불리</p>
+<p><strong>단점</strong>: 넓은 면적의 soft tactile skin 용도보다는 포인트 F/T 센싱에 특화. 가격이 높고($7K+) 대면적 확장성이 불리; 충격에 취약</p>
 <h3>2.1.7 유체/공압식 (Fluidic / Pneumatic)</h3>
 <p>유체(액체 또는 공기)의 압력 변화를 통해 접촉력을 측정합니다. 내부 유체가 외력에 의해 변형되면 압력 센서가 이를 감지하는 구조로, 인간 손가락 끝의 접촉 거동에 가까운 유연성(compliance)을 구현할 수 있습니다.</p>
 <p><strong>상용 제품 사례</strong>:</p>
@@ -347,8 +358,18 @@
 <li><strong>1mN 힘 분해능</strong>: 인간 수준에 근접하는 민감도</li>
 </ul>
 <p>이 센서는 단일 손가락에 인간의 여러 수용기 유형에 상응하는 다중 모달 감지를 통합했다는 점에서, 인공 촉각의 "완전체"에 가까운 시도입니다.</p>
+<figure>
+  <a href="../assets/figures/ch02/fig_digit360_overview.png" target="_blank"><img src="../assets/figures/ch02/fig_digit360_overview.png" alt="Figure 2.2a: Digit 360 개요 — 온디바이스 AI와 초인간적 촉각 디지털화 성능을 갖춘 인공 다중모달 손가락 끝. 출처: Lambeta et al. (2024), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch02/fig_digit360_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.2a: Digit 360 개요 — 온디바이스 AI와 초인간적 촉각 디지털화 성능을 갖춘 인공 다중모달 손가락 끝. 출처: Lambeta et al. (2024), Fig. 1</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch02/fig_digit360_modalities.png" target="_blank"><img src="../assets/figures/ch02/fig_digit360_modalities.png" alt="Figure 2.2b: Digit 360 센싱 모달리티 — 시각촉각 이미징, 정적/동적 압력, 방향성 조명, 표면 진동, 온도, 가스 감지, 온디바이스 AI 처리. 출처: Lambeta et al. (2024), Fig. 2" loading="lazy" onerror="this.src='../assets/figures/ch02/fig_digit360_modalities.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.2b: Digit 360 센싱 모달리티 — 시각촉각 이미징, 정적/동적 압력, 방향성 조명, 표면 진동, 온도, 가스 감지, 온디바이스 AI 처리. 출처: Lambeta et al. (2024), Fig. 2</figcaption>
+</figure>
 <h3>모듈러 GelSight 설계 (2025)</h3>
 <p>Agarwal et al.<sup><a class="cite-link" href="#ch2-ref-6" title="al. 2025">[6]</a></sup>은 GelSight 계열 센서의 체계적 모듈러 설계 프레임워크를 제안했습니다 (<em>IJRR</em>). 젤 물질, 조명 배치, 카메라 위치, 하우징을 모듈 단위로 조합하여 응용에 맞는 센서를 커스터마이징할 수 있습니다.</p>
+<h3>비전 기반 F/T 센싱: Visiflex (2021)</h3>
+<p>Fernandez et al.<sup><a class="cite-link" href="#ch2-ref-3" title="al. 2021">[3]</a></sup>은 단일 카메라로 힘, 토크, 접촉 기하를 추정하는 저비용 유연 촉각 손가락 끝 Visiflex를 소개했습니다 (<em>IEEE RA-L</em>). Photometric stereo 방식(GelSight, DIGIT)과 달리, 탄성체 내 마커 변위를 추적하여 6축 F/T를 추론합니다 — 비전 기반 센싱의 접근성과 다축 힘 측정을 결합한 중간 지점입니다.</p>
 <h3>비전 기반 센서의 한계</h3>
 <p>비전 기반 센서의 가장 큰 한계는 <strong>내구성</strong>입니다. 젤 표면은 반복 접촉으로 마모되며, 조명원의 열화, 먼지 침입, 세척 어려움이 산업 환경에서의 장기 운용을 제약합니다. F-TAC Hand<sup><a class="cite-link" href="#ch2-ref-15" title="Hand 2025">[15]</a></sup>가 17개의 센서를 손 전체에 배치했을 때, 이는 곧 17개의 잠재적 고장점을 의미합니다. AnySkin<sup><a class="cite-link" href="#ch2-ref-8" title="AnySkin 2024">[8]</a></sup>의 12초 교체 접근은 이 문제의 실용적 해결책 중 하나입니다 (<a href="ch13.html">Chapter 13.1 참조</a>).</p>
 <figure>
@@ -376,11 +397,89 @@
 <li>로봇 핸드 적용 검증 완료</li>
 </ul>
 <p>이 소형 다축 센서는 비전 기반 센서의 부피 문제를 해결하면서도 전단력 정보를 제공한다는 점에서 의미가 있습니다.</p>
+<h3>CoinFT: 소형 다축 센싱의 사례 연구</h3>
+<p>CoinFT [Choi et al., 2024]는 비전 기반 센서와 기존 스트레인 게이지 F/T 센서 모두에 대한 대안으로, 정전용량식 6축 센서를 동전 크기(2 g, <$10)로 구현했습니다.</p>
+<figure>
+  <a href="../assets/figures/seminar/coinft_design.png" target="_blank"><img src="../assets/figures/seminar/coinft_design.png" alt="Figure 2.4a: CoinFT 설계 — 빗살 패턴 전극의 두 PCB를 실리콘 고무 기둥으로 연결. Source: Choi, SNU Data Science Seminar 2026." loading="lazy" onerror="this.src='../assets/figures/seminar/coinft_design.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.4a: CoinFT 설계 — 빗살 패턴 전극의 두 PCB를 실리콘 고무 기둥으로 연결. Source: Choi, SNU Data Science Seminar 2026.</figcaption>
+</figure>
+<table class="styled-table">
+<thead><tr>
+<th>항목</th>
+<th>ATI Nano17</th>
+<th>Mitsumi</th>
+<th>CoinFT</th>
+<th>세미나 2 센서</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>축</strong></td>
+<td>6</td>
+<td>6</td>
+<td>6</td>
+<td>3+ (법선+전단)</td>
+</tr>
+<tr>
+<td><strong>크기</strong></td>
+<td>Ø17 × 14.5 mm</td>
+<td>—</td>
+<td><strong>2 mm 두께, 동전 크기</strong></td>
+<td>10 × 10 × 6.5 mm</td>
+</tr>
+<tr>
+<td><strong>무게</strong></td>
+<td>9.1 g</td>
+<td>—</td>
+<td><strong>2 g</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>비용</strong></td>
+<td>>$7,000</td>
+<td>>$1,000</td>
+<td><strong><$10</strong></td>
+<td>연구 프로토타입</td>
+</tr>
+<tr>
+<td><strong>샘플링</strong></td>
+<td>7,000 Hz</td>
+<td>—</td>
+<td>~360 Hz</td>
+<td>100 Hz</td>
+</tr>
+<tr>
+<td><strong>견고성</strong></td>
+<td>취약 (낙하=재교정)</td>
+<td>보통</td>
+<td><strong>해머 충격 견딤</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>오픈소스</strong></td>
+<td>아니오</td>
+<td>아니오</td>
+<td><strong>예 (학술용)</strong></td>
+<td>아니오</td>
+</tr>
+</tbody></table>
+<p>CoinFT의 조절 가능한 설계(기둥 직경, 재료, 패턴 변경)는 특정 응용에 맞는 최적화를 가능하게 합니다. 전 세계 다수 대학에서 채택되었으며, DexForce [Chen et al., 2025]에서 다지 핸드에 통합되어 사용됩니다 (<a href="ch07.html">Chapter 7.4 참조</a>).</p>
+<p><strong>CoinFT의 원 연구실을 넘은 채택 사례</strong>: CoinFT의 오픈소스 설계는 다양한 연구 분야에서 채택을 가능하게 했습니다:</p>
+<ul>
+<li><strong>햅틱 장치</strong>: Winston et al.<sup><a class="cite-link" href="#ch2-ref-6" title="al. 2025">[6]</a></sup>은 Fourigami라는 4-DoF 힘 제어 종이접기 손가락 패드 햅틱 장치에 CoinFT를 통합, 햅틱 렌더링 중 폐쇄 루프 힘 제어에 활용 (<em>IEEE Trans. Robotics</em>).</li>
+<li><strong>방향성 햅틱 큐</strong>: Yoshida et al.<sup><a class="cite-link" href="#ch2-ref-5" title="al. 2024">[5]</a></sup>은 전완부 방향성 전단 햅틱 큐 연구에서 CoinFT로 접촉력 초기화 및 제어 (<em>IEEE Trans. Haptics</em>).</li>
+<li><strong>웨어러블 햅틱</strong>: Sarac et al. [2022]은 웨어러블 햅틱 브레이슬릿에서 법선/전단 피부 자극의 지각 강도 측정에 CoinFT를 활용 (<em>IEEE RA-L</em>).</li>
+</ul>
+<p>이러한 응용은 CoinFT의 소형/저가 설계가 로봇 조작을 넘어 — 햅틱, 웨어러블, 인간 지각 연구 등 — 다양한 분야에서 힘 제어 연구를 가능하게 했음을 입증합니다.</p>
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Choi, H., Kim, A., & Cutkosky, M. R. (2024). "CoinFT: A Compact and Affordable Capacitive Six-Axis Force/Torque Sensor." <em>IEEE Sensors Journal</em>.
+오픈소스 동전 크기 6축 F/T 센서. 상용 센서 대비 1/700 가격으로 유사한 정확도를 달성합니다.</blockquote>
 <blockquote class="key-paper"><strong>핵심 논문</strong>: Fang, J., et al. (2025). "Force Measurement Technology of Vision-Based Tactile Sensor." <em>Advanced Intelligent Systems</em> (Wiley).
 비전 기반 촉각 센서에서의 힘 측정 접근법을 체계적으로 리뷰한 서베이. 교정(calibration) 방법과 다축 힘 추정 기법을 포괄합니다.</blockquote>
 <figure>
-  <a href="../assets/figures/ch02/fig_2_4_multiaxis_force_technical.png" target="_blank"><img src="../assets/figures/ch02/fig_2_4_multiaxis_force_darkmode.png" alt="Figure 2.4: 다축 촉각 센싱 — 법선력과 전단력의 역할 비교." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_4_multiaxis_force_technical.png'" style="cursor:zoom-in"></a>
-  <figcaption>Figure 2.4: 다축 촉각 센싱 — 법선력과 전단력의 역할 비교.</figcaption>
+  <a href="../assets/figures/ch02/fig_2_4_multiaxis_force_technical.png" target="_blank"><img src="../assets/figures/ch02/fig_2_4_multiaxis_force_darkmode.png" alt="Figure 2.4b: 다축 촉각 센싱 — 법선력과 전단력의 역할 비교." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_4_multiaxis_force_technical.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.4b: 다축 촉각 센싱 — 법선력과 전단력의 역할 비교.</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/seminar/ft_sensor_comparison_table.png" target="_blank"><img src="../assets/figures/seminar/ft_sensor_comparison_table.png" alt="Figure 2.4c: 상용 F/T 센서 환경과 CoinFT의 포지셔닝. Source: Choi, SNU Data Science Seminar 2026." loading="lazy" onerror="this.src='../assets/figures/seminar/ft_sensor_comparison_table.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.4c: 상용 F/T 센서 환경과 CoinFT의 포지셔닝. Source: Choi, SNU Data Science Seminar 2026.</figcaption>
 </figure>
 <hr>
 </section>
@@ -390,12 +489,20 @@
 <ul>
 <li><strong>17개 촉각 센서</strong>: 손 표면의 <strong>70%</strong>를 커버</li>
 <li><strong>0.1mm 해상도</strong>: 미세 특징 감지</li>
-<li><strong>100% 다중 물체 파지 성공률</strong>: 촉각 피드백의 직접적 효과</li>
+<li><strong>100% 촉각 기반 적응 성공률</strong>: 다중 물체 파지에서 촉각 피드백을 활용한 적응 성공률 (M=1.000, SD=0.000 vs. 촉각 미사용 시 53.5%, p=2.1×10⁻¹⁷)</li>
 <li><strong>센서 배치 최적화</strong>: 접촉 확률이 높은 영역에 센서 집중</li>
 </ul>
 <figure>
-  <a href="../assets/figures/ch02/fig_2_5_ftac_hand_technical.png" target="_blank"><img src="../assets/figures/ch02/fig_2_5_ftac_hand_darkmode.png" alt="Figure 2.5: F-TAC Hand의 센서 배치 — 17개 촉각 센서의 분포와 커버리지. Source: F-TAC Hand (Nature Machine Intelligence, 2025)." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_5_ftac_hand_technical.png'" style="cursor:zoom-in"></a>
-  <figcaption>Figure 2.5: F-TAC Hand의 센서 배치 — 17개 촉각 센서의 분포와 커버리지. Source: F-TAC Hand (Nature Machine Intelligence, 2025).</figcaption>
+  <a href="../assets/figures/ch02/fig_ftac_hand_overview.png" target="_blank"><img src="../assets/figures/ch02/fig_ftac_hand_overview.png" alt="Figure 2.5a: F-TAC Hand 개요 — 손 표면의 70%에 고해상도 촉각 센싱을 구현한 생체모방 핸드. 출처: Zhao et al. (2025), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch02/fig_ftac_hand_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.5a: F-TAC Hand 개요 — 손 표면의 70%에 고해상도 촉각 센싱을 구현한 생체모방 핸드. 출처: Zhao et al. (2025), Fig. 1</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch02/fig_ftac_hand_sensors.png" target="_blank"><img src="../assets/figures/ch02/fig_ftac_hand_sensors.png" alt="Figure 2.5b: F-TAC Hand 센서 배치 — 6가지 최적화된 구성의 17개 비전 기반 촉각 센서 분포. 출처: Zhao et al. (2025), Fig. 2" loading="lazy" onerror="this.src='../assets/figures/ch02/fig_ftac_hand_sensors.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.5b: F-TAC Hand 센서 배치 — 6가지 최적화된 구성의 17개 비전 기반 촉각 센서 분포. 출처: Zhao et al. (2025), Fig. 2</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch02/fig_2_5_ftac_hand_technical.png" target="_blank"><img src="../assets/figures/ch02/fig_2_5_ftac_hand_darkmode.png" alt="Figure 2.5c: F-TAC Hand의 센서 배치 — 17개 촉각 센서의 분포와 커버리지. Source: F-TAC Hand (Nature Machine Intelligence, 2025)." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_5_ftac_hand_technical.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 2.5c: F-TAC Hand의 센서 배치 — 17개 촉각 센서의 분포와 커버리지. Source: F-TAC Hand (Nature Machine Intelligence, 2025).</figcaption>
 </figure>
 <p>F-TAC Hand의 성공은 센서 기술 자체보다 <strong>통합 설계 방법론</strong>의 중요성을 보여줍니다. 센서의 종류, 수량, 배치를 핸드 설계와 동시에 최적화(co-optimization)하는 접근이 향후 표준이 될 것입니다.</p>
 <p>3D-ViTac <sup><a class="cite-link" href="#ch2-ref-16" title="Huang et al., 2024">[16]</a></sup>은 3mm² 밀도의 고밀도 촉각 센서를 시각과 융합하여 통합 3D 표현을 구축하고, Diffusion Policy로 양손 정밀 조작에서 85-90% 성공률을 달성했습니다 — 시각만 사용할 때의 45-50% 대비 크게 향상된 수치입니다 (<em>CoRL 2024</em>) (<a href="ch11.html">Chapter 11.1 참조</a>).</p>

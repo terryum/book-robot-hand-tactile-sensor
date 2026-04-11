@@ -160,6 +160,7 @@
 <li>Self-healing/self-calibrating sensors for industrial longevity</li>
 <li>Sensor-agnostic representations (AnyTouch, Sensor-Invariant)</li>
 <li>Whole-hand dense tactile coverage as standard (F-TAC direction)</li>
+<li><strong>Affordable compact F/T sensors</strong>: CoinFT [Choi et al., 2024] demonstrated that 6-axis F/T sensing at <$10 is achievable, but key challenges remain — vulnerability to tensile/peeling forces and the need for standardized packaging across different hand morphologies [Choi, SNU Seminar 2026]</li>
 </ul>
 <h3>B. Learning & Control</h3>
 <ul>
@@ -282,10 +283,14 @@
 <p><strong>Axis 1 — Mechanism (Physical Intelligence)</strong>:</p>
 <p>When intelligent mechanisms induce continuous contact (<a href="ch05.html">Chapter 5</a>), state stability improves and control simplifies.</p>
 <p><strong>Axis 2 — Tactile (Sensing)</strong>:</p>
-<p>When tactile sensors recognize the contact state during continuous contact (<a href="ch02.html">Chapter 2</a>), finer force control and slip detection become possible.</p>
+<p>When tactile sensors recognize the contact state during continuous contact (<a href="ch02.html">Chapter 2</a>), finer force control and slip detection become possible. CoinFT's multi-axis sensing at ~360 Hz and ACP's ~500 Hz compliance control demonstrate that the required temporal resolution is achievable with current hardware [Choi, SNU Seminar 2026].</p>
 <p><strong>Axis 3 — Learning (VLA/Diffusion)</strong>:</p>
-<p>When VLA/Diffusion Policy leverages tactile feedback from stable contact (→ Chapters 7, 8), sample efficiency and generalization improve.</p>
+<p>When VLA/Diffusion Policy leverages tactile feedback from stable contact (→ Chapters 7, 8), sample efficiency and generalization improve. The UMI-FT results validate this: policies trained with in-the-wild data achieved <strong>100% success</strong> in unseen environments, versus 20% for lab-only training — demonstrating that data diversity enabled by scalable collection (Axis 2) directly improves learning (Axis 3) [Choi, SNU Seminar 2026].</p>
 <blockquote class=""><strong>Core Proposition</strong>: When mechanism physically guarantees continuous contact, tactile recognizes the contact state, and learning exploits this information — the burden on each axis is reduced and overall system robustness improves.</blockquote>
+<figure>
+  <a href="../assets/figures/seminar/tactile_hierarchy_architecture.png" target="_blank"><img src="../assets/figures/seminar/tactile_hierarchy_architecture.png" alt="Figure 13.4a: Hierarchical tactile control architecture — high-level planner + low-level reflex control. Source: Choi, SNU Data Science Seminar 2026." loading="lazy" onerror="this.src='../assets/figures/seminar/tactile_hierarchy_architecture.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 13.4a: Hierarchical tactile control architecture — high-level planner + low-level reflex control. Source: Choi, SNU Data Science Seminar 2026.</figcaption>
+</figure>
 <figure>
   <a href="../assets/figures/ch13/fig_13_4_triangle_integration_technical.png" target="_blank"><img src="../assets/figures/ch13/fig_13_4_triangle_integration_darkmode.png" alt="Figure 13.4: Mechanism + Tactile + Learning triangle integration." loading="lazy" onerror="this.src='../assets/figures/ch13/fig_13_4_triangle_integration_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 13.4: Mechanism + Tactile + Learning triangle integration.</figcaption>

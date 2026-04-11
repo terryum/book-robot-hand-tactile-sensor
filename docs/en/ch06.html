@@ -165,8 +165,12 @@ A 9-sensor eGaIn glove adapting to all hand sizes. The 4.02 mm fingertip error i
 A 12-sensor three-axis magnetic tactile glove usable on both human and robot hands. Presents a new paradigm for cross-embodiment tactile transfer.</blockquote>
 <p>Key insight from Seminar 2: <strong>Using identical sensing gloves on human and robot simplifies the cross-embodiment problem</strong>. When tactile data is collected from human demonstrations and the same glove is mounted on a robot hand for policy learning, the tactile domain gap is eliminated (<a href="ch10.html">Chapter 10.4</a>).</p>
 <figure>
-  <a href="../assets/figures/ch06/fig_6_3_osmo_bridge_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_3_osmo_bridge_darkmode.png" alt="Figure 6.3: OSMO glove's Embodiment Bridge concept. Source: OSMO (2025)." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_3_osmo_bridge_technical.png'" style="cursor:zoom-in"></a>
-  <figcaption>Figure 6.3: OSMO glove's Embodiment Bridge concept. Source: OSMO (2025).</figcaption>
+  <a href="../assets/figures/ch06/fig_osmo_overview.png" target="_blank"><img src="../assets/figures/ch06/fig_osmo_overview.png" alt="OSMO glove system overview — the same glove design worn on both human and robot hands. Source: Yin et al. (2025), Fig. 1." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_osmo_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>OSMO glove system overview — the same glove design worn on both human and robot hands. Source: Yin et al. (2025), Fig. 1.</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch06/fig_osmo_hardware.png" target="_blank"><img src="../assets/figures/ch06/fig_osmo_hardware.png" alt="OSMO hardware detail — 12 three-axis magnetic sensors with MuMetal shielding. Source: Yin et al. (2025), Fig. 2." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_osmo_hardware.png'" style="cursor:zoom-in"></a>
+  <figcaption>OSMO hardware detail — 12 three-axis magnetic sensors with MuMetal shielding. Source: Yin et al. (2025), Fig. 2.</figcaption>
 </figure>
 <h3>TacCap (2025)</h3>
 <p>TacCap [arXiv, Mar 2025] implements FBG (Fiber Bragg Grating) optical tactile sensors in a fingertip thimble form factor:</p>
@@ -202,8 +206,12 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
 <li><strong>3.2x faster</strong> data collection than teleoperation</li>
 </ul>
 <figure>
-  <a href="../assets/figures/ch06/fig_6_4_dexumi_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_4_dexumi_darkmode.png" alt="Figure 6.4: DexUMI's dual gap resolution. Source: DexUMI (2025)." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_4_dexumi_technical.png'" style="cursor:zoom-in"></a>
-  <figcaption>Figure 6.4: DexUMI's dual gap resolution. Source: DexUMI (2025).</figcaption>
+  <a href="../assets/figures/ch06/fig_dexumi_overview.png" target="_blank"><img src="../assets/figures/ch06/fig_dexumi_overview.png" alt="DexUMI system — wearable exoskeleton with SAM2 inpainting for dual gap resolution. Source: Xu et al. (2025), Fig. 1." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_dexumi_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>DexUMI system — wearable exoskeleton with SAM2 inpainting for dual gap resolution. Source: Xu et al. (2025), Fig. 1.</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch06/fig_dexumi_pipeline.png" target="_blank"><img src="../assets/figures/ch06/fig_dexumi_pipeline.png" alt="DexUMI pipeline — kinematic retargeting + visual gap resolution. Source: Xu et al. (2025), Fig. 2." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_dexumi_pipeline.png'" style="cursor:zoom-in"></a>
+  <figcaption>DexUMI pipeline — kinematic retargeting + visual gap resolution. Source: Xu et al. (2025), Fig. 2.</figcaption>
 </figure>
 <h3>ExoStart (2025)</h3>
 <p>Si et al.<sup><a class="cite-link" href="#ch6-ref-5" title="al. 2025">[5]</a></sup> learn dexterous manipulation policies from <strong>just 10 exoskeleton demonstrations</strong>:</p>
@@ -305,6 +313,11 @@ A 12-sensor three-axis magnetic tactile glove usable on both human and robot han
 <figure>
   <a href="../assets/figures/ch06/fig_6_6_teleop_comparison_technical.png" target="_blank"><img src="../assets/figures/ch06/fig_6_6_teleop_comparison_darkmode.png" alt="Figure 6.6: Teleoperation system comparison." loading="lazy" onerror="this.src='../assets/figures/ch06/fig_6_6_teleop_comparison_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 6.6: Teleoperation system comparison.</figcaption>
+</figure>
+<p>UMI-FT [Choi et al., 2025] occupies a unique position in this landscape: a handheld demonstration device that preserves human dexterity with natural haptic feedback (no teleoperation latency), collects <strong>6-axis force/torque data</strong> via CoinFT sensors, and scales to in-the-wild environments. Hundreds of people can collect demonstrations daily without requiring robots or trained operators. The embodiment gap is small because the device mimics the robot's gripper form factor [Choi, SNU Seminar 2026].</p>
+<figure>
+  <a href="../assets/figures/seminar/in_wild_generalization.png" target="_blank"><img src="../assets/figures/seminar/in_wild_generalization.png" alt="Figure 6.6a: Data collection strategy comparison — teleoperation vs. video learning vs. UMI-style handheld. Source: Choi, SNU Data Science Seminar 2026." loading="lazy" onerror="this.src='../assets/figures/seminar/in_wild_generalization.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 6.6a: Data collection strategy comparison — teleoperation vs. video learning vs. UMI-style handheld. Source: Choi, SNU Data Science Seminar 2026.</figcaption>
 </figure>
 <table class="styled-table">
 <thead><tr>

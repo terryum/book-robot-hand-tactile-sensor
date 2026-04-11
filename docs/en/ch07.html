@@ -82,6 +82,14 @@
 <li><strong>46.9% average improvement</strong> over prior methods</li>
 <li><strong>500+ citations</strong>: The mainstream paradigm for robot policy learning</li>
 </ul>
+<figure>
+  <a href="../assets/figures/ch07/fig_diffusion_policy_overview.png" target="_blank"><img src="../assets/figures/ch07/fig_diffusion_policy_overview.png" alt="Diffusion Policy overview — robot visuomotor policy learning via action diffusion. Source: Chi et al. (2023), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch07/fig_diffusion_policy_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>Diffusion Policy overview — robot visuomotor policy learning via action diffusion. Source: Chi et al. (2023), Fig. 1</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch07/fig_diffusion_policy_arch.png" target="_blank"><img src="../assets/figures/ch07/fig_diffusion_policy_arch.png" alt="Diffusion Policy architecture — CNN-based and Transformer-based network designs. Source: Chi et al. (2023), Fig. 3" loading="lazy" onerror="this.src='../assets/figures/ch07/fig_diffusion_policy_arch.png'" style="cursor:zoom-in"></a>
+  <figcaption>Diffusion Policy architecture — CNN-based and Transformer-based network designs. Source: Chi et al. (2023), Fig. 3</figcaption>
+</figure>
 <blockquote class="key-paper"><strong>Key Paper</strong>: Chi, C., Feng, S., Du, Y., Xu, Z., Cousineau, E., Burchfiel, B., & Song, S. (2023). "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion." <em>RSS 2023 / IJRR 2024</em>.
 Action diffusion for visuomotor policy learning. Natural handling of multimodal distributions makes it readily combinable with tactile conditioning.</blockquote>
 <h3>ACT/ALOHA (2023)</h3>
@@ -91,8 +99,28 @@ Action diffusion for visuomotor policy learning. Natural handling of multimodal 
 <li>Mobile ALOHA: Mobile + bimanual integration (<a href="ch11.html">Chapter 11.2</a>)</li>
 <li><strong>400+ citations</strong></li>
 </ul>
+<figure>
+  <a href="../assets/figures/ch07/fig_act_aloha_overview.png" target="_blank"><img src="../assets/figures/ch07/fig_act_aloha_overview.png" alt="ACT/ALOHA overview — low-cost bimanual teleoperation and autonomous manipulation. Source: Zhao et al. (2023), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch07/fig_act_aloha_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>ACT/ALOHA overview — low-cost bimanual teleoperation and autonomous manipulation. Source: Zhao et al. (2023), Fig. 1</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch07/fig_act_architecture.png" target="_blank"><img src="../assets/figures/ch07/fig_act_architecture.png" alt="ACT architecture — Action Chunking with Transformers for bimanual policy learning. Source: Zhao et al. (2023), Fig. 3" loading="lazy" onerror="this.src='../assets/figures/ch07/fig_act_architecture.png'" style="cursor:zoom-in"></a>
+  <figcaption>ACT architecture — Action Chunking with Transformers for bimanual policy learning. Source: Zhao et al. (2023), Fig. 3</figcaption>
+</figure>
 <blockquote class="key-paper"><strong>Key Paper</strong>: Zhao, T. Z., Kumar, V., Levine, S., & Finn, C. (2023). "Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware." <em>RSS 2023</em>.
 Transformer-based action chunking achieving fine-grained bimanual manipulation on low-cost hardware, open-sourced with ALOHA.</blockquote>
+<h3>ALOHA Unleashed (2024)</h3>
+<p>Zhao et al. [2024, Google DeepMind] scaled up the ALOHA framework with ALOHA 2 hardware and large-scale data collection for <strong>contact-rich bimanual manipulation</strong> (<em>CoRL 2024</em>):</p>
+<ul>
+<li><strong>Diffusion Policy</strong> backbone for complex bimanual coordination</li>
+<li>Tasks include tying shoelaces, hanging clothes, and other highly dexterous bimanual operations</li>
+<li>Demonstrates that scaling both data quantity and task complexity with Diffusion Policy yields robust contact-rich manipulation</li>
+<li>Bridges the gap between simple pick-and-place and truly dexterous manipulation</li>
+</ul>
+<figure>
+  <a href="../assets/figures/ch07/fig_mobile_aloha_overview.png" target="_blank"><img src="../assets/figures/ch07/fig_mobile_aloha_overview.png" alt="Mobile ALOHA overview — mobile bimanual manipulation system. Source: Fu et al. (2024), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch07/fig_mobile_aloha_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>Mobile ALOHA overview — mobile bimanual manipulation system. Source: Fu et al. (2024), Fig. 1</figcaption>
+</figure>
 <h3>LAPA (2025)</h3>
 <p>LAPA [ICLR 2025] introduces <strong>latent action pretraining from human videos</strong>:</p>
 <ul>
@@ -177,6 +205,10 @@ Transformer-based action chunking achieving fine-grained bimanual manipulation o
 <li><strong>87.5% success</strong> on thin/deformable objects</li>
 </ul>
 <figure>
+  <a href="../assets/figures/ch07/fig_pptac_overview.png" target="_blank"><img src="../assets/figures/ch07/fig_pptac_overview.png" alt="PP-Tac system overview — paper picking using omnidirectional tactile feedback. Source: Lin et al. (2025), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch07/fig_pptac_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>PP-Tac system overview — paper picking using omnidirectional tactile feedback. Source: Lin et al. (2025), Fig. 1</figcaption>
+</figure>
+<figure>
   <a href="../assets/figures/ch07/fig_7_3_pptac_technical.png" target="_blank"><img src="../assets/figures/ch07/fig_7_3_pptac_darkmode.png" alt="Figure 7.3: PP-Tac system. Source: PP-Tac (RSS 2025)." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_3_pptac_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 7.3: PP-Tac system. Source: PP-Tac (RSS 2025).</figcaption>
 </figure>
@@ -191,9 +223,27 @@ Transformer-based action chunking achieving fine-grained bimanual manipulation o
 <li><strong>Spring model</strong>: $x_f = x_o + k_f \cdot f$ (single parameter $k_f = 0.0045$)</li>
 <li>Generates force-informed action targets</li>
 <li><strong>76% average success</strong> across 6 tasks</li>
+<li>Uses <strong>CoinFT sensors</strong> on Allegro Hand fingers for 6-axis force/torque recording during kinesthetic demonstrations</li>
 </ul>
+<figure>
+  <a href="../assets/figures/ch07/fig_dexforce_overview.png" target="_blank"><img src="../assets/figures/ch07/fig_dexforce_overview.png" alt="DexForce overview — extracting force-informed actions from kinesthetic demonstrations. Source: Chen et al. (2025), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch07/fig_dexforce_overview.png'" style="cursor:zoom-in"></a>
+  <figcaption>DexForce overview — extracting force-informed actions from kinesthetic demonstrations. Source: Chen et al. (2025), Fig. 1</figcaption>
+</figure>
 <blockquote class="key-paper"><strong>Key Paper</strong>: Hou, Y., et al. (2025). "DexForce: Learning Contact Forces from Human Demonstrations."
 Spring model-based force-informed demonstration learning. A single parameter $k_f$ naturally integrates force information into action targets.</blockquote>
+<p>DexForce's results on dexterous manipulation are striking: without F/T and compliance, tasks achieve ~0% success; with both, success rises to <strong>>90%</strong> — demonstrating that force sensing is not merely helpful but <em>essential</em> for contact-rich dexterous tasks <sup><a class="cite-link" href="#ch7-ref-11" title="Chen et al., 2025">[11]</a></sup>.</p>
+<figure>
+  <a href="../assets/figures/seminar/dexforce_coinft_dexterous.png" target="_blank"><img src="../assets/figures/seminar/dexforce_coinft_dexterous.png" alt="Figure 7.4a: DexForce with CoinFT on Allegro Hand — kinesthetic teaching with F/T recording. Source: Choi, SNU Data Science Seminar 2026." loading="lazy" onerror="this.src='../assets/figures/seminar/dexforce_coinft_dexterous.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 7.4a: DexForce with CoinFT on Allegro Hand — kinesthetic teaching with F/T recording. Source: Choi, SNU Data Science Seminar 2026.</figcaption>
+</figure>
+<h3>Adaptive Compliance Policy — ACP (2025)</h3>
+<p>The Adaptive Compliance Policy (ACP) [Hou et al., 2025], developed as part of the UMI-FT framework, addresses a fundamental trade-off in contact-rich manipulation: compliance reduces impact forces (improving safety) but degrades tracking accuracy.</p>
+<p>ACP's key insight is <strong>selective compliance</strong> — learned from human demonstrations, the policy modulates compliance <em>directionally</em>:</p>
+<ul>
+<li><strong>Compliant</strong> in the direction normal to the contact surface (absorbing impact)</li>
+<li><strong>Stiff</strong> in tangential directions (preserving motion tracking accuracy)</li>
+</ul>
+<p>This is implemented as a low-level controller running at ~500 Hz, separate from the high-level Diffusion Policy (~10 Hz). The architecture resembles the human sensorimotor hierarchy: a "brain" (VLA/Diffusion Policy) handles high-level planning while "reflexes" (ACP) handle fast contact modulation. Task results demonstrate ACP's necessity: on whiteboard wiping, force control without compliance leads to excessive force; on light bulb insertion, the robot cannot perform haptic search without compliance <sup><a class="cite-link" href="#ch7-ref-28" title="Choi, SNU Seminar 2026">[28]</a></sup>.</p>
 <h3>ForceVLA (2025)</h3>
 <p>Yu et al.<sup><a class="cite-link" href="#ch7-ref-8" title="al. 2025">[8]</a></sup> implement dynamic force-vision-language fusion:</p>
 <ul>
@@ -203,9 +253,19 @@ Spring model-based force-informed demonstration learning. A single parameter $k_
 <li><strong>90% success</strong> under visual occlusion</li>
 </ul>
 <p>ForceVLA represents the direction of integrating tactile/force as a "first-class modality" in VLA models (→ Chapters 8.4, 11.1).</p>
+<h3>Feel the Force: Contact-Driven Learning from Humans (Adeniji et al., 2025)</h3>
+<p>Adeniji et al.<sup><a class="cite-link" href="#ch7-ref-8" title="al. 2025">[8]</a></sup> present a direct pipeline from <strong>human tactile glove demonstrations to robot policies</strong> with zero-shot transfer:</p>
+<ul>
+<li>Human demonstrators wear a tactile glove while performing manipulation tasks</li>
+<li>Force/contact signals are recorded alongside visual observations</li>
+<li>A contact-driven policy is learned that transfers to a robot without any robot-specific data</li>
+<li><strong>77% average success</strong> across 5 contact-rich tasks</li>
+<li>Demonstrates that human force demonstrations contain sufficient information for cross-embodiment transfer</li>
+</ul>
+<p>This work validates the same core insight as UMI-FT and DexForce: <strong>force information from human demonstrations is transferable to robots</strong>, and collecting it at scale can bypass the teleoperation bottleneck. The difference is that Adeniji et al. achieve this without any robot data at all — pure zero-shot human-to-robot transfer via force signals.</p>
 <figure>
-  <a href="../assets/figures/ch07/fig_7_4_force_learning_technical.png" target="_blank"><img src="../assets/figures/ch07/fig_7_4_force_learning_darkmode.png" alt="Figure 7.4: Two force-informed learning approaches — DexForce vs. ForceVLA." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_4_force_learning_technical.png'" style="cursor:zoom-in"></a>
-  <figcaption>Figure 7.4: Two force-informed learning approaches — DexForce vs. ForceVLA.</figcaption>
+  <a href="../assets/figures/ch07/fig_7_4_force_learning_technical.png" target="_blank"><img src="../assets/figures/ch07/fig_7_4_force_learning_darkmode.png" alt="Figure 7.4: Force-informed learning approaches — DexForce, ForceVLA, and Feel the Force." loading="lazy" onerror="this.src='../assets/figures/ch07/fig_7_4_force_learning_technical.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 7.4: Force-informed learning approaches — DexForce, ForceVLA, and Feel the Force.</figcaption>
 </figure>
 <hr>
 </section>
@@ -334,6 +394,11 @@ Spring model-based force-informed demonstration learning. A single parameter $k_
   <li id="ch7-ref-23" value="23">Hogan, N. (1985). Impedance control: An approach to manipulation. <em>JDSMC</em>, 107(1), 1-24.</li>
   <li id="ch7-ref-24" value="24">Various. (2025). LAPA: Latent action pretraining from human videos. <em>ICLR 2025</em>.</li>
   <li id="ch7-ref-25" value="25">Ye, L., et al. (2025). Visual-tactile self-supervised pretraining for robotic manipulation. <em>Science Robotics</em>.</li>
+  <li id="ch7-ref-26" value="26">Choi, H., Kim, A., & Cutkosky, M. R. (2024). CoinFT: A compact and affordable capacitive six-axis force/torque sensor. <em>IEEE Sensors Journal</em>.</li>
+  <li id="ch7-ref-27" value="27">Choi, H., Hou, Y., Song, S., & Cutkosky, M. R. (2025). UMI-FT: Learning compliant manipulation at scale with force/torque sensing. <em>arXiv preprint</em>.</li>
+  <li id="ch7-ref-28" value="28">Choi, H. (2026). Multimodal Data for Robot Manipulation. <em>SNU Data Science Seminar</em>.</li>
+  <li id="ch7-ref-29" value="29">Zhao, T. Z., et al. (2024). ALOHA Unleashed: A simple recipe for robot dexterity. <em>CoRL 2024</em>.</li>
+  <li id="ch7-ref-30" value="30">Adeniji, A., et al. (2025). Feel the Force: Contact-driven learning from humans. <em>arXiv:2506.01944</em>.</li>
 </ol>
 </section>
 

@@ -110,7 +110,15 @@ A landmark argument for simplicity in hand design, introducing the underactuatio
 </ul>
 <blockquote class="key-paper"><strong>Key Paper</strong>: Shaw, K., Agarwal, A., & Pathak, D. (2023). "LEAP Hand: Low-Cost, Efficient, and Anthropomorphic Hand for Robot Learning." <em>RSS 2023</em>.
 A $2,000, 3D-printable open-source dexterous hand that democratized manipulation research.</blockquote>
-<p>LEAP Hand's design philosophy is "maximum dexterity at minimum cost." A novel kinematic structure reproduces the essential degrees of freedom of the human hand using only low-cost servo motors and 3D-printed components.</p>
+<p>LEAP Hand's design philosophy is "maximum dexterity at minimum cost." A novel kinematic structure reproduces the essential degrees of freedom of the human hand using only low-cost servo motors and 3D-printed components. The key innovation is a <strong>universal abduction-adduction mechanism</strong> at the MCP (knuckle) joint: unlike Allegro (which loses DoF in the extended position) or prior designs (which lose DoF when flexed), LEAP Hand retains all degrees of freedom in all finger positions. This leads to a significantly larger thumb opposability volume and higher manipulability ellipsoid, translating to better grasping (19.5 N pull-out force, exceeding human grip) and faster in-hand cube rotation than Allegro.</p>
+<figure>
+  <a href="../assets/figures/ch04/fig_4_leap_hand.png" target="_blank"><img src="../assets/figures/ch04/fig_4_leap_hand.png" alt="Figure 4.A: LEAP Hand overview — anthropomorphic design, human-hand scale comparison, and diverse grasps. Source: Shaw et al. (RSS 2023), Fig. 1." loading="lazy" onerror="this.src='../assets/figures/ch04/fig_4_leap_hand.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 4.A: LEAP Hand overview — anthropomorphic design, human-hand scale comparison, and diverse grasps. Source: Shaw et al. (RSS 2023), Fig. 1.</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch04/fig_4_leap_hand_design.png" target="_blank"><img src="../assets/figures/ch04/fig_4_leap_hand_design.png" alt="Figure 4.B: LEAP Hand kinematic design — MCP joint comparison showing universal abduction-adduction in all positions. Source: Shaw et al. (RSS 2023), Fig. 2." loading="lazy" onerror="this.src='../assets/figures/ch04/fig_4_leap_hand_design.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 4.B: LEAP Hand kinematic design — MCP joint comparison showing universal abduction-adduction in all positions. Source: Shaw et al. (RSS 2023), Fig. 2.</figcaption>
+</figure>
 <figure>
   <a href="../assets/figures/ch04/fig_4_2_hand_cost_performance_technical.png" target="_blank"><img src="../assets/figures/ch04/fig_4_2_hand_cost_performance_darkmode.png" alt="Figure 4.2: Cost-performance comparison of open-source robot hands." loading="lazy" onerror="this.src='../assets/figures/ch04/fig_4_2_hand_cost_performance_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 4.2: Cost-performance comparison of open-source robot hands.</figcaption>
@@ -125,11 +133,22 @@ A $2,000, 3D-printable open-source dexterous hand that democratized manipulation
 <h3>ORCA (2025)</h3>
 <p>Born from ETH's Katzschmann group, ORCA is a <strong>17-DoF tendon-driven</strong> hand:</p>
 <ul>
-<li>Under 2,000 CHF, 8-hour build time</li>
-<li><strong>Integrated tactile sensors</strong> included</li>
-<li>Designed for continuous learning</li>
+<li>Under 2,000 CHF, 8-hour build time by a single person</li>
+<li><strong>Integrated tactile sensors</strong> (FSR-based binary touch on all 5 fingertips)</li>
+<li><strong>Poppable pin joints</strong> that dislocate instead of breaking, plus auto-calibration via center-of-rotation tendon routing</li>
+<li>Demonstrated 10,000+ continuous operation cycles (20+ hours) without hardware failure</li>
+<li>Payload capacity up to 10.5 kg (103 N) in a four-finger grasp</li>
+<li>Zero-shot sim-to-real RL for in-hand ball reorientation</li>
 <li>Commercialization pursued via Mimic Robotics</li>
 </ul>
+<figure>
+  <a href="../assets/figures/ch04/fig_4_orca_hand.png" target="_blank"><img src="../assets/figures/ch04/fig_4_orca_hand.png" alt="Figure 4.C: ORCA Hand overview — tendon-driven anthropomorphic design with integrated tactile sensing. Source: Christoph et al. (2025), Fig. 1." loading="lazy" onerror="this.src='../assets/figures/ch04/fig_4_orca_hand.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 4.C: ORCA Hand overview — tendon-driven anthropomorphic design with integrated tactile sensing. Source: Christoph et al. (2025), Fig. 1.</figcaption>
+</figure>
+<figure>
+  <a href="../assets/figures/ch04/fig_4_orca_hand_design.png" target="_blank"><img src="../assets/figures/ch04/fig_4_orca_hand_design.png" alt="Figure 4.D: ORCA Hand design details — poppable joints, auto-calibration, and tendon routing through center of rotation. Source: Christoph et al. (2025), Fig. 2." loading="lazy" onerror="this.src='../assets/figures/ch04/fig_4_orca_hand_design.png'" style="cursor:zoom-in"></a>
+  <figcaption>Figure 4.D: ORCA Hand design details — poppable joints, auto-calibration, and tendon routing through center of rotation. Source: Christoph et al. (2025), Fig. 2.</figcaption>
+</figure>
 <p>These three hands share a common philosophy — <strong>open-source + low-cost + 3D-printable</strong> — reducing the entry barrier for dexterous manipulation research from $100K+ to under $2K.</p>
 <table class="styled-table">
 <thead><tr>
