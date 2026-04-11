@@ -1,7 +1,7 @@
-# 업데이트 요약: 최호정 SNU Data Science Seminar (2026-04-11)
+# 업데이트 요약: 최호중 박사님 SNU Data Science Seminar (2026-04-11)
 
 ## 원본 자료
-- **세미나**: "Multimodal Data for Robot Manipulation: From Tactile Sensing to Scalable Human Demonstrations" — 최호정 (Stanford/Sunday Robotics)
+- **세미나**: "Multimodal Data for Robot Manipulation: From Tactile Sensing to Scalable Human Demonstrations" — 최호중 박사님 (Stanford/Sunday Robotics)
 - **날짜**: 2026년 4월 8일, SNU Data Science Seminar
 - **데이터 파일**: `docs/revise-source/seminar-hojung-choi/`
 - **참고**: Sunday Robotics 고유 콘텐츠 및 개인 작업 섹션은 지침에 따라 제외함.
@@ -121,7 +121,7 @@
 - `choi2026snuseminar` — SNU 세미나 인용
 
 ### README.md + README_ko.md
-- **Contributors 테이블**: 최호정(Hojung Choi) 추가 — Ch02, Ch03, Ch06, Ch07, Ch13 기여
+- **Contributors 테이블**: 최호중 박사님(Hojung Choi) 추가 — Ch02, Ch03, Ch06, Ch07, Ch13 기여
 - **감사의 글**: SNU Data Science Seminar 기여에 대한 감사 문구 추가
 
 ### 이미지 자산

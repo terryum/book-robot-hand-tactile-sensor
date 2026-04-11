@@ -126,14 +126,14 @@ First publication with 13 chapters, 146 references, 222 illustrations, IEEE surv
 |:------:|:-----------:|:-------------|
 | <img src="https://github.com/revfactory.png" width="50"> | [@revfactory](https://github.com/revfactory) | :wrench: [Harness](https://github.com/revfactory/harness) agent framework, :art: [Web design](https://github.com/revfactory/ai-trend-onboarding) patterns |
 | <img src="https://github.com/sjchoi86.png" width="50"> | [@sjchoi86](https://github.com/sjchoi86) | :book: Ch02: Commercial tactile sensor products & 3 new sensor categories ([`f6f6e59`](https://github.com/terryum/survey-robot-hand-tactile-sensor/commit/f6f6e59)) |
-| | Hojung Choi (최호정) | :book: CoinFT/UMI-FT/ACP content across Ch02, Ch03, Ch06, Ch07, Ch13 via [SNU Data Science Seminar 2026](https://www.hojungchoi.com/) |
+| | [Dr. Hojung Choi (최호중)](https://www.hojungchoi.com/) | :book: CoinFT/UMI-FT/ACP content across Ch02, Ch03, Ch06, Ch07, Ch13 via [SNU Data Science Seminar 2026](https://www.hojungchoi.com/) |
 <!-- CONTRIBUTORS-END -->
 
 ## Acknowledgment
 
 This project was built using [Harness](https://github.com/revfactory/harness) (Apache 2.0) by Minho Hwang. The website structure was adapted from [AI Trend Onboarding](https://github.com/revfactory/ai-trend-onboarding) ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)) by Minho Hwang — the design, layout patterns, and agent architecture were modified for this project's domain. Special thanks to Minho Hwang for creating these excellent tools.
 
-This book was seeded from joint research seminar materials between Seoul National University and Cosmax. Special thanks to Junsoo Ha, Jihwan Song, Taejoon Park, and Incheol Jeong (PhD candidates) for preparing the seminars, and to Professors Frank Chongwoo Park, Yong-Lae Park, and Kyujin Cho for their collaboration. Special thanks to **Hojung Choi** (Stanford/Sunday Robotics) for his SNU Data Science Seminar (April 2026) on "Multimodal Data for Robot Manipulation" — his presentation on CoinFT, UMI-FT, and Adaptive Compliance Policy provided valuable content that enriched multiple chapters of this book.
+This book was seeded from joint research seminar materials between Seoul National University and Cosmax. Special thanks to Junsoo Ha, Jihwan Song, Taejoon Park, and Incheol Jeong (PhD candidates) for preparing the seminars, and to Professors Frank Chongwoo Park, Yong-Lae Park, and Kyujin Cho for their collaboration. Special thanks to **[Dr. Hojung Choi](https://www.hojungchoi.com/)** (Stanford/Sunday Robotics) for his SNU Data Science Seminar (April 2026) on "Multimodal Data for Robot Manipulation" — his presentation on CoinFT, UMI-FT, and Adaptive Compliance Policy provided valuable content that enriched multiple chapters of this report.
 
 AI tools were used in the production of this work: Claude (Opus 4.6) for literature survey, content generation, and manuscript preparation, and [gemini-3-image-generation](https://mcpmarket.com/ko/tools/skills/gemini-3-pro-image-generation) skill (Gemini 3 Pro Image) for figure generation.
 
