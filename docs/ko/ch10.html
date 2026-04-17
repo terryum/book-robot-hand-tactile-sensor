@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapter 10: 사람에서 로봇으로 — Embodiment Retargeting</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
@@ -72,12 +74,12 @@
 
 <section id="sec-개요" class="content-section">
 <h2>개요</h2>
-<p>인간의 시연 데이터(Chapter 6)를 로봇 정책으로 변환하려면, 인간과 로봇 사이의 <strong>교차 체현 격차(cross-embodiment gap)</strong>를 극복해야 합니다. 인간 손의 27 DoF와 로봇 핸드의 7-22 DoF는 근본적으로 다른 운동학적 구조이며, 시각적 외형과 촉각 특성도 상이합니다. 이 챕터에서는 운동학적, 시각적, 촉각적 세 차원의 격차와 각각의 해결 접근을 다루며, 나아가 인간-로봇 공동 학습(co-training)과 텔레옵 없이 인간 데이터만으로 로봇 정책을 학습하는 최신 패러다임까지 살펴봅니다.</p>
+<p>인간의 시연 데이터(<a href="ch06.html">Chapter 6</a>)를 로봇 정책으로 변환하려면, 인간과 로봇 사이의 <strong>교차 체현 격차(cross-embodiment gap)</strong>를 극복해야 합니다. 인간 손의 27 DoF와 로봇 핸드의 7-22 DoF는 근본적으로 다른 운동학적 구조이며, 시각적 외형과 촉각 특성도 상이합니다. 이 챕터에서는 운동학적, 시각적, 촉각적 세 차원의 격차와 각각의 해결 접근을 다루며, 나아가 인간-로봇 공동 학습(co-training)과 텔레옵 없이 인간 데이터만으로 로봇 정책을 학습하는 최신 패러다임까지 살펴봅니다.</p>
 <blockquote class=""><strong>이 챕터를 읽고 나면...</strong>
 - 교차 체현 격차의 세 차원(운동학적, 시각적, 촉각적)을 구분할 수 있습니다.
 - AnyTeleop, ImMimic, DexH2R, ManipTrans의 운동학적 리타게팅을 비교할 수 있습니다.
 - Mirage, H2R 등 시각적 격차 해소의 최신 접근을 이해합니다.
-- UniTacHand <a href="https://terry.artlab.ai/ko/posts/2512-unitachand">#16</a>와 OSMO <a href="https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove">#18</a>의 촉각 격차 해소 접근을 이해합니다.
+- UniTacHand <a href="https://terry.artlab.ai/ko/posts/2512-unitachand" target="_blank" class="post-link">[#16]</a>와 OSMO <a href="https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove" target="_blank" class="post-link">[#18]</a>의 촉각 격차 해소 접근을 이해합니다.
 - EgoMimic, EgoScale 등 인간-로봇 공동 학습의 스케일링 법칙을 설명할 수 있습니다.
 - X-Sim, EgoZero 등 텔레옵 없는(teleop-free) 접근의 가능성과 한계를 파악합니다.
 - 촉각 도메인 갭에 일반적 해법이 부재하다는 미해결 과제를 설명할 수 있습니다.</blockquote>
@@ -161,7 +163,7 @@
 <li>매니폴드 기반 접근은 새로운 로봇 핸드에 대한 빠른 적응 가능</li>
 </ul>
 <h3>Human2Sim2Robot</h3>
-<p>인간 비디오 → 시뮬레이션 재현 → 로봇 정책의 파이프라인. 인터넷 비디오 활용의 연장선입니다 (<a href="ch06.html">Chapter 6.5 참조</a>).</p>
+<p>인간 비디오 → 시뮬레이션 재현 → 로봇 정책의 파이프라인. 인터넷 비디오 활용의 연장선입니다 (→ <a href="ch06.html">Chapter 6.5 참조</a>).</p>
 <figure>
   <a href="../assets/figures/ch10/fig_10_2_kinematic_retargeting_technical.png" target="_blank"><img src="../assets/figures/ch10/fig_10_2_kinematic_retargeting_darkmode.png" alt="Figure 10.2: 운동학적 리타게팅의 세 접근." loading="lazy" onerror="this.src='../assets/figures/ch10/fig_10_2_kinematic_retargeting_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 10.2: 운동학적 리타게팅의 세 접근.</figcaption>
@@ -169,9 +171,9 @@
 <hr>
 </section>
 <section id="sec-10-3" class="content-section">
-<h2>10.3 시각적 격차 해소: DexUMI <a href="https://terry.artlab.ai/ko/posts/2505-dexumi">#8</a>, RoboPaint <a href="https://terry.artlab.ai/ko/posts/2602-robopaint">#15</a>, Mirage, H2R</h2>
+<h2>10.3 시각적 격차 해소: DexUMI <a href="https://terry.artlab.ai/ko/posts/2505-dexumi" target="_blank" class="post-link">[#8]</a>, RoboPaint <a href="https://terry.artlab.ai/ko/posts/2602-robopaint" target="_blank" class="post-link">[#15]</a>, Mirage, H2R</h2>
 <h3>DexUMI (2025)</h3>
-<p>Xu et al.<sup><a class="cite-link" href="#ch10-ref-2" title="al. 2025">[2]</a></sup>의 DexUMI (<a href="ch06.html">Chapter 6.4에서 소개</a>):</p>
+<p>Xu et al.<sup><a class="cite-link" href="#ch10-ref-2" title="al. 2025">[2]</a></sup>의 DexUMI (→ <a href="ch06.html">Chapter 6.4에서 소개</a>):</p>
 <ul>
 <li><strong>SAM2 인페인팅</strong>: 카메라 이미지에서 인간 손을 지우고 로봇 손으로 대체</li>
 <li>시각 정책이 인간 손 외형에 의존하지 않게 함</li>
@@ -182,7 +184,7 @@
 <ul>
 <li>실제 장면의 시각적 충실도를 시뮬레이션에 재현</li>
 <li>시각적 sim-to-real 격차 감소</li>
-<li>Real-Sim-Real 루프의 시각적 구성 요소 (<a href="ch09.html">Chapter 9.4 참조</a>)</li>
+<li>Real-Sim-Real 루프의 시각적 구성 요소 (→ <a href="ch09.html">Chapter 9.4 참조</a>)</li>
 </ul>
 <h3>Mirage (RSS 2024)</h3>
 <p>Chen et al. [2024, RSS]의 Cross-Painting:</p>
@@ -219,7 +221,7 @@
 <h3>UniTacHand (2025)</h3>
 <p>Zhang et al.<sup><a class="cite-link" href="#ch10-ref-2" title="al. 2025">[2]</a></sup>:</p>
 <ul>
-<li><strong>MANO <a href="https://terry.artlab.ai/ko/posts/2201-mano-hand-model">#17</a> UV 맵</strong>: 인간 손 표면을 2D UV 공간으로 전개</li>
+<li><strong>MANO <a href="https://terry.artlab.ai/ko/posts/2201-mano-hand-model" target="_blank" class="post-link">[#17]</a> UV 맵</strong>: 인간 손 표면을 2D UV 공간으로 전개</li>
 <li>인간 글로브의 촉각 → MANO UV 맵으로 투영</li>
 <li>로봇 핸드의 촉각 → 같은 MANO UV 맵으로 투영</li>
 <li><strong>공유 표현 공간(shared representation space)</strong>에서 촉각 정책 학습</li>
@@ -228,7 +230,7 @@
 <blockquote class="key-paper"><strong>핵심 논문</strong>: Zhang, Y., et al. (2025). "UniTacHand: Cross-Embodiment Tactile Transfer via MANO UV Map." <em>Various</em>.
 MANO UV 맵을 이용한 인간-로봇 촉각 공유 표현. 촉각 교차 체현 전이를 최초로 체계적으로 다룬 연구입니다.</blockquote>
 <h3>OSMO (2025)</h3>
-<p>OSMO 글로브 [arXiv:2512.08920] (<a href="ch06.html">Chapter 6.3에서 소개</a>):</p>
+<p>OSMO 글로브 [arXiv:2512.08920] (→ <a href="ch06.html">Chapter 6.3에서 소개</a>):</p>
 <ul>
 <li><strong>Embodiment Bridge</strong>: 인간/로봇에 동일 촉각 글로브 사용</li>
 <li>촉각 도메인 갭을 <strong>물리적으로 제거</strong> — 같은 센서이므로 표현 차이가 없음</li>
@@ -247,7 +249,7 @@ MANO UV 맵을 이용한 인간-로봇 촉각 공유 표현. 촉각 교차 체�
 <hr>
 </section>
 <section id="sec-10-5" class="content-section">
-<h2>10.5 기계적 결합: DEXOP <a href="https://terry.artlab.ai/ko/posts/2509-dexop">#10</a>의 4절 링크 방식</h2>
+<h2>10.5 기계적 결합: DEXOP <a href="https://terry.artlab.ai/ko/posts/2509-dexop" target="_blank" class="post-link">[#10]</a>의 4절 링크 방식</h2>
 <p>DEXOP<sup><a class="cite-link" href="#ch10-ref-8" title="DEXOP 2025">[8]</a></sup>은 인간과 로봇 손가락을 <strong>4절 링크(4-bar linkage)</strong>로 직접 기계적으로 연결합니다:</p>
 <ul>
 <li>세 가지 격차를 동시에 해소:</li>
@@ -302,7 +304,7 @@ MANO UV 맵을 이용한 인간-로봇 촉각 공유 표현. 촉각 교차 체�
 <li>소량의 인간 데이터가 로봇 데이터의 부족을 효과적으로 보완</li>
 <li>리소스 제약 환경에서의 실용적 공동 학습 접근</li>
 </ul>
-<h3>pi0 <a href="https://terry.artlab.ai/ko/posts/2410-pi0-vla-flow-model">#2</a> Human-to-Robot Transfer (Physical Intelligence, 2025)</h3>
+<h3>pi0 <a href="https://terry.artlab.ai/ko/posts/2410-pi0-vla-flow-model" target="_blank" class="post-link">[#2]</a> Human-to-Robot Transfer (Physical Intelligence, 2025)</h3>
 <p>Physical Intelligence [Dec 2025]:</p>
 <ul>
 <li>대규모 사전 학습된 pi0 모델에 인간 데이터로 <strong>공동 미세조정(co-finetuning)</strong></li>
@@ -367,7 +369,7 @@ MANO UV 맵을 이용한 인간-로봇 촉각 공유 표현. 촉각 교차 체�
 </ul>
 <p>향후 필요한 연구 방향:</p>
 <ol>
-<li><strong>센서 무관 촉각 전이</strong>: AnyTouch/Sensor-Invariant 방향의 교차 체현 확장 (<a href="ch03.html">Chapter 3.3 참조</a>)</li>
+<li><strong>센서 무관 촉각 전이</strong>: AnyTouch/Sensor-Invariant 방향의 교차 체현 확장 (→ <a href="ch03.html">Chapter 3.3 참조</a>)</li>
 <li><strong>범용 촉각 UV 맵</strong>: MANO 외의 다양한 핸드 모델에 적용 가능한 공유 표현</li>
 <li><strong>시뮬레이션 기반 촉각 전이</strong>: DiffTactile로 시뮬레이션에서 촉각 갭을 극복</li>
 </ol>
@@ -397,7 +399,7 @@ MANO UV 맵을 이용한 인간-로봇 촉각 공유 표현. 촉각 교차 체�
 </ol>
 <p>그러나 촉각 도메인의 교차 체현 전이는 여전히 1편의 논문(UniTacHand)만이 체계적으로 다루고 있으며, 공동 학습과 텔레옵-프리 접근 역시 촉각 정보를 다루지 못하고 있습니다. 이는 이 분야의 가장 큰 열린 문제입니다.</p>
 <p>Chapter 13에서 제안하는 <strong>"Shared Sensing Platform"</strong> 방향 — OSMO/UniTacHand 방식의 교차 체현 촉각 전이 일반화 — 이 이 격차를 메울 핵심 연구 방향입니다.</p>
-<p>다음 파트에서는 지금까지의 모든 기술을 통합하는 <strong>시스템 통합과 전망</strong>을 다룹니다 (<a href="ch11.html">Chapter 11: 시스템 통합 참조</a>).</p>
+<p>다음 파트에서는 지금까지의 모든 기술을 통합하는 <strong>시스템 통합과 전망</strong>을 다룹니다 (→ <a href="ch11.html">Chapter 11: 시스템 통합 참조</a>).</p>
 <hr>
 </section>
       <nav class="chapter-nav">
@@ -408,33 +410,33 @@ MANO UV 맵을 이용한 인간-로봇 촉각 공유 표현. 촉각 교차 체�
 <section id="sec-references" class="content-section">
 <h2>참고문헌</h2>
 <ol class="references-list">
-  <li id="ch10-ref-1" value="1">Qin, Y., et al. (2023). AnyTeleop: A general vision-based dexterous robot teleoperation system. <em>RSS 2023</em>.</li>
-  <li id="ch10-ref-2" value="2">Liu, Y., et al. (2025). ImMimic: Cross-domain imitation from human videos via mapping and interpolation. <em>arXiv preprint</em>.</li>
-  <li id="ch10-ref-3" value="3">Li, Y., et al. (2024). DexH2R: Task-oriented dexterous manipulation from human to robots. <em>arXiv preprint</em>. arXiv:2411.04428.</li>
-  <li id="ch10-ref-4" value="4">Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>. arXiv:2505.21864. [#8](https://terry.artlab.ai/ko/posts/2505-dexumi)</li>
-  <li id="ch10-ref-5" value="5">Various. (2026). RoboPaint: From human demonstration to any robot and any view. <em>arXiv preprint</em>. [#15](https://terry.artlab.ai/ko/posts/2602-robopaint)</li>
-  <li id="ch10-ref-6" value="6">Zhang, C., Xue, Z., Yin, S., Zhao, B., et al. (2025). UniTacHand: Unified spatio-tactile representation for human to robotic hand skill transfer. <em>arXiv preprint</em>. arXiv:2512.21233. [#16](https://terry.artlab.ai/ko/posts/2512-unitachand)</li>
-  <li id="ch10-ref-7" value="7">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920. [#18](https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove)</li>
-  <li id="ch10-ref-8" value="8">Fang, H.-S., Romero, B., Xie, Y., Hu, A., Huang, B.-R., Alvarez, J., Kim, M., Margolis, G., Anbarasu, K., Tomizuka, M., Adelson, E., & Agrawal, P. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441. [#10](https://terry.artlab.ai/ko/posts/2509-dexop)</li>
-  <li id="ch10-ref-9" value="9">Dan, P., et al. (2025). X-Sim: Cross-embodiment learning via real-to-sim-to-real. <em>CoRL 2025 (Oral)</em>.</li>
-  <li id="ch10-ref-10" value="10">Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>. arXiv:2506.11775. [#9](https://terry.artlab.ai/ko/posts/2506-exostart)</li>
-  <li id="ch10-ref-11" value="11">Shaw, K., Bahl, S., & Pathak, D. (2024). Learning dexterity from human hand motion in internet videos. <em>arXiv preprint</em>. arXiv:2404.xxxxx.</li>
-  <li id="ch10-ref-12" value="12">Romero, J., Tzionas, D., & Black, M. J. (2017). Embodied hands (MANO). <em>SIGGRAPH Asia 2017</em>. [#17](https://terry.artlab.ai/ko/posts/2201-mano-hand-model)</li>
-  <li id="ch10-ref-13" value="13">Various. (2025). Human2Sim2Robot: Learning from human video via sim-to-real transfer. <em>arXiv preprint</em>.</li>
-  <li id="ch10-ref-14" value="14">Various. (2025). AnyTouch: Unified static-dynamic tactile representation. <em>arXiv:2502.12191</em>.</li>
-  <li id="ch10-ref-15" value="15">Various. (2025). Sensor-invariant tactile representation. <em>OpenReview</em>.</li>
-  <li id="ch10-ref-16" value="16">Lv, Y., et al. (2025). ManipTrans: Efficient bimanual dexterous manipulation retargeting. <em>CVPR 2025</em>.</li>
-  <li id="ch10-ref-17" value="17">Park, J., et al. (2025). Joint motion manifold for human-to-robot hand retargeting. <em>arXiv preprint, Jan 2025</em>.</li>
-  <li id="ch10-ref-18" value="18">Chen, B., et al. (2024). Mirage: Cross-embodiment zero-shot transfer via cross-painting. <em>RSS 2024</em>.</li>
-  <li id="ch10-ref-19" value="19">Various. (2025). H2R: Human-to-robot video augmentation for policy pretraining. <em>arXiv preprint</em>.</li>
-  <li id="ch10-ref-20" value="20">Various. (2025). Masquerade: Human video to robot visual transformation. <em>arXiv preprint</em>.</li>
-  <li id="ch10-ref-21" value="21">Kareer, S., et al. (2024). EgoMimic: Scaling imitation learning via egocentric video. <em>arXiv preprint</em>.</li>
-  <li id="ch10-ref-22" value="22">NVIDIA. (2026). EgoScale: Scaling robot policy learning with 20K hours of human egocentric data. <em>arXiv preprint, Feb 2026</em>.</li>
-  <li id="ch10-ref-23" value="23">Various. (2026). AoE: Augmentation of experience via human ego demonstrations. <em>arXiv preprint, Feb 2026</em>.</li>
-  <li id="ch10-ref-24" value="24">Physical Intelligence. (2025). pi0 human-to-robot transfer: Co-finetuning for cross-embodiment generalization. <em>Technical Report, Dec 2025</em>. [#2](https://terry.artlab.ai/ko/posts/2410-pi0-vla-flow-model)</li>
-  <li id="ch10-ref-25" value="25">Various. (2025). EgoZero: Zero robot data policy learning from smart glasses. <em>arXiv preprint</em>.</li>
-  <li id="ch10-ref-26" value="26">Various. (2025). VidBot: Internet video to 3D affordance for zero-shot robot control. <em>CVPR 2025</em>.</li>
-  <li id="ch10-ref-27" value="27">Various. (2025). Human2Bot: Task similarity reward from human video for zero-shot robot control. <em>Autonomous Robots, 2025</em>.</li>
+  <li id="ch10-ref-1" value="1">Qin, Y., et al. (2023). AnyTeleop: A general vision-based dexterous robot teleoperation system. <em>RSS 2023</em>. <a href="https://scholar.google.com/scholar?q=AnyTeleop%3A+A+general+vision-based+dexterous+robot+teleoperation+system" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-2" value="2">Liu, Y., et al. (2025). ImMimic: Cross-domain imitation from human videos via mapping and interpolation. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=ImMimic%3A+Cross-domain+imitation+from+human+videos+via+mapping+and+interpolation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-3" value="3">Li, Y., et al. (2024). DexH2R: Task-oriented dexterous manipulation from human to robots. <em>arXiv preprint</em>. arXiv:2411.04428. <a href="https://scholar.google.com/scholar?q=DexH2R%3A+Task-oriented+dexterous+manipulation+from+human+to+robots" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-4" value="4">Xu, M., Zhang, H., Hou, Y., Xu, Z., Fan, L., Veloso, M., & Song, S. (2025). DexUMI: Using human hand as the universal manipulation interface for dexterous manipulation. <em>arXiv preprint</em>. arXiv:2505.21864. <a href="https://terry.artlab.ai/ko/posts/2505-dexumi" target="_blank" rel="noopener">#8</a> <a href="https://scholar.google.com/scholar?q=DexUMI%3A+Using+human+hand+as+the+universal+manipulation+interface+for+dexterous+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-5" value="5">Various. (2026). RoboPaint: From human demonstration to any robot and any view. <em>arXiv preprint</em>. <a href="https://terry.artlab.ai/ko/posts/2602-robopaint" target="_blank" rel="noopener">#15</a> <a href="https://scholar.google.com/scholar?q=RoboPaint%3A+From+human+demonstration+to+any+robot+and+any+view" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-6" value="6">Zhang, C., Xue, Z., Yin, S., Zhao, B., et al. (2025). UniTacHand: Unified spatio-tactile representation for human to robotic hand skill transfer. <em>arXiv preprint</em>. arXiv:2512.21233. <a href="https://terry.artlab.ai/ko/posts/2512-unitachand" target="_blank" rel="noopener">#16</a> <a href="https://scholar.google.com/scholar?q=UniTacHand%3A+Unified+spatio-tactile+representation+for+human+to+robotic+hand+skill+transfer" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-7" value="7">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920. <a href="https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove" target="_blank" rel="noopener">#18</a> <a href="https://scholar.google.com/scholar?q=OSMO%3A+Open-source+tactile+glove+for+human-to-robot+skill+transfer" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-8" value="8">Fang, H.-S., Romero, B., Xie, Y., Hu, A., Huang, B.-R., Alvarez, J., Kim, M., Margolis, G., Anbarasu, K., Tomizuka, M., Adelson, E., & Agrawal, P. (2025). DEXOP: A device for robotic transfer of dexterous human manipulation. <em>arXiv preprint</em>. arXiv:2509.04441. <a href="https://terry.artlab.ai/ko/posts/2509-dexop" target="_blank" rel="noopener">#10</a> <a href="https://scholar.google.com/scholar?q=DEXOP%3A+A+device+for+robotic+transfer+of+dexterous+human+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-9" value="9">Dan, P., et al. (2025). X-Sim: Cross-embodiment learning via real-to-sim-to-real. <em>CoRL 2025 (Oral)</em>. <a href="https://scholar.google.com/scholar?q=X-Sim%3A+Cross-embodiment+learning+via+real-to-sim-to-real" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-10" value="10">Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>. arXiv:2506.11775. <a href="https://terry.artlab.ai/ko/posts/2506-exostart" target="_blank" rel="noopener">#9</a> <a href="https://scholar.google.com/scholar?q=ExoStart%3A+Efficient+learning+for+dexterous+manipulation+with+sensorized+exoskeleton+demonstrations" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-11" value="11">Shaw, K., Bahl, S., & Pathak, D. (2024). Learning dexterity from human hand motion in internet videos. <em>arXiv preprint</em>. arXiv:2212.04498. <a href="https://scholar.google.com/scholar?q=Learning+dexterity+from+human+hand+motion+in+internet+videos" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-12" value="12">Romero, J., Tzionas, D., & Black, M. J. (2017). Embodied hands (MANO). <em>SIGGRAPH Asia 2017</em>. <a href="https://terry.artlab.ai/ko/posts/2201-mano-hand-model" target="_blank" rel="noopener">#17</a> <a href="https://scholar.google.com/scholar?q=Embodied+hands+%28MANO%29" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-13" value="13">Various. (2025). Human2Sim2Robot: Learning from human video via sim-to-real transfer. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=Human2Sim2Robot%3A+Learning+from+human+video+via+sim-to-real+transfer" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-14" value="14">Various. (2025). AnyTouch: Unified static-dynamic tactile representation. <em>arXiv:2502.12191</em>. <a href="https://scholar.google.com/scholar?q=AnyTouch%3A+Unified+static-dynamic+tactile+representation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-15" value="15">Various. (2025). Sensor-invariant tactile representation. <em>OpenReview</em>. <a href="https://scholar.google.com/scholar?q=Sensor-invariant+tactile+representation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-16" value="16">Lv, Y., et al. (2025). ManipTrans: Efficient bimanual dexterous manipulation retargeting. <em>CVPR 2025</em>. <a href="https://scholar.google.com/scholar?q=ManipTrans%3A+Efficient+bimanual+dexterous+manipulation+retargeting" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-17" value="17">Park, J., et al. (2025). Joint motion manifold for human-to-robot hand retargeting. <em>arXiv preprint, Jan 2025</em>. <a href="https://scholar.google.com/scholar?q=Joint+motion+manifold+for+human-to-robot+hand+retargeting" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-18" value="18">Chen, B., et al. (2024). Mirage: Cross-embodiment zero-shot transfer via cross-painting. <em>RSS 2024</em>. <a href="https://scholar.google.com/scholar?q=Mirage%3A+Cross-embodiment+zero-shot+transfer+via+cross-painting" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-19" value="19">Various. (2025). H2R: Human-to-robot video augmentation for policy pretraining. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=H2R%3A+Human-to-robot+video+augmentation+for+policy+pretraining" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-20" value="20">Various. (2025). Masquerade: Human video to robot visual transformation. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=Masquerade%3A+Human+video+to+robot+visual+transformation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-21" value="21">Kareer, S., et al. (2024). EgoMimic: Scaling imitation learning via egocentric video. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=EgoMimic%3A+Scaling+imitation+learning+via+egocentric+video" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-22" value="22">NVIDIA. (2026). EgoScale: Scaling robot policy learning with 20K hours of human egocentric data. <em>arXiv preprint, Feb 2026</em>. <a href="https://scholar.google.com/scholar?q=EgoScale%3A+Scaling+robot+policy+learning+with+20K+hours+of+human+egocentric+data" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-23" value="23">Various. (2026). AoE: Augmentation of experience via human ego demonstrations. <em>arXiv preprint, Feb 2026</em>. <a href="https://scholar.google.com/scholar?q=AoE%3A+Augmentation+of+experience+via+human+ego+demonstrations" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-24" value="24">Physical Intelligence. (2025). pi0 human-to-robot transfer: Co-finetuning for cross-embodiment generalization. <em>Technical Report, Dec 2025</em>. <a href="https://terry.artlab.ai/ko/posts/2410-pi0-vla-flow-model" target="_blank" rel="noopener">#2</a> <a href="https://scholar.google.com/scholar?q=pi0+human-to-robot+transfer%3A+Co-finetuning+for+cross-embodiment+generalization" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-25" value="25">Various. (2025). EgoZero: Zero robot data policy learning from smart glasses. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=EgoZero%3A+Zero+robot+data+policy+learning+from+smart+glasses" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-26" value="26">Various. (2025). VidBot: Internet video to 3D affordance for zero-shot robot control. <em>CVPR 2025</em>. <a href="https://scholar.google.com/scholar?q=VidBot%3A+Internet+video+to+3D+affordance+for+zero-shot+robot+control" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch10-ref-27" value="27">Various. (2025). Human2Bot: Task similarity reward from human video for zero-shot robot control. <em>Autonomous Robots, 2025</em>. <a href="https://scholar.google.com/scholar?q=Human2Bot%3A+Task+similarity+reward+from+human+video+for+zero-shot+robot+control" target="_blank" rel="noopener">scholar</a></li>
 </ol>
 </section>
 
@@ -453,5 +455,17 @@ MANO UV 맵을 이용한 인간-로봇 촉각 공유 표현. 촉각 교차 체�
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="../js/chapter.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof katex !== 'undefined') {
+        document.querySelectorAll('.math-inline').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: false });
+        });
+        document.querySelectorAll('.math-block').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: true });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

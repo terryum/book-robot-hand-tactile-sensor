@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapter 13: Limitations and Future — Toward Physical AI for Manufacturing</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 </head>
 <body class="lang-en">
   <canvas id="particle-canvas"></canvas>
@@ -164,8 +166,8 @@
 </ul>
 <h3>B. Learning & Control</h3>
 <ul>
-<li>VLA + tactile as first-class modality (ForceVLA <a href="https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe">#1</a>, Tactile-VLA)</li>
-<li>Post-deployment RL for continuous improvement (pi0.6 <a href="https://terry.artlab.ai/en/posts/2511-pi0-6-recap">#4</a>/RECAP)</li>
+<li>VLA + tactile as first-class modality (ForceVLA <a href="https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe" target="_blank" class="post-link">[#1]</a>, Tactile-VLA)</li>
+<li>Post-deployment RL for continuous improvement (pi0.6 <a href="https://terry.artlab.ai/en/posts/2511-pi0-6-recap" target="_blank" class="post-link">[#4]</a>/RECAP)</li>
 <li>One-demo/zero-demo learning from human video</li>
 <li>World models with tactile feedback for model-based planning</li>
 <li>Hierarchical VLA for long-horizon dexterous tasks with error recovery</li>
@@ -281,9 +283,9 @@
 <h2>13.4 Our Research Agenda: The Mechanism-Tactile-Learning Triangle</h2>
 <p>Synthesizing insights from all 12 preceding chapters into a unified research direction:</p>
 <p><strong>Axis 1 — Mechanism (Physical Intelligence)</strong>:</p>
-<p>When intelligent mechanisms induce continuous contact (<a href="ch05.html">Chapter 5</a>), state stability improves and control simplifies.</p>
+<p>When intelligent mechanisms induce continuous contact (→ <a href="ch05.html">Chapter 5</a>), state stability improves and control simplifies.</p>
 <p><strong>Axis 2 — Tactile (Sensing)</strong>:</p>
-<p>When tactile sensors recognize the contact state during continuous contact (<a href="ch02.html">Chapter 2</a>), finer force control and slip detection become possible. CoinFT's multi-axis sensing at ~360 Hz and ACP's ~500 Hz compliance control demonstrate that the required temporal resolution is achievable with current hardware [Choi, SNU Seminar 2026].</p>
+<p>When tactile sensors recognize the contact state during continuous contact (→ <a href="ch02.html">Chapter 2</a>), finer force control and slip detection become possible. CoinFT's multi-axis sensing at ~360 Hz and ACP's ~500 Hz compliance control demonstrate that the required temporal resolution is achievable with current hardware [Choi, SNU Seminar 2026].</p>
 <p><strong>Axis 3 — Learning (VLA/Diffusion)</strong>:</p>
 <p>When VLA/Diffusion Policy leverages tactile feedback from stable contact (→ Chapters 7, 8), sample efficiency and generalization improve. The UMI-FT results validate this: policies trained with in-the-wild data achieved <strong>100% success</strong> in unseen environments, versus 20% for lab-only training — demonstrating that data diversity enabled by scalable collection (Axis 2) directly improves learning (Axis 3) [Choi, SNU Seminar 2026].</p>
 <blockquote class=""><strong>Core Proposition</strong>: When mechanism physically guarantees continuous contact, tactile recognizes the contact state, and learning exploits this information — the burden on each axis is reduced and overall system robustness improves.</blockquote>
@@ -297,7 +299,7 @@
 </figure>
 <h3>Additional Directions</h3>
 <ul>
-<li><strong>Shared Sensing Platform</strong>: Generalizing OSMO <a href="https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove">#18</a>/UniTacHand <a href="https://terry.artlab.ai/en/posts/2512-unitachand">#16</a> cross-embodiment tactile transfer (<a href="ch10.html">Chapter 10.4</a>)</li>
+<li><strong>Shared Sensing Platform</strong>: Generalizing OSMO <a href="https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove" target="_blank" class="post-link">[#18]</a>/UniTacHand <a href="https://terry.artlab.ai/en/posts/2512-unitachand" target="_blank" class="post-link">[#16]</a> cross-embodiment tactile transfer (→ <a href="ch10.html">Chapter 10.4</a>)</li>
 <li><strong>Factory-Specific Foundation Model</strong>: Tactile-visual foundation model specialized for factory environments</li>
 <li><strong>Open Hardware + Open Data</strong>: Sub-$2K hands + Touch100k-scale dataset expansion</li>
 <li><strong>Continuous-Contact Manipulation</strong>: Seminar 3's original insight — mechanism-induced continuous contact reduces sensing/learning burden</li>
@@ -331,33 +333,33 @@
 <section id="sec-references" class="content-section">
 <h2>References</h2>
 <ol class="references-list">
-  <li id="ch13-ref-1" value="1">Various. (2023). DeXtreme. <em>ICRA 2023</em>.</li>
-  <li id="ch13-ref-2" value="2">Various. (2025). Tactile Robotics: Past and Future. <em>arXiv:2512.01106</em>.</li>
-  <li id="ch13-ref-3" value="3">Bhirangi, R., et al. (2024). AnySkin. <em>ICRA 2025</em>.</li>
-  <li id="ch13-ref-4" value="4">Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
-  <li id="ch13-ref-5" value="5">Various. (2025). NRE-skin. <em>PNAS</em>.</li>
-  <li id="ch13-ref-6" value="6">Various. (2026). Bioinspired spiking architecture. <em>Nature Communications</em>.</li>
-  <li id="ch13-ref-7" value="7">Yu, J., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. [#1](https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe)</li>
-  <li id="ch13-ref-8" value="8">Various. (2025). Tactile-VLA. <em>OpenReview</em>.</li>
-  <li id="ch13-ref-9" value="9">Physical Intelligence. (2025). pi0.5/RECAP: Post-deployment RL for continuous improvement. <em>arXiv preprint</em>. arXiv:2504.16932. [#4](https://terry.artlab.ai/en/posts/2511-pi0-6-recap)</li>
-  <li id="ch13-ref-10" value="10">Shaw, K., et al. (2024). Learning from internet videos. <em>CMU</em>.</li>
-  <li id="ch13-ref-11" value="11">Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator. <em>ICLR 2024</em>.</li>
-  <li id="ch13-ref-12" value="12">Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776.</li>
-  <li id="ch13-ref-13" value="13">NVIDIA. (2026). 780K trajectories in 11 hours. <em>GTC 2026</em>.</li>
-  <li id="ch13-ref-14" value="14">Various. (2025). OSMO. <em>arXiv:2512.08920</em>. [#18](https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove)</li>
-  <li id="ch13-ref-15" value="15">Zhang, Y., et al. (2025). UniTacHand. <em>Various</em>. [#16](https://terry.artlab.ai/en/posts/2512-unitachand)</li>
-  <li id="ch13-ref-16" value="16">Bicchi, A. (2000). Hands for dexterous manipulation. <em>IEEE T-RA</em>.</li>
-  <li id="ch13-ref-17" value="17">Billard, A., & Kragic, D. (2019). Trends and challenges. <em>Science</em>.</li>
-  <li id="ch13-ref-18" value="18">Various. (2026). VLA systematic review. <em>Information Fusion</em>.</li>
-  <li id="ch13-ref-19" value="19">Various. (2025). What matters in building VLA models. <em>Nature MI</em>.</li>
-  <li id="ch13-ref-20" value="20">Hogan, N. (1985). Impedance control. <em>JDSMC</em>.</li>
-  <li id="ch13-ref-21" value="21">Bansal, A., et al. (2026). EgoScale: Scaling laws for egocentric human data in robot learning. <em>arXiv preprint</em>. NVIDIA Research.</li>
-  <li id="ch13-ref-22" value="22">Kareer, S., et al. (2024). EgoMimic: Scaling imitation learning via egocentric video. <em>arXiv preprint</em>. Georgia Tech.</li>
-  <li id="ch13-ref-23" value="23">Rishabh, A., et al. (2025). X-Sim: Cross-embodiment simulation for robot learning. <em>CoRL 2025 (Oral)</em>. Cornell University.</li>
-  <li id="ch13-ref-24" value="24">Bahl, S., et al. (2025). VidBot: Learning robot policies from internet videos. <em>CVPR 2025</em>. TU Munich.</li>
-  <li id="ch13-ref-25" value="25">Wang, Y., et al. (2025). EgoZero: Robot learning from smart glasses demonstrations. <em>arXiv preprint</em>.</li>
-  <li id="ch13-ref-26" value="26">Apple ML Research. (2025). EgoDex: Learning dexterous manipulation from large-scale egocentric video. 829 hours, 90M frames. <em>arXiv preprint</em>.</li>
-  <li id="ch13-ref-27" value="27">Grauman, K., et al. (2022). Ego4D: Around the world in 3,000 hours of egocentric video. <em>CVPR 2022</em>. Meta AI. 3,670 hours, 931 participants.</li>
+  <li id="ch13-ref-1" value="1">Various. (2023). DeXtreme. <em>ICRA 2023</em>. <a href="https://scholar.google.com/scholar?q=DeXtreme" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-2" value="2">Various. (2025). Tactile Robotics: Past and Future. <em>arXiv:2512.01106</em>. <a href="https://scholar.google.com/scholar?q=Tactile+Robotics%3A+Past+and+Future" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-3" value="3">Bhirangi, R., et al. (2024). AnySkin. <em>ICRA 2025</em>. <a href="https://scholar.google.com/scholar?q=AnySkin" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-4" value="4">Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3 <a href="https://terry.artlab.ai/en/posts/2412-f-tac-hand" target="_blank" rel="noopener">#39</a> <a href="https://scholar.google.com/scholar?q=Embedding+high-resolution+touch+across+robotic+hands+enables+adaptive+human-like+grasping" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-5" value="5">Various. (2025). NRE-skin. <em>PNAS</em>. <a href="https://scholar.google.com/scholar?q=NRE-skin" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-6" value="6">Various. (2026). Bioinspired spiking architecture. <em>Nature Communications</em>. <a href="https://scholar.google.com/scholar?q=Bioinspired+spiking+architecture" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-7" value="7">Yu, J., et al. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. <a href="https://terry.artlab.ai/en/posts/2505-forcevla-force-aware-moe" target="_blank" rel="noopener">#1</a> <a href="https://scholar.google.com/scholar?q=ForceVLA%3A+Enhancing+VLA+models+with+a+force-aware+MoE+for+contact-rich+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-8" value="8">Various. (2025). Tactile-VLA. <em>OpenReview</em>. <a href="https://scholar.google.com/scholar?q=Tactile-VLA" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-9" value="9">Physical Intelligence. (2025). pi0.5/RECAP: Post-deployment RL for continuous improvement. <em>arXiv preprint</em>. arXiv:2504.16932. <a href="https://terry.artlab.ai/en/posts/2511-pi0-6-recap" target="_blank" rel="noopener">#4</a> <a href="https://scholar.google.com/scholar?q=pi0.5%2FRECAP%3A+Post-deployment+RL+for+continuous+improvement" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-10" value="10">Shaw, K., et al. (2024). Learning from internet videos. <em>CMU</em>. <a href="https://scholar.google.com/scholar?q=Learning+from+internet+videos" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-11" value="11">Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator. <em>ICLR 2024</em>. <a href="https://scholar.google.com/scholar?q=DiffTactile%3A+A+physics-based+differentiable+tactile+simulator" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-12" value="12">Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776. <a href="https://scholar.google.com/scholar?q=TacEx%3A+GelSight+tactile+simulation+in+Isaac+Sim" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-13" value="13">NVIDIA. (2026). 780K trajectories in 11 hours. <em>GTC 2026</em>. <a href="https://scholar.google.com/scholar?q=780K+trajectories+in+11+hours" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-14" value="14">Various. (2025). OSMO. <em>arXiv:2512.08920</em>. <a href="https://terry.artlab.ai/en/posts/2512-osmo-tactile-glove" target="_blank" rel="noopener">#18</a> <a href="https://scholar.google.com/scholar?q=OSMO" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-15" value="15">Zhang, Y., et al. (2025). UniTacHand. <em>Various</em>. <a href="https://terry.artlab.ai/en/posts/2512-unitachand" target="_blank" rel="noopener">#16</a> <a href="https://scholar.google.com/scholar?q=UniTacHand" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-16" value="16">Bicchi, A. (2000). Hands for dexterous manipulation. <em>IEEE T-RA</em>. <a href="https://scholar.google.com/scholar?q=Hands+for+dexterous+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-17" value="17">Billard, A., & Kragic, D. (2019). Trends and challenges. <em>Science</em>. <a href="https://scholar.google.com/scholar?q=Trends+and+challenges" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-18" value="18">Various. (2026). VLA systematic review. <em>Information Fusion</em>. <a href="https://scholar.google.com/scholar?q=VLA+systematic+review" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-19" value="19">Various. (2025). What matters in building VLA models. <em>Nature MI</em>. <a href="https://scholar.google.com/scholar?q=What+matters+in+building+VLA+models" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-20" value="20">Hogan, N. (1985). Impedance control. <em>JDSMC</em>. <a href="https://scholar.google.com/scholar?q=Impedance+control" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-21" value="21">Bansal, A., et al. (2026). EgoScale: Scaling laws for egocentric human data in robot learning. <em>arXiv preprint</em>. NVIDIA Research. <a href="https://scholar.google.com/scholar?q=EgoScale%3A+Scaling+laws+for+egocentric+human+data+in+robot+learning" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-22" value="22">Kareer, S., et al. (2024). EgoMimic: Scaling imitation learning via egocentric video. <em>arXiv preprint</em>. Georgia Tech. <a href="https://scholar.google.com/scholar?q=EgoMimic%3A+Scaling+imitation+learning+via+egocentric+video" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-23" value="23">Rishabh, A., et al. (2025). X-Sim: Cross-embodiment simulation for robot learning. <em>CoRL 2025 (Oral)</em>. Cornell University. <a href="https://scholar.google.com/scholar?q=X-Sim%3A+Cross-embodiment+simulation+for+robot+learning" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-24" value="24">Bahl, S., et al. (2025). VidBot: Learning robot policies from internet videos. <em>CVPR 2025</em>. TU Munich. <a href="https://scholar.google.com/scholar?q=VidBot%3A+Learning+robot+policies+from+internet+videos" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-25" value="25">Wang, Y., et al. (2025). EgoZero: Robot learning from smart glasses demonstrations. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=EgoZero%3A+Robot+learning+from+smart+glasses+demonstrations" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-26" value="26">Apple ML Research. (2025). EgoDex: Learning dexterous manipulation from large-scale egocentric video. 829 hours, 90M frames. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=EgoDex%3A+Learning+dexterous+manipulation+from+large-scale+egocentric+video.+829+hours%2C+90M+frames" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch13-ref-27" value="27">Grauman, K., et al. (2022). Ego4D: Around the world in 3,000 hours of egocentric video. <em>CVPR 2022</em>. Meta AI. 3,670 hours, 931 participants. <a href="https://scholar.google.com/scholar?q=Ego4D%3A+Around+the+world+in+3%2C000+hours+of+egocentric+video" target="_blank" rel="noopener">scholar</a></li>
 </ol>
 </section>
 
@@ -376,5 +378,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="../js/chapter.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof katex !== 'undefined') {
+        document.querySelectorAll('.math-inline').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: false });
+        });
+        document.querySelectorAll('.math-block').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: true });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

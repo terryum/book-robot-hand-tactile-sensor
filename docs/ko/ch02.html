@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapter 2: 촉각 센서 기술 — 로봇의 피부</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
@@ -100,8 +102,8 @@
 <li><strong>Interlink FSR 400</strong>: 단일 감지 영역의 FSR(Force Sensing Resistor). PTF(Polymer Thick Film) 기반으로, 힘이 커질수록 저항이 감소하는 원리를 이용합니다.</li>
 <li><strong>Tekscan FlexiForce A201</strong>: 초박형 piezoresistive force sensor. 4.4 N / 111 N / 445 N 범위 옵션을 제공합니다.</li>
 </ul>
-<figure class="commercial-sensor">
-  <a href="../assets/figures/ch02/commercial_sensors/sensible_robotics.png" target="_blank"><img src="../assets/figures/ch02/commercial_sensors/sensible_robotics.png" alt="Sensible Robotics 80-taxel 촉각 어레이" loading="lazy" style="max-height:200px;width:auto;cursor:zoom-in"></a>
+<figure>
+  <a href="../assets/figures/ch02/commercial_sensors/sensible_robotics.png" target="_blank"><img src="../assets/figures/ch02/commercial_sensors/sensible_robotics.png" alt="Sensible Robotics 80-taxel 촉각 어레이" loading="lazy" onerror="this.src='../assets/figures/ch02/commercial_sensors/sensible_robotics.png'" style="cursor:zoom-in"></a>
   <figcaption>Sensible Robotics 80-taxel 촉각 어레이</figcaption>
 </figure>
 <ul>
@@ -137,7 +139,7 @@
 <p>투명한 젤(gel) 또는 탄성체의 변형을 내장 카메라로 촬영하여 접촉 정보를 추출합니다. 이 방식이 현재 촉각 로봇 연구의 <strong>주류 패러다임</strong>이 되었습니다 — 다음 섹션(2.2)에서 상세히 다룹니다.</p>
 <h3>2.1.4 자기식 (Magnetic)</h3>
 <p>자석과 홀 효과(Hall effect) 센서 또는 자기 저항(magnetoresistive) 센서의 조합으로 변형을 측정합니다. ReSkin <sup><a class="cite-link" href="#ch2-ref-7" title="Bhirangi et al., 2021">[7]</a></sup>은 자기 탄성체(magnetic elastomer) 기반으로 단가 $6 미만, 두께 2-3mm, 50,000회 이상 반복 사용 가능한 촉각 피부를 구현했습니다. 전자부와 감지부의 분리 설계가 핵심으로, AnySkin <sup><a class="cite-link" href="#ch2-ref-8" title="Bhirangi et al., 2024">[8]</a></sup>은 이를 발전시켜 <strong>12초 만에 교체 가능</strong>한 플러그 앤 플레이 방식을 달성했습니다 — 재교정(recalibration) 없이 92%의 미끄러짐 감지 정확도를 유지합니다.</p>
-<blockquote class="key-paper"><strong>핵심 논문</strong>: Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). "ReSkin: Versatile, Replaceable, Lasting Tactile Skin <a href="https://terry.artlab.ai/ko/posts/2407-tactile-skin-inhand-translation">#13</a>s." <em>arXiv preprint</em>.
+<blockquote class="key-paper"><strong>핵심 논문</strong>: Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). "ReSkin: Versatile, Replaceable, Lasting Tactile Skin <a href="https://terry.artlab.ai/ko/posts/2407-tactile-skin-inhand-translation" target="_blank" class="post-link">[#13]</a>s." <em>arXiv preprint</em>.
 자기 탄성체 기반의 저비용($6/개), 교체 가능한 촉각 피부. 산업 환경에서의 센서 내구성 문제에 대한 실용적 해답을 제시했습니다.</blockquote>
 <figure>
   <a href="../assets/figures/ch02/fig_reskin_overview.png" target="_blank"><img src="../assets/figures/ch02/fig_reskin_overview.png" alt="Figure 2.1a: ReSkin 개요 — 소형, 교체 가능한 자기 촉각 피부. 로봇 그리퍼부터 웨어러블까지 다양한 응용 가능. 출처: Bhirangi et al. (2021), Fig. 1" loading="lazy" onerror="this.src='../assets/figures/ch02/fig_reskin_overview.png'" style="cursor:zoom-in"></a>
@@ -165,12 +167,12 @@
 <ul>
 <li><strong>XELA uSkin</strong>: 얇고 유연한 패키지에서 3축 촉각 센싱을 제공. 센싱 포인트당 전단력과 법선력을 동시에 측정하며, 모듈당 최대 64 sensing points, 0.1 gf 해상도, 500 Hz 샘플링을 지원합니다.</li>
 </ul>
-<p>OSMO 글로브 [2025] <a href="https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove">#18</a>는 12개의 3축 자기 센서를 사용하여 법선력과 전단력을 동시에 측정하며, MuMetal 차폐로 외부 자기장 간섭을 억제합니다 (<a href="ch06.html">Chapter 6.3 참조</a>).</p>
+<p>OSMO 글로브 [2025] <a href="https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove" target="_blank" class="post-link">[#18]</a>는 12개의 3축 자기 센서를 사용하여 법선력과 전단력을 동시에 측정하며, MuMetal 차폐로 외부 자기장 간섭을 억제합니다 (→ <a href="ch06.html">Chapter 6.3 참조</a>).</p>
 <h3>2.1.5 압전식 (Piezoelectric)</h3>
 <p>압전 물질(PZT, PVDF 등)이 변형 시 전하를 생성하는 원리를 이용합니다. 정적 힘보다 동적 변화(진동, 질감)의 감지에 적합하여, Pacinian 소체의 기능적 등가물로 활용됩니다. 에너지 하베스팅(energy harvesting)과 결합하면 자가 전원 센서도 가능합니다 <sup><a class="cite-link" href="#ch2-ref-12" title="Yu et al., 2025">[12]</a></sup>.</p>
 <p><strong>상용 제품 사례</strong>:</p>
-<figure class="commercial-sensor">
-  <a href="../assets/figures/ch02/commercial_sensors/te_dt1_028k.png" target="_blank"><img src="../assets/figures/ch02/commercial_sensors/te_dt1_028k.png" alt="TE Connectivity DT1-028K" loading="lazy" style="max-height:200px;width:auto;cursor:zoom-in"></a>
+<figure>
+  <a href="../assets/figures/ch02/commercial_sensors/te_dt1_028k.png" target="_blank"><img src="../assets/figures/ch02/commercial_sensors/te_dt1_028k.png" alt="TE Connectivity DT1-028K" loading="lazy" onerror="this.src='../assets/figures/ch02/commercial_sensors/te_dt1_028k.png'" style="cursor:zoom-in"></a>
   <figcaption>TE Connectivity DT1-028K</figcaption>
 </figure>
 <ul>
@@ -227,8 +229,8 @@
 <h3>2.1.8 열감지식 (Thermal)</h3>
 <p>열 구배(thermal gradient)를 측정하여 접촉 물체의 재질(thermal property)을 판별합니다. 히터(heater)와 서미스터(thermistor)를 조합하여 물체와의 열전달 차이를 감지합니다.</p>
 <p><strong>상용 제품 사례</strong>:</p>
-<figure class="commercial-sensor">
-  <a href="../assets/figures/ch02/commercial_sensors/syntouch_biotac_sp.png" target="_blank"><img src="../assets/figures/ch02/commercial_sensors/syntouch_biotac_sp.png" alt="SynTouch BioTac SP" loading="lazy" style="max-height:200px;width:auto;cursor:zoom-in"></a>
+<figure>
+  <a href="../assets/figures/ch02/commercial_sensors/syntouch_biotac_sp.png" target="_blank"><img src="../assets/figures/ch02/commercial_sensors/syntouch_biotac_sp.png" alt="SynTouch BioTac SP" loading="lazy" onerror="this.src='../assets/figures/ch02/commercial_sensors/syntouch_biotac_sp.png'" style="cursor:zoom-in"></a>
   <figcaption>SynTouch BioTac SP</figcaption>
 </figure>
 <ul>
@@ -371,7 +373,7 @@
 <h3>비전 기반 F/T 센싱: Visiflex (2021)</h3>
 <p>Fernandez et al.<sup><a class="cite-link" href="#ch2-ref-3" title="al. 2021">[3]</a></sup>은 단일 카메라로 힘, 토크, 접촉 기하를 추정하는 저비용 유연 촉각 손가락 끝 Visiflex를 소개했습니다 (<em>IEEE RA-L</em>). Photometric stereo 방식(GelSight, DIGIT)과 달리, 탄성체 내 마커 변위를 추적하여 6축 F/T를 추론합니다 — 비전 기반 센싱의 접근성과 다축 힘 측정을 결합한 중간 지점입니다.</p>
 <h3>비전 기반 센서의 한계</h3>
-<p>비전 기반 센서의 가장 큰 한계는 <strong>내구성</strong>입니다. 젤 표면은 반복 접촉으로 마모되며, 조명원의 열화, 먼지 침입, 세척 어려움이 산업 환경에서의 장기 운용을 제약합니다. F-TAC Hand<sup><a class="cite-link" href="#ch2-ref-15" title="Hand 2025">[15]</a></sup>가 17개의 센서를 손 전체에 배치했을 때, 이는 곧 17개의 잠재적 고장점을 의미합니다. AnySkin<sup><a class="cite-link" href="#ch2-ref-8" title="AnySkin 2024">[8]</a></sup>의 12초 교체 접근은 이 문제의 실용적 해결책 중 하나입니다 (<a href="ch13.html">Chapter 13.1 참조</a>).</p>
+<p>비전 기반 센서의 가장 큰 한계는 <strong>내구성</strong>입니다. 젤 표면은 반복 접촉으로 마모되며, 조명원의 열화, 먼지 침입, 세척 어려움이 산업 환경에서의 장기 운용을 제약합니다. F-TAC Hand<sup><a class="cite-link" href="#ch2-ref-15" title="Hand 2025">[15]</a></sup>가 17개의 센서를 손 전체에 배치했을 때, 이는 곧 17개의 잠재적 고장점을 의미합니다. AnySkin<sup><a class="cite-link" href="#ch2-ref-8" title="AnySkin 2024">[8]</a></sup>의 12초 교체 접근은 이 문제의 실용적 해결책 중 하나입니다 (→ <a href="ch13.html">Chapter 13.1 참조</a>).</p>
 <figure>
   <a href="../assets/figures/ch02/fig_2_3_photometric_stereo_technical.png" target="_blank"><img src="../assets/figures/ch02/fig_2_3_photometric_stereo_darkmode.png" alt="Figure 2.3: 비전 기반 촉각 센서의 작동 원리 — 광도 입체법 기반 3D 접촉 지도 재구성." loading="lazy" onerror="this.src='../assets/figures/ch02/fig_2_3_photometric_stereo_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 2.3: 비전 기반 촉각 센서의 작동 원리 — 광도 입체법 기반 3D 접촉 지도 재구성.</figcaption>
@@ -461,7 +463,7 @@
 <td>아니오</td>
 </tr>
 </tbody></table>
-<p>CoinFT의 조절 가능한 설계(기둥 직경, 재료, 패턴 변경)는 특정 응용에 맞는 최적화를 가능하게 합니다. 전 세계 다수 대학에서 채택되었으며, DexForce [Chen et al., 2025]에서 다지 핸드에 통합되어 사용됩니다 (<a href="ch07.html">Chapter 7.4 참조</a>).</p>
+<p>CoinFT의 조절 가능한 설계(기둥 직경, 재료, 패턴 변경)는 특정 응용에 맞는 최적화를 가능하게 합니다. 전 세계 다수 대학에서 채택되었으며, DexForce [Chen et al., 2025]에서 다지 핸드에 통합되어 사용됩니다 (→ <a href="ch07.html">Chapter 7.4 참조</a>).</p>
 <p><strong>CoinFT의 원 연구실을 넘은 채택 사례</strong>: CoinFT의 오픈소스 설계는 다양한 연구 분야에서 채택을 가능하게 했습니다:</p>
 <ul>
 <li><strong>햅틱 장치</strong>: Winston et al.<sup><a class="cite-link" href="#ch2-ref-6" title="al. 2025">[6]</a></sup>은 Fourigami라는 4-DoF 힘 제어 종이접기 손가락 패드 햅틱 장치에 CoinFT를 통합, 햅틱 렌더링 중 폐쇄 루프 힘 제어에 활용 (<em>IEEE Trans. Robotics</em>).</li>
@@ -505,7 +507,7 @@
   <figcaption>Figure 2.5c: F-TAC Hand의 센서 배치 — 17개 촉각 센서의 분포와 커버리지. Source: F-TAC Hand (Nature Machine Intelligence, 2025).</figcaption>
 </figure>
 <p>F-TAC Hand의 성공은 센서 기술 자체보다 <strong>통합 설계 방법론</strong>의 중요성을 보여줍니다. 센서의 종류, 수량, 배치를 핸드 설계와 동시에 최적화(co-optimization)하는 접근이 향후 표준이 될 것입니다.</p>
-<p>3D-ViTac <sup><a class="cite-link" href="#ch2-ref-16" title="Huang et al., 2024">[16]</a></sup>은 3mm² 밀도의 고밀도 촉각 센서를 시각과 융합하여 통합 3D 표현을 구축하고, Diffusion Policy로 양손 정밀 조작에서 85-90% 성공률을 달성했습니다 — 시각만 사용할 때의 45-50% 대비 크게 향상된 수치입니다 (<em>CoRL 2024</em>) (<a href="ch11.html">Chapter 11.1 참조</a>).</p>
+<p>3D-ViTac <sup><a class="cite-link" href="#ch2-ref-16" title="Huang et al., 2024">[16]</a></sup>은 3mm² 밀도의 고밀도 촉각 센서를 시각과 융합하여 통합 3D 표현을 구축하고, Diffusion Policy로 양손 정밀 조작에서 85-90% 성공률을 달성했습니다 — 시각만 사용할 때의 45-50% 대비 크게 향상된 수치입니다 (<em>CoRL 2024</em>) (→ <a href="ch11.html">Chapter 11.1 참조</a>).</p>
 <p>Soft Robotic Hand with Tactile Palm-Finger Coordination [2025, <em>Nature Communications</em>]은 유연 로봇 핸드에서 손바닥과 손가락의 촉각 협조를 통해 조작 성능을 향상시켰습니다.</p>
 <hr>
 </section>
@@ -556,7 +558,7 @@
 <td>Universal Slip Detection</td>
 </tr>
 </tbody></table>
-<blockquote class=""><strong>핵심 관점</strong>: 센서 선택은 단일 최적해가 아닌, <strong>태스크-센서 적합도(task-sensor fitness)</strong> 관점에서 접근해야 합니다. Albini et al.<sup><a class="cite-link" href="#ch2-ref-6" title="al. 2025">[6]</a></sup>의 촉각 데이터 분류 체계(taxonomy)는 센서 하드웨어에서 데이터 표현으로 이어지는 결정 흐름을 체계화했습니다 (<a href="ch03.html">Chapter 3 참조</a>).</blockquote>
+<blockquote class=""><strong>핵심 관점</strong>: 센서 선택은 단일 최적해가 아닌, <strong>태스크-센서 적합도(task-sensor fitness)</strong> 관점에서 접근해야 합니다. Albini et al.<sup><a class="cite-link" href="#ch2-ref-6" title="al. 2025">[6]</a></sup>의 촉각 데이터 분류 체계(taxonomy)는 센서 하드웨어에서 데이터 표현으로 이어지는 결정 흐름을 체계화했습니다 (→ <a href="ch03.html">Chapter 3 참조</a>).</blockquote>
 <hr>
 </section>
 <section id="sec-2-6" class="content-section">
@@ -565,7 +567,7 @@
 <p>생물학적 신경계를 모방한 신경형태학적(neuromorphic) 센서는 이벤트 기반(event-driven) 처리로 에너지 효율과 시간 해상도를 극대화합니다. NRE-skin [2025, <em>PNAS</em>]은 계층적 아키텍처로 고해상도 촉각, 능동 통증/손상 감지, 국소 반사를 통합했으며, 모듈형 퀵릴리스 수리가 가능합니다.</p>
 <p>스파이크 기반 신경 코딩 서베이 [2025, <em>Microsystems & Nanoengineering</em>]는 CMOS/멤리스터 하드웨어와 SNN(Spiking Neural Network) 디코딩을 결합하여 10배 초해상도(super-resolution)를 달성할 수 있음을 보여줍니다. Bioinspired Spiking Architecture [2026, <em>Nature Communications</em>]은 에너지 제약 환경에서의 효율적 촉각 인코딩을 시연했습니다.</p>
 <h3>2.6.2 자가 치유 및 다감각 전자 피부 (Self-Healing and Multisensory E-Skin)</h3>
-<p>Multisensory Electronic Skin [2025, <em>PNAS</em>]은 압력과 온도 감지를 분리(decoupled)하는 전자 피부를 구현했으며, 자가 치유(self-healing) 물질을 통합하여 센서 수명을 연장합니다. 이러한 접근은 산업 환경에서의 촉각 센서 내구성 문제(<a href="ch13.html">Chapter 13.1 참조</a>)를 근본적으로 해결할 잠재력을 가집니다.</p>
+<p>Multisensory Electronic Skin [2025, <em>PNAS</em>]은 압력과 온도 감지를 분리(decoupled)하는 전자 피부를 구현했으며, 자가 치유(self-healing) 물질을 통합하여 센서 수명을 연장합니다. 이러한 접근은 산업 환경에서의 촉각 센서 내구성 문제(→ <a href="ch13.html">Chapter 13.1 참조</a>)를 근본적으로 해결할 잠재력을 가집니다.</p>
 <h3>2.6.3 물리 기반 렌더링을 통한 센서 설계</h3>
 <p>Vision-Based Tactile Sensor Design Using Physically Based Rendering [2025, <em>Nature Communications Engineering</em>]은 물리 기반 렌더링(PBR)으로 광학 촉각 센서의 설계를 시뮬레이션에서 검증하는 방법을 제안했습니다. 이는 센서 설계의 시행착오를 줄이고, 디지털 트윈(digital twin) 기반 설계를 가능하게 합니다.</p>
 <figure>
@@ -583,7 +585,7 @@
 <h2>요약 및 전망</h2>
 <p>촉각 센서 기술은 비전 기반 광학 센서의 등장으로 패러다임 전환을 겪었습니다. GelSight($350 수준의 DIGIT)에서 시작하여 Digit 360(8.3M taxels, 18+ 모달리티)에 이르기까지, 해상도와 다중 모달리티는 비약적으로 향상되었습니다. 동시에 ReSkin/AnySkin의 자기식 센서는 $6 수준의 교체 가능한 촉각 피부를 실현하여, 내구성 문제에 대한 실용적 해법을 제시했습니다.</p>
 <p>그러나 핵심 과제는 여전합니다: 젤 마모, 재교정(recalibration), 산업 환경 검증, 소형화와 다축 센싱의 동시 달성. Sanctuary AI의 5mN 민감도 촉각 통합이 상용 휴머노이드에서 구현되고, Meta의 Digit Plexus가 표준화된 센서-핸드 인터페이스를 추진하는 등, 촉각이 "옵션에서 표준으로" 전환되는 과도기에 있습니다.</p>
-<p>다음 챕터에서는 이러한 센서들이 생성하는 <strong>촉각 데이터의 표현과 수집</strong>을 다룹니다 (<a href="ch03.html">Chapter 3: 촉각 데이터 참조</a>).</p>
+<p>다음 챕터에서는 이러한 센서들이 생성하는 <strong>촉각 데이터의 표현과 수집</strong>을 다룹니다 (→ <a href="ch03.html">Chapter 3: 촉각 데이터 참조</a>).</p>
 <hr>
 </section>
       <nav class="chapter-nav">
@@ -594,35 +596,35 @@
 <section id="sec-references" class="content-section">
 <h2>참고문헌</h2>
 <ol class="references-list">
-  <li id="ch2-ref-1" value="1">Dahiya, R. S., Metta, G., Valle, M., & Sandini, G. (2010). Tactile sensing: From humans to humanoids. <em>IEEE Transactions on Robotics</em>, 26(1), 1-20. https://doi.org/10.1109/TRO.2009.2033627</li>
-  <li id="ch2-ref-2" value="2">Yuan, W., Dong, S., & Adelson, E. H. (2017). GelSight: High-resolution robot tactile sensors for estimating geometry and force. <em>Sensors</em>, 17(12), 2762. https://doi.org/10.3390/s17122762</li>
-  <li id="ch2-ref-3" value="3">Wang, S., She, Y., Romero, B., & Adelson, E. H. (2021). GelSight Wedge: Measuring high-resolution 3D contact geometry with a compact robot finger. <em>IEEE ICRA 2021</em>. https://doi.org/10.1109/ICRA48506.2021.9560783</li>
-  <li id="ch2-ref-4" value="4">Lambeta, M., Chou, P.-W., Tian, S., Yang, B., Maloon, B., Most, V. R., ... & Calandra, R. (2020). DIGIT: A novel design for a low-cost compact high-resolution tactile sensor with application to in-hand manipulation. <em>IEEE Robotics and Automation Letters</em>, 5(3), 3838-3845.</li>
-  <li id="ch2-ref-5" value="5">Lambeta, M., Wu, T., Sengul, A., & Calandra, R. (2024). Digitizing touch with an artificial multimodal fingertip (Digit 360). <em>arXiv preprint</em>, arXiv:2411.02834.</li>
-  <li id="ch2-ref-6" value="6">Agarwal, A., Mirzaee, M. A., Sun, X., & Yuan, W. (2025). A modularized design approach for GelSight family of vision-based tactile sensors. <em>International Journal of Robotics Research</em>. https://doi.org/10.1177/02783649251339680</li>
-  <li id="ch2-ref-7" value="7">Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). ReSkin: Versatile, replaceable, lasting tactile skins. <em>arXiv preprint</em>, arXiv:2111.00071. [#13](https://terry.artlab.ai/ko/posts/2407-tactile-skin-inhand-translation)</li>
-  <li id="ch2-ref-8" value="8">Bhirangi, R., Pattabiraman, V., Norcross, E., Shocher, A., & Pinto, L. (2024). AnySkin: Plug-and-play skin sensing for robotic touch. <em>ICRA 2025</em>. arXiv:2409.08276.</li>
-  <li id="ch2-ref-9" value="9">Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702.</li>
-  <li id="ch2-ref-10" value="10">Murphy, L., et al. (2025). Capacitive tactile sensing for teaching by demonstration. <em>arXiv preprint</em>.</li>
-  <li id="ch2-ref-11" value="11">Fang, J., et al. (2025). Force measurement technology of vision-based tactile sensor. <em>Advanced Intelligent Systems</em> (Wiley). https://doi.org/10.1002/aisy.202400290</li>
-  <li id="ch2-ref-12" value="12">Yu, et al. (2025). Recent progress in tactile sensing and machine learning for texture perception in humanoid robots. <em>Interdisciplinary Materials</em> (Wiley). https://doi.org/10.1002/idm2.12233</li>
-  <li id="ch2-ref-13" value="13">Various. (2025). Comprehensive review of tactile sensing technologies in space robotics. <em>Chinese Journal of Aeronautics</em>. https://doi.org/10.1016/j.cja.2025.01.031</li>
-  <li id="ch2-ref-14" value="14">Various. (2025). Vision-based tactile sensor design using physically based rendering. <em>Communications Engineering</em> (Nature). https://doi.org/10.1038/s44172-025-00350-4</li>
-  <li id="ch2-ref-15" value="15">Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3</li>
-  <li id="ch2-ref-16" value="16">Huang, B., Wang, Y., et al. (2024). 3D-ViTac: Learning fine-grained manipulation with visuo-tactile sensing. <em>CoRL 2024</em>. arXiv:2410.24091.</li>
-  <li id="ch2-ref-17" value="17">Zhang, N., Ren, J., Dong, Y., Gu, G., & Zhu, X. (2025). Soft robotic hand with tactile palm-finger coordination. <em>Nature Communications</em>, 16, 2395. https://doi.org/10.1038/s41467-025-57741-6</li>
-  <li id="ch2-ref-18" value="18">Gao, Y., Zhang, J., Zhang, H., et al. (2025). A neuromorphic robotic electronic skin with active pain and injury perception. <em>PNAS</em>. https://doi.org/10.1073/pnas.2520922122</li>
-  <li id="ch2-ref-19" value="19">Various. (2025). Multisensory electronic skin with decoupled pressure-temperature sensing. <em>PNAS</em>.</li>
-  <li id="ch2-ref-20" value="20">Various. (2025). Recent advances in spike-based neural coding for tactile perception. <em>Microsystems & Nanoengineering</em> (Nature). https://doi.org/10.1038/s41378-025-01074-3</li>
-  <li id="ch2-ref-21" value="21">Various. (2026). Bioinspired spiking architecture for energy-constrained touch encoding. <em>Nature Communications</em>. https://doi.org/10.1038/s41467-026-68858-7</li>
-  <li id="ch2-ref-22" value="22">Yin, Z.-H., et al. (2025). Multi-dimensional tactile sensing for efficient robot learning. <em>arXiv preprint</em>.</li>
-  <li id="ch2-ref-23" value="23">Hossain, M., et al. (2025). Multi-axis tactile for object orientation detection. <em>Sensors and Actuators A: Physical</em>.</li>
-  <li id="ch2-ref-24" value="24">Lach, L., et al. (2023). Tactile-based object orientation detection for blind manipulation. <em>arXiv preprint</em>.</li>
-  <li id="ch2-ref-25" value="25">Cho, W., et al. (2025). Multi-dimensional tactile sensing for force/noise decoupling. <em>ACS Applied Materials & Interfaces</em>.</li>
-  <li id="ch2-ref-26" value="26">Various. (2025). Recent advances in tactile sensing technologies for human-robot interaction. <em>Sensors International</em>. https://doi.org/10.1016/j.sintl.2025.100345</li>
-  <li id="ch2-ref-27" value="27">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920. [#18](https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove)</li>
-  <li id="ch2-ref-28" value="28">Albini, A., Kaboli, M., Cannata, G., & Maiolino, P. (2025). Representing data in robotic tactile perception — A review. <em>arXiv preprint</em> (submitted to IEEE Trans. Robot.). arXiv:2510.10804.</li>
-  <li id="ch2-ref-29" value="29">Choi, S. (Korea University). (2026). Commercial tactile sensor survey. https://www.notion.so/2026-03-26-Tactile-sensors-32f13b6f5ea48054a5e3f4cee07f00c6</li>
+  <li id="ch2-ref-1" value="1">Dahiya, R. S., Metta, G., Valle, M., & Sandini, G. (2010). Tactile sensing: From humans to humanoids. <em>IEEE Transactions on Robotics</em>, 26(1), 1-20. https://doi.org/10.1109/TRO.2009.2033627 <a href="https://scholar.google.com/scholar?q=Tactile+sensing%3A+From+humans+to+humanoids" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-2" value="2">Yuan, W., Dong, S., & Adelson, E. H. (2017). GelSight: High-resolution robot tactile sensors for estimating geometry and force. <em>Sensors</em>, 17(12), 2762. https://doi.org/10.3390/s17122762 <a href="https://scholar.google.com/scholar?q=GelSight%3A+High-resolution+robot+tactile+sensors+for+estimating+geometry+and+force" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-3" value="3">Wang, S., She, Y., Romero, B., & Adelson, E. H. (2021). GelSight Wedge: Measuring high-resolution 3D contact geometry with a compact robot finger. <em>IEEE ICRA 2021</em>. https://doi.org/10.1109/ICRA48506.2021.9560783 <a href="https://scholar.google.com/scholar?q=GelSight+Wedge%3A+Measuring+high-resolution+3D+contact+geometry+with+a+compact+robot+finger" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-4" value="4">Lambeta, M., Chou, P.-W., Tian, S., Yang, B., Maloon, B., Most, V. R., ... & Calandra, R. (2020). DIGIT: A novel design for a low-cost compact high-resolution tactile sensor with application to in-hand manipulation. <em>IEEE Robotics and Automation Letters</em>, 5(3), 3838-3845. <a href="https://scholar.google.com/scholar?q=DIGIT%3A+A+novel+design+for+a+low-cost+compact+high-resolution+tactile+sensor+with+application+to+in-hand+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-5" value="5">Lambeta, M., Wu, T., Sengul, A., & Calandra, R. (2024). Digitizing touch with an artificial multimodal fingertip (Digit 360). <em>arXiv preprint</em>, arXiv:2411.02834. <a href="https://scholar.google.com/scholar?q=Digitizing+touch+with+an+artificial+multimodal+fingertip+%28Digit+360%29" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-6" value="6">Agarwal, A., Mirzaee, M. A., Sun, X., & Yuan, W. (2025). A modularized design approach for GelSight family of vision-based tactile sensors. <em>International Journal of Robotics Research</em>. https://doi.org/10.1177/02783649251339680 <a href="https://scholar.google.com/scholar?q=A+modularized+design+approach+for+GelSight+family+of+vision-based+tactile+sensors" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-7" value="7">Bhirangi, R., Hellebrekers, T., Majidi, C., & Gupta, A. (2021). ReSkin: Versatile, replaceable, lasting tactile skins. <em>arXiv preprint</em>, arXiv:2111.00071. <a href="https://terry.artlab.ai/ko/posts/2407-tactile-skin-inhand-translation" target="_blank" rel="noopener">#13</a> <a href="https://scholar.google.com/scholar?q=ReSkin%3A+Versatile%2C+replaceable%2C+lasting+tactile+skins" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-8" value="8">Bhirangi, R., Pattabiraman, V., Norcross, E., Shocher, A., & Pinto, L. (2024). AnySkin: Plug-and-play skin sensing for robotic touch. <em>ICRA 2025</em>. arXiv:2409.08276. <a href="https://scholar.google.com/scholar?q=AnySkin%3A+Plug-and-play+skin+sensing+for+robotic+touch" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-9" value="9">Sundaram, S., Kellnhofer, P., Li, Y., Zhu, J.-Y., Torralba, A., & Matusik, W. (2019). Learning the signatures of the human grasp using a scalable tactile glove. <em>Nature</em>, 569, 698-702. <a href="https://scholar.google.com/scholar?q=Learning+the+signatures+of+the+human+grasp+using+a+scalable+tactile+glove" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-10" value="10">Murphy, L., et al. (2025). Capacitive tactile sensing for teaching by demonstration. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=Capacitive+tactile+sensing+for+teaching+by+demonstration" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-11" value="11">Fang, J., et al. (2025). Force measurement technology of vision-based tactile sensor. <em>Advanced Intelligent Systems</em> (Wiley). https://doi.org/10.1002/aisy.202400290 <a href="https://scholar.google.com/scholar?q=Force+measurement+technology+of+vision-based+tactile+sensor" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-12" value="12">Yu, et al. (2025). Recent progress in tactile sensing and machine learning for texture perception in humanoid robots. <em>Interdisciplinary Materials</em> (Wiley). https://doi.org/10.1002/idm2.12233 <a href="https://scholar.google.com/scholar?q=Recent+progress+in+tactile+sensing+and+machine+learning+for+texture+perception+in+humanoid+robots" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-13" value="13">Various. (2025). Comprehensive review of tactile sensing technologies in space robotics. <em>Chinese Journal of Aeronautics</em>. https://doi.org/10.1016/j.cja.2025.01.031 <a href="https://scholar.google.com/scholar?q=Comprehensive+review+of+tactile+sensing+technologies+in+space+robotics" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-14" value="14">Various. (2025). Vision-based tactile sensor design using physically based rendering. <em>Communications Engineering</em> (Nature). https://doi.org/10.1038/s44172-025-00350-4 <a href="https://scholar.google.com/scholar?q=Vision-based+tactile+sensor+design+using+physically+based+rendering" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-15" value="15">Zhao, Z., Li, W., Li, Y., Liu, T., Li, B., Wang, M., Du, K., Liu, H., Zhu, Y., Wang, Q., Althoefer, K., & Zhu, S.-C. (2025). Embedding high-resolution touch across robotic hands enables adaptive human-like grasping. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01053-3 <a href="https://terry.artlab.ai/ko/posts/2412-f-tac-hand" target="_blank" rel="noopener">#39</a> <a href="https://scholar.google.com/scholar?q=Embedding+high-resolution+touch+across+robotic+hands+enables+adaptive+human-like+grasping" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-16" value="16">Huang, B., Wang, Y., et al. (2024). 3D-ViTac: Learning fine-grained manipulation with visuo-tactile sensing. <em>CoRL 2024</em>. arXiv:2410.24091. <a href="https://scholar.google.com/scholar?q=3D-ViTac%3A+Learning+fine-grained+manipulation+with+visuo-tactile+sensing" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-17" value="17">Zhang, N., Ren, J., Dong, Y., Gu, G., & Zhu, X. (2025). Soft robotic hand with tactile palm-finger coordination. <em>Nature Communications</em>, 16, 2395. https://doi.org/10.1038/s41467-025-57741-6 <a href="https://terry.artlab.ai/ko/posts/2503-tacpalm-softhand" target="_blank" rel="noopener">#40</a> <a href="https://scholar.google.com/scholar?q=Soft+robotic+hand+with+tactile+palm-finger+coordination" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-18" value="18">Gao, Y., Zhang, J., Zhang, H., et al. (2025). A neuromorphic robotic electronic skin with active pain and injury perception. <em>PNAS</em>. https://doi.org/10.1073/pnas.2520922122 <a href="https://scholar.google.com/scholar?q=A+neuromorphic+robotic+electronic+skin+with+active+pain+and+injury+perception" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-19" value="19">Various. (2025). Multisensory electronic skin with decoupled pressure-temperature sensing. <em>PNAS</em>. <a href="https://scholar.google.com/scholar?q=Multisensory+electronic+skin+with+decoupled+pressure-temperature+sensing" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-20" value="20">Various. (2025). Recent advances in spike-based neural coding for tactile perception. <em>Microsystems & Nanoengineering</em> (Nature). https://doi.org/10.1038/s41378-025-01074-3 <a href="https://scholar.google.com/scholar?q=Recent+advances+in+spike-based+neural+coding+for+tactile+perception" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-21" value="21">Various. (2026). Bioinspired spiking architecture for energy-constrained touch encoding. <em>Nature Communications</em>. https://doi.org/10.1038/s41467-026-68858-7 <a href="https://scholar.google.com/scholar?q=Bioinspired+spiking+architecture+for+energy-constrained+touch+encoding" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-22" value="22">Yin, Z.-H., et al. (2025). Multi-dimensional tactile sensing for efficient robot learning. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=Multi-dimensional+tactile+sensing+for+efficient+robot+learning" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-23" value="23">Hossain, M., et al. (2025). Multi-axis tactile for object orientation detection. <em>Sensors and Actuators A: Physical</em>. <a href="https://scholar.google.com/scholar?q=Multi-axis+tactile+for+object+orientation+detection" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-24" value="24">Lach, L., et al. (2023). Tactile-based object orientation detection for blind manipulation. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=Tactile-based+object+orientation+detection+for+blind+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-25" value="25">Cho, W., et al. (2025). Multi-dimensional tactile sensing for force/noise decoupling. <em>ACS Applied Materials & Interfaces</em>. <a href="https://scholar.google.com/scholar?q=Multi-dimensional+tactile+sensing+for+force%2Fnoise+decoupling" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-26" value="26">Various. (2025). Recent advances in tactile sensing technologies for human-robot interaction. <em>Sensors International</em>. https://doi.org/10.1016/j.sintl.2025.100345 <a href="https://scholar.google.com/scholar?q=Recent+advances+in+tactile+sensing+technologies+for+human-robot+interaction" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-27" value="27">Yin, J., Qi, H., Wi, Y., Kundu, S., Lambeta, M., Yang, W., Wang, C., Wu, T., Malik, J., & Hellebrekers, T. (2025). OSMO: Open-source tactile glove for human-to-robot skill transfer. <em>arXiv preprint</em>. arXiv:2512.08920. <a href="https://terry.artlab.ai/ko/posts/2512-osmo-tactile-glove" target="_blank" rel="noopener">#18</a> <a href="https://scholar.google.com/scholar?q=OSMO%3A+Open-source+tactile+glove+for+human-to-robot+skill+transfer" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-28" value="28">Albini, A., Kaboli, M., Cannata, G., & Maiolino, P. (2025). Representing data in robotic tactile perception — A review. <em>arXiv preprint</em> (submitted to IEEE Trans. Robot.). arXiv:2510.10804. <a href="https://scholar.google.com/scholar?q=Representing+data+in+robotic+tactile+perception+%E2%80%94+A+review" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch2-ref-29" value="29">Choi, S. (Korea University). (2026). Commercial tactile sensor survey. https://www.notion.so/2026-03-26-Tactile-sensors-32f13b6f5ea48054a5e3f4cee07f00c6 <a href="https://scholar.google.com/scholar?q=Commercial+tactile+sensor+survey" target="_blank" rel="noopener">scholar</a></li>
 </ol>
 </section>
 
@@ -641,5 +643,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="../js/chapter.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof katex !== 'undefined') {
+        document.querySelectorAll('.math-inline').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: false });
+        });
+        document.querySelectorAll('.math-block').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: true });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

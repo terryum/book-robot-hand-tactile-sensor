@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapter 11: 시스템 통합 — 연구적 관점</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
@@ -59,7 +61,7 @@
 <p>앞선 10개 챕터에서 개별 구성 요소 — 센서, 데이터, 핸드, 학습, 전이 — 를 다뤘다면, 이 챕터에서는 이들이 <strong>하나의 시스템으로 통합</strong>되는 과정을 다룹니다. 다중 모달 융합 아키텍처, End-to-End 시스템 사례, 오픈소스 생태계, 벤치마크와 표준화를 통해 연구의 현 위치를 조망합니다.</p>
 <blockquote class=""><strong>이 챕터를 읽고 나면...</strong>
 - 시각-촉각 융합의 주요 아키텍처(early/late/MoE)를 비교할 수 있습니다.
-- Mobile ALOHA, PP-Tac <a href="https://terry.artlab.ai/ko/posts/2504-pp-tac">#12</a>, 세미나 3 통합 그리퍼의 시스템적 의의를 설명할 수 있습니다.
+- Mobile ALOHA, PP-Tac <a href="https://terry.artlab.ai/ko/posts/2504-pp-tac" target="_blank" class="post-link">[#12]</a>, 세미나 3 통합 그리퍼의 시스템적 의의를 설명할 수 있습니다.
 - 오픈소스 하드웨어/소프트웨어/데이터의 연구 가속화 효과를 이해합니다.
 - RGMC 등 벤치마크의 현황과 표준화 필요성을 파악합니다.</blockquote>
 <hr>
@@ -67,15 +69,15 @@
 <section id="sec-11-1" class="content-section">
 <h2>11.1 다중 모달 통합 아키텍처</h2>
 <h3>시각-촉각 융합</h3>
-<p><strong>Robot Synesthesia</strong> <sup><a class="cite-link" href="#ch11-ref-1" title="Yuan et al., 2024">[1]</a></sup>: 포인트 클라우드 기반 촉각과 시각의 융합. PointNet 인코더로 촉각 포인트 클라우드 처리, 새로운 물체에 일반화 (<a href="ch03.html">Chapter 3.1.4</a>).</p>
-<p><strong>NeuralFeels</strong> <sup><a class="cite-link" href="#ch11-ref-2" title="Suresh et al., 2024">[2]</a></sup>: 신경장(neural field) 기반 시각-촉각 인지. 손 안에서 물체의 자세와 형상을 동시에 추정. <em>Science Robotics</em> (<a href="ch01.html">Chapter 1.3.4</a>).</p>
-<p><strong>3D-ViTac</strong> <sup><a class="cite-link" href="#ch11-ref-3" title="Huang et al., 2024">[3]</a></sup>: 3mm² 밀도 촉각 + 시각의 통합 3D 표현. Diffusion Policy로 85-90% 양손 성공률 (시각만 45-50%) (<a href="ch02.html">Chapter 2.4</a>).</p>
+<p><strong>Robot Synesthesia</strong> <sup><a class="cite-link" href="#ch11-ref-1" title="Yuan et al., 2024">[1]</a></sup>: 포인트 클라우드 기반 촉각과 시각의 융합. PointNet 인코더로 촉각 포인트 클라우드 처리, 새로운 물체에 일반화 (→ <a href="ch03.html">Chapter 3.1.4</a>).</p>
+<p><strong>NeuralFeels</strong> <sup><a class="cite-link" href="#ch11-ref-2" title="Suresh et al., 2024">[2]</a></sup>: 신경장(neural field) 기반 시각-촉각 인지. 손 안에서 물체의 자세와 형상을 동시에 추정. <em>Science Robotics</em> (→ <a href="ch01.html">Chapter 1.3.4</a>).</p>
+<p><strong>3D-ViTac</strong> <sup><a class="cite-link" href="#ch11-ref-3" title="Huang et al., 2024">[3]</a></sup>: 3mm² 밀도 촉각 + 시각의 통합 3D 표현. Diffusion Policy로 85-90% 양손 성공률 (시각만 45-50%) (→ <a href="ch02.html">Chapter 2.4</a>).</p>
 <h3>힘-시각-언어 융합</h3>
-<p><strong>ForceVLA</strong> <sup><a class="cite-link" href="#ch11-ref-12" title="Yu et al., 2025">[12]</a></sup> <a href="https://terry.artlab.ai/ko/posts/2505-forcevla-force-aware-moe">#1</a>: FVLMoE(4 expert MoE)로 힘-시각-언어 동적 라우팅. +23.2%p, 시각 가림 시 90% (<a href="ch07.html">Chapter 7.4, 8.4</a>).</p>
-<p><strong>Tactile-VLA</strong><sup><a class="cite-link" href="#ch11-ref-5" title="Tactile-VLA 2025">[5]</a></sup>: VLA의 사전학습 물리 지식을 촉각으로 해방 (<a href="ch08.html">Chapter 8.4</a>).</p>
+<p><strong>ForceVLA</strong> <sup><a class="cite-link" href="#ch11-ref-12" title="Yu et al., 2025">[12]</a></sup> <a href="https://terry.artlab.ai/ko/posts/2505-forcevla-force-aware-moe" target="_blank" class="post-link">[#1]</a>: FVLMoE(4 expert MoE)로 힘-시각-언어 동적 라우팅. +23.2%p, 시각 가림 시 90% (→ <a href="ch07.html">Chapter 7.4</a>, 8.4).</p>
+<p><strong>Tactile-VLA</strong><sup><a class="cite-link" href="#ch11-ref-5" title="Tactile-VLA 2025">[5]</a></sup>: VLA의 사전학습 물리 지식을 촉각으로 해방 (→ <a href="ch08.html">Chapter 8.4</a>).</p>
 <h3>표현 정렬</h3>
-<p><strong>UniTouch</strong> <sup><a class="cite-link" href="#ch11-ref-6" title="Yang et al., 2024">[6]</a></sup>: 대조 학습으로 촉각-시각-언어-오디오 정렬. 제로샷 분류 (<a href="ch03.html">Chapter 3.6</a>).</p>
-<p><strong>Sparsh</strong> <sup><a class="cite-link" href="#ch11-ref-7" title="Higuera et al., 2024">[7]</a></sup>: 460K+ 이미지 자기지도 촉각 Foundation Model (<a href="ch03.html">Chapter 3.6</a>).</p>
+<p><strong>UniTouch</strong> <sup><a class="cite-link" href="#ch11-ref-6" title="Yang et al., 2024">[6]</a></sup>: 대조 학습으로 촉각-시각-언어-오디오 정렬. 제로샷 분류 (→ <a href="ch03.html">Chapter 3.6</a>).</p>
+<p><strong>Sparsh</strong> <sup><a class="cite-link" href="#ch11-ref-7" title="Higuera et al., 2024">[7]</a></sup>: 460K+ 이미지 자기지도 촉각 Foundation Model (→ <a href="ch03.html">Chapter 3.6</a>).</p>
 <p><strong>VTV-LLM</strong><sup><a class="cite-link" href="#ch11-ref-8" title="VTV-LLM 2025">[8]</a></sup>: 접촉 전 물리 속성(마찰, 유연성) 추론. 시각-촉각 비디오 + LLM으로 물성 예측.</p>
 <h3>융합 아키텍처 비교</h3>
 <table class="styled-table">
@@ -141,7 +143,7 @@
 <h3>세미나 3 통합 그리퍼</h3>
 <p>Underactuation + VSA + Active Belt → 공장 자동화 end-effector:</p>
 <ul>
-<li>메커니즘(Chapter 5) + 센싱 + 제어의 물리적 통합</li>
+<li>메커니즘(<a href="ch05.html">Chapter 5</a>) + 센싱 + 제어의 물리적 통합</li>
 <li>얇은 물체, 복수 물체, 재배치를 하나의 그리퍼로</li>
 </ul>
 <figure>
@@ -184,11 +186,11 @@
 <section id="sec-11-4" class="content-section">
 <h2>11.4 벤치마크와 표준화 동향</h2>
 <h3>RGMC (Robotic Grasping and Manipulation Competition)</h3>
-<p>ICRA에서 매년 개최되는 RGMC는 촉각 조작의 가장 공인된 벤치마크입니다. 2025년 RGMC Champion <sup><a class="cite-link" href="#ch11-ref-12" title="Yu et al., 2025">[12]</a></sup>은 학습 없는 최적화 접근으로 우승하여, 방법론적 다양성의 중요성을 보여주었습니다 (<a href="ch07.html">Chapter 7.5</a>).</p>
+<p>ICRA에서 매년 개최되는 RGMC는 촉각 조작의 가장 공인된 벤치마크입니다. 2025년 RGMC Champion <sup><a class="cite-link" href="#ch11-ref-12" title="Yu et al., 2025">[12]</a></sup>은 학습 없는 최적화 접근으로 우승하여, 방법론적 다양성의 중요성을 보여주었습니다 (→ <a href="ch07.html">Chapter 7.5</a>).</p>
 <h3>촉각 센서 벤치마크의 부재</h3>
 <p>시각 인지(perception)에는 ImageNet, COCO 등 표준 벤치마크가 존재하지만, 촉각 센서에는 <strong>공인 벤치마크가 없습니다</strong>. 이는 센서 간 성능 비교를 어렵게 하며, 연구 재현성을 저해합니다.</p>
 <h3>데이터 포맷 표준화</h3>
-<p>Albini et al.<sup><a class="cite-link" href="#ch11-ref-12" title="al. 2025">[12]</a></sup>의 6가지 데이터 구조(Chapter 3)가 de facto 표준 후보입니다. 촉각 데이터의 표준 포맷이 확립되면, 교차 센서/교차 연구실 데이터 공유가 가능해집니다.</p>
+<p>Albini et al.<sup><a class="cite-link" href="#ch11-ref-12" title="al. 2025">[12]</a></sup>의 6가지 데이터 구조(<a href="ch03.html">Chapter 3</a>)가 de facto 표준 후보입니다. 촉각 데이터의 표준 포맷이 확립되면, 교차 센서/교차 연구실 데이터 공유가 가능해집니다.</p>
 <h3>교차 체현 평가 프레임워크</h3>
 <p>Open X-Embodiment<sup><a class="cite-link" href="#ch11-ref-14" title="X-Embodiment 2024">[14]</a></sup>가 제시한 교차 체현 평가 프레임워크는 다양한 로봇에서의 일관된 성능 비교를 가능하게 합니다.</p>
 <p>Multimodal Tactile-Vision for Housekeeping [<em>Nature Communications</em>, 2024]은 가사 환경에서 압력, 온도, 질감, 미끄러짐 + 시각의 다중 모달 통합을 구현한 end-to-end 사례입니다.</p>
@@ -201,7 +203,7 @@
 <section id="sec-요약-및-전망" class="content-section">
 <h2>요약 및 전망</h2>
 <p>시스템 통합은 개별 구성 요소의 발전만큼이나 중요합니다. ForceVLA의 MoE 융합, Mobile ALOHA의 저비용 양손 시스템, PP-Tac의 실용적 문제 해결, 그리고 세미나 3의 메커니즘 통합이 각각 다른 관점에서 "전체는 부분의 합보다 크다"를 보여줍니다. 오픈소스 생태계는 이 통합을 가속화하는 핵심 동력이며, 표준화된 벤치마크의 확립이 다음 단계의 과제입니다.</p>
-<p>다음 챕터에서는 이 연구적 성과가 산업으로 전환되는 <strong>Physical AI와 산업 전망</strong>을 다룹니다 (<a href="ch12.html">Chapter 12 참조</a>).</p>
+<p>다음 챕터에서는 이 연구적 성과가 산업으로 전환되는 <strong>Physical AI와 산업 전망</strong>을 다룹니다 (→ <a href="ch12.html">Chapter 12 참조</a>).</p>
 <hr>
 </section>
       <nav class="chapter-nav">
@@ -212,24 +214,24 @@
 <section id="sec-references" class="content-section">
 <h2>참고문헌</h2>
 <ol class="references-list">
-  <li id="ch11-ref-1" value="1">Yuan, Y., et al. (2024). Robot Synesthesia: In-hand manipulation with visuotactile sensing. <em>ICRA 2024</em>.</li>
-  <li id="ch11-ref-2" value="2">Suresh, S., et al. (2024). NeuralFeels: Neural fields for visuotactile perception. <em>Science Robotics</em>, 9(86).</li>
-  <li id="ch11-ref-3" value="3">Huang, B., et al. (2024). 3D-ViTac: Learning fine-grained manipulation with visuo-tactile sensing. <em>CoRL 2024</em>.</li>
-  <li id="ch11-ref-4" value="4">Yu, J., Liu, H., Yu, Q., Ren, J., Hao, C., Ding, H., Huang, G., Huang, G., Song, Y., Cai, P., Lu, C., & Zhang, W. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. arXiv:2505.22159. [#1](https://terry.artlab.ai/ko/posts/2505-forcevla-force-aware-moe)</li>
-  <li id="ch11-ref-5" value="5">Huang, J., Wang, S., Lin, F., Hu, Y., Wen, C., & Gao, Y. (2025). Tactile-VLA: Unlocking vision-language-action model's physical knowledge for tactile generalization. <em>OpenReview</em>.</li>
-  <li id="ch11-ref-6" value="6">Yang, F., et al. (2024). UniTouch: Binding touch to everything. <em>CVPR 2024</em>.</li>
-  <li id="ch11-ref-7" value="7">Higuera, C., et al. (2024). Sparsh: Self-supervised touch representations. <em>CoRL 2024</em>.</li>
-  <li id="ch11-ref-8" value="8">Liu, K., et al. (2025). VTV-LLM: Robotic perception with a large tactile-vision-language model. <em>arXiv preprint</em>. arXiv:2506.19303.</li>
-  <li id="ch11-ref-9" value="9">Fu, Z., Zhao, T. Z., & Finn, C. (2024). Mobile ALOHA: Learning bimanual mobile manipulation with low-cost whole-body teleoperation. <em>arXiv preprint</em>. arXiv:2401.02117.</li>
-  <li id="ch11-ref-10" value="10">Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776.</li>
-  <li id="ch11-ref-11" value="11">Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>RSS 2025</em>. [#12](https://terry.artlab.ai/ko/posts/2504-pp-tac)</li>
-  <li id="ch11-ref-12" value="12">Yu, M., et al. (2025). RGMC Champion: Kinematic trajectory optimization. <em>IEEE RA-L</em>.</li>
-  <li id="ch11-ref-13" value="13">Albini, A., et al. (2025). Representing data in robotic tactile perception. <em>arXiv (IEEE T-RO)</em>.</li>
-  <li id="ch11-ref-14" value="14">Open X-Embodiment Collaboration. (2024). Open X-Embodiment. <em>ICRA 2024</em>.</li>
-  <li id="ch11-ref-15" value="15">Mao, Q., Liao, Z., Yuan, J., & Zhu, R. (2024). Multimodal tactile sensing fused with vision for dexterous robotic housekeeping. <em>Nature Communications</em>, 15, 6871. https://doi.org/10.1038/s41467-024-51261-5</li>
-  <li id="ch11-ref-16" value="16">Various. (2025). Simultaneous tactile-visual perception for learning multimodal robot manipulation. <em>arXiv preprint</em>. arXiv:2512.09851.</li>
-  <li id="ch11-ref-17" value="17">Various. (2025). Multimodal fusion and vision-language models: A survey for robot vision. <em>Information Fusion (Elsevier)</em>. arXiv:2504.02477.</li>
-  <li id="ch11-ref-18" value="18">Various. (2025). Tactile Robotics: An outlook. <em>arXiv preprint</em>. arXiv:2508.11261.</li>
+  <li id="ch11-ref-1" value="1">Yuan, Y., et al. (2024). Robot Synesthesia: In-hand manipulation with visuotactile sensing. <em>ICRA 2024</em>. <a href="https://scholar.google.com/scholar?q=Robot+Synesthesia%3A+In-hand+manipulation+with+visuotactile+sensing" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-2" value="2">Suresh, S., et al. (2024). NeuralFeels: Neural fields for visuotactile perception. <em>Science Robotics</em>, 9(86). <a href="https://scholar.google.com/scholar?q=NeuralFeels%3A+Neural+fields+for+visuotactile+perception" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-3" value="3">Huang, B., et al. (2024). 3D-ViTac: Learning fine-grained manipulation with visuo-tactile sensing. <em>CoRL 2024</em>. <a href="https://scholar.google.com/scholar?q=3D-ViTac%3A+Learning+fine-grained+manipulation+with+visuo-tactile+sensing" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-4" value="4">Yu, J., Liu, H., Yu, Q., Ren, J., Hao, C., Ding, H., Huang, G., Huang, G., Song, Y., Cai, P., Lu, C., & Zhang, W. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. arXiv:2505.22159. <a href="https://terry.artlab.ai/ko/posts/2505-forcevla-force-aware-moe" target="_blank" rel="noopener">#1</a> <a href="https://scholar.google.com/scholar?q=ForceVLA%3A+Enhancing+VLA+models+with+a+force-aware+MoE+for+contact-rich+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-5" value="5">Huang, J., Wang, S., Lin, F., Hu, Y., Wen, C., & Gao, Y. (2025). Tactile-VLA: Unlocking vision-language-action model's physical knowledge for tactile generalization. <em>OpenReview</em>. <a href="https://scholar.google.com/scholar?q=Tactile-VLA%3A+Unlocking+vision-language-action+model%27s+physical+knowledge+for+tactile+generalization" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-6" value="6">Yang, F., et al. (2024). UniTouch: Binding touch to everything. <em>CVPR 2024</em>. <a href="https://scholar.google.com/scholar?q=UniTouch%3A+Binding+touch+to+everything" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-7" value="7">Higuera, C., et al. (2024). Sparsh: Self-supervised touch representations. <em>CoRL 2024</em>. <a href="https://scholar.google.com/scholar?q=Sparsh%3A+Self-supervised+touch+representations" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-8" value="8">Liu, K., et al. (2025). VTV-LLM: Robotic perception with a large tactile-vision-language model. <em>arXiv preprint</em>. arXiv:2506.19303. <a href="https://scholar.google.com/scholar?q=VTV-LLM%3A+Robotic+perception+with+a+large+tactile-vision-language+model" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-9" value="9">Fu, Z., Zhao, T. Z., & Finn, C. (2024). Mobile ALOHA: Learning bimanual mobile manipulation with low-cost whole-body teleoperation. <em>arXiv preprint</em>. arXiv:2401.02117. <a href="https://scholar.google.com/scholar?q=Mobile+ALOHA%3A+Learning+bimanual+mobile+manipulation+with+low-cost+whole-body+teleoperation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-10" value="10">Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776. <a href="https://scholar.google.com/scholar?q=TacEx%3A+GelSight+tactile+simulation+in+Isaac+Sim" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-11" value="11">Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>RSS 2025</em>. <a href="https://terry.artlab.ai/ko/posts/2504-pp-tac" target="_blank" rel="noopener">#12</a> <a href="https://scholar.google.com/scholar?q=PP-Tac%3A+Paper+picking+using+omnidirectional+tactile+feedback+in+dexterous+robotic+hands" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-12" value="12">Yu, M., et al. (2025). RGMC Champion: Kinematic trajectory optimization. <em>IEEE RA-L</em>. <a href="https://scholar.google.com/scholar?q=RGMC+Champion%3A+Kinematic+trajectory+optimization" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-13" value="13">Albini, A., et al. (2025). Representing data in robotic tactile perception. <em>arXiv (IEEE T-RO)</em>. <a href="https://scholar.google.com/scholar?q=Representing+data+in+robotic+tactile+perception" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-14" value="14">Open X-Embodiment Collaboration. (2024). Open X-Embodiment. <em>ICRA 2024</em>. <a href="https://scholar.google.com/scholar?q=Open+X-Embodiment" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-15" value="15">Mao, Q., Liao, Z., Yuan, J., & Zhu, R. (2024). Multimodal tactile sensing fused with vision for dexterous robotic housekeeping. <em>Nature Communications</em>, 15, 6871. https://doi.org/10.1038/s41467-024-51261-5 <a href="https://scholar.google.com/scholar?q=Multimodal+tactile+sensing+fused+with+vision+for+dexterous+robotic+housekeeping" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-16" value="16">Various. (2025). Simultaneous tactile-visual perception for learning multimodal robot manipulation. <em>arXiv preprint</em>. arXiv:2512.09851. <a href="https://scholar.google.com/scholar?q=Simultaneous+tactile-visual+perception+for+learning+multimodal+robot+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-17" value="17">Various. (2025). Multimodal fusion and vision-language models: A survey for robot vision. <em>Information Fusion (Elsevier)</em>. arXiv:2504.02477. <a href="https://scholar.google.com/scholar?q=Multimodal+fusion+and+vision-language+models%3A+A+survey+for+robot+vision" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch11-ref-18" value="18">Various. (2025). Tactile Robotics: An outlook. <em>arXiv preprint</em>. arXiv:2508.11261. <a href="https://scholar.google.com/scholar?q=Tactile+Robotics%3A+An+outlook" target="_blank" rel="noopener">scholar</a></li>
 </ol>
 </section>
 
@@ -248,5 +250,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="../js/chapter.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof katex !== 'undefined') {
+        document.querySelectorAll('.math-inline').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: false });
+        });
+        document.querySelectorAll('.math-block').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: true });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

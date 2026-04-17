@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로봇 손의 정교한 조작을 위한 촉각 센싱 — Tactile Sensing for Dexterous Robot Hand Manipulation</title>
+  <title>촉각 센싱과 로봇 핸드 조작 — 종합 서베이</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -15,15 +15,13 @@
   <main>
     <!-- Hero -->
     <section class="hero">
-      <h1 class="gradient-text">로봇 손의 정교한 조작을 위한 촉각 센싱</h1>
-      <p class="subtitle">촉각 센서, 로봇 핸드, 데이터 수집, 학습 기반 조작, 그리고 Physical AI까지 — 종합 서베이</p>
-      <p class="description">
-        로봇 손의 감각을 완성하는 여정 &mdash; 촉각 센서부터 지능형 조작까지, 4 Parts, 13 Chapters로 구성된 종합 가이드
-      </p>
+      <h1 class="gradient-text">촉각과 로봇 핸드</h1>
+      <p class="subtitle">촉각 센서 기술에서 VLA 기반 정교 조작까지의 연구 흐름</p>
+      <p class="description">촉각 센서, 로봇 핸드, 조작 학습, sim-to-real 전이를 아우르는 종합 서베이 — 4 Parts, 13 Chapters</p>
       <p class="hero-dates" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">
         <span>First published: 2026-04-01</span>
         <span style="margin: 0 0.5rem;">|</span>
-        <span>Last updated: 2026-04-07</span>
+        <span>Last updated: 2026-04-12</span>
       </p>
       <div class="hero-cta">
         <a href="ch01.html" class="btn-primary">읽기 시작</a>
@@ -36,22 +34,22 @@
         <div class="intro-item">
           <span class="item-icon">&#x270B;</span>
           <div class="intro-item-content">
-            <h4>왜 촉각인가</h4>
-            <p>인간은 시각 없이도 열쇠를 찾고 달걀을 옮깁니다. 촉각은 로봇 조작의 "마지막 퍼즐 조각"입니다.</p>
+            <h4>촉각 센서 기술 총정리</h4>
+            <p>저항식, 압전식, 광학식(GelSight), 자기장식 등 주요 촉각 센서 기술의 원리와 비교 분석.</p>
           </div>
         </div>
         <div class="intro-item">
           <span class="item-icon">&#x1F4DA;</span>
           <div class="intro-item-content">
-            <h4>이 보고서의 특징</h4>
-            <p>131편의 최신 논문과 산업 동향을 체계적으로 정리. 기초부터 Physical AI까지 전체 그림을 그립니다.</p>
+            <h4>로봇 핸드 설계와 메커니즘</h4>
+            <p>언더액추에이션, VSA, 순응 메커니즘 등 지능형 로봇 핸드 설계의 핵심 원리.</p>
           </div>
         </div>
         <div class="intro-item">
-          <span class="item-icon">&#x1F393;</span>
+          <span class="item-icon">&#x1F52C;</span>
           <div class="intro-item-content">
-            <h4>대상 독자</h4>
-            <p>로봇 공학 연구자, 대학원생, 촉각/조작 분야에 관심 있는 엔지니어를 위한 종합 레퍼런스입니다.</p>
+            <h4>VLA와 Sim-to-Real</h4>
+            <p>Vision-Language-Action 모델과 시뮬레이션 기반 전이 학습의 최신 연구 흐름.</p>
           </div>
         </div>
       </div>
@@ -59,127 +57,115 @@
 
     <!-- Chapter Grid -->
     <section class="chapters-section">
-
-      <!-- Part I -->
       <div class="part-group part-1">
-        <h2 class="part-title">Part I: 촉각의 기초 (Foundations of Touch)</h2>
+        <h2 class="part-title">Part I: 촉각의 기초</h2>
         <div class="chapter-grid">
           <a href="ch01.html" class="chapter-card fade-in">
             <span class="ch-num">01</span>
-            <h3>왜 촉각인가 &mdash; 로봇에게 손의 감각을</h3>
-            <p>생물학적 촉각, 역사적 발전, 촉각 없는 실패 사례, 산업 전망</p>
+            <h3>왜 촉각인가 — 로봇에게 손의 감각을</h3>
+            <p>촉각의 필요성, 인간 촉각 시스템, 로봇 촉각의 역사</p>
             <span class="arrow">&rarr;</span>
           </a>
           <a href="ch02.html" class="chapter-card fade-in">
             <span class="ch-num">02</span>
-            <h3>촉각 센서 기술 &mdash; 로봇의 피부</h3>
-            <p>압저항식, 정전용량식, 광학식, GelSight, Digit 360, 센서 비교 가이드</p>
+            <h3>촉각 센서 기술 — 로봇의 피부</h3>
+            <p>저항식, 압전식, 광학식, 자기장식 센서 원리와 비교</p>
             <span class="arrow">&rarr;</span>
           </a>
           <a href="ch03.html" class="chapter-card fade-in">
             <span class="ch-num">03</span>
             <h3>촉각 데이터: 표현과 수집</h3>
-            <p>데이터 분류 체계, 수집 파이프라인, 공개 데이터셋, 자기지도 사전학습</p>
+            <p>촉각 데이터 표현, 수집 방법, 데이터셋</p>
             <span class="arrow">&rarr;</span>
           </a>
         </div>
       </div>
 
-      <!-- Part II -->
       <div class="part-group part-2">
-        <h2 class="part-title">Part II: 로봇 핸드와 인간 손 (Hands: Robot and Human)</h2>
+        <h2 class="part-title">Part II: 로봇 핸드와 인간 손</h2>
         <div class="chapter-grid">
           <a href="ch04.html" class="chapter-card fade-in">
             <span class="ch-num">04</span>
-            <h3>로봇 핸드 설계 &mdash; 잡기 위한 기계</h3>
-            <p>병렬 그리퍼 vs 다지 핸드, 오픈소스 핸드, 건 구동 방식, 설계 원리</p>
+            <h3>로봇 핸드 설계 — 잡기 위한 기계</h3>
+            <p>다지 핸드, 그리퍼, 메커니즘 설계</p>
             <span class="arrow">&rarr;</span>
           </a>
           <a href="ch05.html" class="chapter-card fade-in">
             <span class="ch-num">05</span>
-            <h3>지능형 메커니즘 &mdash; 물리적 지능</h3>
-            <p>부족 구동, 가변 강성, 능동 표면, 공장 자동화 적용</p>
+            <h3>지능형 메커니즘 — 물리적 지능</h3>
+            <p>언더액추에이션, VSA, 순응 메커니즘</p>
             <span class="arrow">&rarr;</span>
           </a>
           <a href="ch06.html" class="chapter-card fade-in">
             <span class="ch-num">06</span>
-            <h3>사람 손 데이터 수집 &mdash; 시연으로 가르치기</h3>
-            <p>MANO 모델, 모션 글로브, 촉각 글로브, 외골격, 원격 조작</p>
+            <h3>사람 손 데이터 수집 — 시연으로 가르치기</h3>
+            <p>데이터 글러브, 모션 캡처, 텔레오퍼레이션</p>
             <span class="arrow">&rarr;</span>
           </a>
         </div>
       </div>
 
-      <!-- Part III -->
       <div class="part-group part-3">
-        <h2 class="part-title">Part III: 학습과 전이 (Learning and Transfer)</h2>
+        <h2 class="part-title">Part III: 학습과 전이</h2>
         <div class="chapter-grid">
           <a href="ch07.html" class="chapter-card fade-in">
             <span class="ch-num">07</span>
-            <h3>조작 학습 &mdash; 만지며 배우기</h3>
-            <p>모방 학습, 강화학습, 촉각 기반 조작, 힘 기반 학습</p>
+            <h3>조작 학습 — 만지며 배우기</h3>
+            <p>강화학습, 모방학습, 촉각 기반 정책</p>
             <span class="arrow">&rarr;</span>
           </a>
           <a href="ch08.html" class="chapter-card fade-in">
             <span class="ch-num">08</span>
-            <h3>VLA 모델 &mdash; 보고 듣고 행동하기</h3>
-            <p>RT-1에서 Gemini Robotics까지, pi0, 촉각 통합, 스케일링</p>
+            <h3>VLA 모델 — 보고 듣고 행동하기</h3>
+            <p>RT-2, OpenVLA, pi0, 멀티모달 정책</p>
             <span class="arrow">&rarr;</span>
           </a>
           <a href="ch09.html" class="chapter-card fade-in">
             <span class="ch-num">09</span>
-            <h3>Sim-to-Real 전이 &mdash; 가상에서 현실로</h3>
-            <p>시뮬레이션 엔진, 도메인 랜덤화, 촉각 Sim-to-Real, 합성 데이터</p>
+            <h3>Sim-to-Real 전이 — 가상에서 현실로</h3>
+            <p>도메인 랜덤화, 촉각 시뮬레이션</p>
             <span class="arrow">&rarr;</span>
           </a>
           <a href="ch10.html" class="chapter-card fade-in">
             <span class="ch-num">10</span>
-            <h3>사람에서 로봇으로 &mdash; Embodiment Retargeting</h3>
-            <p>교차 체현 격차, 운동학적/시각적/촉각적 리타게팅</p>
+            <h3>사람에서 로봇으로 — Embodiment Retargeting</h3>
+            <p>운동학적/시각적 리타게팅, 잠재 공간 정렬</p>
             <span class="arrow">&rarr;</span>
           </a>
         </div>
       </div>
 
-      <!-- Part IV -->
       <div class="part-group part-4">
-        <h2 class="part-title">Part IV: 통합과 전망 (Integration and Outlook)</h2>
+        <h2 class="part-title">Part IV: 통합과 전망</h2>
         <div class="chapter-grid">
           <a href="ch11.html" class="chapter-card fade-in">
             <span class="ch-num">11</span>
-            <h3>시스템 통합 &mdash; 연구적 관점</h3>
-            <p>다중 모달 융합, End-to-End 시스템, 오픈소스, 벤치마크</p>
+            <h3>시스템 통합 — 연구적 관점</h3>
+            <p>연구 통합, 시스템 관점</p>
             <span class="arrow">&rarr;</span>
           </a>
           <a href="ch12.html" class="chapter-card fade-in">
             <span class="ch-num">12</span>
             <h3>Physical AI와 산업적 전망</h3>
-            <p>Physical AI 비전, 로봇 핸드 기업, 제조업 배치, 시장 전망</p>
+            <p>제조, 의료, 농업 응용</p>
             <span class="arrow">&rarr;</span>
           </a>
           <a href="ch13.html" class="chapter-card fade-in">
             <span class="ch-num">13</span>
-            <h3>한계와 미래 &mdash; Physical AI for Manufacturing</h3>
-            <p>공통 한계점 TOP 10, 미래 연구 방향, 삼각 통합 제안</p>
+            <h3>한계와 미래 — Physical AI for Manufacturing</h3>
+            <p>현재 한계, 미래 방향, 로드맵</p>
             <span class="arrow">&rarr;</span>
           </a>
         </div>
       </div>
 
-      <!-- Appendices -->
       <div class="part-group part-2">
         <h2 class="part-title">부록 (Appendices)</h2>
         <div class="chapter-grid">
-          <a href="glossary.html" class="chapter-card fade-in">
-            <span class="ch-num">A</span>
-            <h3>용어집 (Glossary)</h3>
-            <p>주요 기술 용어 한영 대조</p>
-            <span class="arrow">&rarr;</span>
-          </a>
           <a href="references.html" class="chapter-card fade-in">
-            <span class="ch-num">B</span>
+            <span class="ch-num">A</span>
             <h3>통합 참고문헌 (References)</h3>
-            <p>전체 146편의 참고문헌 목록</p>
+            <p>전체 참고문헌 목록</p>
             <span class="arrow">&rarr;</span>
           </a>
         </div>

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapter 8: VLA 모델 — 보고 듣고 행동하기</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
@@ -64,11 +66,11 @@
 
 <section id="sec-개요" class="content-section">
 <h2>개요</h2>
-<p>VLA(Vision-Language-Action) 모델은 대규모 비전-언어 모델(VLM)에 로봇 행동을 결합하여, <strong>보고(vision), 이해하고(language), 행동하는(action)</strong> 범용 로봇 제어를 추구합니다. 2023년 RT-2에서 시작된 이 패러다임은 2026년 현재 모든 주요 휴머노이드 로봇의 "뇌"로 채택되고 있습니다. 이 챕터에서는 VLA 계보, pi0 <a href="https://terry.artlab.ai/ko/posts/2410-pi0-vla-flow-model">#2</a>의 Flow Matching, 배치 후 개선, 촉각 통합, 그리고 스케일링 전략을 다룹니다.</p>
+<p>VLA(Vision-Language-Action) 모델은 대규모 비전-언어 모델(VLM)에 로봇 행동을 결합하여, <strong>보고(vision), 이해하고(language), 행동하는(action)</strong> 범용 로봇 제어를 추구합니다. 2023년 RT-2에서 시작된 이 패러다임은 2026년 현재 모든 주요 휴머노이드 로봇의 "뇌"로 채택되고 있습니다. 이 챕터에서는 VLA 계보, pi0 <a href="https://terry.artlab.ai/ko/posts/2410-pi0-vla-flow-model" target="_blank" class="post-link">[#2]</a>의 Flow Matching, 배치 후 개선, 촉각 통합, 그리고 스케일링 전략을 다룹니다.</p>
 <blockquote class=""><strong>이 챕터를 읽고 나면...</strong>
 - RT-1에서 Gemini Robotics까지 VLA 계보의 핵심 전환점을 설명할 수 있습니다.
 - pi0의 VLM + Flow Matching 아키텍처를 이해합니다.
-- 촉각이 VLA에 통합되는 방식과 의의(ForceVLA <a href="https://terry.artlab.ai/ko/posts/2505-forcevla-force-aware-moe">#1</a>, Tactile-VLA)를 파악합니다.
+- 촉각이 VLA에 통합되는 방식과 의의(ForceVLA <a href="https://terry.artlab.ai/ko/posts/2505-forcevla-force-aware-moe" target="_blank" class="post-link">[#1]</a>, Tactile-VLA)를 파악합니다.
 - Open X-Embodiment의 교차 체현 데이터 전략을 설명할 수 있습니다.</blockquote>
 <hr>
 </section>
@@ -133,7 +135,7 @@ PaLiGemma VLM + Flow Matching으로 8개 체현(embodiment)에 걸친 범용 로
 </section>
 <section id="sec-8-3" class="content-section">
 <h2>8.3 pi0.6/RECAP: 배치 후 강화학습으로 지속 개선</h2>
-<p>pi0.6<sup><a class="cite-link" href="#ch8-ref-15" title="pi0.6 2025">[15]</a></sup> <a href="https://terry.artlab.ai/ko/posts/2511-pi0-6-recap">#4</a>와 RECAP은 <strong>배치 후(post-deployment) 강화학습</strong>으로 VLA의 지속 개선을 실현합니다:</p>
+<p>pi0.6<sup><a class="cite-link" href="#ch8-ref-15" title="pi0.6 2025">[15]</a></sup> <a href="https://terry.artlab.ai/ko/posts/2511-pi0-6-recap" target="_blank" class="post-link">[#4]</a>와 RECAP은 <strong>배치 후(post-deployment) 강화학습</strong>으로 VLA의 지속 개선을 실현합니다:</p>
 <ul>
 <li>초기 pi0으로 배치 → 실패/성공 데이터 수집</li>
 <li>수집된 데이터로 RL 미세 조정</li>
@@ -150,7 +152,7 @@ PaLiGemma VLM + Flow Matching으로 8개 체현(embodiment)에 걸친 범용 로
 <h3>EgoVLA (2025)</h3>
 <p>EgoVLA [arXiv Jul 2025]는 <strong>egocentric 인간 비디오로 사전학습</strong> 후 로봇에 미세 조정하는 VLA입니다:</p>
 <ul>
-<li>인간 egocentric 비디오에서 MANO <a href="https://terry.artlab.ai/ko/posts/2201-mano-hand-model">#17</a> hand parameter 기반 행동 표현 학습</li>
+<li>인간 egocentric 비디오에서 MANO <a href="https://terry.artlab.ai/ko/posts/2201-mano-hand-model" target="_blank" class="post-link">[#17]</a> hand parameter 기반 행동 표현 학습</li>
 <li>인간 손 → 로봇 손의 표현 정렬을 VLA 프레임워크 내에서 해결</li>
 <li>Chapter 6.1의 MANO 모델과 Chapter 10의 retargeting 접근을 VLA에 통합</li>
 </ul>
@@ -167,7 +169,7 @@ PaLiGemma VLM + Flow Matching으로 8개 체현(embodiment)에 걸친 범용 로
 <h2>8.4 촉각 통합: ForceVLA, Tactile-VLA</h2>
 <p>VLA에 촉각/힘 정보를 "일급 모달리티(first-class modality)"로 통합하는 방향이 부상하고 있습니다.</p>
 <h3>ForceVLA (2025)</h3>
-<p>Yu et al.<sup><a class="cite-link" href="#ch8-ref-6" title="al. 2025">[6]</a></sup>의 ForceVLA (<a href="ch07.html">Chapter 7.4에서 소개</a>):</p>
+<p>Yu et al.<sup><a class="cite-link" href="#ch8-ref-6" title="al. 2025">[6]</a></sup>의 ForceVLA (→ <a href="ch07.html">Chapter 7.4에서 소개</a>):</p>
 <ul>
 <li><strong>FVLMoE</strong>: 4개 전문가(expert)의 동적 라우팅</li>
 <li>pi0 기반 VLA에 힘 센서 정보 통합</li>
@@ -187,7 +189,7 @@ PaLiGemma VLM + Flow Matching으로 8개 체현(embodiment)에 걸친 범용 로
 <li>힘/촉각: 100-1,000 Hz</li>
 <li>Transformer 지연(latency): 추론 시 실시간 제약</li>
 </ul>
-<p>ForceVLA의 MoE 접근은 이 불일치를 동적 라우팅으로 부분적으로 해결하지만, 근본적 해법은 아직 열린 문제입니다 (<a href="ch13.html">Chapter 13.1 참조</a>).</p>
+<p>ForceVLA의 MoE 접근은 이 불일치를 동적 라우팅으로 부분적으로 해결하지만, 근본적 해법은 아직 열린 문제입니다 (→ <a href="ch13.html">Chapter 13.1 참조</a>).</p>
 <figure>
   <a href="../assets/figures/ch08/fig_8_3_tactile_vla_approaches_technical.png" target="_blank"><img src="../assets/figures/ch08/fig_8_3_tactile_vla_approaches_darkmode.png" alt="Figure 8.3: VLA에 촉각을 통합하는 세 가지 접근." loading="lazy" onerror="this.src='../assets/figures/ch08/fig_8_3_tactile_vla_approaches_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 8.3: VLA에 촉각을 통합하는 세 가지 접근.</figcaption>
@@ -253,7 +255,7 @@ PaLiGemma VLM + Flow Matching으로 8개 체현(embodiment)에 걸친 범용 로
 <h2>요약 및 전망</h2>
 <p>VLA 모델은 RT-1의 가능성 입증에서 pi0의 범용 제어, Gemini Robotics의 체현 추론까지 급속히 진화하고 있습니다. Open X-Embodiment의 교차 체현 데이터와 NVIDIA의 합성 데이터가 규모를 해결하고, ForceVLA와 Tactile-VLA가 촉각을 일급 모달리티로 통합하며, pi0.6/RECAP이 배치 후 지속 개선을 실현합니다.</p>
 <p>그러나 장기 태스크, 개방 세계 일반화, 시각-촉각 시간 정렬 등 핵심 과제가 남아 있습니다. 이러한 과제들은 Chapter 13에서 체계적으로 다룹니다.</p>
-<p>다음 챕터에서는 VLA와 RL 정책을 현실에 전이하는 <strong>Sim-to-Real 전이</strong>를 다룹니다 (<a href="ch09.html">Chapter 9 참조</a>).</p>
+<p>다음 챕터에서는 VLA와 RL 정책을 현실에 전이하는 <strong>Sim-to-Real 전이</strong>를 다룹니다 (→ <a href="ch09.html">Chapter 9 참조</a>).</p>
 <hr>
 </section>
       <nav class="chapter-nav">
@@ -264,27 +266,27 @@ PaLiGemma VLM + Flow Matching으로 8개 체현(embodiment)에 걸친 범용 로
 <section id="sec-references" class="content-section">
 <h2>참고문헌</h2>
 <ol class="references-list">
-  <li id="ch8-ref-1" value="1">Brohan, A., Brown, N., et al. (2023). RT-1: Robotics Transformer for real-world control at scale. <em>RSS 2023</em>. arXiv:2212.06817.</li>
-  <li id="ch8-ref-2" value="2">Brohan, A., Brown, N., et al. (2023). RT-2: Vision-Language-Action models transfer web knowledge to robotic control. <em>CoRL 2023</em>. arXiv:2307.15818.</li>
-  <li id="ch8-ref-3" value="3">Kim, M. J., Pertsch, K., Karamcheti, S., et al. (2024). OpenVLA: An open-source Vision-Language-Action model. <em>arXiv:2406.09246</em>.</li>
-  <li id="ch8-ref-4" value="4">Octo Model Team. (2024). Octo: An open-source generalist robot policy. <em>arXiv:2405.12213</em>.</li>
-  <li id="ch8-ref-5" value="5">Physical Intelligence. (2024). pi0: A Vision-Language-Action flow model for general robot control. <em>arXiv:2410.24164</em>. [#2](https://terry.artlab.ai/ko/posts/2410-pi0-vla-flow-model)</li>
-  <li id="ch8-ref-6" value="6">Google DeepMind. (2025). Gemini Robotics: Bringing AI into the physical world. <em>arXiv:2503.20020</em>.</li>
-  <li id="ch8-ref-7" value="7">Open X-Embodiment Collaboration. (2024). Open X-Embodiment: Robotic learning datasets and RT-X models. <em>ICRA 2024</em>. arXiv:2310.08864.</li>
-  <li id="ch8-ref-8" value="8">Lipman, Y., Chen, R. T. Q., Ben-Hamu, H., Nickel, M., & Le, M. (2023). Flow matching for generative modeling. <em>ICLR 2023</em>. arXiv:2210.02747.</li>
-  <li id="ch8-ref-9" value="9">Yu, J., Liu, H., Yu, Q., Ren, J., Hao, C., Ding, H., Huang, G., Huang, G., Song, Y., Cai, P., Lu, C., & Zhang, W. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. arXiv:2505.22159. [#1](https://terry.artlab.ai/ko/posts/2505-forcevla-force-aware-moe)</li>
-  <li id="ch8-ref-10" value="10">Huang, J., Wang, S., Lin, F., Hu, Y., Wen, C., & Gao, Y. (2025). Tactile-VLA: Unlocking vision-language-action model's physical knowledge for tactile generalization. <em>OpenReview</em>.</li>
-  <li id="ch8-ref-11" value="11">Helmut, E., Funk, N., Schneider, T., de Farias, C., & Peters, J. (2025). Tactile-conditioned diffusion policy for force-aware robotic manipulation. <em>ICRA 2026</em>. arXiv:2510.13324.</li>
-  <li id="ch8-ref-12" value="12">Various. (2026). VLA systematic review. <em>Information Fusion</em> (Elsevier). https://doi.org/10.1016/j.inffus.2025.103148.</li>
-  <li id="ch8-ref-13" value="13">Various. (2025). What matters in building VLA models. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01168-7.</li>
-  <li id="ch8-ref-14" value="14">Various. (2025). Diffusion models for robotic manipulation survey. <em>Frontiers in Robotics and AI</em>. https://doi.org/10.3389/frobt.2025.1606247.</li>
-  <li id="ch8-ref-15" value="15">Physical Intelligence. (2025). pi0.5: A VLA model and training recipe for post-deployment improvement via RLEF. <em>arXiv preprint</em>. arXiv:2504.16932. [#4](https://terry.artlab.ai/ko/posts/2511-pi0-6-recap)</li>
-  <li id="ch8-ref-16" value="16">NVIDIA. (2025). GR00T N1: An open foundation model for generalist humanoid robots. <em>arXiv preprint</em>. arXiv:2503.14734.</li>
-  <li id="ch8-ref-17" value="17">NVIDIA. (2026). GR00T N1.5: Advancing humanoid robot foundation models. <em>GTC 2026</em>.</li>
-  <li id="ch8-ref-18" value="18">Figure AI. (2025). Helix: A vision-language-action model for full humanoid control. <em>Company technical report</em>.</li>
-  <li id="ch8-ref-19" value="19">Physical Intelligence. (2025). pi0 human-to-robot transfer: Human co-finetuning for generalization. <em>Technical report</em>.</li>
-  <li id="ch8-ref-20" value="20">Various. (2025). EgoVLA: Egocentric human video pretraining for robot VLA. <em>arXiv preprint</em>.</li>
-  <li id="ch8-ref-21" value="21">Various. (2025). PhysBrain: Physical world fine-tuning of VLMs via 3M VQA from Ego4D. <em>arXiv preprint</em>.</li>
+  <li id="ch8-ref-1" value="1">Brohan, A., Brown, N., et al. (2023). RT-1: Robotics Transformer for real-world control at scale. <em>RSS 2023</em>. arXiv:2212.06817. <a href="https://scholar.google.com/scholar?q=RT-1%3A+Robotics+Transformer+for+real-world+control+at+scale" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-2" value="2">Brohan, A., Brown, N., et al. (2023). RT-2: Vision-Language-Action models transfer web knowledge to robotic control. <em>CoRL 2023</em>. arXiv:2307.15818. <a href="https://scholar.google.com/scholar?q=RT-2%3A+Vision-Language-Action+models+transfer+web+knowledge+to+robotic+control" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-3" value="3">Kim, M. J., Pertsch, K., Karamcheti, S., et al. (2024). OpenVLA: An open-source Vision-Language-Action model. <em>arXiv:2406.09246</em>. <a href="https://scholar.google.com/scholar?q=OpenVLA%3A+An+open-source+Vision-Language-Action+model" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-4" value="4">Octo Model Team. (2024). Octo: An open-source generalist robot policy. <em>arXiv:2405.12213</em>. <a href="https://scholar.google.com/scholar?q=Octo%3A+An+open-source+generalist+robot+policy" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-5" value="5">Physical Intelligence. (2024). pi0: A Vision-Language-Action flow model for general robot control. <em>arXiv:2410.24164</em>. <a href="https://terry.artlab.ai/ko/posts/2410-pi0-vla-flow-model" target="_blank" rel="noopener">#2</a> <a href="https://scholar.google.com/scholar?q=pi0%3A+A+Vision-Language-Action+flow+model+for+general+robot+control" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-6" value="6">Google DeepMind. (2025). Gemini Robotics: Bringing AI into the physical world. <em>arXiv:2503.20020</em>. <a href="https://scholar.google.com/scholar?q=Gemini+Robotics%3A+Bringing+AI+into+the+physical+world" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-7" value="7">Open X-Embodiment Collaboration. (2024). Open X-Embodiment: Robotic learning datasets and RT-X models. <em>ICRA 2024</em>. arXiv:2310.08864. <a href="https://scholar.google.com/scholar?q=Open+X-Embodiment%3A+Robotic+learning+datasets+and+RT-X+models" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-8" value="8">Lipman, Y., Chen, R. T. Q., Ben-Hamu, H., Nickel, M., & Le, M. (2023). Flow matching for generative modeling. <em>ICLR 2023</em>. arXiv:2210.02747. <a href="https://scholar.google.com/scholar?q=Flow+matching+for+generative+modeling" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-9" value="9">Yu, J., Liu, H., Yu, Q., Ren, J., Hao, C., Ding, H., Huang, G., Huang, G., Song, Y., Cai, P., Lu, C., & Zhang, W. (2025). ForceVLA: Enhancing VLA models with a force-aware MoE for contact-rich manipulation. <em>NeurIPS 2025</em>. arXiv:2505.22159. <a href="https://terry.artlab.ai/ko/posts/2505-forcevla-force-aware-moe" target="_blank" rel="noopener">#1</a> <a href="https://scholar.google.com/scholar?q=ForceVLA%3A+Enhancing+VLA+models+with+a+force-aware+MoE+for+contact-rich+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-10" value="10">Huang, J., Wang, S., Lin, F., Hu, Y., Wen, C., & Gao, Y. (2025). Tactile-VLA: Unlocking vision-language-action model's physical knowledge for tactile generalization. <em>OpenReview</em>. <a href="https://scholar.google.com/scholar?q=Tactile-VLA%3A+Unlocking+vision-language-action+model%27s+physical+knowledge+for+tactile+generalization" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-11" value="11">Helmut, E., Funk, N., Schneider, T., de Farias, C., & Peters, J. (2025). Tactile-conditioned diffusion policy for force-aware robotic manipulation. <em>ICRA 2026</em>. arXiv:2510.13324. <a href="https://scholar.google.com/scholar?q=Tactile-conditioned+diffusion+policy+for+force-aware+robotic+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-12" value="12">Various. (2026). VLA systematic review. <em>Information Fusion</em> (Elsevier). https://doi.org/10.1016/j.inffus.2025.103148. <a href="https://scholar.google.com/scholar?q=VLA+systematic+review" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-13" value="13">Various. (2025). What matters in building VLA models. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01168-7. <a href="https://scholar.google.com/scholar?q=What+matters+in+building+VLA+models" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-14" value="14">Various. (2025). Diffusion models for robotic manipulation survey. <em>Frontiers in Robotics and AI</em>. https://doi.org/10.3389/frobt.2025.1606247. <a href="https://scholar.google.com/scholar?q=Diffusion+models+for+robotic+manipulation+survey" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-15" value="15">Physical Intelligence. (2025). pi0.5: A VLA model and training recipe for post-deployment improvement via RLEF. <em>arXiv preprint</em>. arXiv:2504.16932. <a href="https://terry.artlab.ai/ko/posts/2511-pi0-6-recap" target="_blank" rel="noopener">#4</a> <a href="https://scholar.google.com/scholar?q=pi0.5%3A+A+VLA+model+and+training+recipe+for+post-deployment+improvement+via+RLEF" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-16" value="16">NVIDIA. (2025). GR00T N1: An open foundation model for generalist humanoid robots. <em>arXiv preprint</em>. arXiv:2503.14734. <a href="https://scholar.google.com/scholar?q=GR00T+N1%3A+An+open+foundation+model+for+generalist+humanoid+robots" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-17" value="17">NVIDIA. (2026). GR00T N1.5: Advancing humanoid robot foundation models. <em>GTC 2026</em>. <a href="https://scholar.google.com/scholar?q=GR00T+N1.5%3A+Advancing+humanoid+robot+foundation+models" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-18" value="18">Figure AI. (2025). Helix: A vision-language-action model for full humanoid control. <em>Company technical report</em>. <a href="https://scholar.google.com/scholar?q=Helix%3A+A+vision-language-action+model+for+full+humanoid+control" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-19" value="19">Physical Intelligence. (2025). pi0 human-to-robot transfer: Human co-finetuning for generalization. <em>Technical report</em>. <a href="https://scholar.google.com/scholar?q=pi0+human-to-robot+transfer%3A+Human+co-finetuning+for+generalization" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-20" value="20">Various. (2025). EgoVLA: Egocentric human video pretraining for robot VLA. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=EgoVLA%3A+Egocentric+human+video+pretraining+for+robot+VLA" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch8-ref-21" value="21">Various. (2025). PhysBrain: Physical world fine-tuning of VLMs via 3M VQA from Ego4D. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=PhysBrain%3A+Physical+world+fine-tuning+of+VLMs+via+3M+VQA+from+Ego4D" target="_blank" rel="noopener">scholar</a></li>
 </ol>
 </section>
 
@@ -303,5 +305,17 @@ PaLiGemma VLM + Flow Matching으로 8개 체현(embodiment)에 걸친 범용 로
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="../js/chapter.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof katex !== 'undefined') {
+        document.querySelectorAll('.math-inline').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: false });
+        });
+        document.querySelectorAll('.math-block').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: true });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

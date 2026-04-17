@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapter 9: Sim-to-Real 전이 — 가상에서 현실로</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
@@ -87,7 +89,7 @@
 <p>DeepMind의 MuJoCo는 접촉이 풍부한 시뮬레이션에 강점을 가집니다:</p>
 <ul>
 <li>효율적 접촉 솔버(contact solver)</li>
-<li>ExoStart<sup><a class="cite-link" href="#ch9-ref-6" title="ExoStart 2025">[6]</a></sup> <a href="https://terry.artlab.ai/ko/posts/2506-exostart">#9</a>의 dynamics filtering에 사용</li>
+<li>ExoStart<sup><a class="cite-link" href="#ch9-ref-6" title="ExoStart 2025">[6]</a></sup> <a href="https://terry.artlab.ai/ko/posts/2506-exostart" target="_blank" class="post-link">[#9]</a>의 dynamics filtering에 사용</li>
 <li>OpenAI Dactyl <sup><a class="cite-link" href="#ch9-ref-2" title="2020">[2]</a></sup>의 초기 시뮬레이션 플랫폼</li>
 </ul>
 <h3>Tacto (2022)</h3>
@@ -106,7 +108,7 @@
 <li>FEM 기반 변형 모델링</li>
 </ul>
 <h3>TacEx (2024)</h3>
-<p>TacEx는 GelSight 시뮬레이션을 Isaac Sim에 통합하여, 연구 워크플로우 전체(센서 시뮬레이션 → 정책 학습 → 전이)를 하나의 플랫폼에서 수행할 수 있게 합니다 (<a href="ch11.html">Chapter 11.2 참조</a>).</p>
+<p>TacEx는 GelSight 시뮬레이션을 Isaac Sim에 통합하여, 연구 워크플로우 전체(센서 시뮬레이션 → 정책 학습 → 전이)를 하나의 플랫폼에서 수행할 수 있게 합니다 (→ <a href="ch11.html">Chapter 11.2 참조</a>).</p>
 <figure>
   <a href="../assets/figures/ch09/fig_9_1_sim_engines_technical.png" target="_blank"><img src="../assets/figures/ch09/fig_9_1_sim_engines_darkmode.png" alt="Figure 9.1: 촉각 시뮬레이션 엔진 비교." loading="lazy" onerror="this.src='../assets/figures/ch09/fig_9_1_sim_engines_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 9.1: 촉각 시뮬레이션 엔진 비교.</figcaption>
@@ -192,7 +194,7 @@ Allegro Hand + Isaac Gym에서 ADR로 sim-to-real 다지 조작 달성. 물리/�
 <li>다중 물리 결합 (광학 + 변형 + 접촉)</li>
 <li>센서 노이즈 프로파일의 시뮬레이션/현실 차이</li>
 </ul>
-<p>Yin et al.<sup><a class="cite-link" href="#ch9-ref-4" title="al. 2024">[4]</a></sup>의 이진 3축 촉각 피부(binary 3-axis tactile skin <a href="https://terry.artlab.ai/ko/posts/2407-tactile-skin-inhand-translation">#13</a>) 모델은 이 문제의 실용적 해법입니다:</p>
+<p>Yin et al.<sup><a class="cite-link" href="#ch9-ref-4" title="al. 2024">[4]</a></sup>의 이진 3축 촉각 피부(binary 3-axis tactile skin <a href="https://terry.artlab.ai/ko/posts/2407-tactile-skin-inhand-translation" target="_blank" class="post-link">[#13]</a>) 모델은 이 문제의 실용적 해법입니다:</p>
 <ul>
 <li><strong>단순화</strong>: 연속 힘 → 이진 접촉 (접촉 여부 + 3축 방향)</li>
 <li><strong>5,000 FPS</strong> 시뮬레이션 속도</li>
@@ -208,7 +210,7 @@ Allegro Hand + Isaac Gym에서 ADR로 sim-to-real 다지 조작 달성. 물리/�
 <hr>
 </section>
 <section id="sec-9-4" class="content-section">
-<h2>9.4 Real-Sim-Real: RoboPaint <a href="https://terry.artlab.ai/ko/posts/2602-robopaint">#15</a>, X-Sim, ExoStart</h2>
+<h2>9.4 Real-Sim-Real: RoboPaint <a href="https://terry.artlab.ai/ko/posts/2602-robopaint" target="_blank" class="post-link">[#15]</a>, X-Sim, ExoStart</h2>
 <p>Real-Sim-Real은 실제 데이터를 시뮬레이션에 통합한 후 다시 현실로 전이하는 루프입니다.</p>
 <h3>RoboPaint (2025)</h3>
 <p>3D Gaussian Splatting(3DGS)으로 실제 장면을 시뮬레이션에 재구성하여, 시뮬레이션의 시각적 충실도를 높입니다. 이는 시각적 sim-to-real 격차를 줄이는 데 기여합니다.</p>
@@ -286,7 +288,7 @@ Allegro Hand + Isaac Gym에서 ADR로 sim-to-real 다지 조작 달성. 물리/�
 <section id="sec-요약-및-전망" class="content-section">
 <h2>요약 및 전망</h2>
 <p>Sim-to-real 전이는 촉각 기반 조작의 가장 큰 병목 중 하나이며, 동시에 가장 빠르게 진보하는 영역입니다. DeXtreme의 ADR, Yin et al.의 단순화된 촉각 모델, ExoStart의 데이터 효율적 Real-Sim-Real이 현재의 최전선입니다. NVIDIA의 합성 데이터 파이프라인은 규모 문제를 해결하지만, 촉각 sim-to-real 격차는 시각보다 근본적으로 크며, DiffTactile/TacEx 방향의 발전이 필요합니다.</p>
-<p>다음 챕터에서는 인간에서 로봇으로의 <strong>Embodiment Retargeting</strong>을 다룹니다 (<a href="ch10.html">Chapter 10 참조</a>).</p>
+<p>다음 챕터에서는 인간에서 로봇으로의 <strong>Embodiment Retargeting</strong>을 다룹니다 (→ <a href="ch10.html">Chapter 10 참조</a>).</p>
 <hr>
 </section>
       <nav class="chapter-nav">
@@ -297,22 +299,22 @@ Allegro Hand + Isaac Gym에서 ADR로 sim-to-real 다지 조작 달성. 물리/�
 <section id="sec-references" class="content-section">
 <h2>참고문헌</h2>
 <ol class="references-list">
-  <li id="ch9-ref-1" value="1">Handa, A., et al. (2023). DeXtreme: Transfer of agile in-hand manipulation from simulation to reality. <em>ICRA 2023</em>. arXiv:2210.13702.</li>
-  <li id="ch9-ref-2" value="2">Various. (2020). OpenAI Dactyl: Solving Rubik's Cube with a robot hand. <em>IJRR</em>.</li>
-  <li id="ch9-ref-3" value="3">Wang, S., Lambeta, M., et al. (2022). Tacto: A fast, flexible, and open-source simulator for vision-based tactile sensors. <em>IEEE RA-L</em>.</li>
-  <li id="ch9-ref-4" value="4">Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator for contact-rich robotic manipulation. <em>ICLR 2024</em>. arXiv:2403.08716.</li>
-  <li id="ch9-ref-5" value="5">Yin, Z.-H., et al. (2024). Learning in-hand translation using a binary 3-axis tactile skin. <em>arXiv preprint</em>. [#13](https://terry.artlab.ai/ko/posts/2407-tactile-skin-inhand-translation)</li>
-  <li id="ch9-ref-6" value="6">Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>. arXiv:2506.11775. [#9](https://terry.artlab.ai/ko/posts/2506-exostart)</li>
-  <li id="ch9-ref-7" value="7">Dan, P., et al. (2025). X-Sim: Cross-embodiment learning via real-to-sim-to-real. <em>arXiv preprint</em>.</li>
-  <li id="ch9-ref-8" value="8">Various. (2026). RoboPaint: From human demonstration to any robot and any view. <em>arXiv preprint</em>. [#15](https://terry.artlab.ai/ko/posts/2602-robopaint)</li>
-  <li id="ch9-ref-9" value="9">Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776.</li>
-  <li id="ch9-ref-10" value="10">Various. (2025). Sim-to-real reinforcement learning for vision-based dexterous manipulation on humanoids. <em>arXiv preprint</em>. arXiv:2502.20396.</li>
-  <li id="ch9-ref-11" value="11">Various. (2025). Human-in-the-loop RL for precise dexterous manipulation. <em>Science Robotics</em>. https://doi.org/10.1126/scirobotics.ads5033.</li>
-  <li id="ch9-ref-12" value="12">NVIDIA. (2025). GR00T N1: An open foundation model for generalist humanoid robots. <em>arXiv preprint</em>. arXiv:2503.14734.</li>
-  <li id="ch9-ref-13" value="13">NVIDIA. (2026). Synthetic data pipeline: 780K trajectories in 11 hours. <em>GTC 2026 Keynote</em>.</li>
-  <li id="ch9-ref-14" value="14">Various. (2025). Tactile Robotics: Past and Future. <em>arXiv:2512.01106</em>.</li>
-  <li id="ch9-ref-15" value="15">Lipman, Y., et al. (2023). Flow matching for generative modeling. <em>ICLR 2023</em>.</li>
-  <li id="ch9-ref-16" value="16">Various. (2025). DexWM: Dexterous world models from human video. <em>arXiv preprint</em>. Meta FAIR.</li>
+  <li id="ch9-ref-1" value="1">Handa, A., et al. (2023). DeXtreme: Transfer of agile in-hand manipulation from simulation to reality. <em>ICRA 2023</em>. arXiv:2210.13702. <a href="https://scholar.google.com/scholar?q=DeXtreme%3A+Transfer+of+agile+in-hand+manipulation+from+simulation+to+reality" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-2" value="2">Various. (2020). OpenAI Dactyl: Solving Rubik's Cube with a robot hand. <em>IJRR</em>. <a href="https://scholar.google.com/scholar?q=OpenAI+Dactyl%3A+Solving+Rubik%27s+Cube+with+a+robot+hand" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-3" value="3">Wang, S., Lambeta, M., et al. (2022). Tacto: A fast, flexible, and open-source simulator for vision-based tactile sensors. <em>IEEE RA-L</em>. <a href="https://scholar.google.com/scholar?q=Tacto%3A+A+fast%2C+flexible%2C+and+open-source+simulator+for+vision-based+tactile+sensors" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-4" value="4">Si, Z., Zhang, G., Ben, Q., Romero, B., Xian, Z., Liu, C., & Gan, C. (2024). DiffTactile: A physics-based differentiable tactile simulator for contact-rich robotic manipulation. <em>ICLR 2024</em>. arXiv:2403.08716. <a href="https://scholar.google.com/scholar?q=DiffTactile%3A+A+physics-based+differentiable+tactile+simulator+for+contact-rich+robotic+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-5" value="5">Yin, Z.-H., et al. (2024). Learning in-hand translation using a binary 3-axis tactile skin. <em>arXiv preprint</em>. <a href="https://terry.artlab.ai/ko/posts/2407-tactile-skin-inhand-translation" target="_blank" rel="noopener">#13</a> <a href="https://scholar.google.com/scholar?q=Learning+in-hand+translation+using+a+binary+3-axis+tactile+skin" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-6" value="6">Si, Z., Qian, K., Sontakke, N., et al. (2025). ExoStart: Efficient learning for dexterous manipulation with sensorized exoskeleton demonstrations. <em>arXiv preprint</em>. arXiv:2506.11775. <a href="https://terry.artlab.ai/ko/posts/2506-exostart" target="_blank" rel="noopener">#9</a> <a href="https://scholar.google.com/scholar?q=ExoStart%3A+Efficient+learning+for+dexterous+manipulation+with+sensorized+exoskeleton+demonstrations" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-7" value="7">Dan, P., et al. (2025). X-Sim: Cross-embodiment learning via real-to-sim-to-real. <em>arXiv preprint</em>. <a href="https://scholar.google.com/scholar?q=X-Sim%3A+Cross-embodiment+learning+via+real-to-sim-to-real" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-8" value="8">Various. (2026). RoboPaint: From human demonstration to any robot and any view. <em>arXiv preprint</em>. <a href="https://terry.artlab.ai/ko/posts/2602-robopaint" target="_blank" rel="noopener">#15</a> <a href="https://scholar.google.com/scholar?q=RoboPaint%3A+From+human+demonstration+to+any+robot+and+any+view" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-9" value="9">Various. (2024). TacEx: GelSight tactile simulation in Isaac Sim. <em>arXiv preprint</em>. arXiv:2411.04776. <a href="https://scholar.google.com/scholar?q=TacEx%3A+GelSight+tactile+simulation+in+Isaac+Sim" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-10" value="10">Various. (2025). Sim-to-real reinforcement learning for vision-based dexterous manipulation on humanoids. <em>arXiv preprint</em>. arXiv:2502.20396. <a href="https://scholar.google.com/scholar?q=Sim-to-real+reinforcement+learning+for+vision-based+dexterous+manipulation+on+humanoids" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-11" value="11">Various. (2025). Human-in-the-loop RL for precise dexterous manipulation. <em>Science Robotics</em>. https://doi.org/10.1126/scirobotics.ads5033. <a href="https://scholar.google.com/scholar?q=Human-in-the-loop+RL+for+precise+dexterous+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-12" value="12">NVIDIA. (2025). GR00T N1: An open foundation model for generalist humanoid robots. <em>arXiv preprint</em>. arXiv:2503.14734. <a href="https://scholar.google.com/scholar?q=GR00T+N1%3A+An+open+foundation+model+for+generalist+humanoid+robots" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-13" value="13">NVIDIA. (2026). Synthetic data pipeline: 780K trajectories in 11 hours. <em>GTC 2026 Keynote</em>. <a href="https://scholar.google.com/scholar?q=Synthetic+data+pipeline%3A+780K+trajectories+in+11+hours" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-14" value="14">Various. (2025). Tactile Robotics: Past and Future. <em>arXiv:2512.01106</em>. <a href="https://scholar.google.com/scholar?q=Tactile+Robotics%3A+Past+and+Future" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-15" value="15">Lipman, Y., et al. (2023). Flow matching for generative modeling. <em>ICLR 2023</em>. <a href="https://scholar.google.com/scholar?q=Flow+matching+for+generative+modeling" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch9-ref-16" value="16">Various. (2025). DexWM: Dexterous world models from human video. <em>arXiv preprint</em>. Meta FAIR. <a href="https://scholar.google.com/scholar?q=DexWM%3A+Dexterous+world+models+from+human+video" target="_blank" rel="noopener">scholar</a></li>
 </ol>
 </section>
 
@@ -331,5 +333,17 @@ Allegro Hand + Isaac Gym에서 ADR로 sim-to-real 다지 조작 달성. 물리/�
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="../js/chapter.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof katex !== 'undefined') {
+        document.querySelectorAll('.math-inline').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: false });
+        });
+        document.querySelectorAll('.math-block').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: true });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapter 5: Intelligent Mechanisms — Physical Intelligence</title>
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 </head>
 <body class="lang-en">
   <canvas id="particle-canvas"></canvas>
@@ -203,9 +205,9 @@ The foundational paper for underactuation theory, proving the paradoxical propos
 <h2>5.5 Factory Automation Applications: Thin Objects, Multiple Objects, Repositioning</h2>
 <p>Seminar 3 presented concrete factory automation scenarios for this integrated mechanism:</p>
 <h3>5.5.1 Thin Object Grasping</h3>
-<p>Extremely thin objects (cards, paper, gaskets) are difficult for parallel grippers. Active belt surfaces lift edges from the table, followed by underactuated finger grasping. PP-Tac<sup><a class="cite-link" href="#ch5-ref-17" title="PP-Tac 2025">[17]</a></sup> <a href="https://terry.artlab.ai/en/posts/2504-pp-tac">#12</a> (R-Tac + Diffusion Policy, 87.5% success) attacks this problem from the tactile+learning direction; Seminar 3's mechanism approach attacks it from physical design (<a href="ch07.html">Chapter 7.3</a>).</p>
+<p>Extremely thin objects (cards, paper, gaskets) are difficult for parallel grippers. Active belt surfaces lift edges from the table, followed by underactuated finger grasping. PP-Tac<sup><a class="cite-link" href="#ch5-ref-17" title="PP-Tac 2025">[17]</a></sup> <a href="https://terry.artlab.ai/en/posts/2504-pp-tac" target="_blank" class="post-link">[#12]</a> (R-Tac + Diffusion Policy, 87.5% success) attacks this problem from the tactile+learning direction; Seminar 3's mechanism approach attacks it from physical design (→ <a href="ch07.html">Chapter 7.3</a>).</p>
 <h3>5.5.2 Multiple Object Handling</h3>
-<p>Grasping multiple objects simultaneously, or adding objects to an existing grasp. Underactuation's shape adaptation plays the key role; the F-TAC Hand's 100% multi-object success shows how tactile feedback reinforces this further (<a href="ch04.html">Chapter 4.5</a>).</p>
+<p>Grasping multiple objects simultaneously, or adding objects to an existing grasp. Underactuation's shape adaptation plays the key role; the F-TAC Hand's 100% multi-object success shows how tactile feedback reinforces this further (→ <a href="ch04.html">Chapter 4.5</a>).</p>
 <h3>5.5.3 Repositioning/Alignment/Rotation</h3>
 <p>Adjusting object position or orientation within the grasp. Active belt surfaces play the central role — more stable than discrete contact (release-and-regrasp).</p>
 <figure>
@@ -257,7 +259,7 @@ The foundational paper for underactuation theory, proving the paradoxical propos
 <li>Mechanism "physically guarantees" continuous contact</li>
 <li>Reduced burden on learning and sensing</li>
 </ul>
-<blockquote class=""><strong>Key Perspective</strong>: When mechanisms induce continuous contact, the burden on sensing and learning is reduced. This forms one axis of the <strong>"mechanism + tactile + learning triangle"</strong> proposed in Chapter 13 (<a href="ch13.html">Chapter 13.4</a>).</blockquote>
+<blockquote class=""><strong>Key Perspective</strong>: When mechanisms induce continuous contact, the burden on sensing and learning is reduced. This forms one axis of the <strong>"mechanism + tactile + learning triangle"</strong> proposed in Chapter 13 (→ <a href="ch13.html">Chapter 13.4</a>).</blockquote>
 <figure>
   <a href="../assets/figures/ch05/fig_5_6_contact_continuity_technical.png" target="_blank"><img src="../assets/figures/ch05/fig_5_6_contact_continuity_darkmode.png" alt="Figure 5.6: Continuous vs. discrete contact — state transition diagrams." loading="lazy" onerror="this.src='../assets/figures/ch05/fig_5_6_contact_continuity_technical.png'" style="cursor:zoom-in"></a>
   <figcaption>Figure 5.6: Continuous vs. discrete contact — state transition diagrams.</figcaption>
@@ -268,7 +270,7 @@ The foundational paper for underactuation theory, proving the paradoxical propos
 <section id="sec-summary-and-outlook" class="content-section">
 <h2>Summary and Outlook</h2>
 <p>Intelligent mechanisms are not alternatives to software intelligence (sensing, learning) but <strong>complements</strong>. Underactuation provides shape adaptation, VSAs provide state locking, and active surfaces provide continuous-contact manipulation. Their integration creates synergy beyond the sum of parts. Seminar 3's factory scenarios (thin objects, multiple objects, repositioning) represent challenges one level above current industrial deployments (logistics), and mechanism-based approaches are a key strategy for bridging this gap.</p>
-<p>The next chapter examines <strong>human hand data collection</strong> — how we teach robots to manipulate by demonstration (<a href="ch06.html">Chapter 6: Human Hand Data Collection</a>).</p>
+<p>The next chapter examines <strong>human hand data collection</strong> — how we teach robots to manipulate by demonstration (→ <a href="ch06.html">Chapter 6: Human Hand Data Collection</a>).</p>
 <hr>
 </section>
       <nav class="chapter-nav">
@@ -279,24 +281,24 @@ The foundational paper for underactuation theory, proving the paradoxical propos
 <section id="sec-references" class="content-section">
 <h2>References</h2>
 <ol class="references-list">
-  <li id="ch5-ref-1" value="1">Bicchi, A. (2000). Hands for dexterous manipulation and robust grasping: A difficult road toward simplicity. <em>IEEE Transactions on Robotics and Automation</em>, 16(6), 652-662.</li>
-  <li id="ch5-ref-2" value="2">Li, H., Ford, C. J., Bianchi, M., Catalano, M. G., Psomopoulou, E., & Lepora, N. F. (2022). BRL/Pisa/IIT SoftHand: A low-cost, 3D-printed, underactuated, tendon-driven hand with soft and adaptive synergies. <em>IEEE Robotics and Automation Letters</em>, 7(4), 8745-8751.</li>
-  <li id="ch5-ref-3" value="3">Catalano, M. G., Grioli, G., Farnioli, E., Serio, A., Piazza, C., & Bicchi, A. (2014). Adaptive synergies for the design and control of the Pisa/IIT SoftHand. <em>International Journal of Robotics Research</em>, 33(5), 768-782. https://doi.org/10.1177/0278364913518998</li>
-  <li id="ch5-ref-4" value="4">Della Santina, C., Piazza, C., Grioli, G., Catalano, M. G., & Bicchi, A. (2018). Toward dexterous manipulation with augmented adaptive synergies: The Pisa/IIT SoftHand 2. <em>IEEE Transactions on Robotics</em>, 34(5), 1141-1156.</li>
-  <li id="ch5-ref-5" value="5">Capsi-Morales, P., Grioli, G., Piazza, C., Bicchi, A., & Catalano, M. G. (2020). Exploring the role of palm concavity and adaptability in soft synergistic robotic hands. <em>IEEE Robotics and Automation Letters</em>, 5(3), 4703-4710.</li>
-  <li id="ch5-ref-6" value="6">Kakogawa, A., Nishimura, H., & Ma, S. (2016). Underactuated modular finger with pull-in mechanism for a robotic gripper. <em>IEEE International Conference on Robotics and Biomimetics (ROBIO)</em>, 556-561.</li>
-  <li id="ch5-ref-7" value="7">Odhner, L. U., Jentoft, L. P., Claffee, M. R., Corson, N., Tenzer, Y., Ma, R. R., Buehler, M., Kohout, R., Howe, R. D., & Dollar, A. M. (2014). A compliant, underactuated hand for robust manipulation. <em>International Journal of Robotics Research</em>, 33(5), 736-752.</li>
-  <li id="ch5-ref-8" value="8">Fu, J., Yu, Z., Guo, Q., Zheng, L., & Gan, D. (2023). A variable stiffness robotic gripper based on parallel beam with vision-based force sensing for flexible grasping. <em>Robotica</em>. https://doi.org/10.1017/S026357472300156X</li>
-  <li id="ch5-ref-9" value="9">Al Abeach, L. A. T., Nefti-Meziani, S., & Davis, S. (2017). Design of a variable stiffness soft dexterous gripper. <em>Soft Robotics</em>, 4(3), 274-284.</li>
-  <li id="ch5-ref-10" value="10">Wang, W., & Ahn, S.-H. (2017). Shape memory alloy-based soft gripper with variable stiffness for compliant and effective grasping. <em>Soft Robotics</em>, 4(4), 379-389.</li>
-  <li id="ch5-ref-11" value="11">Wei, Y., Chen, Y., Ren, T., Chen, Q., Yan, C., Yang, Y., & Li, Y. (2016). A novel, variable stiffness robotic gripper based on integrated soft actuating and particle jamming. <em>Soft Robotics</em>, 3(3), 134-143.</li>
-  <li id="ch5-ref-12" value="12">Kim, Y., Shin, J., Won, J., Lee, W., & Seo, T. (2024). LBH gripper: Linkage-belt based hybrid adaptive gripper design for dish collecting robots. <em>Robotics and Autonomous Systems</em>, 185, 104886.</li>
-  <li id="ch5-ref-13" value="13">Wang, H., Gao, B., Zhao, D., & Shen, H. (2025). A reconfigurable gripper inspired by elastic belt for versatile in-hand manipulations. <em>IEEE Robotics and Automation Letters</em>.</li>
-  <li id="ch5-ref-14" value="14">Lin, J., et al. (2023). A bioinspired bidirectional stiffening soft actuator for multimodal, compliant, and robust grasping. <em>Soft Robotics</em>. https://doi.org/10.1089/soro.2022.0212</li>
-  <li id="ch5-ref-15" value="15">Kopicki, M., Ansary, S. I., Tolomei, S., Angelini, F., Garabini, M., & Skrzypczyński, P. (2025). Underactuated dexterous robotic grasping with reconfigurable passive joints. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.16006.</li>
-  <li id="ch5-ref-16" value="16">Johannsmeier, L., et al. (2025). A process-centric manipulation taxonomy for the organization, classification and synthesis of tactile robot skills. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01045-3</li>
-  <li id="ch5-ref-17" value="17">Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>RSS 2025</em>. [#12](https://terry.artlab.ai/en/posts/2504-pp-tac)</li>
-  <li id="ch5-ref-18" value="18">Hogan, N. (1985). Impedance control: An approach to manipulation. <em>JDSMC</em>, 107(1), 1-24.</li>
+  <li id="ch5-ref-1" value="1">Bicchi, A. (2000). Hands for dexterous manipulation and robust grasping: A difficult road toward simplicity. <em>IEEE Transactions on Robotics and Automation</em>, 16(6), 652-662. <a href="https://scholar.google.com/scholar?q=Hands+for+dexterous+manipulation+and+robust+grasping%3A+A+difficult+road+toward+simplicity" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-2" value="2">Li, H., Ford, C. J., Bianchi, M., Catalano, M. G., Psomopoulou, E., & Lepora, N. F. (2022). BRL/Pisa/IIT SoftHand: A low-cost, 3D-printed, underactuated, tendon-driven hand with soft and adaptive synergies. <em>IEEE Robotics and Automation Letters</em>, 7(4), 8745-8751. <a href="https://scholar.google.com/scholar?q=BRL%2FPisa%2FIIT+SoftHand%3A+A+low-cost%2C+3D-printed%2C+underactuated%2C+tendon-driven+hand+with+soft+and+adaptive+synergies" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-3" value="3">Catalano, M. G., Grioli, G., Farnioli, E., Serio, A., Piazza, C., & Bicchi, A. (2014). Adaptive synergies for the design and control of the Pisa/IIT SoftHand. <em>International Journal of Robotics Research</em>, 33(5), 768-782. https://doi.org/10.1177/0278364913518998 <a href="https://scholar.google.com/scholar?q=Adaptive+synergies+for+the+design+and+control+of+the+Pisa%2FIIT+SoftHand" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-4" value="4">Della Santina, C., Piazza, C., Grioli, G., Catalano, M. G., & Bicchi, A. (2018). Toward dexterous manipulation with augmented adaptive synergies: The Pisa/IIT SoftHand 2. <em>IEEE Transactions on Robotics</em>, 34(5), 1141-1156. <a href="https://scholar.google.com/scholar?q=Toward+dexterous+manipulation+with+augmented+adaptive+synergies%3A+The+Pisa%2FIIT+SoftHand+2" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-5" value="5">Capsi-Morales, P., Grioli, G., Piazza, C., Bicchi, A., & Catalano, M. G. (2020). Exploring the role of palm concavity and adaptability in soft synergistic robotic hands. <em>IEEE Robotics and Automation Letters</em>, 5(3), 4703-4710. <a href="https://scholar.google.com/scholar?q=Exploring+the+role+of+palm+concavity+and+adaptability+in+soft+synergistic+robotic+hands" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-6" value="6">Kakogawa, A., Nishimura, H., & Ma, S. (2016). Underactuated modular finger with pull-in mechanism for a robotic gripper. <em>IEEE International Conference on Robotics and Biomimetics (ROBIO)</em>, 556-561. <a href="https://scholar.google.com/scholar?q=Underactuated+modular+finger+with+pull-in+mechanism+for+a+robotic+gripper" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-7" value="7">Odhner, L. U., Jentoft, L. P., Claffee, M. R., Corson, N., Tenzer, Y., Ma, R. R., Buehler, M., Kohout, R., Howe, R. D., & Dollar, A. M. (2014). A compliant, underactuated hand for robust manipulation. <em>International Journal of Robotics Research</em>, 33(5), 736-752. <a href="https://scholar.google.com/scholar?q=A+compliant%2C+underactuated+hand+for+robust+manipulation" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-8" value="8">Fu, J., Yu, Z., Guo, Q., Zheng, L., & Gan, D. (2023). A variable stiffness robotic gripper based on parallel beam with vision-based force sensing for flexible grasping. <em>Robotica</em>. https://doi.org/10.1017/S026357472300156X <a href="https://scholar.google.com/scholar?q=A+variable+stiffness+robotic+gripper+based+on+parallel+beam+with+vision-based+force+sensing+for+flexible+grasping" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-9" value="9">Al Abeach, L. A. T., Nefti-Meziani, S., & Davis, S. (2017). Design of a variable stiffness soft dexterous gripper. <em>Soft Robotics</em>, 4(3), 274-284. <a href="https://scholar.google.com/scholar?q=Design+of+a+variable+stiffness+soft+dexterous+gripper" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-10" value="10">Wang, W., & Ahn, S.-H. (2017). Shape memory alloy-based soft gripper with variable stiffness for compliant and effective grasping. <em>Soft Robotics</em>, 4(4), 379-389. <a href="https://scholar.google.com/scholar?q=Shape+memory+alloy-based+soft+gripper+with+variable+stiffness+for+compliant+and+effective+grasping" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-11" value="11">Wei, Y., Chen, Y., Ren, T., Chen, Q., Yan, C., Yang, Y., & Li, Y. (2016). A novel, variable stiffness robotic gripper based on integrated soft actuating and particle jamming. <em>Soft Robotics</em>, 3(3), 134-143. <a href="https://scholar.google.com/scholar?q=A+novel%2C+variable+stiffness+robotic+gripper+based+on+integrated+soft+actuating+and+particle+jamming" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-12" value="12">Kim, Y., Shin, J., Won, J., Lee, W., & Seo, T. (2024). LBH gripper: Linkage-belt based hybrid adaptive gripper design for dish collecting robots. <em>Robotics and Autonomous Systems</em>, 185, 104886. <a href="https://scholar.google.com/scholar?q=LBH+gripper%3A+Linkage-belt+based+hybrid+adaptive+gripper+design+for+dish+collecting+robots" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-13" value="13">Wang, H., Gao, B., Zhao, D., & Shen, H. (2025). A reconfigurable gripper inspired by elastic belt for versatile in-hand manipulations. <em>IEEE Robotics and Automation Letters</em>. <a href="https://scholar.google.com/scholar?q=A+reconfigurable+gripper+inspired+by+elastic+belt+for+versatile+in-hand+manipulations" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-14" value="14">Lin, J., et al. (2023). A bioinspired bidirectional stiffening soft actuator for multimodal, compliant, and robust grasping. <em>Soft Robotics</em>. https://doi.org/10.1089/soro.2022.0212 <a href="https://scholar.google.com/scholar?q=A+bioinspired+bidirectional+stiffening+soft+actuator+for+multimodal%2C+compliant%2C+and+robust+grasping" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-15" value="15">Kopicki, M., Ansary, S. I., Tolomei, S., Angelini, F., Garabini, M., & Skrzypczyński, P. (2025). Underactuated dexterous robotic grasping with reconfigurable passive joints. <em>IEEE Robotics and Automation Letters</em>. arXiv:2501.16006. <a href="https://scholar.google.com/scholar?q=Underactuated+dexterous+robotic+grasping+with+reconfigurable+passive+joints" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-16" value="16">Johannsmeier, L., et al. (2025). A process-centric manipulation taxonomy for the organization, classification and synthesis of tactile robot skills. <em>Nature Machine Intelligence</em>. https://doi.org/10.1038/s42256-025-01045-3 <a href="https://scholar.google.com/scholar?q=A+process-centric+manipulation+taxonomy+for+the+organization%2C+classification+and+synthesis+of+tactile+robot+skills" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-17" value="17">Lin, P., Huang, Y., Li, W., Ma, J., Xiao, C., & Jiao, Z. (2025). PP-Tac: Paper picking using omnidirectional tactile feedback in dexterous robotic hands. <em>RSS 2025</em>. <a href="https://terry.artlab.ai/en/posts/2504-pp-tac" target="_blank" rel="noopener">#12</a> <a href="https://scholar.google.com/scholar?q=PP-Tac%3A+Paper+picking+using+omnidirectional+tactile+feedback+in+dexterous+robotic+hands" target="_blank" rel="noopener">scholar</a></li>
+  <li id="ch5-ref-18" value="18">Hogan, N. (1985). Impedance control: An approach to manipulation. <em>JDSMC</em>, 107(1), 1-24. <a href="https://scholar.google.com/scholar?q=Impedance+control%3A+An+approach+to+manipulation" target="_blank" rel="noopener">scholar</a></li>
 </ol>
 </section>
 
@@ -315,5 +317,17 @@ The foundational paper for underactuation theory, proving the paradoxical propos
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="../js/chapter.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof katex !== 'undefined') {
+        document.querySelectorAll('.math-inline').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: false });
+        });
+        document.querySelectorAll('.math-block').forEach(function(el) {
+          katex.render(el.textContent, el, { throwOnError: false, displayMode: true });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

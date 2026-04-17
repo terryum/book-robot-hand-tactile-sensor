@@ -1,5 +1,5 @@
 /* ============================================
-   Tactile Sensing for Robot Hands — Chapter JS
+   From Human Hands to Robot Hands — Chapter JS
    GSAP ScrollTrigger animations, sidebar nav
    ============================================ */
 
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const backLink = document.createElement('a');
         backLink.className = 'cite-backlink';
         backLink.href = '#' + backId;
-        backLink.textContent = ' ↩';
+        backLink.textContent = ' [본문으로 돌아가기]';
         backLink.title = 'Back to text';
         backLink.addEventListener('click', function(ev) {
           ev.preventDefault();

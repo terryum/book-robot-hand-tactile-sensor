@@ -1,5 +1,5 @@
 /* ============================================
-   Tactile Sensing for Robot Hands — Main JS
+   From Human Hands to Robot Hands — Main JS
    Particle background, navigation, language toggle
    ============================================ */
 
@@ -133,5 +133,3 @@ document.addEventListener('click', function(e) {
     observer.observe(el);
   });
 })();
-
-// Home button logic moved to header.js (shared component)

@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tactile Sensing for Dexterous Robot Hand Manipulation</title>
+  <title>Tactile Sensing & Robot Hands</title>
   <link rel="stylesheet" href="css/style.css">
   <script>
-    // Auto-redirect based on saved preference or browser locale
     (function() {
       var lang = localStorage.getItem('preferred-lang');
       if (lang === 'en') { window.location.replace('en/'); return; }
       if (lang === 'ko') { window.location.replace('ko/'); return; }
-      // First visit: detect browser locale
       var browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
       if (browserLang.startsWith('ko')) {
         localStorage.setItem('preferred-lang', 'ko');
@@ -27,9 +25,9 @@
   <canvas id="particle-canvas"></canvas>
 
   <main class="lang-landing">
-    <h1 class="gradient-text">Tactile Sensing for Dexterous Robot Hand Manipulation</h1>
+    <h1 class="gradient-text">Tactile Sensing & Robot Hands</h1>
     <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; text-align: center; line-height: 1.8;">
-      A comprehensive survey from tactile sensors and robot hand design to learning-based manipulation and Physical AI
+      From tactile sensor technology to VLA-based dexterous manipulation
     </p>
 
     <div class="lang-options">
